@@ -7,8 +7,8 @@ from selenium.webdriver.chrome.options import Options
 
 class ScrapGef:
     def __init__(self):
-        options = Options()
-        options.add_argument("user-data-dir=./Gef/cookies")
+        '''options = Options()
+        options.add_argument("user-data-dir=./Cookies/Gef")
         options.add_argument("enable-automation")
         options.add_argument("--headless")
         options.add_argument("--window-size=1920,1080")
@@ -16,7 +16,7 @@ class ScrapGef:
         options.add_argument("--disable-extensions")
         options.add_argument("--dns-prefetch-disable")
         options.add_argument("--disable-gpu")
-        #self.driver = webdriver.Chrome("./chromedriver.exe",options=options)
+        self.driver = webdriver.Chrome("./chromedriver.exe",options=options)'''
         self.driver = webdriver.Chrome("./chromedriver.exe")
         self.brand = "Gef"
         if not os.path.exists("{}/".format(self.brand)):
@@ -40,14 +40,14 @@ class ScrapGef:
 
     def scrapCategory(self, url):
         self.driver.get(url)
-        loading = False
+        loading = True
         elems = self.driver.find_elements_by_xpath('.//div[@class="listProductTienda"]/div/div/a')
         while loading:
             self.driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
             sleep(3)
             loading = len(elems) < len(self.driver.find_elements_by_xpath('.//div[@class="listProductTienda"]/div/div/a'))
             elems = self.driver.find_elements_by_xpath('.//div[@class="listProductTienda"]/div/div/a')
-        for e in range(min(2,len(elems))):#len(elems)):
+        for e in range(len(elems)):
             self.driver.execute_script("arguments[0].scrollIntoView();", elems[e])
             try:
                 self.subcategory = self.driver.find_element_by_xpath('.//li[@class="current"]').text.capitalize().replace('/',', ')
@@ -69,14 +69,15 @@ class ScrapGef:
             try:
                 description = self.driver.find_element_by_xpath('.//div[contains(@id,"product_longdescription")]').text
             except:
-                description = ""
+                description = " "
             colorsBtn = self.driver.find_elements_by_xpath('.//div[@class="color_swatch_list"]/ul/li/a/img')
             comunName = []
             skipName=[[],[]]
             colors = []
             allSizes = []
             allImages = []
-            allPrices = []
+            allPricesNow = []
+            allPricesBfr = []
             for c in range(len(colorsBtn)):
                 name = self.driver.find_element_by_xpath('.//h1[@class="main_header"]').text.capitalize()
                 if not comunName:
@@ -94,12 +95,17 @@ class ScrapGef:
                 colorsBtn[c].click()
                 try:
                     priceNow = self.driver.find_element_by_xpath('.//span[@class="price"]').text
+                    priceBfr = ' '
                 except:
                     try:
                         priceNow = self.driver.find_element_by_xpath('.//span[@class="price diff"]').text
+                        priceBfr = self.driver.find_element_by_xpath('.//span[@class="old_price"]').text
                     except:
-                        priceNow = "errorPrice"
-                allPrices.append(priceNow)
+                        priceNow = "$"
+                if not priceNow:
+                    priceNow = "$"
+                allPricesNow.append(priceNow)
+                allPricesBfr.append(priceBfr)
                 colors.append(colorsBtn[c].get_attribute("src"))
                 sizes = []
                 sizesTags = self.driver.find_elements_by_xpath('.//div[@class="color_swatch_list"]/ul[@aria-label="TALLA"]/li/a')
@@ -126,17 +132,13 @@ class ScrapGef:
                 images.sort()
                 allImages.append(images)
                 colorsBtn = self.driver.find_elements_by_xpath('.//div[@class="color_swatch_list"]/ul/li/a/img')
-            try:
-                priceBfr = self.driver.find_element_by_xpath('.//span[@class="old_price"]').text
-            except:
-                priceBfr = allPrices[0]
             name = " ".join(comunName)
             w = skipName[0][skipName[1].index(max(skipName[1]))]
             if not name.startswith(w):
                 name = " ".join([w,name])
             if name:
                 self.sale = False
-                Item(self.brand,name,description,priceBfr,priceNow,'discount',allImages,url,allSizes,colors,self.category,'self.originalCategory',self.subcategory,'self.originalSubcategory',self.sale,self.gender)
+                Item(self.brand,name,description,allPricesBfr,allPricesNow,' ',allImages,url,allSizes,colors,self.category,self.category, self.subcategory,self.subcategory,self.sale,self.gender)
             else:
                 print("Hubo un error")
         except Exception as e:
@@ -147,4 +149,4 @@ class ScrapGef:
 
 
 # Main Code
-ScrapGef()
+#ScrapGef()
