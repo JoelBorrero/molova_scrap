@@ -1,19 +1,34 @@
-import random, json, os
-from time import sleep
-from selenium import webdriver
 from Item import Item
+from time import sleep
+from Database import Database
+from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 
+xpaths={
+    'categories':'.//ul[@class="product-categories"]/li/ul/li/a[not(contains(@href,"rebajas")) and not(contains(@href,"novedades")) and not(span/span[contains(text(),"Ver todo")]) and not(span[contains(@style,"#f")])]',
+    'categoriesSale':'.//ul[@class="product-categories"]/li/ul/li/a[span[contains(@style,"#f")]]',
+    'colorsBtn':'.//div[@class="c-product-info--header"]/div[contains(@class,"product-card-color-selector")]/div/div/div/img',
+    'description':'.//span[@class="c-product-info--description-text"]',
+    'discount':'./../..//div[@class="product-price--price product-price--price-discount"]',
+    'elems':'.//div[@class="new-category-page tiles-list tiles-list--halves-grid"]/div/div/div[@id="productWrapper" or @class="carousel-wrapper carousel-wrapper--landscape"]/a',
+    'imgs':'.//div[@id="product-grid"]/div/div/figure/img',
+    'name':'.//h1[@class="title"]',
+    'priceBfr':'.//div[@class="c-product-info--header"]/div[@class="prices"]/div[@class="price price-old"]/span',
+    'priceNow':'.//div[@class="c-product-info--header"]/div[@class="prices"]/div[@class="sale"]/span',
+    'priceNow2':'.//div[@class="c-product-info--header"]/div[@class="prices"]/div/span',
+    'sizesTags':'.//div[@class="c-product-info--size"]/div/div/div[@class="product-card-size-selector--dropdown-sizes"]/div',
+    'subCats':'.//div[starts-with(@class,"carrousel-filters")]/div/div/div/div',
+    'subCats2':'.//div[@class="category-badges-list"]/a[not(text()="Ver todo")]'}
 
 class ScrapStradivarius:
     def __init__(self):
         options = Options()
-        options.add_argument("user-data-dir=./Stradivarius/cookies")
+        options.add_argument("user-data-dir=./Cookies/Stradivarius")
         # chrome_options.add_argument("--headless")
         self.driver = webdriver.Chrome("./chromedriver.exe", options=options)
-        self.marca = "Stradivarius"
-        if not os.path.exists("{}/".format(self.marca)):
-            os.mkdir("{}/".format(self.marca))
+        self.driver.set_page_load_timeout(30)
+        self.brand = "Stradivarius"
+        self.db = Database(self.brand)
         self.driver.maximize_window()
         self.driver.get("https://www.stradivarius.com/co/")
         sleep(5)
@@ -21,7 +36,11 @@ class ScrapStradivarius:
         for c in categories[0]:
             cat = c.get_attribute("innerText").replace("\n", "")
             categories[1].append(c.find_element_by_xpath('./a').get_attribute("href"))
-            categories[2].append(len(categories[0])-categories[0].index(c)<23)
+            try:
+                c.find_element_by_xpath('./a[@style]')
+                categories[2].append(True)
+            except:
+                categories[2].append(False)
             while cat.startswith(" "):
                 cat = cat[1:]
             while cat.endswith(" "):
@@ -34,9 +53,8 @@ class ScrapStradivarius:
                 self.subcategory = c
                 self.originalSubcategory = c
                 self.sale = categories[2][categories[0].index(c)]
-                print(self.category)
                 self.scrapCategory(categories[1][categories[0].index(c)])
-
+        self.driver.quit()
     def scrapCategory(self, url):
         self.driver.get(url)
         sleep(1)
@@ -54,14 +72,15 @@ class ScrapStradivarius:
     def scrapSubcategory(self, url):
         self.driver.get(url)
         sleep(5)
-        loading = False  # Testing
+        loading = True  # Testing
         elems = self.driver.find_elements_by_xpath('.//a[@id="hrefRedirectProduct"]')
         while loading:
             self.driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
             sleep(3)
             loading = len(elems) < len(self.driver.find_elements_by_xpath('.//a[@id="hrefRedirectProduct"]'))
             elems = self.driver.find_elements_by_xpath('.//a[@id="hrefRedirectProduct"]')
-        for e in elems[:1]:
+            self.driver.execute_script("arguments[0].scrollIntoView();", elems[-1])
+        for e in elems:
             self.driver.execute_script("arguments[0].scrollIntoView();", e)
             self.scrapProduct(e.get_attribute("href"))
 
@@ -112,7 +131,7 @@ class ScrapStradivarius:
                 name = name[0].text.capitalize()
                 if not self.originalSubcategory:
                     self.originalSubcategory = ' '
-                Item(self.marca,name,description,priceBfr,priceNow,discount,allImages,url,allSizes,colors,self.category,self.originalCategory,self.subcategory,self.originalSubcategory,self.sale,"Mujer")
+                self.db.add(Item(self.brand,name,description,priceBfr,priceNow,discount,allImages,url,allSizes,colors,self.category,self.originalCategory,self.subcategory,self.originalSubcategory,self.sale,"Mujer"))
             else:
                 print("Hubo un error")
         except Exception as e:
@@ -123,6 +142,6 @@ class ScrapStradivarius:
 
 
 # Main Code
-ScrapStradivarius()
+# ScrapStradivarius()
 # mouse = webdriver.ActionChains(self.driver)
 # mouse.move_to_element(self.driver.find_element_by_xpath('.//div[@class="child-center-parent sidebar-close col-xs-2"]')).click()

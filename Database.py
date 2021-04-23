@@ -8,7 +8,8 @@ class Database:
         self.q = Query()
 
     def add(self, item):
-        item = item.__dict__
+        if not item is dict:
+            item = item.__dict__
         def matches(val, images):
             p = 0
             t = 0

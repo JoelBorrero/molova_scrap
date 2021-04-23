@@ -1,8 +1,10 @@
-import os
 from time import sleep
+
 from selenium import webdriver
-from Item import Item
 from selenium.webdriver.chrome.options import Options
+
+from Item import Item
+from Database import Database
 
 
 class ScrapGef:
@@ -19,8 +21,7 @@ class ScrapGef:
         self.driver = webdriver.Chrome("./chromedriver.exe",options=options)'''
         self.driver = webdriver.Chrome("./chromedriver.exe")
         self.brand = "Gef"
-        if not os.path.exists("{}/".format(self.brand)):
-            os.mkdir("{}/".format(self.brand))
+        self.db = Database(self.brand)
         self.driver.maximize_window()
         self.driver.get("https://www.gef.com.co/tienda/es-co/gef?gclid=EAIaIQobChMI2bDutMa47gIVFInICh1RYwQgEAAYASAAEgKDfvD_BwE")
         categories = [self.driver.find_elements_by_xpath('.//div[@class="header"]/a[@class="menuLink" and not(contains(@data-open,"nuevo")) and not(contains(@data-open,"green")) and not(contains(@data-open,"bono"))and not(contains(@data-open,"sale2")) ]'),[]]
@@ -49,13 +50,15 @@ class ScrapGef:
             elems = self.driver.find_elements_by_xpath('.//div[@class="listProductTienda"]/div/div/a')
         for e in range(len(elems)):
             self.driver.execute_script("arguments[0].scrollIntoView();", elems[e])
-            try:
-                self.subcategory = self.driver.find_element_by_xpath('.//li[@class="current"]').text.capitalize().replace('/',', ')
-                self.scrapProduct(elems[e].get_attribute("href"))
-            except:
-                elems = self.driver.find_elements_by_xpath('.//div[@class="listProductTienda"]/div/div/a')
-                self.subcategory = self.driver.find_element_by_xpath('.//li[@class="current"]').text.capitalize()
-                self.scrapProduct(elems[e].get_attribute("href"))
+            self.db.addUrl(elems[e].get_attribute('href'))
+            if not self.db.contains(elems[e].get_attribute('href')):
+                try:
+                    self.subcategory = self.driver.find_element_by_xpath('.//li[@class="current"]').text.capitalize().replace('/',', ')
+                    self.scrapProduct(elems[e].get_attribute("href"))
+                except:
+                    elems = self.driver.find_elements_by_xpath('.//div[@class="listProductTienda"]/div/div/a')
+                    self.subcategory = self.driver.find_element_by_xpath('.//li[@class="current"]').text.capitalize()
+                    self.scrapProduct(elems[e].get_attribute("href"))
 
     def scrapProduct(self, url):
         self.driver.execute_script('window.open("{}", "new window")'.format(url))
@@ -138,10 +141,11 @@ class ScrapGef:
                 name = " ".join([w,name])
             if name:
                 self.sale = False
-                Item(self.brand,name,description,allPricesBfr,allPricesNow,' ',allImages,url,allSizes,colors,self.category,self.category, self.subcategory,self.subcategory,self.sale,self.gender)
+                self.db.add(Item(self.brand,name,description,allPricesBfr,allPricesNow,' ',allImages,url,allSizes,colors,self.category,self.category, self.subcategory,self.subcategory,self.sale,self.gender))
             else:
                 print("Hubo un error")
         except Exception as e:
+            self.db.urlError(url)
             print("Item saltado")
             print(e)
         self.driver.close()
