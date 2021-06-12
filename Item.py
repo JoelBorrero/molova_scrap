@@ -12,12 +12,14 @@ class Item:
         if not priceBefore:
             priceBefore = ' '
         self.priceBefore = priceBefore
-        if not isinstance(allPricesNow,list):
-            allPricesNow = [allPricesNow]
         self.allPricesNow = allPricesNow
+        if not isinstance(self.allPricesNow,list):
+            self.allPricesNow = [self.allPricesNow]
+        for p in range(len(self.allPricesNow)):
+            self.allPricesNow[p] = toInt(self.allPricesNow[p])
         if not discount:
-            discount = ' '
-        self.discount = discount
+            discount = '0'
+        self.discount = toInt(discount)
         self.allImages = allImages
         self.url = url
         self.allSizes = allSizes
@@ -25,9 +27,8 @@ class Item:
             self.colors = colors
         else:
             col = []
-            if not crawling:
-                for c in str(colors).split(','):
-                    col.append(getColorSrc(c,url))
+            for c in str(colors).split(','):
+                col.append(getColorSrc(c,url))
             self.colors = col
         if not category:
             category = ' '
@@ -41,12 +42,12 @@ class Item:
         if not originalSubcategory:
             originalSubcategory = category
         self.originalSubcategory = originalSubcategory
-        self.sale = any(toInt(p) < toInt(priceBefore) for p in allPricesNow)
+        self.sale = any(toInt(p) < toInt(priceBefore) for p in self.allPricesNow)
         self.gender = gender
         self.getCategories()
-        if crawling:
-            self.addToCrawl()
-        self.addToFile(crawling=crawling)
+        # if crawling:
+            # self.addToCrawl()
+        # self.addToFile(crawling=crawling)
 
     def addToFile(self,crawling=False):
         if self.sale:
@@ -102,6 +103,7 @@ class Item:
         with open(f"{path}{self.brand}{sale}-{self.gender}.json","w",encoding="utf8") as f:
             w = str(data).replace("'",'"').replace('\\n','&BR%LN%').replace('\\','').replace('""','').replace('": False,','": false,').replace('": True,','": true,')
             f.write(w.replace('&BR%LN%','\\n'))
+        print(f"{path}{self.category.replace(' ','_')}{sale}-{self.gender}.json")
         data = json.loads(open(f"{path}{self.category.replace(' ','_')}{sale}-{self.gender}.json","r",encoding="utf8").read())
         isInFile = False
         for item in data['items']:
@@ -301,36 +303,43 @@ def getColorSrc(colorName,url):
     elif "az" in colorName:
         return "https://static.e-stradivarius.net/5/photos3/2021/V/0/1/p/2512/446/010/2512446010_3_1_5.jpg?t=1606152337393"
     else:
-        with open("C:/Users/JoelBook/Documents/Molova/Items/COLORS.txt","r",encoding="utf8") as f:
-            line=colorName[colorName.index("'")+1:]
-            line=line[:line.index("'")]
-            if not any(line in l for l in f.readlines()):
-                f.close()
-                with open("Items/COLORS.txt","a",encoding="utf8") as f:
-                    f.write("{}:{}\n".format(line,url))
-                f.close()
-            else:
-                f.close()
+    #     try:
+    #         with open("C:/Users/JoelBook/Documents/Molova/Items/COLORS.txt","r",encoding="utf8") as f:
+    #             line=colorName[colorName.index("'")+1:]
+    #             line=line[:line.index("'")]
+    #             if not any(line in l for l in f.readlines()):
+    #                 f.close()
+    #                 with open("Items/COLORS.txt","a",encoding="utf8") as f:
+    #                     f.write("{}:{}\n".format(line,url))
+    #                 f.close()
+    #             else:
+    #                 f.close()
+    #     except:
+    #         pass
         return "https://static.e-stradivarius.net/5/photos3/2021/V/0/1/p/2545/990/001/2545990001_3_1_5.jpg?t=1613467824691"
 
 def toInt(s):
-    s = ''.join(s)
-    stf = 0
-    for st in s:
-        try:
-            stf = stf * 10 + int(st)
-        except:
-            pass
-    return stf
+    if not type(s) is int:
+        stf = 0
+        s = ''.join(s)
+        for st in s:
+            try:
+                stf = stf * 10 + int(st)
+            except:
+                pass
+        return stf
+    else:
+        return s
+    
 
-def toPrice(s):
+'''def toPrice(s):
     s = str(toInt(s))
     stf = '$ '
     for i in range(len(s)):
         if (len(s)-i)%3==0 and i>0:
             stf=stf+'.'
         stf=stf+s[i]
-    return stf
+    return stf'''
 
 def to_excel(list, path, transpose=True):
     if transpose:
@@ -340,21 +349,3 @@ def to_excel(list, path, transpose=True):
     writer = pd.ExcelWriter('{}.xlsx'.format(path), engine='xlsxwriter')
     df.to_excel(writer, sheet_name='welcome', index=False,header=False)
     writer.save()
-
-'''s=''
-Item('brand',f"Camisa{s}",
-           f"description{s}",
-           f"100{s}",
-           f"100{s}",
-           f"0%{s}",
-           [["img","img2"]],
-           f"http.url.com",
-           f"[s,i,z,e,s]{s}",
-           f"color{s}",
-           f"Camisetas{s}",
-           f"Camisetas{s}",
-           f"Camisetas{s}",
-           f"Camisetas{s}",
-            False,
-            "Mujer",
-            crawling=True)'''

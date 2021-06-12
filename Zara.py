@@ -74,7 +74,7 @@ class ScrapZara:
     def scrapSubcategory(self):
         loading = True     #Testing
         self.originalSubcategory = self.subcategory
-        xpath = './/li[@class="product-grid-block"]/ul/li/a'
+        xpath = './/a[@class="product-link product-grid-product__link link"]'
         itemsWebElems = self.driver.find_elements_by_xpath(xpath)
         self.driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
         sleep(3)
@@ -83,6 +83,7 @@ class ScrapZara:
             sleep(3)
             loading = len(itemsWebElems) < len(self.driver.find_elements_by_xpath(xpath))
             itemsWebElems = self.driver.find_elements_by_xpath(xpath)
+        print(len(itemsWebElems))
         for i in itemsWebElems:
             try:
             #     try:
@@ -175,4 +176,4 @@ class ScrapZara:
         self.driver.switch_to.window(self.driver.window_handles[0])
 
 # Main Code
-#ScrapZara()
+# ScrapZara()

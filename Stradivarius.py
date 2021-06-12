@@ -23,7 +23,7 @@ xpaths={
 class ScrapStradivarius:
     def __init__(self):
         options = Options()
-        options.add_argument("user-data-dir=./Cookies/Stradivarius")
+        # options.add_argument("user-data-dir=./Cookies/Stradivarius")
         # chrome_options.add_argument("--headless")
         self.driver = webdriver.Chrome("./chromedriver.exe", options=options)
         self.driver.set_page_load_timeout(30)
@@ -32,7 +32,7 @@ class ScrapStradivarius:
         self.driver.maximize_window()
         self.driver.get("https://www.stradivarius.com/co/")
         sleep(5)
-        categories = [self.driver.find_elements_by_xpath('.//div[contains(@class,"category-content ")]/div/div/div[not(@class="sales-title")]'),[],[]]
+        categories = [self.driver.find_elements_by_xpath('.//div[@class="items-menu no-padding "]/div/div/div/div/a').reverse(),[],[]]
         for c in categories[0]:
             cat = c.get_attribute("innerText").replace("\n", "")
             categories[1].append(c.find_element_by_xpath('./a').get_attribute("href"))
@@ -53,6 +53,7 @@ class ScrapStradivarius:
                 self.subcategory = c
                 self.originalSubcategory = c
                 self.sale = categories[2][categories[0].index(c)]
+                print(categories[0][c],categories[1][categories[0].index(c)])
                 self.scrapCategory(categories[1][categories[0].index(c)])
         self.driver.quit()
     def scrapCategory(self, url):

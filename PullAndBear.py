@@ -2,11 +2,14 @@ from time import sleep
 from Database import Database
 from selenium import webdriver
 from Item import Item
+from selenium.webdriver.common.by import By
 from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 
 xpaths={
-    'categories':'.//ul[@class="product-categories"]/li/ul/li/a[not(contains(@href,"rebajas")) and not(contains(@href,"novedades")) and not(span/span[contains(text(),"Ver todo")]) and not(span[contains(@style,"#f")])]',
-    'categoriesSale':'.//ul[@class="product-categories"]/li/ul/li/a[span[contains(@style,"#f")]]',
+    'categories':'.//li[contains(@class,"has-new-products-count")]/a',
+    'categoriesSale':'.//ul[@class="product-categories"]/li/*[1]',
     'colorsBtn':'.//div[@class="c-product-info--header"]/div[contains(@class,"product-card-color-selector")]/div/div/div/img',
     'description':'.//span[@class="c-product-info--description-text"]',
     'discount':'./../..//div[@class="product-price--price product-price--price-discount"]',
@@ -23,26 +26,32 @@ xpaths={
 class ScrapPullAndBear:
     def __init__(self):
         self.driver = webdriver.Chrome("./chromedriver.exe")
+        self.wait = WebDriverWait(self.driver, 10)
         self.driver.set_page_load_timeout(30)
         self.brand = "Pull & Bear"
         self.db = Database(self.brand)
         self.driver.maximize_window()
-        self.scrapSale()
+        self.sale = False
+        self.visitedIds = []
+        self.scrapSaleAndNew()
         self.gender = "Mujer"
         self.scrapGender("https://www.pullandbear.com/co/mujer-c1030204557.html")
         self.gender = "Hombre"
         # self.scrapGender("https://www.pullandbear.com/co/hombre-c1030204558.html")
         self.driver.close()
 
-    def scrapSale(self):
+    def scrapSaleAndNew(self):
         self.sale = True
         self.gender = 'Mujer'
-        for i in ['https://www.pullandbear.com/co/mujer-c1030204557.html']:#,'https://www.pullandbear.com/co/hombre-c1030204558.html']:
+        for i in ['https://www.pullandbear.com/co/mujer-c1030006518.html']:#,'https://www.pullandbear.com/co/hombre-c1030204558.html']:
             self.driver.get(i)
+            print('Will wait')
+            try:
+                self.wait.until(EC.presence_of_element_located((By.XPATH, xpaths["categoriesSale"])))
+            except:
+                print('Waited')
             categories = [self.driver.find_elements_by_xpath(xpaths['categoriesSale']),[]]
-            while not categories[0]:
-                sleep(1)
-                categories = [self.driver.find_elements_by_xpath(xpaths['categoriesSale']),[]]
+            print(categories[0])
             for c in categories[0]:
                 cat = c.get_attribute("innerText").replace("\n", "")
                 categories[1].append(c.get_attribute("href"))
@@ -51,6 +60,7 @@ class ScrapPullAndBear:
                 while cat.endswith(" "):
                     cat = cat[:-1]
                 categories[0][categories[0].index(c)] = cat
+            print(categories[0])
             for c in range(len(categories[0])):
                 self.category = categories[0][c]
                 self.originalCategory = categories[0][c]
@@ -135,7 +145,12 @@ class ScrapPullAndBear:
                 discount = self.driver.find_element_by_xpath(xpaths['discount'])
             except:
                 discount = ' '
-            self.scrapProduct(e.get_attribute("href"),discount)
+            self.db.addUrl(e.get_attribute("href"))
+            if self.db.getIdByUrl not in self.visitedIds:
+                # print(e.get_attribute("href"),discount)
+                self.scrapProduct(e.get_attribute("href"),discount)
+            else:
+                print('Visitado ya ',e.get_attribute("href"))
 
     def scrapProduct(self, url, discount):
         self.driver.execute_script('window.open("{}", "new window")'.format(url))
@@ -181,7 +196,10 @@ class ScrapPullAndBear:
                         sleep(1)
                     images.append(imgs[i].get_attribute("src"))
                 allImages.append(images)
-            self.db.add(Item(self.brand,name,description,priceBfr,priceNow,discount,allImages,url,allSizes,colors,self.category,self.originalCategory,self.subcategory,self.originalSubcategory,self.sale,self.gender))
+            self.visitedIds.append(self.db.add(Item(self.brand,name,description,priceBfr,priceNow,discount,allImages,url,allSizes,colors,self.category,self.originalCategory,self.subcategory,self.originalSubcategory,self.sale,self.gender)))
+            if len(self.visitedIds >20):
+                self.visitedIds.pop(0)
+            print(self.visitedIds)
         except Exception as e:
             print("Item saltado:",e)
         self.driver.close()

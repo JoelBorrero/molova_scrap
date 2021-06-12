@@ -1,0 +1,58 @@
+Inicia Bershka: 6:53
+Acaba Bershka: 6:54
+
+Inicia PullAndBear: 6:54
+Acaba PullAndBear: 6:54
+
+Inicia Stradivarius: 6:54
+Acaba Stradivarius: 6:55
+
+Inicia MercedesCampuzano: 6:55
+Acaba MercedesCampuzano: 6:55
+
+Inicia Zara: 6:55
+Acaba Zara: 6:55
+
+Inicia Bershka: 7:3
+Acaba Bershka: 7:3
+
+Inicia PullAndBear: 7:3
+Acaba PullAndBear: 7:3
+
+Inicia Stradivarius: 7:3
+Acaba Stradivarius: 7:3
+
+Inicia MercedesCampuzano: 7:3
+Acaba MercedesCampuzano: 7:3
+
+Inicia Zara: 7:3
+Inicia Bershka: 7:4
+Acaba Bershka: 8:15
+
+Inicia PullAndBear: 8:15
+Acaba PullAndBear: 8:15
+
+Inicia Stradivarius: 8:15
+Acaba Stradivarius: 8:15
+
+Inicia MercedesCampuzano: 8:15
+Acaba MercedesCampuzano: 8:15
+
+Inicia Zara: 8:15
+Acaba Zara: 8:15
+
+Inicia Bershka: 0:11
+Acaba Bershka: 0:11
+
+Inicia PullAndBear: 0:11
+Acaba PullAndBear: 0:11
+
+Inicia Stradivarius: 0:11
+Acaba Stradivarius: 0:11
+
+Inicia MercedesCampuzano: 0:11
+Acaba MercedesCampuzano: 0:11
+
+Inicia Zara: 0:11
+Acaba Zara: 0:11
+

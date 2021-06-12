@@ -1,3 +1,4 @@
+from Item import Item
 from time import sleep
 from Database import Database
 from selenium import webdriver
@@ -23,27 +24,26 @@ xpaths = {
 }
 
 
-
 class ScrapBershka:
     def __init__(self):
         # options = Options()
         # options.add_argument("enable-automation")
         # options.add_argument("--headless")
-        #options.add_argument("--window-size=1920,1080")
-        #options.add_argument("--no-sandbox")
-        #options.add_argument("--disable-extensions")
-        #options.add_argument("--dns-prefetch-disable")
-        #options.add_argument("--disable-gpu")
-        #options.add_argument("user-data-dir=./Cookies/Bershka")
-        #self.driver = webdriver.Chrome("./chromedriver.exe", options=options)
+        # options.add_argument("--window-size=1920,1080")
+        # options.add_argument("--no-sandbox")
+        # options.add_argument("--disable-extensions")
+        # options.add_argument("--dns-prefetch-disable")
+        # options.add_argument("--disable-gpu")
+        # options.add_argument("user-data-dir=./Cookies/Bershka")
+        # self.driver = webdriver.Chrome("./chromedriver.exe", options=options)
         self.driver = webdriver.Chrome("./chromedriver.exe")
         self.driver.set_page_load_timeout(30)
         self.brand = "Bershka"
         self.db = Database(self.brand)
         self.driver.maximize_window()
         self.driver.get("https://www.bershka.com/co/")
-        self.scrapCategories()
         self.scrapSale()
+        self.scrapCategories()
         self.driver.quit()
 
     def scrapSale(self):
@@ -142,8 +142,8 @@ class ScrapBershka:
     def scrapProduct(self, url):
         self.driver.execute_script('window.open("{}", "new window")'.format(url))
         self.driver.switch_to.window(self.driver.window_handles[1])
-        try:    
-            if not self.driver.find_elements_by_xpath(xpaths['images']):
+        try:
+            if not self.driver.find_elements_by_xpath(xpaths["images"]):
                 sleep(1)
             name = self.driver.find_element_by_xpath(xpaths["name"]).text
             description = self.driver.find_element_by_xpath(xpaths["description"]).text
@@ -153,13 +153,17 @@ class ScrapBershka:
                 discount = self.driver.find_element_by_xpath(xpaths["discount"]).text
             except:
                 priceBfr = priceNow
-                discount = " "
+                discount = "0"
             colorsBtn = self.driver.find_elements_by_xpath(xpaths["colorsBtn"])
             colors = []
             allSizes = []
             allImages = []
             for c in colorsBtn:
-                c.click()
+                try:
+                    c.click()
+                except:
+                    sleep(2)
+                    c.click()
                 colors.append(c.get_attribute("src"))
                 sizes = []
                 sizesTags = self.driver.find_elements_by_xpath(xpaths["sizesTags"])
@@ -214,31 +218,27 @@ class ScrapBershka:
                     images.append(i.get_attribute("src"))
                 allImages.append(images)
                 colors.append(images[0])
-            self.db.add(Item(
-                self.brand,
-                name,
-                description,
-                priceBfr,
-                priceNow,
-                discount,
-                allImages,
-                url,
-                allSizes,
-                colors,
-                self.category,
-                self.originalCategory,
-                self.subcategory,
-                self.originalSubcategory,
-                self.sale,
-                self.gender,
-            ))
+            self.db.add(
+                Item(
+                    self.brand,
+                    name,
+                    description,
+                    priceBfr,
+                    priceNow,
+                    discount,
+                    allImages,
+                    url,
+                    allSizes,
+                    colors,
+                    self.category,
+                    self.originalCategory,
+                    self.subcategory,
+                    self.originalSubcategory,
+                    self.sale,
+                    self.gender,
+                )
+            )
         except Exception as e:
-            # i = 0
-            # if not os.path.exists("Errors/{}".format(self.brand)):
-            #     os.mkdir("Errors/{}".format(self.brand))
-            # while os.path.exists("Errors/{}/{}{}.png".format(self.brand, e, i)):
-            #     i = i + 1
-            # self.driver.save_screenshot("Errors/{}/{}{}.png".format(self.brand, e, i))
             print("Item saltado")
             print(e)
         self.driver.close()
