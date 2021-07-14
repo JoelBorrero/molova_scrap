@@ -6,23 +6,26 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.chrome.options import Options
 
 xpaths = {
-    "categories": './/ul[@class="vtex-menu-2-x-menuContainer list flex pl0 mv0 flex-row"]/div/div/div/div/div/li/div',
-    "closeBtn": './/button[@class="vtex-modal-layout-0-x-closeButton vtex-modal-layout-0-x-closeButton--modal-header ma0 bg-transparent pointer bw0 pa3"]',
-    "color": './/img[@class="vtex-store-components-3-x-skuSelectorItemImageValue mercedescampuzano-mcampuzano-1-x-showImgColor"]',
-    "colorsBtn": './/ul[@class="vtex-slider-0-x-sliderFrame list pa0 h-100 ma0 flex justify-center"]/li[not(.//button)]',
-    "description": './/div[@class="vtex-store-components-3-x-specificationsTableContainer mt9 mt0-l pl8-l"]',
-    "description2": './/div[@class="vtex-store-components-3-x-content vtex-store-components-3-x-content--product-description h-auto"]',
-    "discount": './/div[@class="vtex-store-components-3-x-discountInsideContainer t-mini white absolute right-0 pv2 ph3 bg-emphasis z-1"]',
-    #'elems' : './/div[@class="vtex-search-result-3-x-galleryItem vtex-search-result-3-x-galleryItem--gallery vtex-search-result-3-x-galleryItem--normal vtex-search-result-3-x-galleryItem--gallery--normal vtex-search-result-3-x-galleryItem--grid vtex-search-result-3-x-galleryItem--gallery--grid pa4"]',
-    "elems": './/a[@class="vtex-product-summary-2-x-clearLink h-100 flex flex-column"]',
-    "imgs": './/div[contains(@class,"swiper-slide vtex-store-components-3-x-productImagesGallerySlide center-all")]/div/div/div/img',
-    "name": './/span[@class="vtex-store-components-3-x-productBrand "]',
-    "name2": './/span[contains(@class,"vtex-store-components-3-x-currencyInteger vtex-store-components-3-x-currencyInteger--price"]',
-    "priceNow": './/span[@class="vtex-product-price-1-x-currencyContainer vtex-product-price-1-x-currencyContainer--summary"]',
-    "prices": './/span[@class="vtex-store-components-3-x-currencyContainer vtex-store-components-3-x-currencyContainer--price"]',
-    "saleCategory": './/a[@class="vtex-breadcrumb-1-x-link vtex-breadcrumb-1-x-link--1 dib pv1 link ph2 c-muted-2 hover-c-link"]',
-    "subCats": './/div[contains(@class,"vtex-menu-2-x-submenuContainer ")]/div/section/nav/ul/li/div/a',
-    "subCats2": './/a[@class="vtex-slider-layout-0-x-imageElementLink vtex-slider-layout-0-x-imageElementLink--menu-slider vtex-store-components-3-x-imageElementLink vtex-store-components-3-x-imageElementLink--menu-slider"]',
+    'categories': './/ul[@class="vtex-menu-2-x-menuContainer list flex pl0 mv0 flex-row"]/div/div/div/div/div/li/div',
+    'closeBtn': './/button[@class="vtex-modal-layout-0-x-closeButton vtex-modal-layout-0-x-closeButton--modal-header ma0 bg-transparent pointer bw0 pa3"]',
+    'color': './/img[@class="vtex-store-components-3-x-skuSelectorItemImageValue mercedescampuzano-mcampuzano-1-x-showImgColor"]',
+    'colorsBtn': './/ul[@class="vtex-slider-0-x-sliderFrame list pa0 h-100 ma0 flex justify-center"]/li[not(.//button)]',
+    'description': './/div[@class="vtex-store-components-3-x-specificationsTableContainer mt9 mt0-l pl8-l"]',
+    'description2': './/div[@class="vtex-store-components-3-x-content vtex-store-components-3-x-content--product-description h-auto"]',
+    'discount': './/div[@class="vtex-store-components-3-x-discountInsideContainer t-mini white absolute right-0 pv2 ph3 bg-emphasis z-1"]',
+    'elems': './/section[@class="vtex-product-summary-2-x-container vtex-product-summary-2-x-containerNormal overflow-hidden br3 h-100 w-100 flex flex-column justify-between center tc"]',
+    'href':'./a',
+    'fast_discount':'./a//div[contains(@class,"discountInsideContainer")]',
+    'fast_priceBfr':'./a//div/span[contains(@class,"strike")]/span',
+    'fast_priceNow':'./a//div/span[@class="vtex-store-components-3-x-sellingPrice vtex-store-components-3-x-sellingPriceValue vtex-product-summary-2-x-sellingPrice vtex-product-summary-2-x-sellingPrice--sosPrice dib ph2 t-body t-heading-5-ns vtex-product-summary-2-x-price_sellingPrice vtex-product-summary-2-x-price_sellingPrice--sosPrice"]/span',
+    'imgs': './/div[contains(@class,"swiper-slide vtex-store-components-3-x-productImagesGallerySlide center-all")]/div/div/div/img',
+    'name': './/span[@class="vtex-store-components-3-x-productBrand "]',
+    'name2': './/span[contains(@class,"vtex-store-components-3-x-currencyInteger vtex-store-components-3-x-currencyInteger--price"]',
+    'priceNow': './/span[@class="vtex-product-price-1-x-currencyContainer vtex-product-price-1-x-currencyContainer--summary"]',
+    'prices': './/span[@class="vtex-store-components-3-x-currencyContainer vtex-store-components-3-x-currencyContainer--price"]',
+    'saleCategory': './/a[@class="vtex-breadcrumb-1-x-link vtex-breadcrumb-1-x-link--1 dib pv1 link ph2 c-muted-2 hover-c-link"]',
+    'subCats': './/div[contains(@class,"vtex-menu-2-x-submenuContainer ")]/div/section/nav/ul/li/div/a',
+    'subCats2': './/a[@class="vtex-slider-layout-0-x-imageElementLink vtex-slider-layout-0-x-imageElementLink--menu-slider vtex-store-components-3-x-imageElementLink vtex-store-components-3-x-imageElementLink--menu-slider"]',
 }
 
 
@@ -37,7 +40,7 @@ class ScrapMercedesCampuzano:
         options.add_argument("--dns-prefetch-disable")
         options.add_argument("--disable-gpu")
         self.driver = webdriver.Chrome("./chromedriver.exe",options=options)"""
-        self.driver = webdriver.Chrome("./chromedriver.exe")
+        self.driver = webdriver.Chrome("./chromedriver")
         self.driver.set_page_load_timeout(30)
         self.brand = "Mercedes Campuzano"
         self.db = Database(self.brand)
@@ -52,11 +55,16 @@ class ScrapMercedesCampuzano:
                 break
             except:
                 print("sleep", i)
-                sleep(1)
+                sleep(2)
         subCats = []
         categories = self.driver.find_elements_by_xpath(xpaths["categories"])
+        '''while True:
+            try:
+                exec(input('>'))
+            except Exception as e:
+                print(e)'''
         for c in categories:
-            mouse.move_to_element(c).move_by_offset(1, 1).perform()
+            mouse.move_to_element(c).perform()
             for s in self.driver.find_elements_by_xpath(xpaths["subCats"]):
                 subCats.append(s.get_attribute("href"))
             if not self.driver.find_elements_by_xpath(xpaths["subCats"]):
@@ -68,7 +76,7 @@ class ScrapMercedesCampuzano:
             self.originalCategory = self.category
             self.originalSubcategory = self.category
             self.scrapCategory(c)
-        self.driver.close()
+        self.driver.quit()
 
     def scrapCategory(self, url):
         self.driver.get(url)
@@ -84,28 +92,26 @@ class ScrapMercedesCampuzano:
         elems = self.driver.find_elements_by_xpath(xpaths["elems"])
         while loading:
             try:
-                self.driver.execute_script(
-                    "window.scrollTo(0, document.body.scrollHeight);"
-                )
+                self.driver.find_element_by_xpath(".//body").send_keys(Keys.END)
                 sleep(3)
                 self.driver.find_element_by_xpath(".//body").send_keys(Keys.PAGE_UP)
                 sleep(1)
                 self.driver.find_element_by_xpath(".//body").send_keys(Keys.PAGE_UP)
-                sleep(1)
-                loading = len(elems) < len(
-                    self.driver.find_elements_by_xpath(xpaths["elems"])
-                )
+                sleep(2)
+                if len(elems) == len(self.driver.find_elements_by_xpath(xpaths["elems"])):
+                    sleep(3)
+                loading = len(elems) < len(self.driver.find_elements_by_xpath(xpaths["elems"]))
                 elems = self.driver.find_elements_by_xpath(xpaths["elems"])
             except:
                 loading = False
         print(url,len(elems))
-        for e in elems:
-            try:
-                self.db.addUrl(e.get_attribute('href'))
-                # if not self.db.contains(e):
-                #     self.scrapProduct(e)
-            except:
-                self.db.urlError(e.get_attribute('href'))
+        for elem in elems:
+            self.driver.execute_script("arguments[0].scrollIntoView();", elem)
+            url = elem.find_element_by_xpath(xpaths['href']).get_attribute('href')
+            if self.db.contains(url):
+                self.updateProduct(elem)
+            else:
+                self.scrapProduct(url)
 
     def scrapProduct(self, url):
         try:
@@ -257,6 +263,16 @@ class ScrapMercedesCampuzano:
         self.driver.close()
         self.driver.switch_to.window(self.driver.window_handles[0])
 
+    def updateProduct(self, elem):
+        url = elem.find_element_by_xpath(xpaths['href']).get_attribute('href')
+        priceNow = elem.find_element_by_xpath(xpaths['fast_priceNow']).text
+        try:
+            priceBfr = elem.find_element_by_xpath(xpaths['fast_priceBfr']).text
+            discount = elem.find_element_by_xpath(xpaths['fast_discount']).text
+        except:
+            priceBfr = priceNow
+            discount = 0
+        self.db.update_product(url, priceBfr, priceNow, discount)
 
 # Main Code
 # ScrapMercedesCampuzano()

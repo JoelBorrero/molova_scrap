@@ -126,11 +126,12 @@ class ScrapMango:
                             self.category,
                             False,
                             "Mujer"))
+                print('Page',pageNum,len(garments))
                 if len(garments)<300:
                     pageNum = 0
                 else:
                     pageNum += 1
-                # sleep(uniform(5,10))
+                sleep(uniform(5,10))
         self.db.close()
 
 

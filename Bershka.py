@@ -8,19 +8,22 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
 xpaths = {
-    "categories": './/li[@class="sub-menu-item"]/a[not(contains(@href,"total-look")) and not(contains(@href,"join")) and not(contains(@href,"creators")) and not(@aria-label="Ir a Ver Todo")]',
-    "colorsBtn": './/ul[@class="swiper-wrapper"]/li/a/div/img',
-    "coming": "./span/span/span",
-    "description": './/section[@class="product-info"]',
-    "discount": './/span[@class="discount-tag"]',
-    "elems": './/ul[@class="grid-container"]/li/div/a',
-    "images": './/div/button/div[@class="image-item-wrapper"]/img',
-    "name": './/h1[@class="product-title"]',
-    "priceBfr": './/span[@class="old-price-elem"]',
-    "priceNow": './/div[contains(@class,"current-price-elem")]',
-    "sale": ".//a[@style]",
-    "sizesTags": './/div[@class="sizes-list-detail"]/ul/li/button',
-    "subCats": './/div[@class="filter-tag-swiper"]/div/ul/li',
+    'categories': './/li[@class="sub-menu-item"]/a[not(contains(@href,"total-look")) and not(contains(@href,"join")) and not(contains(@href,"creators")) and not(@aria-label="Ir a Ver Todo")]',
+    'colorsBtn': './/ul[@class="swiper-wrapper"]/li/a/div/img',
+    'coming': './span/span/span',
+    'description': './/section[@class="product-info"]',
+    'discount': './/span[@class="discount-tag"]',
+    'elems': './/ul[@class="grid-container"]/li/div/a',
+    'fast_discount': './div/div/span',
+    'fast_priceBfr':'.//span[@class="old-price-elem"]',
+    'fast_priceNow':'.//div[contains(@class,"current-price-elem")]',
+    'images': './/div/button/div[@class="image-item-wrapper"]/img',
+    'name': './/h1[@class="product-title"]',
+    'priceBfr': './/span[@class="old-price-elem"]',
+    'priceNow': './/div[contains(@class,"current-price-elem")]',
+    'sale': './/ul[@class="sub-menu-container is-active"]/li/a',
+    'sizesTags': './/div[@class="sizes-list-detail"]/ul/li/button',
+    'subCats': './/div[@class="filter-tag-swiper"]/div/ul/li',
 }
 
 
@@ -36,7 +39,8 @@ class ScrapBershka:
         # options.add_argument("--disable-gpu")
         # options.add_argument("user-data-dir=./Cookies/Bershka")
         # self.driver = webdriver.Chrome("./chromedriver.exe", options=options)
-        self.driver = webdriver.Chrome("./chromedriver.exe")
+        # self.driver = webdriver.Chrome("./chromedriver.exe")
+        self.driver = webdriver.Chrome("./chromedriver")
         self.driver.set_page_load_timeout(30)
         self.brand = "Bershka"
         self.db = Database(self.brand)
@@ -65,8 +69,7 @@ class ScrapBershka:
             else:
                 self.gender = "Mujer"
                 self.scrapCategory(categories[1][c])
-            # self.scrapCategory(categories[1][c])
-
+                
     def scrapCategories(self):
         self.sale = False
         categories = [[], [], self.driver.find_elements_by_xpath(xpaths["categories"])]
@@ -100,44 +103,39 @@ class ScrapBershka:
         if subCats:
             for s in range(len(subCats)):
                 if not "Todas" in subCats[s].get_attribute("innerText"):
-                    try:
-                        subCats[s].click()
-                        self.driver.find_element_by_xpath(".//body").send_keys(
-                            Keys.PAGE_DOWN
-                        )
-                        sleep(1)
-                        subCats = self.driver.find_elements_by_xpath(xpaths["subCats"])
-                        self.subcategory = subCats[s].get_attribute("innerText")
-                        self.originalSubcategory = subCats[s].get_attribute("innerText")
-                        self.scrapSubcategory()
-                    except:
-                        print("Error clicking")
+                    # try:
+                    self.driver.find_element_by_xpath(".//body").send_keys(Keys.HOME)
+                    sleep(1)
+                    subCats[s].click()
+                    self.driver.find_element_by_xpath(".//body").send_keys(Keys.PAGE_DOWN)
+                    sleep(1)
+                    subCats = self.driver.find_elements_by_xpath(xpaths["subCats"])
+                    self.subcategory = subCats[s].get_attribute("innerText")
+                    self.originalSubcategory = subCats[s].get_attribute("innerText")
+                    self.scrapSubcategory()
+                    # except:
+                    #     print("Error clicking")
         else:
             self.subcategory = self.category
             self.originalSubcategory = self.category
             self.scrapSubcategory()
 
     def scrapSubcategory(self):
-        elems = [[], self.driver.find_elements_by_xpath(xpaths["elems"])]
+        elems = self.driver.find_elements_by_xpath(xpaths["elems"])
         loading = True
         while loading:
-            self.driver.execute_script(
-                "window.scrollTo(0, document.body.scrollHeight);"
-            )
+            self.driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
             self.driver.find_element_by_xpath(".//body").send_keys(Keys.PAGE_UP)
             sleep(3)
-            loading = len(elems[1]) < len(
-                self.driver.find_elements_by_xpath(xpaths["elems"])
-            )
-            elems = [[], self.driver.find_elements_by_xpath(xpaths["elems"])]
-        while elems[1]:
-            e = elems[1].pop().get_attribute("href")
-            e = e[: e.index(".html") + 5]
-            self.db.addUrl(e)
-            if not any(e[:-14] in el for el in elems[0]):
-                elems[0].append(e)
-        while elems[0]:
-            self.scrapProduct(elems[0].pop())
+            loading = len(elems) < len(self.driver.find_elements_by_xpath(xpaths["elems"]))
+            elems = self.driver.find_elements_by_xpath(xpaths["elems"])
+        while elems:
+            e = elems.pop()
+            url = e.get_attribute('href')
+            if self.db.contains(url):
+                self.updateProduct(e)
+            else:
+                self.scrapProduct(url)
 
     def scrapProduct(self, url):
         self.driver.execute_script('window.open("{}", "new window")'.format(url))
@@ -215,7 +213,7 @@ class ScrapBershka:
                 if len(self.driver.find_elements_by_xpath(xpaths["images"])) < 2:
                     sleep(3)
                 for i in self.driver.find_elements_by_xpath(xpaths["images"]):
-                    images.append(i.get_attribute("src"))
+                    images.append(i.get_attribute("src").replace("/2021/I/","/2021/V/"))
                 allImages.append(images)
                 colors.append(images[0])
             self.db.add(
@@ -236,7 +234,7 @@ class ScrapBershka:
                     self.originalSubcategory,
                     self.sale,
                     self.gender,
-                )
+                ),True
             )
         except Exception as e:
             print("Item saltado")
@@ -244,6 +242,17 @@ class ScrapBershka:
         self.driver.close()
         self.driver.switch_to.window(self.driver.window_handles[0])
 
-
+    def updateProduct(self, elem):
+        url = elem.get_attribute('href')
+        priceNow = elem.find_element_by_xpath(xpaths['fast_priceNow']).text
+        try:
+            priceBfr = elem.find_element_by_xpath(xpaths['fast_priceNow']).text
+            discount = elem.find_element_by_xpath(xpaths['fast_discount']).text
+        except:
+            priceBfr = priceNow
+            discount = 0
+        self.db.update_product(url, priceBfr, priceNow, discount)
+        
+        
 # Main Code
 # ScrapBershka()

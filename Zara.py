@@ -2,150 +2,148 @@ import os, Database
 from Item import Item
 from time import sleep
 from selenium import webdriver
-#from selenium.webdriver.chrome.options import Options
+
+xpaths = {
+    'categories': './/ul[@class="layout-categories__container"]/li[position()=1]/ul/li/ul/li/a',
+    'color':'.//p[contains(@class,"product-detail-selected-color")]',
+    'colorsBtn': './/ul[@class="product-detail-info-color-selector__colors"]/li/button',
+    'coming': '',
+    'description': './/div[@class="expandable-text__inner-content"]/p',
+    'discount': './/div[@class="product-detail-info__price-amount price"]//span[@class="price__discount-percentage"]',
+    'elems': './/section[@class="product-grid"]/ul/li/ul/li[not(contains(@class,"seo"))]',
+    'href':'./a',
+    'fast_discount': './/div[@class="product-grid-product-info__tag"]/span',
+    'fast_image': './/img[not(contains(@src,"watermark"))]',
+    'fast_priceBfr':'.//span[@class="price__amount price__amount--old"]',
+    'fast_priceNow':'.//span[@class="price__amount-current"]',
+    'images': './/div[@class="media__wrapper media__wrapper--fill media__wrapper--force-height"]/picture/img[@class="media-image__image media__wrapper--media"]',
+    'name': './/h1[@class="product-detail-info__name"]',
+    'priceBfr': './/div[@class="product-detail-info__price-amount price"]//span[@class="price__amount price__amount--old"]',
+    'priceNow': './/div[@class="product-detail-info__price-amount price"]//span[@class="price__amount-current-wrapper"]',
+    'sale': '',
+    'sizesTags': './/div[@class="product-detail-info product-detail-view__product-info"]//ul[@class="product-detail-size-selector__size-list"]/li',
+    'subcategory': './/span[@class="category-topbar-related-categories__category-name category-topbar-related-categories__category-name--selected"]',
+    'subCats':'.//li[@class="variable-width-carousel__item"]/a/div/span',
+    'thumbnails': './/ul[@class="product-detail-images-thumbnails product-detail-images__thumbnails"]/li/button',
+}
 
 class ScrapZara:
     def __init__(self):
-        self.driver = webdriver.Chrome("./chromedriver.exe")
+        self.driver = webdriver.Chrome("./chromedriver")
         self.brand = "Zara"
         self.db = Database.Database(self.brand)
         self.sale = False
         self.driver.maximize_window()
         self.driver.get("https://www.zara.com/co/")
         cats=[[],[]]
-        sales = [[],[],['?v1=1713916','?v1=1713384','?v1=1713588','?v1=1713959','?v1=1714113','?v1=1714042','?v1=1714238','?v1=1714298']]
-        for cat in self.driver.find_elements_by_xpath('.//ul[@class="layout-categories__container"]/li[position()<3]/ul/li[not(contains(@class,"divider"))]/ul/li/a'):
+        for cat in self.driver.find_elements_by_xpath(xpaths['categories']):
             c = cat.get_attribute('innerText').capitalize()
-            if 'Special prices' in c:
-                sales[0].append(c)
-                sales[1].append(cat.get_attribute("href"))
-            else:
-                cats[0].append(c)
-                cats[1].append(cat.get_attribute("href"))
-        self.sale = True
-        i=0
-        for i in range(len(sales[0])):
-            self.category = sales[0][i]
-            self.originalCategory = self.category
-            if 'mujer' in sales[1][i] or 'woman' in sales[1][i]:
-                self.gender = 'Mujer'
-            else:
-                self.gender = 'Hombre'
-            self.scrapCategoria(sales[1][i])
-        self.sale = False
-        i=0
+            cats[0].append(c)
+            cats[1].append(cat.get_attribute("href"))
         for i in range(len(cats[0])):
             self.category = cats[0][i]
             self.originalCategory = self.category
             if 'mujer' in cats[1][i] or 'woman' in cats[1][i]:
                 self.gender = 'Mujer'
+                self.scrapCategoria(cats[1][i])
             else:
                 self.gender = 'Hombre'
-            self.scrapCategoria(cats[1][i])
+            # self.scrapCategoria(cats[1][i])
 
     def scrapCategoria(self, url):
         self.driver.get(url)
         try:
-            self.subcategory = self.driver.find_element_by_xpath('.//span[@class="category-topbar-related-categories__category-name category-topbar-related-categories__category-name--selected"]').text.capitalize()
+            self.subcategory = self.driver.find_element_by_xpath(xpaths['subcategory']).text.capitalize()
         except:
             self.subcategory = self.category
-        subcats = self.driver.find_elements_by_xpath('.//li[@class="variable-width-carousel__item"]/a/div/span')
+        subcats = self.driver.find_elements_by_xpath(xpaths['subCats'])
         if subcats:
             for s in range(len(subcats)):
-                subcats = self.driver.find_elements_by_xpath('.//li[@class="variable-width-carousel__item"]/a/div/span')
+                print(s,'de',len(subcats))
+                print(s,'de',len(subcats))
                 if subcats[s].text.lower() != 'ver todo':
                     try:
                         subcats[s].click()
                         sleep(5)
-                        self.subcategory = self.driver.find_element_by_xpath('.//span[@class="category-topbar-related-categories__category-name category-topbar-related-categories__category-name--selected"]').text.capitalize()
+                        print('67:')
+                        self.subcategory = self.driver.find_element_by_xpath(xpaths['subcategory']).text.capitalize()
+                        print('68:',self.subcategory)
                         self.scrapSubcategory()
                     except:
-                        try:
-                            self.driver.find_element_by_xpath('.//button[@class="variable-width-carousel__arrow variable-width-carousel__arrow--right"]').click()
-                            subcats[s].click()
-                            sleep(5)
-                            self.subcategory = self.driver.find_element_by_xpath('.//span[@class="category-topbar-related-categories__category-name category-topbar-related-categories__category-name--selected"]').text.capitalize()
-                            self.scrapSubcategory()
-                        except:
-                            print('Never click')
+                        # try:
+                        self.driver.find_element_by_xpath('.//button[@class="variable-width-carousel__arrow variable-width-carousel__arrow--right"]').click()
+                        subcats[s].click()
+                        sleep(5)
+                        self.subcategory = self.driver.find_element_by_xpath(xpaths['subcategory']).text.capitalize()
+                        self.scrapSubcategory()
+                        # except:
+                        #     print('Never click')
+                subcats = self.driver.find_elements_by_xpath(xpaths['subCats'])
         else:
             self.scrapSubcategory()
             
     def scrapSubcategory(self):
-        loading = True     #Testing
         self.originalSubcategory = self.subcategory
-        xpath = './/a[@class="product-link product-grid-product__link link"]'
-        itemsWebElems = self.driver.find_elements_by_xpath(xpath)
+        itemsWebElems = self.driver.find_elements_by_xpath(xpaths['elems'])
         self.driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
         sleep(3)
+        loading = False
         while loading:
             self.driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
             sleep(3)
-            loading = len(itemsWebElems) < len(self.driver.find_elements_by_xpath(xpath))
-            itemsWebElems = self.driver.find_elements_by_xpath(xpath)
+            loading = len(itemsWebElems) < len(self.driver.find_elements_by_xpath(xpaths['elems']))
+            itemsWebElems = self.driver.find_elements_by_xpath(xpaths['elems'])
         print(len(itemsWebElems))
-        for i in itemsWebElems:
-            try:
-            #     try:
-            #         i = i.find_element_by_xpath("./a")
-            #     except Exception as e:
-            #         i = i.find_element_by_xpath("./ul/li/a")
-            #     self.driver.execute_script("arguments[0].scrollIntoView();", i)   
-                
-                self.db.addUrl(i.get_attribute('href'))
-                if not self.db.contains(i.get_attribute('href')):
-                    self.scrapProduct(i.get_attribute('href'))
-            except:
-                self.db.urlError(i.get_attribute('href'))
+        while itemsWebElems:
+            elem = itemsWebElems.pop()
+            self.driver.execute_script("arguments[0].scrollIntoView();", elem)
+            url = elem.find_element_by_xpath(xpaths['href']).get_attribute('href')
+            image = elem.find_element_by_xpath(xpaths['fast_image']).get_attribute('src')
+            if self.db.contains(url, image):
+                self.updateProduct(elem)
+            else:
+                self.scrapProduct(url)
 
 
     def scrapProduct(self, url):
+        mouse = webdriver.ActionChains(self.driver)
         self.driver.execute_script('window.open("{}", "new window")'.format(url))
         self.driver.switch_to.window(self.driver.window_handles[1])
         try:
-            name = self.driver.find_element_by_xpath('.//h1[@class="product-detail-info__name"]').text.capitalize()
-            description = self.driver.find_element_by_xpath('.//div[@class="expandable-text__inner-content"]/p').text.capitalize()
+            name = self.driver.find_element_by_xpath(xpaths['name']).text.capitalize()
+            description = self.driver.find_element_by_xpath(xpaths['description']).text.capitalize()
+            priceNow = self.driver.find_element_by_xpath(xpaths['priceNow']).text
             try:
-                priceBfr = self.driver.find_element_by_xpath('.//div[@class="product-detail-info__price-amount price"]/span[@class="price__amount price__amount--old"]').text
-                priceNow = self.driver.find_element_by_xpath('.//div[@class="product-detail-info__price-amount price"]/span[@class="price__amount price__amount--on-sale"]').text
-                try:
-                    priceNow = priceNow[:priceNow.index('\n')]
-                except:
-                    try:
-                        priceNow = priceNow[:priceNow.index('-')]
-                    except:
-                        priceNow = priceNow[:-3]
-                discount = self.driver.find_element_by_xpath('.//div[@class="product-detail-info__price-amount price"]/span[@class="price__amount price__amount--on-sale"]/span').get_attribute('innerText')
+                priceBfr = self.driver.find_element_by_xpath(xpaths['priceBfr']).text
+                discount = self.driver.find_element_by_xpath(xpaths['discount']).get_attribute('innerText')
             except:
-                priceBfr = self.driver.find_element_by_xpath('.//span[@class="price__amount"]').text
-                priceNow = priceBfr
-                discount = ' '
-            otherColors = self.driver.find_elements_by_xpath('.//ul[@class="product-detail-info-color-selector__colors"]/li/button')
+                priceBfr = priceNow
+                discount = 0
+            colorsBtn = self.driver.find_elements_by_xpath(xpaths['colorsBtn'])
             colors = []
             allSizes = []
             allImages = []
-            if len(otherColors) == 0:
-                try:
-                    color = self.driver.find_element_by_xpath('.//p[@class="product-detail-info-color-selector__selected-color-name"]')
-                except:
-                    try:
-                        color = self.driver.find_element_by_xpath('.//p[@class="product-detail-info__color"]')
-                    except:
-                        color = self.driver.find_element_by_xpath('.//p[@class="product-detail-color-selector__selected-color-name"]')
+            if len(colorsBtn) == 0:
+                color = self.driver.find_element_by_xpath(xpaths['color'])
                 colors.append(color.text.replace("Color: ", "").replace('"', "").capitalize())
                 tallas = []
-                for t in self.driver.find_elements_by_xpath('.//ul[contains(@id,"product-size-selector-product-detail-info-")]/li'):
+                for t in self.driver.find_elements_by_xpath(xpaths['sizesTags']):
                     if "disabled" in t.get_attribute("class"):
                         tallas.append("{}(Agotado)".format(t.find_element_by_xpath("./div/div/span").get_attribute("innerText")))
                     else:
                         tallas.append(t.find_element_by_xpath("./div/div/span").get_attribute("innerText"))
                 allSizes.append(tallas)
                 images = []
-                for i in self.driver.find_elements_by_xpath('.//div[@class="media__wrapper media__wrapper--fill media__wrapper--force-height"]/picture/img[@class="media-image__image media__wrapper--media"]'):
-                    images.append(i.get_attribute("src"))
+                thumbnails = self.driver.find_elements_by_xpath(xpaths['thumbnails'])
+                for i in range(len(thumbnails)):
+                    mouse.move_to_element(thumbnails[i]).perform()
+                    thumbnails[i].click()
+                for i in self.driver.find_elements_by_xpath(xpaths['images']):
+                    if not 'transparent-background' in i.get_attribute("src"):
+                        images.append(i.get_attribute("src"))
                 allImages.append(images)
-            for c in range(len(otherColors)):
-                otherColors[c].click()
+            for c in range(len(colorsBtn)):
+                colorsBtn[c].click()
                 tallas = []
                 while not self.driver.find_elements_by_xpath('.//ul[contains(@id,"product-size-selector-product-detail-info")]/li'):
                     sleep(0.1)
@@ -156,24 +154,33 @@ class ScrapZara:
                         tallas.append(t.find_element_by_xpath("./div/div/span").get_attribute("innerText"))
                 allSizes.append(tallas)
                 images = []
-                for i in self.driver.find_elements_by_xpath('.//div[@class="media__wrapper media__wrapper--fill media__wrapper--force-height"]/picture/img[@class="media-image__image media__wrapper--media"]'):
-                    images.append(i.get_attribute("src"))
+                thumbnails = self.driver.find_elements_by_xpath(xpaths['thumbnails'])
+                for i in range(len(thumbnails)):
+                    mouse.move_to_element(thumbnails[i]).perform()
+                    thumbnails[i].click()
+                for i in self.driver.find_elements_by_xpath(xpaths['images']):
+                    if not 'transparent-background' in i.get_attribute("src"):
+                        images.append(i.get_attribute("src"))
+                        print(i.get_attribute("src"))
                 allImages.append(images)
-                colors.append(otherColors[c].get_attribute("innerText").replace("Color: ", "").replace('"', "").capitalize())
-                otherColors = self.driver.find_elements_by_xpath('.//ul[@class="product-detail-info-color-selector__colors"]/li/button')
-            self.db.add(Item(self.brand,name,description,priceBfr,[priceNow],discount,allImages,url,allSizes,colors,self.category,self.originalCategory,self.subcategory,self.originalSubcategory,self.sale, self.gender))
+                colors.append(colorsBtn[c].get_attribute("innerText").replace("Color: ", "").replace('"', "").capitalize())
+                colorsBtn = self.driver.find_elements_by_xpath('.//ul[@class="product-detail-info-color-selector__colors"]/li/button')
+            self.db.add(Item(self.brand,name,description,priceBfr,[priceNow],discount,allImages,url,allSizes,colors,self.category,self.originalCategory,self.subcategory,self.originalSubcategory,self.sale, self.gender),True)
         except Exception as e:
             i = 0
-            if not os.path.exists("Errors/{}".format(self.brand)):
-                os.mkdir("Errors/{}".format(self.brand))
-            while os.path.exists('Errors/{}/{}{}.png'.format(self.brand, e, i)):
-                i = i + 1
-            self.driver.save_screenshot('Errors/{}/{}{}.png'.format(self.brand, e, i))
-            print("Item saltado")
-            print(e)
-            #input('Continuar?')
+            print('Item saltado',e)
         self.driver.close()
         self.driver.switch_to.window(self.driver.window_handles[0])
 
+    def updateProduct(self, elem):
+        url = elem.find_element_by_xpath(xpaths['href']).get_attribute('href')
+        priceNow = elem.find_element_by_xpath(xpaths['fast_priceNow']).text
+        try:
+            priceBfr = elem.find_element_by_xpath(xpaths['fast_priceNow']).text
+            discount = elem.find_element_by_xpath(xpaths['fast_discount']).text
+        except:
+            priceBfr = priceNow
+            discount = 0
+        self.db.update_product(url, priceBfr, priceNow, discount)
 # Main Code
 # ScrapZara()

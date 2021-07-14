@@ -11,17 +11,22 @@ class Item:
         self.description = description.replace('"','').replace("'",'')
         if not priceBefore:
             priceBefore = ' '
-        self.priceBefore = priceBefore
+        self.priceBefore = toInt(priceBefore)
         self.allPricesNow = allPricesNow
         if not isinstance(self.allPricesNow,list):
             self.allPricesNow = [self.allPricesNow]
         for p in range(len(self.allPricesNow)):
             self.allPricesNow[p] = toInt(self.allPricesNow[p])
-        if not discount:
-            discount = '0'
-        self.discount = toInt(discount)
+        if not discount or toInt(discount)<1:
+            self.discount = (1-self.allPricesNow[0]/self.priceBefore)*100
+        else:
+            self.discount = discount
+        self.discount = toInt(self.discount)
         self.allImages = allImages
-        self.url = url
+        try:
+            self.url = url[:url.index('.html')+5]
+        except:
+            self.url = url
         self.allSizes = allSizes
         if 'http' in str(colors):
             self.colors = colors
@@ -42,7 +47,7 @@ class Item:
         if not originalSubcategory:
             originalSubcategory = category
         self.originalSubcategory = originalSubcategory
-        self.sale = any(toInt(p) < toInt(priceBefore) for p in self.allPricesNow)
+        self.sale = any(p < toInt(priceBefore) for p in self.allPricesNow)
         self.gender = gender
         self.getCategories()
         # if crawling:
@@ -154,17 +159,17 @@ class Item:
         ['pantalones','jeans','bermudas'],
         ['vestidos','petos'],
         ['faldas','short'],
-        ['cazadoras','abrigos','chalecos','sobrecamisas','chaquetas','blazers','cardigans'],
-        ['sudaderas','joggers','chándal'],
+        ['cazadoras','abrigos','chalecos','sobrecamisas','chaquetas','blazers','cardigans', 'blasier'],
+        ['sudaderas','joggers','chándal', 'sport'],
         ['zapatos','baletas','botas','tacones','sandalias','tennis','tenis','mocasines','oxford','zuecos','spadrillas','shoes','zapatillas','piel'],
         ['bolsos','bandoleras','carteras','mochilas','riñoneras'],
         ['accesorios','gafas','bisutería','cinturones','correas','gorros','fundas','bufandas','medias','decoración']]
         cats2=[['camisa','camiseta','jerséi','jersey','blusa','bluson','blusón','top','bandeau','suéter','sueter','sweater','polo','tshirt','t-shirt','crochet'],
         ['pantalon','pantalón','jeans','bermudas','capris','trousers'],
         ['vestido','peto','enterizo','kimono','cuerpo'],
-        ['falda','shorts','minifalda','skirt'],
+        ['falda','shorts','short', 'minifalda','skirt'],
         ['cazadora','abrigo','chaleco','sobrecamisa','saco','chubasquero','capa','parka','buzo','blazer','chaqueta','manguitos','plumíferos','plumiferos','cardigan','cárdigan','rompevientos'],
-        ['sudadera','jogger','chándal','leggins','legging'],
+        ['sudadera','jogger','chándal','leggings', 'leggins','bicicletero', 'sport', 'sporty', 'capri', 'cycling', 'ciclista'],
         ['zapatos','baletas','tacones','tacón','sandalias','zapatillas','trespuntadas','spadrillas','tenis','botas','zuecos','deportivas','deportivos','botínes','bamba'],
         ['bolso','bandolera','cartera','mochila','riñonera','shopper','maletin','maletín','morral'],
         ['correa','gorro','bufanda','medias','cadenas','collares','aretes','anillos']]
@@ -173,7 +178,10 @@ class Item:
         for c in cats:
             for cat in c:
                 if cat in self.category.lower():
-                    category = categories[cats.index(c)]
+                    if any(dep in cats2[5] for dep in self.name.lower().split(' ')):
+                        category = categories[5]
+                    else:
+                        category = categories[cats.index(c)]
         if not category:
             for c in cats2:
                 if any(s in c for s in self.name.lower().split(' ')):
@@ -216,7 +224,7 @@ class Item:
         elif index == 4:
             if any(s in self.name.lower() for s in ['abrigo','chaqueta','gabardina','chaleco','parka','buzo']):
                 self.subcategory = 'Abrigos'
-            elif any(s in self.name.lower() for s in ['blazer','cazadora','sobrecamisa']):
+            elif any(s in self.name.lower() for s in ['blazer','cazadora','sobrecamisa', 'blasier']):
                 self.subcategory = 'Blazers'
             else:
                 self.subcategory = category
@@ -319,9 +327,11 @@ def getColorSrc(colorName,url):
         return "https://static.e-stradivarius.net/5/photos3/2021/V/0/1/p/2545/990/001/2545990001_3_1_5.jpg?t=1613467824691"
 
 def toInt(s):
+    if type(s) is float:
+        s = int(s)  
     if not type(s) is int:
         stf = 0
-        s = ''.join(s)
+        s = ''.join(str(s))
         for st in s:
             try:
                 stf = stf * 10 + int(st)
