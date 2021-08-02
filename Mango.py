@@ -7,8 +7,12 @@ from selenium import webdriver
 from Item import Item
 from Database import Database
 
+brand = 'Mango'
+db = Database(brand)
 xpaths={
-    'categories':'.//div[@class="section-detail-container section-detail-hidden "]/div/ul[@class="section-detail"]/li[not(contains(@class,"desktop-label-hidden") or contains(@class," label-hidden"))]/a'
+    'categories':'.//div[@class="section-detail-container section-detail-hidden "]/div/ul[@class="section-detail"]/li[not(contains(@class,"desktop-label-hidden") or contains(@class," label-hidden"))]/a',
+    'imgs':'.//div[@id="renderedImages"]//img',
+    'name':'.//h1[@itemprop="name"]'
 }
 endpoints = [
     'https://shop.mango.com/services/productlist/products/CO/she/sections_she_colombia_rebajas_SpecialSale.rebajas_she_mobile/?saleSeasons=3,8,5,4&pageNum=',
@@ -57,7 +61,6 @@ endpoints = [
 
 class ScrapMango:
     def __init__(self):
-        self.brand = 'Mango'
         self.scrap()
         self.crawl_api()
 
@@ -84,7 +87,6 @@ class ScrapMango:
         self.driver.quit()
 
     def crawl_api(self):
-        self.db = Database(self.brand)
         for endpoint in endpoints:
             pageNum = 1
             print(endpoint)
@@ -108,9 +110,9 @@ class ScrapMango:
                         allSizes.append(sizes)
                         colors.append(color['iconUrl'].replace(' ',''))
                     allImages.reverse()#I don't know why
-                    self.db.add(
+                    db.add(
                         Item(
-                            self.brand,
+                            brand,
                             it['shortDescription'],
                             it['shortDescription'],
                             it['price']['crossedOutPrices'],
@@ -132,7 +134,7 @@ class ScrapMango:
                 else:
                     pageNum += 1
                 sleep(uniform(5,10))
-        self.db.close()
+        db.close()
 
 
 # ScrapMango()

@@ -8,6 +8,8 @@ from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
+brand = 'Pull & Bear'
+db = Database(brand)
 xpaths={
     'categories':'.//ul[@class="product-categories"]/li/ul/li/a',
     'categoriesSale':'.//ul[@class="product-categories"]/li[contains(@class,"sale")]/ul/li/a',
@@ -35,8 +37,6 @@ class ScrapPullAndBear:
         self.driver = webdriver.Chrome('./chromedriver')
         self.wait = WebDriverWait(self.driver, 10)
         self.driver.set_page_load_timeout(30)
-        self.brand = 'Pull & Bear'
-        self.db = Database(self.brand)
         self.driver.maximize_window()
         self.gender = 'Mujer'
         # self.ScrapSale()
@@ -74,7 +74,7 @@ class ScrapPullAndBear:
             priceBfr = elem.find_element_by_xpath(xpaths['fast_price']).text
             priceNow = priceBfr
             discount = 0
-        self.db.update_product(url, priceBfr, priceNow, discount)
+        db.update_product(url, priceBfr, priceNow, discount)
         
     def scrapGender(self, url):
         self.sale = False
@@ -170,7 +170,7 @@ class ScrapPullAndBear:
             self.driver.execute_script("arguments[0].scrollIntoView();", elem)
             url = elem.find_element_by_xpath(xpaths['href']).get_attribute('href')
             image = elem.find_element_by_xpath(xpaths['fast_image']).get_attribute('src')
-            if self.db.contains(url, image):
+            if db.contains(url, image):
                 self.updateProduct(elem)
             else:
                 try:
@@ -223,7 +223,7 @@ class ScrapPullAndBear:
                         sleep(1)
                     images.append(imgs[i].get_attribute("src"))
                 allImages.append(images)
-            self.db.add(Item(self.brand,name,description,priceBfr,priceNow,discount,allImages,url,allSizes,colors,self.category,self.originalCategory,self.subcategory,self.originalSubcategory,self.sale,self.gender))
+            db.add(Item(brand,name,description,priceBfr,priceNow,discount,allImages,url,allSizes,colors,self.category,self.originalCategory,self.subcategory,self.originalSubcategory,self.sale,self.gender))
         except Exception as e:
            print("Item saltado:",e)
         self.driver.close()

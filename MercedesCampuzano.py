@@ -5,6 +5,8 @@ from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.chrome.options import Options
 
+brand = "Mercedes Campuzano"
+db = Database(brand)
 xpaths = {
     'categories': './/ul[@class="vtex-menu-2-x-menuContainer list flex pl0 mv0 flex-row"]/div/div/div/div/div/li/div',
     'closeBtn': './/button[@class="vtex-modal-layout-0-x-closeButton vtex-modal-layout-0-x-closeButton--modal-header ma0 bg-transparent pointer bw0 pa3"]',
@@ -42,8 +44,6 @@ class ScrapMercedesCampuzano:
         self.driver = webdriver.Chrome("./chromedriver.exe",options=options)"""
         self.driver = webdriver.Chrome("./chromedriver")
         self.driver.set_page_load_timeout(30)
-        self.brand = "Mercedes Campuzano"
-        self.db = Database(self.brand)
         self.driver.maximize_window()
         self.gender = "Mujer"
         self.sale = False
@@ -66,7 +66,10 @@ class ScrapMercedesCampuzano:
         for c in categories:
             mouse.move_to_element(c).perform()
             for s in self.driver.find_elements_by_xpath(xpaths["subCats"]):
-                subCats.append(s.get_attribute("href"))
+                try:
+                    subCats.append(s.get_attribute("href"))
+                except:
+                    print('err')
             if not self.driver.find_elements_by_xpath(xpaths["subCats"]):
                 for s in self.driver.find_elements_by_xpath(xpaths["subCats2"]):
                     subCats.append(s.get_attribute("href"))
@@ -108,7 +111,7 @@ class ScrapMercedesCampuzano:
         for elem in elems:
             self.driver.execute_script("arguments[0].scrollIntoView();", elem)
             url = elem.find_element_by_xpath(xpaths['href']).get_attribute('href')
-            if self.db.contains(url):
+            if db.contains(url):
                 self.updateProduct(elem)
             else:
                 self.scrapProduct(url)
@@ -233,7 +236,7 @@ class ScrapMercedesCampuzano:
             if not name.startswith(w):
                 name = " ".join([w, name])
             Item(
-                self.brand,
+                brand,
                 name,
                 description,
                 priceBfr,
@@ -272,7 +275,7 @@ class ScrapMercedesCampuzano:
         except:
             priceBfr = priceNow
             discount = 0
-        self.db.update_product(url, priceBfr, priceNow, discount)
+        db.update_product(url, priceBfr, priceNow, discount)
 
 # Main Code
 # ScrapMercedesCampuzano()

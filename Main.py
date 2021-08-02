@@ -1,26 +1,22 @@
-import os, json, scrapy, requests, Bershka, Gef, MercedesCampuzano, PullAndBear, Stradivarius, Zara, Mango
+import os, json, scrapy, requests
 from time import sleep
 from random import uniform
-from Item import Item, toInt
-from Database import Database
+from selenium import webdriver
 from scrapy.crawler import CrawlerProcess
 
-urlsDb = Database('Urls')
+import Bershka, Gef, Mango, MercedesCampuzano, PullAndBear, Stradivarius, Zara
+from Item import Item, toInt
+from Database import Database
+
+
 bDb = Database('Bershka')
-# gDb = Database('Gef')
 mngDb = Database('Mango')
 mDb = Database('Mercedes Campuzano')
 pDb = Database('Pull & Bear')
 sDb = Database('Stradivarius')
 zDb = Database('Zara')
-
-def is_valid_json(path):
-    try:
-        with open(path, 'r', encoding='utf8') as f:
-            j = json.loads(f.read())
-        return True
-    except:
-        return False
+latest = Database('Latest')
+broken = Database('Broken')
 
 
 def merge():
@@ -76,23 +72,13 @@ def merge():
                     print(e)
     # input('\nPresione enter para salir\n')
 
-
-def scrap(brands = ['Mango','PullAndBear', 'Bershka', 'Stradivarius', 'MercedesCampuzano', 'Zara']):
-    brands.reverse()
+def scrap(brands = ['Stradivarius','Mango','PullAndBear', 'Bershka', 'MercedesCampuzano', 'Zara']):
     for brand in brands:
-        # s = time.localtime(time.time())
-        # with open('Items/Log.txt', 'a', encoding='utf8') as f:
-        #     f.write(f'Inicia {brand}: {s.tm_hour}:{s.tm_min}\n')
         try:
             exec('{0}.Scrap{0}()'.format(brand))
-        except:
-            print('Error scrapping', brand)
-        # lastLoad = upload(lastLoad)
-        # s = time.localtime(time.time())
-        # with open('Items/Log.txt', 'a', encoding='utf8') as f:
-        #     f.write(f'Acaba {brand}: {s.tm_hour}:{s.tm_min}\n\n')
-
-
+        except Exception as e:
+           print('Error scrapping', brand, e)
+       
 def crawl(brands=['mercedescampuzano.com', 'zara.com']):
 
     class ItemsSpider(scrapy.Spider):
@@ -305,7 +291,6 @@ def crawl(brands=['mercedescampuzano.com', 'zara.com']):
     process.crawl(ItemsSpider)
     process.start()
 
-# Lambda AWS
 def postItem(data):
     '''Create or update the element with the same url'''
     temp = jsonToBody(data)#.replace(''allPricesNow'',''allPriceNow'').replace(''allSizes'',''allSize'').replace(''subcategory'',''subCategory'').replace(''originalSubcategory'',''originalSubCategory'')
@@ -313,7 +298,6 @@ def postItem(data):
         return requests.post('https://2ksanrpxtd.execute-api.us-east-1.amazonaws.com/dev/molova/find', temp.encode('utf-8'))
     except Exception as e:
         print('Exception:',e)
-
 
 def jsonToBody(json):
     for p in range(len(json['allPricesNow'])):
@@ -333,12 +317,12 @@ def jsonToBody(json):
     json['colors'] = '__colors__'
     return str(json).replace("'",'"').replace('"sale": True','"sale": 1').replace('"sale": False','"sale": 0').replace('"__allPricesNow__"',str(_backup[0])).replace('__allImages__',str(_backup[1])).replace('__allSizes__',str(_backup[2])).replace('__colors__',str(_backup[3])).replace('á','a').replace('é','e').replace('í','i').replace('ó','o').replace('ú','u').replace('Á','A').replace('É','E').replace('Í','I').replace('Ó','O').replace('Ú','U')
 
-
 def post(databases = [mngDb, bDb, mDb, zDb, pDb, sDb]):
     totalItems = 0
     percentage = 0
     index = 0
     bar = ''
+    # check_broken_links(databases)
     for d in databases:
         totalItems += len(d.getAllItems())
     for d in databases:
@@ -350,7 +334,6 @@ def post(databases = [mngDb, bDb, mDb, zDb, pDb, sDb]):
                 bar = bar+'°'
                 print(f'{percentage}% ({index} de {totalItems}) {bar}')
 
-
 def check_sales(brands = ['PullAndBear', 'Bershka', 'Stradivarius', 'Zara', 'MercedesCampuzano']):
     for brand in brands:
         try:
@@ -358,75 +341,60 @@ def check_sales(brands = ['PullAndBear', 'Bershka', 'Stradivarius', 'Zara', 'Mer
         except:
             print('Error scrapping Sale in', brand)
 
-def update_local_list():
-    '''Ensure that the databases exists. Copy original files and delete or just rename to `DB (copia)`'''
-    databases = [Database('Bershka (copia)'), Database('Mercedes Campuzano (copia)'), Database('Pull & Bear (copia)'), Database('Stradivarius (copia)'),Database('Zara (copia)')]
-    local = Database('Local')
-    total_items = 0
+def check_broken_links(databases = [mngDb, bDb, mDb, zDb, pDb, sDb]):
+    '''Check each url that was not present in the last scrap'''
+    print('Looking for broken links...')
+    to_delete= []
+    total_items = len(latest.getAllItems())
     percentage = 0
     index = 0
     bar = ''
-    for database in databases:
-        for item in database.getAllItems():
-            total_items+=1
-    for database in databases:
-        for item in database.getAllItems():
-            local.addUrl(item['url'])
+    for db in databases:
+        for item in db.getAllItems():
+            if not latest.contains_url(item['url']):
+                to_delete.append(item['url'])
             index+=1
             if not percentage == int(index / total_items * 100):
                 percentage = int(index / total_items * 100)
                 bar = f'{bar}°'
                 print(f'{percentage}% ({index} de {total_items}) {bar}')
-
-def delete_brands_fron_urlsdb(brands):
-    to_delete = []
-    for item in urlsDb.getAllUrls():
-        if any(b in item['url'] for b in brands):
-            to_delete.append(item['url'])
-    for url in to_delete:
-        urlsDb.delete(url)
     print(to_delete)
-    response = requests.post('https://2ksanrpxtd.execute-api.us-east-1.amazonaws.com/dev/molova/delete', f'{{"data": {to_delete}}}'.replace(''','''))
-    print(response.json())
-    return response
-
-def delete():
-    '''Delete the specified list from remote database'''
-    to_delete = []
-    for item in urlsDb.getAllUrls():
-        if 'bershka' in item['url']:
-            if not bDb.contains(item['url']):
-                to_delete.append(item['url'])
-        elif 'mercedescampuzano' in item['url']:
-            if not mDb.contains(item['url']):
-                to_delete.append(item['url'])
-        elif 'pullandbear' in item['url']:
-            if not pDb.contains(item['url']):
-                to_delete.append(item['url'])
-        elif 'stradivarius' in item['url']:
-            if not sDb.contains(item['url']):
-                to_delete.append(item['url'])
-        elif 'zara' in item['url']:
-            if not zDb.contains(item['url']):
-                to_delete.append(item['url'])
+    driver = webdriver.Chrome("./chromedriver")
+    driver.maximize_window()
+    driver.set_page_load_timeout(10)
     for url in to_delete:
-        urlsDb.delete(url)
-    print(to_delete,len(to_delete))
+        driver.get(url)
+        brand = Bershka if 'bershka.com' in url else Mango if 'mango.com' in url else MercedesCampuzano if 'mercedescampuzano.com' in url else PullAndBear if 'pullandbear.com' in url  else Stradivarius if  'stradivarius.com' in url else Zara
+        if not driver.find_elements_by_xpath(brand.xpaths['name']):
+            if not driver.find_elements_by_xpath(brand.xpaths['imgs']):
+                broken.db.insert({'url':url})
+                print(url,'borrado')
+                brand.db.delete(url)
+            else:
+                print(url,'name dont fit but images fit')
+        else:
+            brand.db.update_product(url, brand.xpaths['priceBfr'], brand.xpaths['priceNow'], brand.xpaths['discount'])
+    latest.close()
+    open('Latest.json', 'w').close()
+    to_delete = broken.getAllUrls()
     return requests.post('https://2ksanrpxtd.execute-api.us-east-1.amazonaws.com/dev/molova/delete', f'{{"data": {to_delete}}}'.replace("'",'"')).json()
+
     
 # Main code
-# update_local_list()
 # merge()
 # delete_brands_fron_urlsdb(['stradivarius'])
 
-scrap()
+# scrap()
 # different_categores=['BLASIER: Abrigos y Blazers - Blazers','BLASIER: Abrigos y Blazers - Abrigos y Blazers','CHALECO: Abrigos y Blazers - Abrigos','CHAQUETA: Abrigos y Blazers - Blazers','BLASIER: Abrigos y Blazers - Abrigos','VESTIDO: Vestidos y Enterizos - Vestidos','VESTIDO: Camisas y Camisetas - Camisas y Camisetas','VESTIDO: Abrigos y Blazers - Blazers','MONO: Vestidos y Enterizos - Vestidos','FALDA: Faldas y Shorts - Faldas','VESTIDO: Otros - Otros','VESTIDO: Abrigos y Blazers - Abrigos','VESTIDO: Ropa deportiva - Sudaderas','CAMISA: Camisas y Camisetas - Camisas','VESTIDO: Camisas y Camisetas - Camisetas','ABRIGO: Vestidos y Enterizos - Enterizos','PETO: Otros - Otros','PANTALON: Pantalones y Jeans - Jeans', 'VESTIDO: Vestidos y Enterizos - Vestidos','TOPS Y OTRAS P.: Camisas y Camisetas - Camisas y Camisetas','VESTIDO: Abrigos y Blazers - Abrigos','CAMISA: Camisas y Camisetas - Camisas','CHALECO: Abrigos y Blazers - Abrigos','VESTIDO: Otros - Otros','TOPS Y OTRAS P.: Camisas y Camisetas - Tops','CAMISA: Vestidos y Enterizos - Vestidos y Enterizos','CAMISA: Camisas y Camisetas - Tops','CAMISA: Camisas y Camisetas - Camisetas','BODY: Otros - Otros','CAMISA: Otros - Otros','CAMISETA: Otros - Otros','JERSEY: Camisas y Camisetas - Tops','TOPS Y OTRAS P.: Camisas y Camisetas - Camisetas','CAMISETA: Camisas y Camisetas - Tops','JERSEY: Camisas y Camisetas - Camisetas','TOPS Y OTRAS P.: Camisas y Camisetas - Camisas','CAMISA: Vestidos y Enterizos - Enterizos','CHAQUETA: Abrigos y Blazers - Abrigos','CHALECO: Vestidos y Enterizos - Vestidos y Enterizos','CAZADORA: Otros - Otros','CAMISETA: Vestidos y Enterizos - Vestidos y Enterizos','MONO: Camisas y Camisetas - Camisetas','CAMISETA: Camisas y Camisetas - Camisetas']
 # crawl(['mercedescampuzano.com'])
-post()
+# check_broken_links()
+# post()
 # print(delete())
-
-
-# TESTING
-# d={'brand': 'brand', 'name': 'Camiseta básica manga corta', 'description': ' ', 'priceBefore': 79900, 'allPricesNow': [35900], 'discount': 0, 'allImages': [['https://static.e-stradivarius.net/5/photos3/2021/V/0/1/p/2500/151/511/2500151511_1_1_2.jpg?t=1619013088469', 'https://static.e-stradivarius.net/5/photos3/2021/V/0/1/p/2500/151/511/2500151511_2_1_2.jpg?t=1619013088469', 'https://static.e-stradivarius.net/5/photos3/2021/V/0/1/p/2500/151/511/2500151511_2_2_2.jpg?t=1619013088469', 'https://static.e-stradivarius.net/5/photos3/2021/V/0/1/p/2500/151/511/2500151511_2_3_2.jpg?t=1619013088469', 'https://static.e-stradivarius.net/5/photos3/2021/V/0/1/p/2500/151/511/2500151511_2_4_2.jpg?t=1618568296170'], ['https://static.e-stradivarius.net/5/photos3/2021/V/0/1/p/2500/151/602/2500151602_1_1_2.jpg?t=1607945209004', 'https://static.e-stradivarius.net/5/photos3/2021/V/0/1/p/2500/151/602/2500151602_2_1_2.jpg?t=1607945209004', 'https://static.e-stradivarius.net/5/photos3/2021/V/0/1/p/2500/151/602/2500151602_2_2_2.jpg?t=1607945209004', 'https://static.e-stradivarius.net/5/photos3/2021/V/0/1/p/2500/151/602/2500151602_2_3_2.jpg?t=1607945209004', 'https://static.e-stradivarius.net/5/photos3/2021/V/0/1/p/2500/151/602/2500151602_2_4_2.jpg?t=1607945209004'], ['https://static.e-stradivarius.net/5/photos3/2021/V/0/1/p/2500/151/010/2500151010_1_1_2.jpg?t=1610018595147', 'https://static.e-stradivarius.net/5/photos3/2021/V/0/1/p/2500/151/010/2500151010_2_1_2.jpg?t=1610018595147', 'https://static.e-stradivarius.net/5/photos3/2021/V/0/1/p/2500/151/010/2500151010_2_2_2.jpg?t=1610018595147', 'https://static.e-stradivarius.net/5/photos3/2021/V/0/1/p/2500/151/010/2500151010_2_3_2.jpg?t=1610018595147', 'https://static.e-stradivarius.net/5/photos3/2021/V/0/1/p/2500/151/010/2500151010_2_4_2.jpg?t=1609244762972', 'https://static.e-stradivarius.net/5/photos3/2021/V/0/1/p/2500/151/010/2500151010_6_1_2.jpg?t=1609244762972'], ['https://static.e-stradivarius.net/5/photos3/2021/V/0/1/p/2500/151/001/2500151001_1_1_2.jpg?t=1618910149836', 'https://static.e-stradivarius.net/5/photos3/2021/V/0/1/p/2500/151/001/2500151001_2_1_2.jpg?t=1618910149836', 'https://static.e-stradivarius.net/5/photos3/2021/V/0/1/p/2500/151/001/2500151001_2_2_2.jpg?t=1618910149836', 'https://static.e-stradivarius.net/5/photos3/2021/V/0/1/p/2500/151/001/2500151001_2_3_2.jpg?t=1618910149836', 'https://static.e-stradivarius.net/5/photos3/2021/V/0/1/p/2500/151/001/2500151001_2_4_2.jpg?t=1603719197259', 'https://static.e-stradivarius.net/5/photos3/2021/V/0/1/p/2500/151/001/2500151001_6_1_2.jpg?t=1603719197259'], ['https://static.e-stradivarius.net/5/photos3/2021/V/0/1/p/2500/151/003/2500151003_1_1_2.jpg?t=1615993284890', 'https://static.e-stradivarius.net/5/photos3/2021/V/0/1/p/2500/151/003/2500151003_2_1_2.jpg?t=1615993284890', 'https://static.e-stradivarius.net/5/photos3/2021/V/0/1/p/2500/151/003/2500151003_2_2_2.jpg?t=1615993284890', 'https://static.e-stradivarius.net/5/photos3/2021/V/0/1/p/2500/151/003/2500151003_2_3_2.jpg?t=1615993284890', 'https://static.e-stradivarius.net/5/photos3/2021/V/0/1/p/2500/151/003/2500151003_2_4_2.jpg?t=1612959901701', 'https://static.e-stradivarius.net/5/photos3/2021/V/0/1/p/2500/151/003/2500151003_6_1_2.jpg?t=1612959901701']], 'url': 'https://www.stradivarius.com/co/new-collection/ropa/compra-por-producto/camisetas/ver-todo/camiseta-b%C3%A1sica-manga-corta-c1020047036p302047651.html', 'allSizes': [['XS(Agotado)', 'S(Agotado)', 'M(Agotado)', 'L', 'XL'], ['XS', 'S', 'M', 'L', 'XL'], ['XS', 'S', 'M', 'L', 'XL'], ['XS', 'S', 'M', 'L', 'XL'], ['XXS', 'XS', 'S', 'M', 'L', 'XL', 'XXL']], 'colors': ['https://static.e-stradivarius.net/5/photos3/2021/V/0/1/p/2500/151/511/2500151511_3_1_5.jpg?t=1619013088469', 'https://static.e-stradivarius.net/5/photos3/2021/V/0/1/p/2500/151/602/2500151602_3_1_5.jpg?t=1607945209004', 'https://static.e-stradivarius.net/5/photos3/2021/V/0/1/p/2500/151/010/2500151010_3_1_5.jpg?t=1610018595147', 'https://static.e-stradivarius.net/5/photos3/2021/V/0/1/p/2500/151/001/2500151001_3_1_5.jpg?t=1618910149836', 'https://static.e-stradivarius.net/5/photos3/2021/V/0/1/p/2500/151/003/2500151003_3_1_5.jpg?t=1615993284890'], 'category': 'Camisas y Camisetas', 'originalCategory': 'Camisetas', 'subcategory': 'Camisetas', 'originalSubcategory': 'Camisetas', 'sale': True, 'gender': 'Mujer'}
-# sDb.add(it)
-#it = Item(d['brand'],d['name'],d['description'],d['priceBefore'],d['allPricesNow'],d['discount'],d['allImages'],d['url'],d['allSizes'],d['colors'],d['category'],d['originalCategory'],d['subcategory'],d['originalSubcategory'],d['sale'],d['gender'])
+print('Comma separated(1,2,3)\n1. Merge\n2. Scrap\n3. Post\n4. Check broken links')
+to_do = ','+input('>')
+tasks = ['merge()','scrap()','post()', 'check_broken_links()']
+for task in to_do.split(','):
+    try:
+        exec(tasks[int(task)-1])
+    except:
+        pass

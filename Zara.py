@@ -1,8 +1,11 @@
-import os, Database
+import os
 from Item import Item
 from time import sleep
+from Database import Database
 from selenium import webdriver
 
+brand = "Zara"
+db = Database(brand)
 xpaths = {
     'categories': './/ul[@class="layout-categories__container"]/li[position()=1]/ul/li/ul/li/a',
     'color':'.//p[contains(@class,"product-detail-selected-color")]',
@@ -10,13 +13,13 @@ xpaths = {
     'coming': '',
     'description': './/div[@class="expandable-text__inner-content"]/p',
     'discount': './/div[@class="product-detail-info__price-amount price"]//span[@class="price__discount-percentage"]',
-    'elems': './/section[@class="product-grid"]/ul/li/ul/li[not(contains(@class,"seo"))]',
-    'href':'./a',
+    'elems': './/section[@class="product-grid"]/ul/li/ul/li[not(contains(@class,"seo"))][.//span[@class="price__amount-current"]]',
+    'href':'.//a',
     'fast_discount': './/div[@class="product-grid-product-info__tag"]/span',
     'fast_image': './/img[not(contains(@src,"watermark"))]',
     'fast_priceBfr':'.//span[@class="price__amount price__amount--old"]',
     'fast_priceNow':'.//span[@class="price__amount-current"]',
-    'images': './/div[@class="media__wrapper media__wrapper--fill media__wrapper--force-height"]/picture/img[@class="media-image__image media__wrapper--media"]',
+    'imgs': './/div[@class="media__wrapper media__wrapper--fill media__wrapper--force-height"]/picture/img[@class="media-image__image media__wrapper--media"]',
     'name': './/h1[@class="product-detail-info__name"]',
     'priceBfr': './/div[@class="product-detail-info__price-amount price"]//span[@class="price__amount price__amount--old"]',
     'priceNow': './/div[@class="product-detail-info__price-amount price"]//span[@class="price__amount-current-wrapper"]',
@@ -30,8 +33,7 @@ xpaths = {
 class ScrapZara:
     def __init__(self):
         self.driver = webdriver.Chrome("./chromedriver")
-        self.brand = "Zara"
-        self.db = Database.Database(self.brand)
+        self.driver.set_page_load_timeout(30)
         self.sale = False
         self.driver.maximize_window()
         self.driver.get("https://www.zara.com/co/")
@@ -87,7 +89,7 @@ class ScrapZara:
         itemsWebElems = self.driver.find_elements_by_xpath(xpaths['elems'])
         self.driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
         sleep(3)
-        loading = False
+        loading = True
         while loading:
             self.driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
             sleep(3)
@@ -98,10 +100,13 @@ class ScrapZara:
             elem = itemsWebElems.pop()
             self.driver.execute_script("arguments[0].scrollIntoView();", elem)
             url = elem.find_element_by_xpath(xpaths['href']).get_attribute('href')
-            image = elem.find_element_by_xpath(xpaths['fast_image']).get_attribute('src')
-            if self.db.contains(url, image):
-                self.updateProduct(elem)
-            else:
+            try:
+                image = elem.find_element_by_xpath(xpaths['fast_image']).get_attribute('src')
+                if db.contains(url, image):
+                    self.updateProduct(elem)
+                else:
+                    self.scrapProduct(url)
+            except:
                 self.scrapProduct(url)
 
 
@@ -111,7 +116,10 @@ class ScrapZara:
         self.driver.switch_to.window(self.driver.window_handles[1])
         try:
             name = self.driver.find_element_by_xpath(xpaths['name']).text.capitalize()
-            description = self.driver.find_element_by_xpath(xpaths['description']).text.capitalize()
+            try:
+                description = self.driver.find_element_by_xpath(xpaths['description']).text.capitalize()
+            except:
+                description = ''
             priceNow = self.driver.find_element_by_xpath(xpaths['priceNow']).text
             try:
                 priceBfr = self.driver.find_element_by_xpath(xpaths['priceBfr']).text
@@ -138,7 +146,7 @@ class ScrapZara:
                 for i in range(len(thumbnails)):
                     mouse.move_to_element(thumbnails[i]).perform()
                     thumbnails[i].click()
-                for i in self.driver.find_elements_by_xpath(xpaths['images']):
+                for i in self.driver.find_elements_by_xpath(xpaths['imgs']):
                     if not 'transparent-background' in i.get_attribute("src"):
                         images.append(i.get_attribute("src"))
                 allImages.append(images)
@@ -158,17 +166,17 @@ class ScrapZara:
                 for i in range(len(thumbnails)):
                     mouse.move_to_element(thumbnails[i]).perform()
                     thumbnails[i].click()
-                for i in self.driver.find_elements_by_xpath(xpaths['images']):
+                for i in self.driver.find_elements_by_xpath(xpaths['imgs']):
                     if not 'transparent-background' in i.get_attribute("src"):
                         images.append(i.get_attribute("src"))
                         print(i.get_attribute("src"))
                 allImages.append(images)
                 colors.append(colorsBtn[c].get_attribute("innerText").replace("Color: ", "").replace('"', "").capitalize())
                 colorsBtn = self.driver.find_elements_by_xpath('.//ul[@class="product-detail-info-color-selector__colors"]/li/button')
-            self.db.add(Item(self.brand,name,description,priceBfr,[priceNow],discount,allImages,url,allSizes,colors,self.category,self.originalCategory,self.subcategory,self.originalSubcategory,self.sale, self.gender),True)
+            db.add(Item(brand,name,description,priceBfr,[priceNow],discount,allImages,url,allSizes,colors,self.category,self.originalCategory,self.subcategory,self.originalSubcategory,self.sale, self.gender))
         except Exception as e:
             i = 0
-            print('Item saltado',e)
+            print('Item saltado\n',url,e)
         self.driver.close()
         self.driver.switch_to.window(self.driver.window_handles[0])
 
@@ -181,6 +189,6 @@ class ScrapZara:
         except:
             priceBfr = priceNow
             discount = 0
-        self.db.update_product(url, priceBfr, priceNow, discount)
+        db.update_product(url, priceBfr, priceNow, discount)
 # Main Code
 # ScrapZara()

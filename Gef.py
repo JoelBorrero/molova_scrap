@@ -5,7 +5,7 @@ from selenium.webdriver.chrome.options import Options
 
 from Item import Item
 from Database import Database
-
+brand = "Gef"
 
 class ScrapGef:
     def __init__(self):
@@ -20,8 +20,7 @@ class ScrapGef:
         options.add_argument("--disable-gpu")
         self.driver = webdriver.Chrome("./chromedriver.exe",options=options)'''
         self.driver = webdriver.Chrome("./chromedriver.exe")
-        self.brand = "Gef"
-        self.db = Database(self.brand)
+        self.db = Database(brand)
         self.driver.maximize_window()
         self.driver.get("https://www.gef.com.co/tienda/es-co/gef?gclid=EAIaIQobChMI2bDutMa47gIVFInICh1RYwQgEAAYASAAEgKDfvD_BwE")
         categories = [self.driver.find_elements_by_xpath('.//div[@class="header"]/a[@class="menuLink" and not(contains(@data-open,"nuevo")) and not(contains(@data-open,"green")) and not(contains(@data-open,"bono"))and not(contains(@data-open,"sale2")) ]'),[]]
@@ -141,7 +140,7 @@ class ScrapGef:
                 name = " ".join([w,name])
             if name:
                 self.sale = False
-                self.db.add(Item(self.brand,name,description,allPricesBfr,allPricesNow,' ',allImages,url,allSizes,colors,self.category,self.category, self.subcategory,self.subcategory,self.sale,self.gender))
+                self.db.add(Item(brand,name,description,allPricesBfr,allPricesNow,' ',allImages,url,allSizes,colors,self.category,self.category, self.subcategory,self.subcategory,self.sale,self.gender))
             else:
                 print("Hubo un error")
         except Exception as e:

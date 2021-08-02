@@ -1,4 +1,4 @@
-import json, os, pandas as pd
+import json, os
 
 class Item:
     def __init__(self,brand,name,description,priceBefore,allPricesNow,discount,allImages,url,allSizes,colors,category,originalCategory,subcategory,originalSubcategory,sale,gender,crawling=False):
@@ -49,7 +49,7 @@ class Item:
         self.originalSubcategory = originalSubcategory
         self.sale = any(p < toInt(priceBefore) for p in self.allPricesNow)
         self.gender = gender
-        self.getCategories()
+        self.get_categories()
         # if crawling:
             # self.addToCrawl()
         # self.addToFile(crawling=crawling)
@@ -154,109 +154,128 @@ class Item:
             w = str(data).replace("'",'"').replace('\\n','&BR%LN%').replace('\\','').replace('""','').replace('": False,','": false,').replace('": True,','": true,')
             f.write(w.replace('&BR%LN%','\\n'))
 
-    def getCategories(self):
-        cats=[['camisas','camisetas','jerséis','blusas','tops'],
+    def get_categories(self):
+        cats=[
+        ['camisas','camisetas','jerséis','blusas','tops'],
         ['pantalones','jeans','bermudas'],
         ['vestidos','petos'],
-        ['faldas','short'],
-        ['cazadoras','abrigos','chalecos','sobrecamisas','chaquetas','blazers','cardigans', 'blasier'],
-        ['sudaderas','joggers','chándal', 'sport'],
+        ['faldas','shorts','short'],
+        ['cazadoras','abrigos','chalecos','chaleco','sobrecamisas','chaquetas','blazers','cardigans','cárdigans', 'blasier'],
+        ['sudaderas','joggers','chándal','sport','legging','leggings'],
         ['zapatos','baletas','botas','tacones','sandalias','tennis','tenis','mocasines','oxford','zuecos','spadrillas','shoes','zapatillas','piel'],
         ['bolsos','bandoleras','carteras','mochilas','riñoneras'],
         ['accesorios','gafas','bisutería','cinturones','correas','gorros','fundas','bufandas','medias','decoración']]
-        cats2=[['camisa','camiseta','jerséi','jersey','blusa','bluson','blusón','top','bandeau','suéter','sueter','sweater','polo','tshirt','t-shirt','crochet'],
-        ['pantalon','pantalón','jeans','bermudas','capris','trousers'],
-        ['vestido','peto','enterizo','kimono','cuerpo'],
-        ['falda','shorts','short', 'minifalda','skirt'],
-        ['cazadora','abrigo','chaleco','sobrecamisa','saco','chubasquero','capa','parka','buzo','blazer','chaqueta','manguitos','plumíferos','plumiferos','cardigan','cárdigan','rompevientos'],
-        ['sudadera','jogger','chándal','leggings', 'leggins','bicicletero', 'sport', 'sporty', 'capri', 'cycling', 'ciclista'],
-        ['zapatos','baletas','tacones','tacón','sandalias','zapatillas','trespuntadas','spadrillas','tenis','botas','zuecos','deportivas','deportivos','botínes','bamba'],
-        ['bolso','bandolera','cartera','mochila','riñonera','shopper','maletin','maletín','morral'],
-        ['correa','gorro','bufanda','medias','cadenas','collares','aretes','anillos']]
+        cats2=[[['camisa','shirt','blusa','blouse','bluson','blusón','crochet'],['camiseta','shirt','t-shirt','tshirt','basic','básica','basica','estampado','estampada','license','licencia','manga','jacket','jersey','jersei','jerséi','polo','suéter','sueter','sweater'],['top','bandeau','bralette'],['body', 'bodies']],[['pantalon','pantalón','bermuda','bermudas','capris','trousers'],['jeans','jean','jeggings']],[['vestido','peto','pichi','chaleco','túnica'],['enterizo','kimono','cuerpo','mono']],[['falda','minifalda','skirt','skort'],['shorts','short','bermuda']],[['abrigo','chaqueta','gabardina','chaleco','parka','buzo','capa','cárdigan','saco','cazadora','saco','chubasquero','parka','manguitos','plumíferos','plumiferos','cardigan','rompevientos','jersey','sudadera'],['sobrecamisa','buzo','blazer']],[['sudadera','jogger','chándal'],['leggings', 'leggins','bicicletero', 'capri', 'cycling', 'ciclista'],['sport', 'sporty']],[['tenis','tennis','deportivas','deportivos'],['oxford','clásico','clasico','zuecos'],['sandalias','trespuntadas'],['baletas','spadrillas','bamba'],['tacones','tacón','zapatos','zapatillas'],['botas','botínes']],[['bolso','bandolera','cartera','mochila','riñonera','shopper','maletin','maletín','morral']],[['correa','gorro','bufanda','medias','cadenas','collares','aretes','anillos','tobilleras']],[[]]]
         categories = ["Camisas y Camisetas","Pantalones y Jeans","Vestidos y Enterizos","Faldas y Shorts","Abrigos y Blazers","Ropa deportiva","Zapatos","Bolsos","Accesorios","Otros"]
-        category = ''
+        self.category = ''
         for c in cats:
             for cat in c:
-                if cat in self.category.lower():
-                    if any(dep in cats2[5] for dep in self.name.lower().split(' ')):
-                        category = categories[5]
-                    else:
-                        category = categories[cats.index(c)]
-        if not category:
+                if cat in self.originalCategory.lower():
+                    index = cats.index(c)
+                    if index == 0:
+                        # If any cardigan in shirts
+                        if any(s in self.name.lower() for s in cats[4]):
+                            index = 4
+                    elif index == 1:
+                        # If any short in pants
+                        if any(s in self.name.lower() for s in cats[3]):
+                            index = 3
+                        # If any leggin in pants
+                        elif any(s in self.name.lower() for s in cats[5]):
+                            index = 5
+                    self.category = categories[index]
+        if not self.category:
             for c in cats2:
-                if any(s in c for s in self.name.lower().split(' ')):
-                    category = categories[cats2.index(c)]
-        if not category:
-            category = categories[-1]
-        index = categories.index(category)
+                for cat in c:
+                    if any(s in cat for s in self.name.lower().split(' ')) and not self.category:
+                        self.category = categories[cats2.index(c)]
+        if not self.category:
+            self.category = categories[-1]
+        self.subcategory = self.get_subcategory(categories.index(self.category), cats2)
+
+    def get_subcategory(self, index, cats2):
+        sub = self.originalSubcategory.lower()
+        name = self.name.lower()
+        subs = cats2[index] if index <7 else ''
         if index == 0:
-            if any(s in self.name.lower() for s in ['camisa','shirt','blusa','blouse']):
-                self.subcategory = 'Camisas'
-            elif any(s in self.name.lower() for s in ['camiseta','shirt','t-shirt','basic','básica','basica','estampado','estampada','license','licencia','manga','jacket','jersey','polo']):
-                self.subcategory = 'Camisetas'
-            elif 'top' in self.name.lower():
-                self.subcategory = 'Tops'
-            elif 'body' in self.name.lower():
-                self.subcategory = 'Bodies'
-            else:
-                self.subcategory = category
+            if any(s in sub for s in subs[0]) and not any(s in sub for s in subs[1]+subs[2]+subs[3]):
+                return 'Camisas'
+            elif any(s in sub for s in subs[1]) and not any(s in sub for s in subs[2]+subs[3]):
+                return 'Camisetas'
+            elif any(s in sub for s in subs[2]) and not any(s in sub for s in subs[3]):
+                return 'Tops'
+            elif any(s in sub for s in subs[3]):
+                return 'Bodies'
+            elif any(s in name for s in subs[0]):
+                return 'Camisas'
+            elif any(s in name for s in subs[1]):
+                return 'Camisetas'
+            elif any(s in name for s in subs[2]):
+                return 'Tops'
         elif index == 1:
-            if 'jean' in self.name.lower() or 'jean' in self.category.lower():
-                self.subcategory = 'Jeans'
-            elif any(s in self.name.lower() for s in ['pantal','trous']):
-                self.subcategory = 'Pantalones'
-            else:
-                self.subcategory = category
+            if any(s in sub for s in subs[0]) and not any(s in sub for s in subs[1]):
+                return 'Pantalones'
+            elif any(s in sub for s in subs[1]):
+                return 'Jeans'
+            elif any(s in name for s in subs[0]):
+                return 'Pantalones'
+            elif any(s in name for s in subs[1]):
+                return 'Jeans'
         elif index == 2:
-            if any(s in self.name.lower() for s in ['vestido','dress']):
-                self.subcategory = 'Vestidos'
-            elif any(s in self.name.lower() for s in ['enterizo','mono','dungaree','jumpsuit']):
-                self.subcategory = 'Enterizos'
-            else:
-                self.subcategory = category
+            if any(s in sub for s in subs[0]) and not any(s in sub for s in subs[1]):
+                return 'Vestidos'
+            elif any(s in sub for s in subs[1]):
+                return 'Enterizos'
+            elif any(s in name for s in subs[0]):
+                    return 'Vestidos'
+            elif any(s in name for s in subs[1]):
+                return 'Enterizos'
         elif index == 3:
-            if any(s in self.name.lower() for s in ['falda','skirt','minifalda']):
-                self.subcategory = 'Faldas'
-            elif any(s in self.name.lower() for s in ['short']):
-                self.subcategory = 'Shorts'
-            else:
-                self.subcategory = category
+            if any(s in sub for s in subs[0]) and not any(s in sub for s in subs[1]):
+                return 'Faldas'
+            elif any(s in sub for s in subs[1]):
+                return 'Shorts'
+            elif any(s in name for s in subs[0]):
+                return 'Faldas'
+            elif any(s in name for s in subs[1]):
+                return 'Shorts'
         elif index == 4:
-            if any(s in self.name.lower() for s in ['abrigo','chaqueta','gabardina','chaleco','parka','buzo']):
-                self.subcategory = 'Abrigos'
-            elif any(s in self.name.lower() for s in ['blazer','cazadora','sobrecamisa', 'blasier']):
-                self.subcategory = 'Blazers'
-            else:
-                self.subcategory = category
+            if any(s in sub for s in subs[0]) and not any(s in sub for s in subs[1]):
+                return 'Abrigos'
+            elif any(s in sub for s in subs[1]):
+                return 'Blazers'
+            elif any(s in name for s in subs[0]):
+                return 'Abrigos'
+            elif any(s in name for s in subs[1]):
+                return 'Blazers'
         elif index == 5:
-            if any(s in self.name.lower() for s in ['sudadera','jogger']):
-                self.subcategory = 'Sudaderas'
-            elif any(s in self.name.lower() for s in ['licra','leggy']):
-                self.subcategory = 'Licras'
-            elif any(s in self.name.lower() for s in ['top']):
-                self.subcategory = 'Tops'
-            else:
-                self.subcategory = category
+            if any(s in sub for s in subs[0]) and not any(s in sub for s in subs[1]+subs[2]):
+                return 'Sudaderas'
+            elif any(s in sub for s in subs[1]) and not any(s in sub for s in subs[2]):
+                return 'Licras'
+            elif any(s in sub for s in subs[2]):
+                return 'Tops'
+            elif any(s in name for s in subs[0]):
+                return 'Sudaderas'
+            elif any(s in name for s in subs[1]):
+                return 'Licras'
+            elif any(s in name for s in subs[2]):
+                return 'Tops'
         elif index == 6:
-            if any(s in self.name.lower() for s in ['tenis','tennis']):
-                self.subcategory = 'Tenis'
-            elif any(s in self.name.lower() for s in ['oxford','clasico']):
-                self.subcategory = 'Clásicos'
-            elif any(s in self.name.lower() for s in ['sandalia','trespuntada','spadrilla']):
-                self.subcategory = 'Sandalias'
-            elif any(s in self.name.lower() for s in ['baleta']):
-                self.subcategory = 'Baletas'
-            elif any(s in self.name.lower() for s in ['tacon','tacón']):
-                self.subcategory = 'Tacones'
-            elif any(s in self.name.lower() for s in ['bota','botin','botín']):
-                self.subcategory = 'Botas'
-            else:
-                self.subcategory = category
-        else:
-            self.subcategory = category
-        self.category = category
-        if 'sale' in self.subcategory.lower():
-            self.subcategory = category
+            if any(s in sub+name for s in subs[0]) :
+                return 'Tenis'
+            elif any(s in sub+name for s in subs[1]):
+                return 'Clásicos'
+            elif any(s in sub+name for s in subs[2]):
+                return 'Sandalias'
+            elif any(s in sub+name for s in subs[3]):
+                return 'Baletas'
+            elif any(s in sub+name for s in subs[4]):
+                return 'Tacones'
+            elif any(s in sub+name for s in subs[5]):
+                return 'Botas'
+        return f'_{index}_{self.category}'
+        
 
 def getColorSrc(colorName,url):
     colorName = colorName.lower()
@@ -340,22 +359,6 @@ def toInt(s):
         return stf
     else:
         return s
-    
 
-'''def toPrice(s):
-    s = str(toInt(s))
-    stf = '$ '
-    for i in range(len(s)):
-        if (len(s)-i)%3==0 and i>0:
-            stf=stf+'.'
-        stf=stf+s[i]
-    return stf'''
-
-def to_excel(list, path, transpose=True):
-    if transpose:
-        df = pd.DataFrame(list).T
-    else:
-        df = pd.DataFrame(list)
-    writer = pd.ExcelWriter('{}.xlsx'.format(path), engine='xlsxwriter')
-    df.to_excel(writer, sheet_name='welcome', index=False,header=False)
-    writer.save()
+def from_dict(data):
+    return Item(data['brand'],data['name'],data['description'],data['priceBefore'],data['allPricesNow'],data['discount'],data['allImages'],data['url'],data['allSizes'],data['colors'],data['category'],data['originalCategory'],data['subcategory'],data['originalSubcategory'],data['sale'],data['gender'])   

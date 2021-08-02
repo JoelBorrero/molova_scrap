@@ -7,6 +7,7 @@ class Database:
         TinyDB.default_table_name = "Items"
         self.db = TinyDB(f"./Database/{name}.json")
         self.urls_db = TinyDB("./Database/Urls.json")
+        self.latest = TinyDB("./Database/Latest.json")
         self.q = Query()
 
     def add(self, item, debug=False):
@@ -25,7 +26,7 @@ class Database:
                 "Accesorios",
             ]
             def transform(doc):
-                for field in ["name","description","priceBefore","allPricesNow","discount","allSizes","sale", "colors", "url"]:
+                for field in ["name","description","priceBefore","allPricesNow","discount","allSizes","sale", "colors", "url","allImages","category","subcategory", "allSizes"]:
                     if not doc[field] == item[field]:
                         doc[field] = item[field]
                 for field in ["category", "originalCategory"]:
@@ -47,6 +48,7 @@ class Database:
 
     def update_product(self, url, priceBfr, priceNow, discount):
         url = normalyze_url(url)
+        print('updating',url)
         priceBfr = toInt(priceBfr)
         priceNow = toInt(priceNow)
         discount = toInt(discount)
@@ -60,7 +62,8 @@ class Database:
         url = normalyze_url(url)
         if not self.urls_db.get(self.q.url == url):
             self.urls_db.insert({"url": url})
-    
+    def contains_url(self, url):
+        return True if self.db.get(self.q.url == url) else False
     def contains(self, url, allImages=''):
         def matches(val, images):
             p = 0
@@ -88,15 +91,17 @@ class Database:
         it = self.db.get(self.q.url == url)
         if not it:  # Search by imgs
             it = self.db.get(self.q.allImages.test(matches, allImages))
-            # try:
-            # except Exception as e:
-            #     print("Error but added", e)
         if not it and allImages:
             it = self.db.get(self.q.allImages.test(has_image,allImages))
+        if it:
+            if not self.latest.get(self.q.url == it['url']):
+                self.latest.insert({'url':it['url']})
+        else:
+            self.latest.insert({'url':url})
         return it
 
     def delete(self, url):
-        self.urls_db.remove(where('url') == url)
+        self.db.remove(where('url') == url)
 
     def firstUrl(self):
         return self.urls_db.get(doc_id=1)["url"]
@@ -111,12 +116,10 @@ class Database:
 
     def getAllUrls(self):
         '''Return a list with all urls in the Urls database'''
-        return self.urls_db.all()
-        v=[]
-        for o in self.urls_db.all():
-            if any(b in o['url'] for b in ['https://www.zara.com','https://www.mercedescampuzano.com']):
-                v.append(o["url"])
-        return v
+        res = []
+        for url in self.db.all():
+            res.append(url['url'])
+        return res
 
     def get_crawl_urls(self, brands):
         mDb = Database("Mercedes Campuzano")
