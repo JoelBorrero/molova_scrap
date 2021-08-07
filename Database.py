@@ -6,7 +6,6 @@ class Database:
     def __init__(self, name):
         TinyDB.default_table_name = "Items"
         self.db = TinyDB(f"./Database/{name}.json")
-        self.urls_db = TinyDB("./Database/Urls.json")
         self.latest = TinyDB("./Database/Latest.json")
         self.q = Query()
 
@@ -43,55 +42,44 @@ class Database:
             if debug:
                 print('DB:Adding',item["url"])
             item['url'] = normalyze_url(item['url'])
-            self.addUrl(item['url'])
             return int(self.db.insert(item))
 
-    def update_product(self, url, priceBfr, priceNow, discount):
+    def update_product(self, elem, url, xpaths):
+        '''Update the item if its exists in database
+            `elem`: Web element
+            `url`: Url
+            `xpaths`: Dictionary with xpaths locators'''
         url = normalyze_url(url)
-        print('updating',url)
+        priceNow = elem.find_element_by_xpath(xpaths['fast_priceNow']).text
+        try:
+            priceBfr = elem.find_element_by_xpath(xpaths['fast_priceNow']).text
+            discount = elem.find_element_by_xpath(xpaths['fast_discount']).text
+        except:
+            priceBfr = priceNow
+            discount = 0
         priceBfr = toInt(priceBfr)
         priceNow = toInt(priceNow)
         discount = toInt(discount)
         sale = priceNow < priceBfr
         if discount < 1 or discount >= 60:
-            discount = (1-priceNow/priceBfr)*100
+            discount = (1-priceNow/priceBfr)*100 if not discount == 0 else 0
         if priceBfr > 0 and priceNow > 0:
             self.db.update({"priceBefore":priceBfr, "allPricesNow":[priceNow], 'discount':discount, 'sale':sale}, self.q.url == url)
 
-    def addUrl(self, url):
-        url = normalyze_url(url)
-        if not self.urls_db.get(self.q.url == url):
-            self.urls_db.insert({"url": url})
     def contains_url(self, url):
         return True if self.db.get(self.q.url == url) else False
     def contains(self, url, allImages=''):
-        def matches(val, images):
-            p = 0
-            t = 0
-            if val:
-                if not type(val[0]) == list:
-                    val=[val]
-                for color in val:
-                    for img in color:
-                        try:
-                            if img[:img.index('.jpg')+4] in images:
-                                p += 1
-                        except:
-                            if img in images:
-                                p += 1
-                        t += 1
-            return 0 if t==0 else p / t > 0.3
         def has_image(val, image):
             if 'pullandbear' in image:
                 image = image[:image.index('_')]
             elif 'zara' in image:
                 image = image[:image.index('/w/')]
+            elif 'stradivarius' in image:
+                image = image[:image.rindex('_')]
             return image in str(val)
         url = normalyze_url(url)
         it = self.db.get(self.q.url == url)
-        if not it:  # Search by imgs
-            it = self.db.get(self.q.allImages.test(matches, allImages))
-        if not it and allImages:
+        if not it and allImages: # Search by imgs
             it = self.db.get(self.q.allImages.test(has_image,allImages))
         if it:
             if not self.latest.get(self.q.url == it['url']):
@@ -103,32 +91,12 @@ class Database:
     def delete(self, url):
         self.db.remove(where('url') == url)
 
-    def firstUrl(self):
-        return self.urls_db.get(doc_id=1)["url"]
-
-    def nextUrl(self, url):
-        n = self.urls_db.get(self.q.url == url)
-        try:
-            n = self.urls_db.get(doc_id=n.doc_id + 1)["url"]
-        except:
-            return False
-        return n
-
     def getAllUrls(self):
         '''Return a list with all urls in the Urls database'''
         res = []
         for url in self.db.all():
             res.append(url['url'])
         return res
-
-    def get_crawl_urls(self, brands):
-        mDb = Database("Mercedes Campuzano")
-        zDb = Database("Zara")
-        v=[]
-        for o in self.urls_db.all():
-            if any(b in o['url'] for b in brands):
-                v.append(o["url"])
-        return v
     
     def getAllItems(self):
         '''Return a list with all the items in the database'''
@@ -140,7 +108,6 @@ class Database:
 
     def close(self):
         self.db.close()
-        self.urls_db.close()
     
 def normalyze_url(url):
     try:

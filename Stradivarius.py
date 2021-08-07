@@ -8,7 +8,7 @@ from selenium.webdriver.chrome.options import Options
 brand = 'Stradivarius'
 db = Database(brand)
 xpaths={
-    'categories':'.//div[contains(@class,"sales")]/div/div/div/a',
+    'categories':'.//div[@class="categories-menu "]//div[contains(@class,"menu-list-item")]/a',
     'categoriesSale':'.//ul[@class="product-categories"]/li/ul/li/a[span[contains(@style,"#f")]]',
     'colorsBtn':'.//div[@class="set-colors-product parent-center-child"]//img[@src]',
     'description':'.//span[@class="c-product-info--description-text"]',
@@ -19,7 +19,6 @@ xpaths={
     'fast_discount':'./div[@class="item-data-product"]/div/div/div/div/div[@class="discount-percentage"]',
     'href':'./div/a[@id="hrefRedirectProduct"]',
     'imgs':'.//div[@class="image-container"]/img',
-    #'imgs':'.//div[@id="product-grid"]/div/div/figure/img',
     'main_categories':'.//div[contains(@class,"menu-list-item main-category ")]',
     'name':'.//h1[@class="product-name-title"]',
     'priceBfr':'.//div[@class="product-price block-height"]//div[@class="one-old-price"]//span',
@@ -31,10 +30,7 @@ xpaths={
 
 class ScrapStradivarius:
     def __init__(self):
-        options = Options()
-        # options.add_argument("user-data-dir=./Cookies/Stradivarius")
-        # options.add_argument("--headless")
-        self.driver = webdriver.Chrome('./chromedriver', options=options)
+        self.driver = webdriver.Chrome('./chromedriver')
         self.driver.set_page_load_timeout(30)
         self.driver.maximize_window()
         self.driver.get('https://www.stradivarius.com/co/')
@@ -43,41 +39,47 @@ class ScrapStradivarius:
             self.driver.find_element_by_xpath('.//button[@class="STRButton  cancel-button STRButton_secondary STRButton_large"]').click()
         except:
             print('No dismiss cookies')
-        try:
-            self.driver.find_element_by_xpath('.//div[@class="burger-icon"]').click()
-            sleep(2)
-        except:
-            print('No menu open')
-        main_categories = self.driver.find_elements_by_xpath(xpaths['main_categories'])
+        # try:
+        #     self.driver.find_element_by_xpath('.//div[@class="burger-icon"]').click()
+        #     sleep(2)
+        # except:
+        #     print('No menu open')
+        # main_categories = self.driver.find_elements_by_xpath(xpaths['main_categories'])
+        main_categories = self.driver.find_elements_by_xpath(xpaths['categories'])
         categories = [[],[]]
-        for i in range(len(main_categories)):
-            i=main_categories[i]
-            self.driver.execute_script('arguments[0].scrollIntoView();', i)
-            if i.find_elements_by_xpath('./a[contains(@href,"javascript")]'):
-                try:
-                    i.click()
-                    sleep(3)
-                    for c in self.driver.find_elements_by_xpath(xpaths['categories']):
-                        categories[0].append(c.get_attribute('innerText'))
-                        categories[1].append(c.get_attribute('href'))
-                except:
-                    print('err')
-            else:
-                categories[0].append(i.text)
-                categories[1].append(i.get_attribute('href'))
-            main_categories = self.driver.find_elements_by_xpath(xpaths['main_categories'])
+        # for i in range(len(main_categories)):
+        #     i=main_categories[i]
+        #     self.driver.execute_script('arguments[0].scrollIntoView();', i)
+        #     if i.find_elements_by_xpath('./a[contains(@href,"javascript")]'):
+        #         try:
+        #             i.click()
+        #             sleep(3)
+        #             for c in self.driver.find_elements_by_xpath(xpaths['categories']):
+        #                 if not c.get_attribute('href') in categories[1]:
+        #                     categories[0].append(c.get_attribute('innerText'))
+        #                     categories[1].append(c.get_attribute('href'))
+        #         except:
+        #             print('err')
+        #     else:
+        #         categories[0].append(i.text)
+        #         categories[1].append(i.find_element_by_xpath('./a').get_attribute('href'))
+        #     main_categories = self.driver.find_elements_by_xpath(xpaths['main_categories'])
+        for c in main_categories:
+            if not 'javascript:void' in c.get_attribute('href'):
+                categories[0].append(c.get_attribute('innerText'))
+                categories[1].append(c.get_attribute('href'))
         for c in range(len(categories[0])):
             self.category = categories[0][c]
             self.originalCategory = categories[0][c]
             self.subcategory = categories[0][c]
             self.originalSubcategory = categories[0][c]
             self.sale = False
-            print(categories[0][c],categories[1][c])
             self.scrapCategory(categories[1][c])
         self.driver.quit()
 
 
     def scrapCategory(self, url):
+        print(url)
         self.driver.get(url)
         sleep(1)
         subCats = [self.driver.find_elements_by_xpath(xpaths['subCats']),[]]
@@ -115,11 +117,15 @@ class ScrapStradivarius:
                 elems = self.driver.find_elements_by_xpath(xpaths['elems'])
             except:
                 loading = False
-        for e in elems:
-            self.driver.execute_script('arguments[0].scrollIntoView();', e)
-            href = e.find_element_by_xpath(xpaths['href']).get_attribute('href')
-            if db.contains(href):
-                self.updateProduct(e)
+        for elem in elems:
+            self.driver.execute_script('arguments[0].scrollIntoView();', elem)
+            href = elem.find_element_by_xpath(xpaths['href']).get_attribute('href')
+            try:
+                img = elem.find_element_by_xpath('.//img').get_attribute('src')
+            except:
+                img = ''
+            if db.contains(href, img):
+                db.update_product(elem, href, xpaths)
             else:
                 self.scrapProduct(href)
             
@@ -184,17 +190,10 @@ class ScrapStradivarius:
             else:
                 print("Hubo un error")
         except Exception as e:
-            print("Item saltado")
+            print("Item saltado", url)
             print(e)
         self.driver.close()
         self.driver.switch_to.window(self.driver.window_handles[0])
-
-    def updateProduct(self, elem):
-        url = elem.find_element_by_xpath(xpaths['href']).get_attribute('href')
-        priceBfr = elem.find_element_by_xpath(xpaths['fast_priceBfr']).text
-        priceNow = elem.find_element_by_xpath(xpaths['fast_priceNow']).text
-        discount = elem.find_element_by_xpath(xpaths['fast_discount']).text
-        db.update_product(url, priceBfr, priceNow, discount)
 
 
 # Main Code

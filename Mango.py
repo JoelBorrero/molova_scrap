@@ -11,8 +11,11 @@ brand = 'Mango'
 db = Database(brand)
 xpaths={
     'categories':'.//div[@class="section-detail-container section-detail-hidden "]/div/ul[@class="section-detail"]/li[not(contains(@class,"desktop-label-hidden") or contains(@class," label-hidden"))]/a',
+    'discount':'.//span[@class="product-discount"]',
     'imgs':'.//div[@id="renderedImages"]//img',
-    'name':'.//h1[@itemprop="name"]'
+    'name':'.//h1[@itemprop="name"]',
+    'priceBfr':'.//span[@class="product-sale--cross"]',
+    'priceNow':'.//span[contains(@class,"product-sale")]'
 }
 endpoints = [
     'https://shop.mango.com/services/productlist/products/CO/she/sections_she_colombia_rebajas_SpecialSale.rebajas_she_mobile/?saleSeasons=3,8,5,4&pageNum=',

@@ -373,9 +373,16 @@ def check_broken_links(databases = [mngDb, bDb, mDb, zDb, pDb, sDb]):
             else:
                 print(url,'name dont fit but images fit')
         else:
-            brand.db.update_product(url, brand.xpaths['priceBfr'], brand.xpaths['priceNow'], brand.xpaths['discount'])
+            priceBfr = brand.xpaths['priceBfr']
+            try:
+                priceNow = brand.xpaths['priceNow']
+                discount = brand.xpaths['discount']
+            except:
+                priceNow = priceBfr
+                discount = 0
+            brand.db.update_product(url, priceBfr, priceNow, discount)
     latest.close()
-    open('Latest.json', 'w').close()
+    open('./Database/Latest.json', 'w').close()
     to_delete = broken.getAllUrls()
     return requests.post('https://2ksanrpxtd.execute-api.us-east-1.amazonaws.com/dev/molova/delete', f'{{"data": {to_delete}}}'.replace("'",'"')).json()
 

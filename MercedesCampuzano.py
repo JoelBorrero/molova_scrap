@@ -112,7 +112,7 @@ class ScrapMercedesCampuzano:
             self.driver.execute_script("arguments[0].scrollIntoView();", elem)
             url = elem.find_element_by_xpath(xpaths['href']).get_attribute('href')
             if db.contains(url):
-                self.updateProduct(elem)
+                db.update_product(elem, xpaths)
             else:
                 self.scrapProduct(url)
 
@@ -266,16 +266,6 @@ class ScrapMercedesCampuzano:
         self.driver.close()
         self.driver.switch_to.window(self.driver.window_handles[0])
 
-    def updateProduct(self, elem):
-        url = elem.find_element_by_xpath(xpaths['href']).get_attribute('href')
-        priceNow = elem.find_element_by_xpath(xpaths['fast_priceNow']).text
-        try:
-            priceBfr = elem.find_element_by_xpath(xpaths['fast_priceBfr']).text
-            discount = elem.find_element_by_xpath(xpaths['fast_discount']).text
-        except:
-            priceBfr = priceNow
-            discount = 0
-        db.update_product(url, priceBfr, priceNow, discount)
 
 # Main Code
 # ScrapMercedesCampuzano()
