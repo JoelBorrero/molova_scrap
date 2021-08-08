@@ -61,15 +61,11 @@ class ScrapZara:
         subcats = self.driver.find_elements_by_xpath(xpaths['subCats'])
         if subcats:
             for s in range(len(subcats)):
-                print(s,'de',len(subcats))
-                print(s,'de',len(subcats))
                 if subcats[s].text.lower() != 'ver todo':
                     try:
                         subcats[s].click()
                         sleep(5)
-                        print('67:')
                         self.subcategory = self.driver.find_element_by_xpath(xpaths['subcategory']).text.capitalize()
-                        print('68:',self.subcategory)
                         self.scrapSubcategory()
                     except:
                         # try:
@@ -95,7 +91,6 @@ class ScrapZara:
             sleep(3)
             loading = len(itemsWebElems) < len(self.driver.find_elements_by_xpath(xpaths['elems']))
             itemsWebElems = self.driver.find_elements_by_xpath(xpaths['elems'])
-        print(len(itemsWebElems))
         while itemsWebElems:
             elem = itemsWebElems.pop()
             self.driver.execute_script("arguments[0].scrollIntoView();", elem)
@@ -103,7 +98,7 @@ class ScrapZara:
             try:
                 image = elem.find_element_by_xpath(xpaths['fast_image']).get_attribute('src')
                 if db.contains(url, image):
-                    self.updateProduct(elem)
+                    db.update_product(elem, url, xpaths)
                 else:
                     self.scrapProduct(url)
             except:
@@ -180,15 +175,5 @@ class ScrapZara:
         self.driver.close()
         self.driver.switch_to.window(self.driver.window_handles[0])
 
-    def updateProduct(self, elem):
-        url = elem.find_element_by_xpath(xpaths['href']).get_attribute('href')
-        priceNow = elem.find_element_by_xpath(xpaths['fast_priceNow']).text
-        try:
-            priceBfr = elem.find_element_by_xpath(xpaths['fast_priceNow']).text
-            discount = elem.find_element_by_xpath(xpaths['fast_discount']).text
-        except:
-            priceBfr = priceNow
-            discount = 0
-        db.update_product(url, priceBfr, priceNow, discount)
 # Main Code
 # ScrapZara()

@@ -3,11 +3,9 @@ from time import sleep
 from random import uniform
 from selenium import webdriver
 from scrapy.crawler import CrawlerProcess
-
-import Bershka, Gef, Mango, MercedesCampuzano, PullAndBear, Stradivarius, Zara
+import Bershka, Mango, MercedesCampuzano, PullAndBear, Stradivarius, Zara
 from Item import Item, toInt
 from Database import Database
-
 
 bDb = Database('Bershka')
 mngDb = Database('Mango')
@@ -17,7 +15,6 @@ sDb = Database('Stradivarius')
 zDb = Database('Zara')
 latest = Database('Latest')
 broken = Database('Broken')
-
 
 def merge():
     totalItems = 0
@@ -72,8 +69,11 @@ def merge():
                     print(e)
     # input('\nPresione enter para salir\n')
 
-def scrap(brands = ['Stradivarius','Mango','PullAndBear', 'Bershka', 'MercedesCampuzano', 'Zara']):
+def scrap(brands = ['Stradivarius',
+# 'Mango',
+'PullAndBear', 'Bershka', 'MercedesCampuzano', 'Zara']):
     for brand in brands:
+        print('>>>>> ',brand,' <<<<<')
         try:
             exec('{0}.Scrap{0}()'.format(brand))
         except Exception as e:
@@ -322,7 +322,7 @@ def post(databases = [mngDb, bDb, mDb, zDb, pDb, sDb]):
     percentage = 0
     index = 0
     bar = ''
-    # check_broken_links(databases)
+    check_broken_links(databases)
     for d in databases:
         totalItems += len(d.getAllItems())
     for d in databases:
@@ -333,13 +333,6 @@ def post(databases = [mngDb, bDb, mDb, zDb, pDb, sDb]):
                 percentage = int(index / totalItems * 100)
                 bar = bar+'°'
                 print(f'{percentage}% ({index} de {totalItems}) {bar}')
-
-def check_sales(brands = ['PullAndBear', 'Bershka', 'Stradivarius', 'Zara', 'MercedesCampuzano']):
-    for brand in brands:
-        try:
-            exec('{0}.ScrapSale()'.format(brand))
-        except:
-            print('Error scrapping Sale in', brand)
 
 def check_broken_links(databases = [mngDb, bDb, mDb, zDb, pDb, sDb]):
     '''Check each url that was not present in the last scrap'''
@@ -371,7 +364,7 @@ def check_broken_links(databases = [mngDb, bDb, mDb, zDb, pDb, sDb]):
                 print(url,'borrado')
                 brand.db.delete(url)
             else:
-                print(url,'name dont fit but images fit')
+                print(url,'name dont fit but images does')
         else:
             priceBfr = brand.xpaths['priceBfr']
             try:

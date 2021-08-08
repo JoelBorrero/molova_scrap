@@ -79,7 +79,6 @@ class ScrapStradivarius:
 
 
     def scrapCategory(self, url):
-        print(url)
         self.driver.get(url)
         sleep(1)
         subCats = [self.driver.find_elements_by_xpath(xpaths['subCats']),[]]

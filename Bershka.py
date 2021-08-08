@@ -234,10 +234,10 @@ class ScrapBershka:
                     self.originalSubcategory,
                     self.sale,
                     self.gender,
-                ),True
+                )
             )
         except Exception as e:
-            print('Item saltado')
+            print('Item saltado', url)
             print(e)
         self.driver.close()
         self.driver.switch_to.window(self.driver.window_handles[0])
