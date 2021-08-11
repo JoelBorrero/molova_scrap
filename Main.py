@@ -375,9 +375,29 @@ def check_broken_links(databases = [mngDb, bDb, mDb, zDb, pDb, sDb]):
     latest.close()
     open('./Database/Latest.json', 'w').close()
     to_delete = broken.getAllUrls()
+    open('./Database/Broken.json', 'w').close()
     return requests.post('https://2ksanrpxtd.execute-api.us-east-1.amazonaws.com/dev/molova/delete', f'{{"data": {to_delete}}}'.replace("'",'"')).json()
 
-    
+def clear_remote_db():
+    driver = webdriver.Chrome("./chromedriver")
+    driver.maximize_window()
+    driver.set_page_load_timeout(10)
+    for last in ['Camisas%20y%20Camisetas','Pantalones%20y%20Jeans','Vestidos%20y%20Enterizos','Faldas%20y%20Shorts','Abrigos%20y%20Blazers','Ropa%20Deportiva', 'Zapatos','Bolsos','Accesorios']:
+        for index in [0,1]:
+            to_delete = []
+            endpoint = f"https://2ksanrpxtd.execute-api.us-east-1.amazonaws.com/dev/molova/coleccion/{index}/{last}"
+            res = requests.get(endpoint).json()
+            for item in res['items']:
+                to_delete.append(item['id_producto'])
+            for url in to_delete:
+                driver.get(url)
+                brand = Bershka if 'bershka.com' in url else Mango if 'mango.com' in url else MercedesCampuzano if 'mercedescampuzano.com' in url else PullAndBear if 'pullandbear.com' in url  else Stradivarius if  'stradivarius.com' in url else Zara
+                if not driver.find_elements_by_xpath(brand.xpaths['name']):
+                    if not driver.find_elements_by_xpath(brand.xpaths['imgs']):
+                        broken.db.insert({'url':url})
+                        print(url,'borrado')
+                        brand.db.delete(url)
+            requests.post('https://2ksanrpxtd.execute-api.us-east-1.amazonaws.com/dev/molova/delete', f'{{"data": {to_delete}}}'.replace("'",'"')).json()   
 # Main code
 # merge()
 # delete_brands_fron_urlsdb(['stradivarius'])
@@ -388,9 +408,9 @@ def check_broken_links(databases = [mngDb, bDb, mDb, zDb, pDb, sDb]):
 # check_broken_links()
 # post()
 # print(delete())
-print('Comma separated(1,2,3)\n1. Merge\n2. Scrap\n3. Post\n4. Check broken links')
+print('Comma separated(1,2,3)\n1. Merge\n2. Scrap\n3. Post\n4. Check broken links\n5. Clear remote db')
 to_do = ','+input('>')
-tasks = ['merge()','scrap()','post()', 'check_broken_links()']
+tasks = ['merge()','scrap()','post()', 'check_broken_links()','clear_remote_db()']
 for task in to_do.split(','):
     try:
         exec(tasks[int(task)-1])

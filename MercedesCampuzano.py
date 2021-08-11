@@ -8,20 +8,16 @@ from selenium.webdriver.chrome.options import Options
 brand = "Mercedes Campuzano"
 db = Database(brand)
 xpaths = {
-    "categories":
-    './/ul[@class="vtex-menu-2-x-menuContainer list flex pl0 mv0 flex-row"]/div/div/div/div/div/li/div',
-    "closeBtn":
-    './/button[@class="vtex-modal-layout-0-x-closeButton vtex-modal-layout-0-x-closeButton--modal-header ma0 bg-transparent pointer bw0 pa3"]',
-    "color":
-    './/img[@class="vtex-store-components-3-x-skuSelectorItemImageValue mercedescampuzano-mcampuzano-1-x-showImgColor"]',
+    "categories": './/ul[@class="vtex-menu-2-x-menuContainer list flex pl0 mv0 flex-row"]/div/div/div/div/div/li/div',
+    "closeBtn": './/button[@class="vtex-modal-layout-0-x-closeButton vtex-modal-layout-0-x-closeButton--modal-header ma0 bg-transparent pointer bw0 pa3"]',
+    "color": './/img[@class="vtex-store-components-3-x-skuSelectorItemImageValue mercedescampuzano-mcampuzano-1-x-showImgColor"]',
     "colorsBtn":
     './/ul[@class="vtex-slider-0-x-sliderFrame list pa0 h-100 ma0 flex justify-center"]/li[not(.//button)]',
     "description":
     './/div[@class="vtex-store-components-3-x-specificationsTableContainer mt9 mt0-l pl8-l"]',
     "description2":
     './/div[@class="vtex-store-components-3-x-content vtex-store-components-3-x-content--product-description h-auto"]',
-    "discount":
-    './/div[@class="vtex-store-components-3-x-discountInsideContainer t-mini white absolute right-0 pv2 ph3 bg-emphasis z-1"]',
+    "discount": './/div[@class="vtex-store-components-3-x-discountInsideContainer t-mini white absolute right-0 pv2 ph3 bg-emphasis z-1"]',
     "elems":
     './/section[@class="vtex-product-summary-2-x-container vtex-product-summary-2-x-containerNormal overflow-hidden br3 h-100 w-100 flex flex-column justify-between center tc"]',
     "href":
@@ -38,6 +34,7 @@ xpaths = {
     './/span[@class="vtex-store-components-3-x-productBrand "]',
     "name2":
     './/span[contains(@class,"vtex-store-components-3-x-currencyInteger vtex-store-components-3-x-currencyInteger--price"]',
+    'priceBfr': './/div[contains(@class,"priceContainer")]/div/span[contains(@class,"strike")]',
     "priceNow":
     './/span[@class="vtex-product-price-1-x-currencyContainer vtex-product-price-1-x-currencyContainer--summary"]',
     "prices":

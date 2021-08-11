@@ -52,7 +52,7 @@ class ScrapZara:
             cats[1].append(cat.get_attribute("href"))
         cats[0].reverse()
         cats[1].reverse()
-        for i in range(17, len(cats[0])):
+        for i in range(len(cats[0])):
             self.category = cats[0][i]
             self.originalCategory = self.category
             if 'mujer' in cats[1][i] or 'woman' in cats[1][i]:
