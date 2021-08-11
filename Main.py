@@ -69,9 +69,7 @@ def merge():
                     print(e)
     # input('\nPresione enter para salir\n')
 
-def scrap(brands = ['Stradivarius',
-# 'Mango',
-'PullAndBear', 'Bershka', 'MercedesCampuzano', 'Zara']):
+def scrap(brands = ['Stradivarius','Mango', 'PullAndBear', 'Bershka', 'MercedesCampuzano', 'Zara']):
     for brand in brands:
         print('>>>>> ',brand,' <<<<<')
         try:

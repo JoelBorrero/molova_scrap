@@ -9,11 +9,11 @@ db = Database(brand)
 xpaths = {
     'categories': './/ul[@class="layout-categories__container"]/li[position()=1]/ul/li/ul/li/a',
     'color':'.//p[contains(@class,"product-detail-selected-color")]',
-    'colorsBtn': './/ul[@class="product-detail-info-color-selector__colors"]/li/button',
+    'colorsBtn': './/ul[contains(@class,"-color-selector__colors")]/li/button',
     'coming': '',
     'description': './/div[@class="expandable-text__inner-content"]/p',
     'discount': './/div[@class="product-detail-info__price-amount price"]//span[@class="price__discount-percentage"]',
-    'elems': './/section[@class="product-grid"]/ul/li/ul/li[not(contains(@class,"seo"))][.//span[@class="price__amount-current"]]',
+    'elems': './/section[@class="product-grid"]/ul/li/ul/li[not(contains(@class,"seo"))][.//span[@class="price__amount-current"] and .//a]',
     'href':'.//a',
     'fast_discount': './/div[@class="product-grid-product-info__tag"]/span',
     'fast_image': './/img[not(contains(@src,"watermark"))]',
@@ -37,12 +37,22 @@ class ScrapZara:
         self.sale = False
         self.driver.maximize_window()
         self.driver.get("https://www.zara.com/co/")
+        sleep(3)
+        try:
+            self.driver.find_element_by_xpath('.//button[@class="modal__close-button"]').click()
+            print('clicked')
+            sleep(2)
+            self.driver.find_element_by_xpath('.//button[@class="modal__close-button"]').click()
+        except:
+            print('No dismiss')
         cats=[[],[]]
         for cat in self.driver.find_elements_by_xpath(xpaths['categories']):
             c = cat.get_attribute('innerText').capitalize()
             cats[0].append(c)
             cats[1].append(cat.get_attribute("href"))
-        for i in range(len(cats[0])):
+        cats[0].reverse()
+        cats[1].reverse()
+        for i in range(17, len(cats[0])):
             self.category = cats[0][i]
             self.originalCategory = self.category
             if 'mujer' in cats[1][i] or 'woman' in cats[1][i]:
@@ -70,6 +80,7 @@ class ScrapZara:
                     except:
                         # try:
                         self.driver.find_element_by_xpath('.//button[@class="variable-width-carousel__arrow variable-width-carousel__arrow--right"]').click()
+                        sleep(1)
                         subcats[s].click()
                         sleep(5)
                         self.subcategory = self.driver.find_element_by_xpath(xpaths['subcategory']).text.capitalize()
@@ -129,13 +140,13 @@ class ScrapZara:
             if len(colorsBtn) == 0:
                 color = self.driver.find_element_by_xpath(xpaths['color'])
                 colors.append(color.text.replace("Color: ", "").replace('"', "").capitalize())
-                tallas = []
+                sizes = []
                 for t in self.driver.find_elements_by_xpath(xpaths['sizesTags']):
                     if "disabled" in t.get_attribute("class"):
-                        tallas.append("{}(Agotado)".format(t.find_element_by_xpath("./div/div/span").get_attribute("innerText")))
+                        sizes.append("{}(Agotado)".format(t.find_element_by_xpath("./div/div/span").get_attribute("innerText")))
                     else:
-                        tallas.append(t.find_element_by_xpath("./div/div/span").get_attribute("innerText"))
-                allSizes.append(tallas)
+                        sizes.append(t.find_element_by_xpath("./div/div/span").get_attribute("innerText"))
+                allSizes.append(sizes)
                 images = []
                 thumbnails = self.driver.find_elements_by_xpath(xpaths['thumbnails'])
                 for i in range(len(thumbnails)):
@@ -147,15 +158,15 @@ class ScrapZara:
                 allImages.append(images)
             for c in range(len(colorsBtn)):
                 colorsBtn[c].click()
-                tallas = []
+                sizes = []
                 while not self.driver.find_elements_by_xpath('.//ul[contains(@id,"product-size-selector-product-detail-info")]/li'):
                     sleep(0.1)
                 for t in self.driver.find_elements_by_xpath('.//ul[contains(@id,"product-size-selector-product-detail-info")]/li'):
                     if "disabled" in t.get_attribute("class"):
-                        tallas.append("{}(Agotado)".format(t.find_element_by_xpath("./div/div/span").get_attribute("innerText")))
+                        sizes.append("{}(Agotado)".format(t.find_element_by_xpath("./div/div/span").get_attribute("innerText")))
                     else:
-                        tallas.append(t.find_element_by_xpath("./div/div/span").get_attribute("innerText"))
-                allSizes.append(tallas)
+                        sizes.append(t.find_element_by_xpath("./div/div/span").get_attribute("innerText"))
+                allSizes.append(sizes)
                 images = []
                 thumbnails = self.driver.find_elements_by_xpath(xpaths['thumbnails'])
                 for i in range(len(thumbnails)):

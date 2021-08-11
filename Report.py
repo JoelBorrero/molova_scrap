@@ -1,22 +1,22 @@
-import os, json
-path = 'C:/Users/JoelBook/Documents/Molova/Items'
-totalItems=0
-for file in os.listdir(path):
-    if '.json' in file:
-        with open('{}/{}'.format(path,file), 'r',encoding='utf8') as f:
-            j = json.loads(f.read())
-            try:
-                brandItems=0
-                for c in j['categories']:
-                    index2=0
-                    for i in c['items']:
-                        totalItems+=1
-                        index2+=1
-                        brandItems+=1
-                    #print(index2)
-                    print('         ',c['category'],index2)
-                print(file,brandItems,'\n')
-            except:
-                pass
-print(totalItems,'productos en total\n')
-input('Presiona enter para salir')
+import pandas as pd
+from Database import Database
+writer = pd.ExcelWriter('./Report.xlsx', engine='xlsxwriter')
+general = [0,0,0,0,0,0,0,0,0,0]
+category_names = ["Camisas y Camisetas","Pantalones y Jeans","Vestidos y Enterizos","Faldas y Shorts","Abrigos y Blazers","Ropa deportiva","Zapatos","Bolsos","Accesorios","Otros"]
+df = pd.DataFrame({'Categoría':category_names})
+df.to_excel(writer,'Report', index=False)
+for i, brand in [(0,'Bershka'), (1,'Mango'), (2,'Mercedes Campuzano'), (3,'Pull & Bear'), (4,'Stradivarius'), (5,'Zara')]:
+    db = Database(brand)
+    categories = [0,0,0,0,0,0,0,0,0,0]
+    for item in db.getAllItems():
+        index = category_names.index(item['category'])
+        categories[index] += 1
+        general[index] += 1
+    df = pd.DataFrame({brand:categories})
+    df.to_excel(writer,sheet_name='Report',startcol=i+2, index=False)
+worksheet = writer.sheets['Report']
+worksheet.set_column('A:H',16)
+worksheet.conditional_format('B2:B11', {'type': '3_color_scale'})
+df = pd.DataFrame({'General':general})
+df.to_excel(writer, sheet_name='Report', startcol=1 , index=False)
+writer.save()
