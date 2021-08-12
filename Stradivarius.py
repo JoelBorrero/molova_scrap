@@ -117,16 +117,19 @@ class ScrapStradivarius:
             except:
                 loading = False
         for elem in elems:
-            self.driver.execute_script('arguments[0].scrollIntoView();', elem)
-            href = elem.find_element_by_xpath(xpaths['href']).get_attribute('href')
             try:
-                img = elem.find_element_by_xpath('.//img').get_attribute('src')
+                self.driver.execute_script('arguments[0].scrollIntoView();', elem)
+                href = elem.find_element_by_xpath(xpaths['href']).get_attribute('href')
+                try:
+                    img = elem.find_element_by_xpath('.//img').get_attribute('src')
+                except:
+                    img = ''
+                if db.contains(href, img):
+                    db.update_product(elem, href, xpaths)
+                else:
+                    self.scrapProduct(href)
             except:
-                img = ''
-            if db.contains(href, img):
-                db.update_product(elem, href, xpaths)
-            else:
-                self.scrapProduct(href)
+                print('Error')
             
 
     def scrapProduct(self, url):

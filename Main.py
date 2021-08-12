@@ -279,7 +279,6 @@ def crawl(brands=['mercedescampuzano.com', 'zara.com']):
                 db.add(item)
             else:
                 print('<<<<<<<<<<<<<<<<<<<<<<<<This item has no price:', response.url)
-                urlsDb.urlError(response.url)
             sleep(uniform(5,10))
     process = CrawlerProcess(
         settings={
@@ -336,26 +335,18 @@ def check_broken_links(databases = [mngDb, bDb, mDb, zDb, pDb, sDb]):
     '''Check each url that was not present in the last scrap'''
     print('Looking for broken links...')
     to_delete= []
-    total_items = len(latest.getAllItems())
-    percentage = 0
-    index = 0
-    bar = ''
     for db in databases:
         for item in db.getAllItems():
             if not latest.contains_url(item['url']):
                 to_delete.append(item['url'])
-            index+=1
-            if not percentage == int(index / total_items * 100):
-                percentage = int(index / total_items * 100)
-                bar = f'{bar}°'
-                print(f'{percentage}% ({index} de {total_items}) {bar}')
-    print(to_delete)
     driver = webdriver.Chrome("./chromedriver")
     driver.maximize_window()
     driver.set_page_load_timeout(10)
     for url in to_delete:
         driver.get(url)
         brand = Bershka if 'bershka.com' in url else Mango if 'mango.com' in url else MercedesCampuzano if 'mercedescampuzano.com' in url else PullAndBear if 'pullandbear.com' in url  else Stradivarius if  'stradivarius.com' in url else Zara
+        if not driver.find_elements_by_xpath(brand.xpaths['name']):
+            sleep(1)
         if not driver.find_elements_by_xpath(brand.xpaths['name']):
             if not driver.find_elements_by_xpath(brand.xpaths['imgs']):
                 broken.db.insert({'url':url})
@@ -364,19 +355,48 @@ def check_broken_links(databases = [mngDb, bDb, mDb, zDb, pDb, sDb]):
             else:
                 print(url,'name dont fit but images does')
         else:
-            priceBfr = brand.xpaths['priceBfr']
+            priceBfr = driver.find_element_by_xpath(brand.xpaths['priceBfr']).text
             try:
-                priceNow = brand.xpaths['priceNow']
-                discount = brand.xpaths['discount']
+                priceNow = driver.find_element_by_xpath(brand.xpaths['priceNow']).text
+                discount = driver.find_element_by_xpath(brand.xpaths['discount']).text
             except:
                 priceNow = priceBfr
                 discount = 0
-            brand.db.update_product(url, priceBfr, priceNow, discount)
+            brand.db.update_product([discount, priceBfr, priceNow], url)
     latest.close()
     open('./Database/Latest.json', 'w').close()
     to_delete = broken.getAllUrls()
     open('./Database/Broken.json', 'w').close()
-    return requests.post('https://2ksanrpxtd.execute-api.us-east-1.amazonaws.com/dev/molova/delete', f'{{"data": {to_delete}}}'.replace("'",'"')).json()
+    requests.post('https://2ksanrpxtd.execute-api.us-east-1.amazonaws.com/dev/molova/delete', f'{{"data": {to_delete}}}'.replace("'",'"')).json()
+
+def sync():
+    for last in ['Camisas%20y%20Camisetas','Pantalones%20y%20Jeans','Vestidos%20y%20Enterizos','Faldas%20y%20Shorts','Abrigos%20y%20Blazers','Ropa%20Deportiva', 'Zapatos','Bolsos','Accesorios']:
+        for index in [0,1]:
+            endpoint = f"https://2ksanrpxtd.execute-api.us-east-1.amazonaws.com/dev/molova/coleccion/{index}/{last}"
+            print(last,'sale' if index else 'col')
+            res = requests.get(endpoint).json()
+            percentage, bar, totalItems = 0, '', len(res['items'])
+            for item in res['items']:
+                if 'Bershka' == item['brand']:
+                    db = bDb
+                elif 'Mercedes' in item['brand']:
+                    db = mDb
+                elif 'Pull' in item['brand']:
+                    db = pDb
+                elif 'Stradivarius' == item['brand']:
+                    db = sDb
+                elif 'Zara' == item['brand']:
+                    db = zDb
+                elif 'Mango' == item['brand']:
+                    db = mngDb
+                item.pop('id')
+                item.pop('id_producto')
+                db.add(item, sync=True)
+                index += 1
+                if not percentage == int(index / totalItems * 100):
+                    percentage = int(index / totalItems * 100)
+                    bar = bar+'°'
+                    print(f'{percentage}% ({index} de {totalItems}) {bar}')
 
 def clear_remote_db():
     driver = webdriver.Chrome("./chromedriver")
@@ -398,21 +418,14 @@ def clear_remote_db():
                         print(url,'borrado')
                         brand.db.delete(url)
             requests.post('https://2ksanrpxtd.execute-api.us-east-1.amazonaws.com/dev/molova/delete', f'{{"data": {to_delete}}}'.replace("'",'"')).json()   
-# Main code
-# merge()
-# delete_brands_fron_urlsdb(['stradivarius'])
 
-# scrap()
-# different_categores=['BLASIER: Abrigos y Blazers - Blazers','BLASIER: Abrigos y Blazers - Abrigos y Blazers','CHALECO: Abrigos y Blazers - Abrigos','CHAQUETA: Abrigos y Blazers - Blazers','BLASIER: Abrigos y Blazers - Abrigos','VESTIDO: Vestidos y Enterizos - Vestidos','VESTIDO: Camisas y Camisetas - Camisas y Camisetas','VESTIDO: Abrigos y Blazers - Blazers','MONO: Vestidos y Enterizos - Vestidos','FALDA: Faldas y Shorts - Faldas','VESTIDO: Otros - Otros','VESTIDO: Abrigos y Blazers - Abrigos','VESTIDO: Ropa deportiva - Sudaderas','CAMISA: Camisas y Camisetas - Camisas','VESTIDO: Camisas y Camisetas - Camisetas','ABRIGO: Vestidos y Enterizos - Enterizos','PETO: Otros - Otros','PANTALON: Pantalones y Jeans - Jeans', 'VESTIDO: Vestidos y Enterizos - Vestidos','TOPS Y OTRAS P.: Camisas y Camisetas - Camisas y Camisetas','VESTIDO: Abrigos y Blazers - Abrigos','CAMISA: Camisas y Camisetas - Camisas','CHALECO: Abrigos y Blazers - Abrigos','VESTIDO: Otros - Otros','TOPS Y OTRAS P.: Camisas y Camisetas - Tops','CAMISA: Vestidos y Enterizos - Vestidos y Enterizos','CAMISA: Camisas y Camisetas - Tops','CAMISA: Camisas y Camisetas - Camisetas','BODY: Otros - Otros','CAMISA: Otros - Otros','CAMISETA: Otros - Otros','JERSEY: Camisas y Camisetas - Tops','TOPS Y OTRAS P.: Camisas y Camisetas - Camisetas','CAMISETA: Camisas y Camisetas - Tops','JERSEY: Camisas y Camisetas - Camisetas','TOPS Y OTRAS P.: Camisas y Camisetas - Camisas','CAMISA: Vestidos y Enterizos - Enterizos','CHAQUETA: Abrigos y Blazers - Abrigos','CHALECO: Vestidos y Enterizos - Vestidos y Enterizos','CAZADORA: Otros - Otros','CAMISETA: Vestidos y Enterizos - Vestidos y Enterizos','MONO: Camisas y Camisetas - Camisetas','CAMISETA: Camisas y Camisetas - Camisetas']
-# crawl(['mercedescampuzano.com'])
-# check_broken_links()
-# post()
-# print(delete())
-print('Comma separated(1,2,3)\n1. Merge\n2. Scrap\n3. Post\n4. Check broken links\n5. Clear remote db')
-to_do = ','+input('>')
-tasks = ['merge()','scrap()','post()', 'check_broken_links()','clear_remote_db()']
+
+# Main code
+print('Comma separated(1,2,3)\n1. Merge\n2. Scrap\n3. Post\n4. Sync\n5. Clear remote db')
+to_do = input('>')
+tasks = ['merge()','scrap()','post()', 'sync()','clear_remote_db()']
 for task in to_do.split(','):
     try:
         exec(tasks[int(task)-1])
-    except:
-        pass
+    except Exception as e:
+        print(e)

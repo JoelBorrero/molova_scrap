@@ -9,7 +9,7 @@ class Database:
         self.latest = TinyDB("./Database/Latest.json")
         self.q = Query()
 
-    def add(self, item, debug=False):
+    def add(self, item, debug=False, sync=False):
         if not type(item) is dict:
             item = item.__dict__
         def update():
@@ -32,7 +32,7 @@ class Database:
                     if not doc[field] in categories and item[field] in categories:
                         doc[field] = item[field]
             return transform
-        it = self.contains(item["url"], str(item["allImages"]))
+        it = self.contains(item["url"], str(item["allImages"]), sync)
         if it:  # Update it
             self.db.update(update(), doc_ids=[it.doc_id])
             if debug:
@@ -60,19 +60,18 @@ class Database:
             except:
                 priceBfr = priceNow
                 discount = 0
-        print(discount,priceBfr, priceNow)
         priceBfr = toInt(priceBfr)
         priceNow = toInt(priceNow)
         discount = toInt(discount)
         sale = priceNow < priceBfr
         if discount < 1 or discount >= 60:
-            discount = (1-priceNow/priceBfr)*100 if not discount == 0 else 0
+            discount = (1-priceNow/priceBfr)*100 if discount else 0
         if priceBfr > 0 and priceNow > 0:
             self.db.update({"priceBefore":priceBfr, "allPricesNow":[priceNow], 'discount':discount, 'sale':sale}, self.q.url == url)
 
     def contains_url(self, url):
         return True if self.db.get(self.q.url == url) else False
-    def contains(self, url, allImages=''):
+    def contains(self, url, allImages='', sync=False):
         def has_image(val, image):
             if 'pullandbear' in image:
                 image = image[:image.index('_')]
@@ -85,11 +84,12 @@ class Database:
         it = self.db.get(self.q.url == url)
         if not it and allImages: # Search by imgs
             it = self.db.get(self.q.allImages.test(has_image,allImages))
-        if it:
-            if not self.latest.get(self.q.url == it['url']):
-                self.latest.insert({'url':it['url']})
-        else:
-            self.latest.insert({'url':url})
+        if not sync:
+            if it:
+                if not self.latest.get(self.q.url == it['url']):
+                    self.latest.insert({'url':it['url']})
+            else:
+                self.latest.insert({'url':url})
         return it
 
     def delete(self, url):
