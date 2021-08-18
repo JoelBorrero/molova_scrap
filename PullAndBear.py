@@ -24,9 +24,10 @@ xpaths={
     'href':'./div/a',
     'imgs':'.//div[@id="product-grid"]/div/div/figure/img',
     'name':'.//h1[@class="title"]',
-    'priceBfr':'.//div[@class="c-product-info--header"]/div[@class="prices"]/div[@class="price price-old"]/span',
+    'priceBfr':'.//div[@class="c-product-info--header"]/div[@class="prices"]/div[contains(@class,"price")]/span',
     'priceNow':'.//div[@class="c-product-info--header"]/div[@class="prices"]/div[@class="sale"]/span',
     'priceNow2':'.//div[@class="c-product-info--header"]/div[@class="prices"]/div/span',
+    'ref':'.//span[@class="c-product-info--description-header-reference"]',
     'sizesTags':'.//div[@class="c-product-info--size"]/div/div/div[@class="product-card-size-selector--dropdown-sizes"]/div',
     'subCats':'.//div[starts-with(@class,"carrousel-filters")]/div/div/div/div',
     'subCats2':'.//div[@class="category-badges-list"]/button[not(@value="Ver todo")][span]'}
@@ -120,7 +121,7 @@ class ScrapPullAndBear:
         if url:
             self.driver.get(url)
             sleep(5)
-        loading = False
+        loading = True
         elems = self.driver.find_elements_by_xpath(xpaths['elems'])
         while loading:
             self.driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
@@ -151,6 +152,7 @@ class ScrapPullAndBear:
             except:
                 sleep(3)
                 name = self.driver.find_element_by_xpath(xpaths['name']).text
+            ref = self.driver.find_element_by_xpath(xpaths['ref']).text
             description = self.driver.find_element_by_xpath(xpaths['description']).text
             try:
                 priceNow = self.driver.find_element_by_xpath(xpaths['priceNow']).text
@@ -165,28 +167,31 @@ class ScrapPullAndBear:
             allSizes = []
             allImages = []
             for c in colorsBtn:
-                c.click()
-                colors.append(c.get_attribute("src"))
-                sizes = []
-                sizesTags = self.driver.find_elements_by_xpath(xpaths['sizesTags'])
-                for s in sizesTags:
-                    if "disabled" in s.get_attribute("class"):
-                        sizes.append("{}(Agotado)".format(s.get_attribute("innerText")))
-                    else:
-                        sizes.append(s.get_attribute("innerText"))
-                if not sizesTags:
-                    sizes = ["Única"]
-                allSizes.append(sizes)
-                images = []
-                imgs = self.driver.find_elements_by_xpath(xpaths['imgs'])
-                for i in range(len(imgs)):
-                    while not imgs[i].get_attribute("src"):
-                        self.driver.execute_script("arguments[0].scrollIntoView();", imgs[i])
-                        imgs = self.driver.find_elements_by_xpath(xpaths['imgs'])
-                        sleep(1)
-                    images.append(imgs[i].get_attribute("src"))
-                allImages.append(images)
-            db.add(Item(brand,name,description,priceBfr,priceNow,discount,allImages,url,allSizes,colors,self.category,self.originalCategory,self.subcategory,self.originalSubcategory,self.sale,self.gender))
+                try:
+                    c.click()
+                    colors.append(c.get_attribute("src"))
+                    sizes = []
+                    sizesTags = self.driver.find_elements_by_xpath(xpaths['sizesTags'])
+                    for s in sizesTags:
+                        if "disabled" in s.get_attribute("class"):
+                            sizes.append("{}(Agotado)".format(s.get_attribute("innerText")))
+                        else:
+                            sizes.append(s.get_attribute("innerText"))
+                    if not sizesTags:
+                        sizes = ["Única"]
+                    allSizes.append(sizes)
+                    images = []
+                    imgs = self.driver.find_elements_by_xpath(xpaths['imgs'])
+                    for i in range(len(imgs)):
+                        while not imgs[i].get_attribute("src"):
+                            self.driver.execute_script("arguments[0].scrollIntoView();", imgs[i])
+                            imgs = self.driver.find_elements_by_xpath(xpaths['imgs'])
+                            sleep(1)
+                        images.append(imgs[i].get_attribute("src"))
+                    allImages.append(images)
+                except:
+                    pass
+            db.add(Item(brand,name,ref,description,priceBfr,priceNow,discount,allImages,url,allSizes,colors,self.category,self.originalCategory,self.subcategory,self.originalSubcategory,self.sale,self.gender))
         except Exception as e:
            print("Item saltado:",e)
         self.driver.close()

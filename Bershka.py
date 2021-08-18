@@ -23,6 +23,7 @@ xpaths = {
     'name': './/h1[@class="product-title"]',
     'priceBfr': './/span[@class="old-price-elem"]',
     'priceNow': './/div[contains(@class,"current-price-elem")]',
+    'ref': './/div[@class="product-reference"]',
     'sale': './/ul[@class="sub-menu-container is-active"]/li/a',
     'sizesTags': './/div[@class="sizes-list-detail"]/ul/li/button',
     'subCats': './/div[@class="filter-tag-swiper"]/div/ul/li',
@@ -144,6 +145,7 @@ class ScrapBershka:
             if not self.driver.find_elements_by_xpath(xpaths['imgs']):
                 sleep(1)
             name = self.driver.find_element_by_xpath(xpaths['name']).text
+            ref = self.driver.find_element_by_xpath(xpaths['ref']).text
             description = self.driver.find_element_by_xpath(xpaths['description']).text
             priceNow = self.driver.find_element_by_xpath(xpaths['priceNow']).text
             try:
@@ -220,6 +222,7 @@ class ScrapBershka:
                 Item(
                     brand,
                     name,
+                    ref,
                     description,
                     priceBfr,
                     priceNow,

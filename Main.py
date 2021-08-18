@@ -297,8 +297,11 @@ def postItem(data):
         print('Exception:',e)
 
 def jsonToBody(json):
-    for p in range(len(json['allPricesNow'])):
-        json['allPricesNow'] = toInt(json['allPricesNow'][p])
+    try:
+        for p in range(len(json['allPricesNow'])):
+            json['allPricesNow'] = toInt(json['allPricesNow'][p])
+    except:
+        json['allPricesNow'] = toInt(json['allPricesNow'])
     json['priceBefore'] = toInt(json['priceBefore'])    
     json['discount'] = toInt(json['discount'])
     json['id_producto'] = json['url']
@@ -319,7 +322,7 @@ def post(databases = [mngDb, bDb, mDb, zDb, pDb, sDb]):
     percentage = 0
     index = 0
     bar = ''
-    check_broken_links(databases)
+    # check_broken_links(databases)
     for d in databases:
         totalItems += len(d.getAllItems())
     for d in databases:
@@ -331,7 +334,7 @@ def post(databases = [mngDb, bDb, mDb, zDb, pDb, sDb]):
                 bar = bar+'°'
                 print(f'{percentage}% ({index} de {totalItems}) {bar}')
 
-def check_broken_links(databases = [mngDb, bDb, mDb, zDb, pDb, sDb]):
+def check_broken_links(databases = [bDb, mDb, zDb, pDb, sDb]):
     '''Check each url that was not present in the last scrap'''
     print('Looking for broken links...')
     to_delete= []
@@ -339,33 +342,56 @@ def check_broken_links(databases = [mngDb, bDb, mDb, zDb, pDb, sDb]):
         for item in db.getAllItems():
             if not latest.contains_url(item['url']):
                 to_delete.append(item['url'])
+    print(len(to_delete),'items to review')
     driver = webdriver.Chrome("./chromedriver")
     driver.maximize_window()
-    driver.set_page_load_timeout(10)
-    for url in to_delete:
-        driver.get(url)
-        brand = Bershka if 'bershka.com' in url else Mango if 'mango.com' in url else MercedesCampuzano if 'mercedescampuzano.com' in url else PullAndBear if 'pullandbear.com' in url  else Stradivarius if  'stradivarius.com' in url else Zara
-        if not driver.find_elements_by_xpath(brand.xpaths['name']):
-            sleep(1)
-        if not driver.find_elements_by_xpath(brand.xpaths['name']):
-            if not driver.find_elements_by_xpath(brand.xpaths['imgs']):
-                broken.db.insert({'url':url})
-                print(url,'borrado')
-                brand.db.delete(url)
+    driver.set_page_load_timeout(20)
+    to_delete.reverse()
+    counter=4100
+    for url in to_delete[counter:]:
+        if not counter%10:
+            print(counter)
+        counter+=1
+        try:
+            driver.get(url)
+        except:
+            driver.quit()
+            sleep(5)
+            driver = webdriver.Chrome("./chromedriver")
+            driver.maximize_window()
+            driver.set_page_load_timeout(20)
+            driver.get(url)
+        try:
+            brand = Bershka if 'bershka.com' in url else Mango if 'mango.com' in url else MercedesCampuzano if 'mercedescampuzano.com' in url else PullAndBear if 'pullandbear.com' in url  else Stradivarius if  'stradivarius.com' in url else Zara
+            if not driver.find_elements_by_xpath(brand.xpaths['name']):
+                sleep(2)
+            if not driver.find_elements_by_xpath(brand.xpaths['name']):
+                if not driver.find_elements_by_xpath(brand.xpaths['imgs']):
+                    broken.db.insert({'url':url})
+                    brand.db.delete(url)
             else:
-                print(url,'name dont fit but images does')
-        else:
-            priceBfr = driver.find_element_by_xpath(brand.xpaths['priceBfr']).text
-            try:
-                priceNow = driver.find_element_by_xpath(brand.xpaths['priceNow']).text
-                discount = driver.find_element_by_xpath(brand.xpaths['discount']).text
-            except:
-                priceNow = priceBfr
-                discount = 0
-            brand.db.update_product([discount, priceBfr, priceNow], url)
-    latest.close()
-    open('./Database/Latest.json', 'w').close()
+                try:
+                    try:
+                        priceBfr = driver.find_element_by_xpath(brand.xpaths['priceBfr']).text
+                    except:
+                        sleep(1)
+                        priceBfr = driver.find_element_by_xpath(brand.xpaths['priceBfr']).text
+                    try:
+                        priceNow = driver.find_element_by_xpath(brand.xpaths['priceNow']).text
+                        discount = driver.find_element_by_xpath(brand.xpaths['discount']).text
+                    except:
+                        priceNow = priceBfr
+                        discount = 0
+                    brand.db.update_product([discount, priceBfr, priceNow], url)
+                except Exception as e:
+                    print('Error updating:',url,e)
+        except:
+            print('Error getting')
     to_delete = broken.getAllUrls()
+    latest.close()
+    broken.close()
+    print(len(to_delete),'items deleted')
+    open('./Database/Latest.json', 'w').close()
     open('./Database/Broken.json', 'w').close()
     requests.post('https://2ksanrpxtd.execute-api.us-east-1.amazonaws.com/dev/molova/delete', f'{{"data": {to_delete}}}'.replace("'",'"')).json()
 
@@ -408,22 +434,23 @@ def clear_remote_db():
             endpoint = f"https://2ksanrpxtd.execute-api.us-east-1.amazonaws.com/dev/molova/coleccion/{index}/{last}"
             res = requests.get(endpoint).json()
             for item in res['items']:
-                to_delete.append(item['id_producto'])
-            for url in to_delete:
+                url = item['id_producto']
                 driver.get(url)
                 brand = Bershka if 'bershka.com' in url else Mango if 'mango.com' in url else MercedesCampuzano if 'mercedescampuzano.com' in url else PullAndBear if 'pullandbear.com' in url  else Stradivarius if  'stradivarius.com' in url else Zara
+                if not driver.find_elements_by_xpath(brand.xpaths['name']):
+                    sleep(1)
                 if not driver.find_elements_by_xpath(brand.xpaths['name']):
                     if not driver.find_elements_by_xpath(brand.xpaths['imgs']):
                         broken.db.insert({'url':url})
                         print(url,'borrado')
                         brand.db.delete(url)
-            requests.post('https://2ksanrpxtd.execute-api.us-east-1.amazonaws.com/dev/molova/delete', f'{{"data": {to_delete}}}'.replace("'",'"')).json()   
-
+                        to_delete.append(url)
+            requests.post('https://2ksanrpxtd.execute-api.us-east-1.amazonaws.com/dev/molova/delete', f'{{"data": {to_delete}}}'.replace("'",'"')).json()
 
 # Main code
-print('Comma separated(1,2,3)\n1. Merge\n2. Scrap\n3. Post\n4. Sync\n5. Clear remote db')
+print('Comma separated(1,2,3)\n1. Merge\n2. Scrap\n3. Check for broken links\n4. Post\n5. Sync\n6. Clear remote db')
 to_do = input('>')
-tasks = ['merge()','scrap()','post()', 'sync()','clear_remote_db()']
+tasks = ['merge()','scrap()', 'check_broken_links()', 'post()', 'sync()','clear_remote_db()']
 for task in to_do.split(','):
     try:
         exec(tasks[int(task)-1])

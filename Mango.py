@@ -14,7 +14,7 @@ xpaths={
     'discount':'.//span[@class="product-discount"]',
     'imgs':'.//div[@id="renderedImages"]//img',
     'name':'.//h1[@itemprop="name"]',
-    'priceBfr':'.//span[@class="product-sale--cross"]',
+    'priceBfr':'.//span[contains(@class,"product-sale") and not(contains(@class,"discount"))]',
     'priceNow':'.//span[contains(@class,"product-sale")]'
 }
 endpoints = [
@@ -90,6 +90,7 @@ class ScrapMango:
         self.driver.quit()
 
     def crawl_api(self):
+        open('./Database/Mango.json', 'w').close()
         for endpoint in endpoints:
             pageNum = 1
             print(endpoint)

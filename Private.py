@@ -1,1 +1,0 @@
-private = {'access_key' : 'AKIA6AVOX4BCTFD4J7X5', 'secret_access_key' : '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'}

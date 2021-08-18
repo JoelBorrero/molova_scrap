@@ -21,8 +21,9 @@ xpaths = {
     'fast_priceNow':'.//span[@class="price__amount-current"]',
     'imgs': './/div[@class="media__wrapper media__wrapper--fill media__wrapper--force-height"]/picture/img[@class="media-image__image media__wrapper--media"]',
     'name': './/h1[@class="product-detail-info__name"]',
-    'priceBfr': './/div[@class="product-detail-info__price-amount price"]//span[@class="price__amount price__amount--old"]',
+    'priceBfr': './/div[@class="product-detail-info__price-amount price"]//span[@class="price__amount price__amount--old" or @class="price__amount-current"]',
     'priceNow': './/div[@class="product-detail-info__price-amount price"]//span[@class="price__amount-current-wrapper"]',
+    'ref':'',
     'sale': '',
     'sizesTags': './/div[@class="product-detail-info product-detail-view__product-info"]//ul[@class="product-detail-size-selector__size-list"]/li',
     'subcategory': './/span[@class="category-topbar-related-categories__category-name category-topbar-related-categories__category-name--selected"]',
@@ -122,6 +123,7 @@ class ScrapZara:
         self.driver.switch_to.window(self.driver.window_handles[1])
         try:
             name = self.driver.find_element_by_xpath(xpaths['name']).text.capitalize()
+            ref = 'ref'
             try:
                 description = self.driver.find_element_by_xpath(xpaths['description']).text.capitalize()
             except:
@@ -179,7 +181,7 @@ class ScrapZara:
                 allImages.append(images)
                 colors.append(colorsBtn[c].get_attribute("innerText").replace("Color: ", "").replace('"', "").capitalize())
                 colorsBtn = self.driver.find_elements_by_xpath('.//ul[@class="product-detail-info-color-selector__colors"]/li/button')
-            db.add(Item(brand,name,description,priceBfr,[priceNow],discount,allImages,url,allSizes,colors,self.category,self.originalCategory,self.subcategory,self.originalSubcategory,self.sale, self.gender))
+            db.add(Item(brand,name,ref,description,priceBfr,[priceNow],discount,allImages,url,allSizes,colors,self.category,self.originalCategory,self.subcategory,self.originalSubcategory,self.sale, self.gender))
         except Exception as e:
             i = 0
             print('Item saltado\n',url,e)

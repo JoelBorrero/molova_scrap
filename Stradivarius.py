@@ -21,9 +21,10 @@ xpaths={
     'imgs':'.//div[@class="image-container"]/img',
     'main_categories':'.//div[contains(@class,"menu-list-item main-category ")]',
     'name':'.//h1[@class="product-name-title"]',
-    'priceBfr':'.//div[@class="product-price block-height"]//div[@class="one-old-price"]//span',
+    'priceBfr':'.//div[@class="product-price block-height"]//div[contains(@class,"-price")]/div[ not(contains(@class,"-red"))]/span',
     'priceNow':'.//div[@class="product-price block-height"]//div[@class="current-price"]//span',
     'priceNow2':'.//div[@class="c-product-info--header"]/div[@class="prices"]/div/span',
+    'ref': './/div[@class="product-ref-details block-height "]',
     'sizesTags':'.//div[@id="productComponentRight"]//div[@class="size-grid-sizes-container"]//span',
     'subCats':'.//div[@class="display-inline-block child-center-parent slider-items-container"]/div/a',
     'subCats2':'.//div[@class="category-badges-list"]/a[not(text()="Ver todo")]'}
@@ -138,6 +139,7 @@ class ScrapStradivarius:
         try:
             sleep(3)
             name = self.driver.find_elements_by_xpath(xpaths['name'])
+            ref = self.driver.find_element_by_xpath(xpaths['ref']).text
             if not name:
                 sleep(3)
                 name = self.driver.find_elements_by_xpath(xpaths['name'])
@@ -187,7 +189,7 @@ class ScrapStradivarius:
                 name = name[0].text.capitalize()
                 if not self.originalSubcategory:
                     self.originalSubcategory = ' '
-                item = Item(brand,name,description,priceBfr,priceNow,discount,allImages,url,allSizes,colors,self.category,self.originalCategory,self.subcategory,self.originalSubcategory,self.sale,"Mujer")
+                item = Item(brand,name,ref,description,priceBfr,priceNow,discount,allImages,url,allSizes,colors,self.category,self.originalCategory,self.subcategory,self.originalSubcategory,self.sale,"Mujer")
                 db.add(item)
             else:
                 print("Hubo un error")
