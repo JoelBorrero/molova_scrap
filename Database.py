@@ -22,8 +22,7 @@ class Database:
                 "Ropa deportiva",
                 "Zapatos",
                 "Bolsos",
-                "Accesorios",
-            ]
+                "Accesorios",]
             def transform(doc):
                 for field in ["name","description","priceBefore","allPricesNow","discount","allSizes","sale", "colors", "url","allImages","category","subcategory", "allSizes"]:
                     if not doc[field] == item[field]:

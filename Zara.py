@@ -23,7 +23,7 @@ xpaths = {
     'name': './/h1[@class="product-detail-info__name"]',
     'priceBfr': './/div[@class="product-detail-info__price-amount price"]//span[@class="price__amount price__amount--old" or @class="price__amount-current"]',
     'priceNow': './/div[@class="product-detail-info__price-amount price"]//span[@class="price__amount-current-wrapper"]',
-    'ref':'',
+    'ref':'.//p[contains(@class,"product-detail")]',
     'sale': '',
     'sizesTags': './/div[@class="product-detail-info product-detail-view__product-info"]//ul[@class="product-detail-size-selector__size-list"]/li',
     'subcategory': './/span[@class="category-topbar-related-categories__category-name category-topbar-related-categories__category-name--selected"]',
@@ -123,7 +123,8 @@ class ScrapZara:
         self.driver.switch_to.window(self.driver.window_handles[1])
         try:
             name = self.driver.find_element_by_xpath(xpaths['name']).text.capitalize()
-            ref = 'ref'
+            ref = self.driver.find_element_by_xpath(xpaths['ref']).text
+            ref = ref[ref.index(' | ')+3:]
             try:
                 description = self.driver.find_element_by_xpath(xpaths['description']).text.capitalize()
             except:
