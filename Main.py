@@ -338,7 +338,7 @@ def post(databases = [mngDb, bDb, mDb, zDb, pDb, sDb]):
                 bar = bar+'°'
                 print(f'{percentage}% ({index} de {totalItems}) {bar}')
 
-def check_broken_links(databases = [bDb, mDb, zDb, pDb, sDb]):
+def check_broken_links(databases = [bDb, mDb, zDb, pDb, sDb], start=0):
     '''Check each url that was not present in the last scrap'''
     print('Looking for broken links...')
     to_delete= []
@@ -350,12 +350,10 @@ def check_broken_links(databases = [bDb, mDb, zDb, pDb, sDb]):
     driver = webdriver.Chrome("./chromedriver")
     driver.maximize_window()
     driver.set_page_load_timeout(20)
-    to_delete.reverse()
-    counter=4100
-    for url in to_delete[counter:]:
-        if not counter%10:
-            print(counter)
-        counter+=1
+    for url in to_delete[start:]:
+        if not start%10:
+            print(start)
+        start+=1
         try:
             driver.get(url)
         except:

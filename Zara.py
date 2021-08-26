@@ -23,7 +23,7 @@ xpaths = {
     'name': './/h1[@class="product-detail-info__name"]',
     'priceBfr': './/div[@class="product-detail-info__price-amount price"]//span[@class="price__amount price__amount--old" or @class="price__amount-current"]',
     'priceNow': './/div[@class="product-detail-info__price-amount price"]//span[@class="price__amount-current-wrapper"]',
-    'ref':'.//p[contains(@class,"product-detail")]',
+    'ref':'.//p[contains(@class,"product-detail-sel")]',
     'sale': '',
     'sizesTags': './/div[@class="product-detail-info product-detail-view__product-info"]//ul[@class="product-detail-size-selector__size-list"]/li',
     'subcategory': './/span[@class="category-topbar-related-categories__category-name category-topbar-related-categories__category-name--selected"]',

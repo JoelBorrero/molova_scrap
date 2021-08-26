@@ -21,7 +21,7 @@ xpaths = {
     'fast_priceNow':'.//div[contains(@class,"current-price-elem")]',
     'imgs': './/div/button/div[@class="image-item-wrapper"]/img',
     'name': './/h1[@class="product-title"]',
-    'priceBfr': './/span[@class="old-price-elem"]',
+    'priceBfr': './/span[@class="old-price-elem"]|.//div[@class="top-group"]/div/div[@class="current-price-elem"]',
     'priceNow': './/div[contains(@class,"current-price-elem")]',
     'ref': './/div[@class="product-reference"]',
     'sale': './/ul[@class="sub-menu-container is-active"]/li/a',

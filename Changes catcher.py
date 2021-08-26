@@ -1,14 +1,17 @@
+import ast
+import pytz
 import requests
 from time import sleep
+from random import uniform
 from datetime import datetime
-import ast
 
 import pandas as pd
 
 
 class Catcher:
     def __init__(self):
-        self.today = f'{datetime.now().day} - {datetime.now().month}'
+        self.tz = pytz.timezone('America/Bogota')
+        self.today = f'{datetime.now(self.tz).day} - {datetime.now(self.tz).month}'
         self.columns = ['Hora','Cambió','Nuevos', 'Actualizados']
         self.filename = './Catcher.xlsx'
         self.df = {}
@@ -44,8 +47,8 @@ class Catcher:
             'user-agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/92.0.4515.131 Safari/537.36',
             'referer': 'https://www.stradivarius.com/'})
     
-    def write(self, data,i=0):
-        self.today = f'{datetime.now().day+i} - {datetime.now().month}'
+    def write(self, data):
+        self.today = f'{datetime.now(self.tz).day} - {datetime.now(self.tz).month}'
         self.writer = pd.ExcelWriter(self.filename, engine='xlsxwriter')
         try:
             self.df[self.today].append(pd.Series(self.columns, index=self.columns), ignore_index=True)
@@ -77,12 +80,12 @@ class Catcher:
                         new += 1
                     if product_updated:
                         updated += 1
-                self.write([f'{datetime.now().hour}:{datetime.now().minute}', data!=new_data, new, updated])
+                self.write([f'{datetime.now(self.tz).hour}:{datetime.now(self.tz).minute}', data!=new_data, new, updated])
             except SyntaxError:
                 print('Err')
                 pass
             with open('./Changes data.txt','w') as f:
                 f.write(str(new_data))
-            sleep(3600)
+            sleep(uniform(1700, 2700))
 
 self = Catcher()
