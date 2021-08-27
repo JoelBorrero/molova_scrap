@@ -14,7 +14,7 @@ from Database import Database
 brand = 'Stradivarius'
 db = Database(brand)
 db2 = Database(brand+'API')
-bog = pytz.timezone('America/Bogota')
+tz = pytz.timezone('America/Bogota')
 xpaths={
     'categories':'.//div[@class="categories-menu "]//div[contains(@class,"menu-list-item")]/a',
     'categoriesSale':'.//ul[@class="product-categories"]/li/ul/li/a[span[contains(@style,"#f")]]',
@@ -285,12 +285,12 @@ class APICrawler:
                                         endpoints.append(endpoint)
             print(endpoints)
         image_formats = ('image/png', 'image/jpeg', 'image/jpg')
-        open('./Logs.txt','w').close()
+        open('./Database/LogsSTR.txt','w').close()
         for endpoint in endpoints:
-            logs = open('./Logs.txt','a')
+            logs = open('./Database/LogsSTR.txt','a')
             headers = session.headers
             res = session.get(endpoint[1]).json()
-            logs.write(f'{datetime.now(bog).hour}:{datetime.now(bog).minute}   -   {len(res["products"])} productos\n')
+            logs.write(f'{datetime.now(tz).hour}:{datetime.now(tz).minute}   -   {len(res["products"])} productos  -  {endpoint[0]}\n')
             logs.close()
             for product in res['products']:
                 try:
@@ -361,8 +361,8 @@ class APICrawler:
                             allImages.append(images)
                         item.allImages = allImages
                         db2.add(item, sync=True)
-                        logs = open('./Logs.txt','a')
-                        logs.write(f'   + {datetime.now(bog).hour}:{datetime.now(bog).minute}:{datetime.now(bog).second}   -   {name}\n')
+                        logs = open('./Database/LogsSTR.txt','a')
+                        logs.write(f'    + {datetime.now(tz).hour}:{datetime.now(tz).minute}:{datetime.now(tz).second}   -   {name}\n')
                         logs.close()
                 except Exception as e:
                     print(e)

@@ -1,6 +1,8 @@
 import requests
 from time import sleep
 from random import uniform
+from datetime import datetime
+import pytz
 
 from selenium import webdriver
 
@@ -57,7 +59,7 @@ class ScrapMango:
     def __init__(self):
         if not endpoints:
             self.scrap()
-        self.crawl_api()
+        APICrawler()
 
     def scrap(self):
         self.driver = webdriver.Chrome('./chromedriver')
@@ -87,15 +89,20 @@ class ScrapMango:
         print(endpoints)
         self.driver.quit()
 
-    def crawl_api(self):
+class APICrawler:
+    def __init__(self):
         open('./Database/Mango.json', 'w').close()
+        open('./Database/LogsMNG.txt','w').close()
+        tz = pytz.timezone('America/Bogota')
         for endpoint in endpoints:
+            logs = open('./Database/LogsMNG.txt','a')
+            logs.write(f'{datetime.now(tz).hour}:{datetime.now(tz).minute}   -   {endpoint[80:]}\n')
             pageNum = 1
-            print(endpoint)
             while pageNum != 0:
                 response = requests.get(endpoint+str(pageNum)).json()
                 self.category = response['titleh1']
                 garments = response['groups'][0]['garments']
+                logs.write(f'    {datetime.now(tz).hour}:{datetime.now(tz).minute}:{datetime.now(tz).second}   -   {len(garments)} products. (Page {pageNum})\n')
                 for item in garments:
                     it = garments[item]
                     allImages = []
@@ -131,13 +138,13 @@ class ScrapMango:
                             self.category,
                             False,
                             "Mujer"))
-                print('Page',pageNum,len(garments))
+                    logs.write(f'      + {datetime.now(tz).hour}:{datetime.now(tz).minute}:{datetime.now(tz).second}   -   {it["shortDescription"]}\n')
                 if len(garments)<300:
                     pageNum = 0
                 else:
                     pageNum += 1
-                # input('Continue...')
                 sleep(uniform(7,30))
+            logs.close()
         db.close()
 
 
