@@ -1,4 +1,5 @@
 import os
+import ast
 import requests
 from time import sleep
 from random import uniform
@@ -13,10 +14,10 @@ from Database import Database
 
 brand = 'Stradivarius'
 db = Database(brand)
-db2 = Database(brand+'API')
+# db = Database(brand+'API')
 tz = pytz.timezone('America/Bogota')
 xpaths={
-    'categories':'.//div[@class="categories-menu "]//div[contains(@class,"menu-list-item")]/a',
+    'categories':'.//div[@class="categories-menu "]/div[contains(@class,"items-menu")]/div/a[not(@href="javascript:void(0)")]|.//div[@class="categories-menu "]/div[contains(@class,"items-menu")]/div[./a[@href="javascript:void(0)"]]/following-sibling::div[position()=1]//a',
     'categoriesSale':'.//ul[@class="product-categories"]/li/ul/li/a[span[contains(@style,"#f")]]',
     'colorsBtn':'.//div[@class="set-colors-product parent-center-child"]//img[@src]',
     'description':'.//span[@class="c-product-info--description-text"]',
@@ -211,7 +212,7 @@ class ScrapStradivarius:
         self.driver.switch_to.window(self.driver.window_handles[0])
 
 
-def ScrapForLinks():
+def scrap_for_links():
     driver = webdriver.Chrome('./chromedriver')
     driver.set_page_load_timeout(30)
     driver.maximize_window()
@@ -235,10 +236,14 @@ def ScrapForLinks():
                 if all(e in i['name'] for e in ['https://www.stradivarius.com/itxrest/2/catalog/store/55009615/50331099/category/','product?']) and i['name'] not in endpoints:
                     endpoints.insert(0,(c,i['name']))
     driver.quit()
+    settings = ast.literal_eval(open('./Settings.txt','r').read())
+    settings[brand]['endpoints']=endpoints
+    with open('./Settings.txt','w') as s:
+        s.write(str(settings))
 
 
 class APICrawler:
-    def __init__(self):
+    def __init__(self, endpoints):
         session = requests.session()
         headers = {
             'accept': '*/*',
@@ -347,7 +352,7 @@ class APICrawler:
                                 r = requests.head(i)
                                 if r.headers["content-type"] in image_formats:
                                     image = i
-                    found = db2.contains(url, image,sync=True)
+                    found = db.contains(url, image,sync=True)
                     if found:
                         item.allImages = found['allImages']
                     else:
@@ -360,13 +365,13 @@ class APICrawler:
                                         images.append(image)
                             allImages.append(images)
                         item.allImages = allImages
-                        db2.add(item, sync=True)
+                        db.add(item, sync=True)
                         logs = open('./Database/LogsSTR.txt','a')
                         logs.write(f'    + {datetime.now(tz).hour}:{datetime.now(tz).minute}:{datetime.now(tz).second}   -   {name}\n')
                         logs.close()
                 except Exception as e:
                     print(e)
-            sleep(uniform(7,30))
+            sleep(uniform(120,300))
             session = requests.session()
             session.headers.update(headers)
 

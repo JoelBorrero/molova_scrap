@@ -419,6 +419,8 @@ def sync():
                     db = mngDb
                 item.pop('id')
                 item.pop('id_producto')
+                if not type(item['allPricesNow']) == list:
+                    item['allPricesNow'] = [item['allPricesNow']]
                 db.add(item, sync=True)
                 index += 1
                 if not percentage == int(index / totalItems * 100):

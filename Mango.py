@@ -1,4 +1,5 @@
 import requests
+import ast
 from time import sleep
 from random import uniform
 from datetime import datetime
@@ -61,45 +62,48 @@ class ScrapMango:
             self.scrap()
         APICrawler()
 
-    def scrap(self):
-        self.driver = webdriver.Chrome('./chromedriver')
-        self.driver.set_page_load_timeout(30)
-        self.driver.maximize_window()
-        self.driver.get('https://shop.mango.com/co/mujer')
-        sleep(2)
-        try:
-            self.driver.find_element_by_id('onetrust-accept-btn-handler').click()
-            self.driver.find_element_by_xpath('.//div[@class="icon closeModal icon__close desktop confirmacionPais"]').click()
-        except:
-            print('Something not dismissed')
-        endpoints = []
-        categories = []
-        for i in self.driver.find_elements_by_xpath(xpaths['categories']):
-            categories.append(i.get_attribute('href'))
-        for category in categories:
-            self.driver.get(category)
-            scriptToExecute = 'var performance = window.performance || window.mozPerformance || window.msPerformance || window.webkitPerformance || {}; var network = performance.getEntries() || {}; return network;'
-            netData = self.driver.execute_script(scriptToExecute)
-            for i in netData:
-                if '/services/productlist/products/CO/she/' in i['name']:
-                    endpoint = (i['name'])
-                    endpoint = endpoint[:endpoint.index('&pageNum=')]
-                    if not endpoint in endpoints:
-                        endpoints.append(endpoint)
-        print(endpoints)
-        self.driver.quit()
+def scrap_for_links():
+    driver = webdriver.Chrome('./chromedriver')
+    driver.set_page_load_timeout(30)
+    driver.maximize_window()
+    driver.get('https://shop.mango.com/co/mujer')
+    sleep(2)
+    try:
+        driver.find_element_by_id('onetrust-accept-btn-handler').click()
+        driver.find_element_by_xpath('.//div[@class="icon closeModal icon__close desktop confirmacionPais"]').click()
+    except:
+        print('Something not dismissed')
+    endpoints.clear()
+    categories = []
+    for i in driver.find_elements_by_xpath(xpaths['categories']):
+        categories.append(i.get_attribute('href'))
+    for category in categories:
+        driver.get(category)
+        scriptToExecute = 'var performance = window.performance || window.mozPerformance || window.msPerformance || window.webkitPerformance || {}; var network = performance.getEntries() || {}; return network;'
+        netData = driver.execute_script(scriptToExecute)
+        for i in netData:
+            if '/services/productlist/products/CO/she/' in i['name']:
+                endpoint = (i['name'])
+                endpoint = endpoint[:endpoint.index('&pageNum=')]
+                if not endpoint in endpoints:
+                    endpoints.append((category, endpoint))
+    driver.quit()
+    settings = ast.literal_eval(open('./Settings.txt','r').read())
+    settings[brand]['endpoints']=endpoints
+    with open('./Settings.txt','w') as s:
+        s.write(str(settings))
 
 class APICrawler:
-    def __init__(self):
+    def __init__(self, endpoints):
         open('./Database/Mango.json', 'w').close()
         open('./Database/LogsMNG.txt','w').close()
         tz = pytz.timezone('America/Bogota')
         for endpoint in endpoints:
             logs = open('./Database/LogsMNG.txt','a')
-            logs.write(f'{datetime.now(tz).hour}:{datetime.now(tz).minute}   -   {endpoint[80:]}\n')
+            logs.write(f'{datetime.now(tz).hour}:{datetime.now(tz).minute}   -   {endpoint[0]}\n')
             pageNum = 1
             while pageNum != 0:
-                response = requests.get(endpoint+str(pageNum)).json()
+                response = requests.get(endpoint[1]+str(pageNum)).json()
                 self.category = response['titleh1']
                 garments = response['groups'][0]['garments']
                 logs.write(f'    {datetime.now(tz).hour}:{datetime.now(tz).minute}:{datetime.now(tz).second}   -   {len(garments)} products. (Page {pageNum})\n')
@@ -139,11 +143,11 @@ class APICrawler:
                             False,
                             "Mujer"))
                     logs.write(f'      + {datetime.now(tz).hour}:{datetime.now(tz).minute}:{datetime.now(tz).second}   -   {it["shortDescription"]}\n')
-                if len(garments)<300:
+                if len(garments) < 300 or pageNum > 4:
                     pageNum = 0
                 else:
                     pageNum += 1
-                sleep(uniform(7,30))
+                sleep(uniform(30,120))
             logs.close()
         db.close()
 
