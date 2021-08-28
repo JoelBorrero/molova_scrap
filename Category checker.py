@@ -1,3 +1,4 @@
+import ast
 from tinydb import Query
 from Item import Item
 from Database import Database
@@ -18,7 +19,7 @@ def get_item(id):
 def verify(id):
     item = get_item(id)
     print('Name:', item.name, '\nCategory:', item.category, '\nSubcat:', item.subcategory)
-    get_categories(item)
+    item.get_categories()
     print('\nNow\nName:', item.name, '\nCategory:', item.category, '\nSubcat:', item.subcategory)
     db.update(item.__dict__, Query().url == item.url)
 

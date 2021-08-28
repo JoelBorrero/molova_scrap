@@ -88,9 +88,9 @@ def scrap_for_links():
                 if not endpoint in endpoints:
                     endpoints.append((category, endpoint))
     driver.quit()
-    settings = ast.literal_eval(open('./Settings.txt','r').read())
+    settings = ast.literal_eval(open('./settings','r').read())
     settings[brand]['endpoints']=endpoints
-    with open('./Settings.txt','w') as s:
+    with open('./settings','w') as s:
         s.write(str(settings))
 
 class APICrawler:

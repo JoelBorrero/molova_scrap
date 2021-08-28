@@ -1,11 +1,17 @@
-import os, json, scrapy, requests
+import os
+import json
+# import scrapy
+import requests
 from time import sleep
-from random import uniform
+# from random import uniform
+
 from selenium import webdriver
-from scrapy.crawler import CrawlerProcess
+# from scrapy.crawler import CrawlerProcess
 import Bershka, Mango, MercedesCampuzano, PullAndBear, Stradivarius, Zara
+
 from Item import Item, toInt
 from Database import Database
+
 
 bDb = Database('Bershka')
 mngDb = Database('Mango')
@@ -80,9 +86,9 @@ def scrap(brands = ['Stradivarius','Mango', 'PullAndBear', 'Bershka', 'MercedesC
             exec('{0}.Scrap{0}()'.format(brand))
         except Exception as e:
            print('Error scrapping', brand, e)
-       
-def crawl(brands=['mercedescampuzano.com', 'zara.com']):
 
+"""
+    def crawl(brands=['mercedescampuzano.com', 'zara.com']):
     class ItemsSpider(scrapy.Spider):
         name = 'Items'
         start_urls = [] #urlsDb.get_crawl_urls(brands)
@@ -290,7 +296,7 @@ def crawl(brands=['mercedescampuzano.com', 'zara.com']):
            }
     )
     process.crawl(ItemsSpider)
-    process.start()
+    process.start()"""
 
 def postItem(data):
     '''Create or update the element with the same url'''
@@ -452,11 +458,12 @@ def clear_remote_db():
             requests.post('https://2ksanrpxtd.execute-api.us-east-1.amazonaws.com/dev/molova/delete', f'{{"data": {to_delete}}}'.replace("'",'"')).json()
 
 # Main code
-print('Comma separated(1,2,3)\n1. Merge\n2. Scrap\n3. Check for broken links\n4. Post\n5. Sync\n6. Clear remote db')
-to_do = input('>')
-tasks = ['merge()','scrap()', 'check_broken_links()', 'post()', 'sync()','clear_remote_db()']
-for task in to_do.split(','):
-    try:
-        exec(tasks[int(task)-1])
-    except Exception as e:
-        print(e)
+def main():
+    print('Comma separated(1,2,3)\n1. Merge\n2. Scrap\n3. Check for broken links\n4. Post\n5. Sync\n6. Clear remote db')
+    to_do = input('>')
+    tasks = ['merge()','scrap()', 'check_broken_links()', 'post()', 'sync()','clear_remote_db()']
+    for task in to_do.split(','):
+        try:
+            exec(tasks[int(task)-1])
+        except Exception as e:
+            print(e)

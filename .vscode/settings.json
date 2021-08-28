@@ -1,5 +1,4 @@
 {
     "python.formatting.provider": "yapf",
-    "editor.formatOnSave": true,
     "git.ignoreLimitWarning": true
 }

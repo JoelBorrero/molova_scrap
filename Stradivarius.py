@@ -236,9 +236,9 @@ def scrap_for_links():
                 if all(e in i['name'] for e in ['https://www.stradivarius.com/itxrest/2/catalog/store/55009615/50331099/category/','product?']) and i['name'] not in endpoints:
                     endpoints.insert(0,(c,i['name']))
     driver.quit()
-    settings = ast.literal_eval(open('./Settings.txt','r').read())
+    settings = ast.literal_eval(open('./.settings','r').read())
     settings[brand]['endpoints']=endpoints
-    with open('./Settings.txt','w') as s:
+    with open('./.settings','w') as s:
         s.write(str(settings))
 
 

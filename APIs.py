@@ -12,10 +12,10 @@ import Stradivarius
 from Main import post
 
 try:
-    settings = ast.literal_eval(open('./Settings.txt','r').read())
+    settings = ast.literal_eval(open('./.settings','r').read())
 except FileNotFoundError:
     settings = {'Mango': {'endpoints': [],'endpoint': ''}, 'Stradivarius': {'endpoints': [], 'endpoint': ''}}
-    with open('./Settings.txt','w') as s:
+    with open('./.settings','w') as s:
         s.write(str(settings))
 brands = [
     {'name': 'Mango', 'endpoint': 'https://shop.mango.com/services/productlist/products/CO/she/sections_she_colombia_rebajas_SpecialSale_HighViz.rebajas_she_mobile/?saleSeasons=4,5,3,8&pageNum=1&rowsPerPage=20&columnsPerRow=4', 'updates': True, "endpoints": settings['Mango']['endpoints']},
@@ -68,7 +68,7 @@ class Catcher:
         self.writer.save()
 
     def check(self):
-        count = 3
+        count = 5
         for brand in brands:
             open(f'./Database/changes_{brand["name"]}.txt','w').close()
         while True:
@@ -102,7 +102,7 @@ class Catcher:
                 with open(f'./Database/changes_{brand["name"]}.txt','w') as f:
                     f.write(str(new_data))
             count += 1
-            if count == 4:
+            if count == 6:
                 for brand in brands:
                     if brand['updates']:
                         exec(f'{brand["name"]}.APICrawler(brand["endpoints"])')

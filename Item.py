@@ -1,11 +1,13 @@
-import json, os
+import os
+import ast
+import json
 
 class Item:
     def __init__(self,brand,name,ref,description,priceBefore,allPricesNow,discount,allImages,url,allSizes,colors,category,originalCategory,subcategory,originalSubcategory,sale,gender,crawling=False):
         self.brand = brand
         if not name:
             name = ' '
-        self.name = name.replace('"','').replace("'",'')
+        self.name = name.replace('"','').replace("'",'').replace('‘','').replace('’','')
         self.ref = ref
         if not description:
             description = ' '
@@ -51,10 +53,7 @@ class Item:
         self.sale = any(p < toInt(priceBefore) for p in self.allPricesNow)
         self.gender = gender
         self.get_categories()
-        # if crawling:
-            # self.addToCrawl()
-        # self.addToFile(crawling=crawling)
-
+        
     def addToFile(self,crawling=False):
         if self.sale:
             sale = '(SALE)'
@@ -155,123 +154,128 @@ class Item:
             w = str(data).replace("'",'"').replace('\\n','&BR%LN%').replace('\\','').replace('""','').replace('": False,','": false,').replace('": True,','": true,')
             f.write(w.replace('&BR%LN%','\\n'))
 
-    def get_categories(self):
-        brands_categories={
-            'Bershka':[
-                ['camisas','camisetas','jerséis','blusas','tops'],
-                ['pantalones','jeans','bermudas'],
-                ['vestidos','petos'],
-                ['faldas','shorts','short'],
-                ['cazadoras','abrigos','chalecos','chaleco','sobrecamisas','chaquetas','blazers','cardigans','cárdigans', 'blasier'],
-                ['sudaderas','joggers','chándal','sport','legging','leggings'],
-                ['zapatos','baletas','botas','tacones','sandalias','tennis','tenis','mocasines','oxford','zuecos','spadrillas','shoes','zapatillas','piel'],
-                ['bolsos','bandoleras','carteras','mochilas','riñoneras'],
-                ['accesorios','gafas','bisutería','cinturones','correas','gorros','fundas','bufandas','medias','decoración']],
-            'Mango':[
-                ['camisas','camisetas','jerséis','blusas','tops'],
-                ['pantalones','jeans','bermudas'],
-                ['vestidos','petos'],
-                ['faldas','shorts','short'],
-                ['cazadoras','abrigos','chalecos','chaleco','americana','sobrecamisas','chaquetas','blazers','cardigans','cárdigans', 'blasier'],
-                ['sudaderas','joggers','chándal','sport','legging','leggings'],
-                ['zapatos','baletas','botas','tacones','sandalias','tennis','tenis','mocasines','oxford','zuecos','spadrillas','shoes','zapatillas','piel'],
-                ['bolsos','bandoleras','carteras','mochilas','riñoneras'],
-                ['accesorios','gafas','bisutería','cinturones','correas','gorros','fundas','bufandas','medias','decoración']],
-            'Mercedes Campuzano':[
-                ['camisas','camisetas','jerséis','blusas','tops'],
-                ['pantalones','jeans','bermudas'],
-                ['vestidos','petos'],
-                ['faldas','shorts','short'],
-                ['cazadoras','abrigos','chalecos','chaleco','sobrecamisas','chaquetas','blazers','cardigans','cárdigans', 'blasier'],
-                ['sudaderas','joggers','chándal','sport','legging','leggings'],
-                ['zapatos','baletas','botas','tacones','sandalias','tennis','tenis','mocasines','oxford','zuecos','spadrillas','shoes','zapatillas','piel'],
-                ['bolsos','bandoleras','carteras','mochilas','riñoneras'],
-                ['accesorios','gafas','bisutería','cinturones','correas','gorros','fundas','bufandas','medias','decoración']],
-            'Pull & Bear':[
-                ['camisas','camisetas','jerséis','blusas','tops'],
-                ['pantalones','jeans','bermudas'],
-                ['vestidos','petos'],
-                ['faldas','shorts','short'],
-                ['cazadoras','abrigos','chalecos','chaleco','sobrecamisas','chaquetas','blazers','cardigans','cárdigans', 'blasier'],
-                ['sudaderas','joggers','chándal','sport','legging','leggings'],
-                ['zapatos','baletas','botas','tacones','sandalias','tennis','tenis','mocasines','oxford','zuecos','spadrillas','shoes','zapatillas','piel'],
-                ['bolsos','bandoleras','carteras','mochilas','riñoneras'],
-                ['accesorios','gafas','bisutería','cinturones','correas','gorros','fundas','bufandas','medias','decoración']],
-            'Stradivarius':[
-                ['camisas','camisetas','jerséis','blusas','tops'],
-                ['pantalones','jeans','bermudas'],
-                ['vestidos','petos'],
-                ['faldas','shorts','short'],
-                ['jackets','gilet', 'waistcoat','cazadoras','abrigos','chalecos','chaleco','sobrecamisas','chaquetas','blazers','cardigans','cárdigans', 'blasier'],
-                ['sudaderas','joggers','chándal','sport','legging','leggings'],
-                ['zapatos','baletas','botas','tacones','sandalias','tennis','tenis','mocasines','oxford','zuecos','spadrillas','shoes','zapatillas','piel'],
-                ['bags','bolsos','bandoleras','carteras','mochilas','riñoneras'],
-                ['accesorios','gafas','bisutería','cinturones','correas','gorros','fundas','bufandas','medias','decoración']],
-            'Zara':[
-                ['camisas','camisetas','jerséis','blusas','tops'],
-                ['pantalones','jeans','bermudas'],
-                ['vestidos','petos'],
-                ['faldas','shorts','short'],
-                ['cazadoras','abrigos','chalecos','chaleco','sobrecamisas','chaquetas','blazers','cardigans','cárdigans', 'blasier'],
-                ['sudaderas','joggers','chándal','sport','legging','leggings'],
-                ['zapatos','baletas','botas','tacones','sandalias','tennis','tenis','mocasines','oxford','zuecos','spadrillas','shoes','zapatillas','piel'],
-                ['bolsos','bandoleras','carteras','mochilas','riñoneras'],
-                ['accesorios','gafas','bisutería','cinturones','correas','gorros','fundas','bufandas','medias','decoración']]
+    def get_categories(self, data=''):
+        try:
+            data = ast.literal_eval(open('./.settings','r').read())
+            brands_categories = data['brands_categories']
+            brands_subcategories = data['brands_subcategories']
+        except:
+            brands_categories={
+                'Bershka':[
+                    ['camisas','camisetas','jerséis','blusas','tops'],
+                    ['pantalones','jeans','bermudas'],
+                    ['vestidos','petos'],
+                    ['faldas','shorts','short'],
+                    ['cazadoras','abrigos','chalecos','chaleco','sobrecamisas','chaquetas','blazers','cardigans','cárdigans', 'blasier'],
+                    ['sudaderas','joggers','chándal','sport','legging','leggings'],
+                    ['zapatos','baletas','botas','tacones','sandalias','tennis','tenis','mocasines','oxford','zuecos','spadrillas','shoes','zapatillas','piel'],
+                    ['bolsos','bandoleras','carteras','mochilas','riñoneras'],
+                    ['accesorios','gafas','bisutería','cinturones','correas','gorros','fundas','bufandas','medias','decoración']],
+                'Mango':[
+                    ['camisas','camisetas','jerséis','blusas','tops'],
+                    ['pantalones','jeans','bermudas'],
+                    ['vestidos','petos'],
+                    ['faldas','shorts','short'],
+                    ['cazadoras','abrigos','chalecos','chaleco','americana','sobrecamisas','chaquetas','blazers','cardigans','cárdigans', 'blasier'],
+                    ['sudaderas','joggers','chándal','sport','legging','leggings'],
+                    ['zapatos','baletas','botas','tacones','sandalias','tennis','tenis','mocasines','oxford','zuecos','spadrillas','shoes','zapatillas','piel'],
+                    ['bolsos','bandoleras','carteras','mochilas','riñoneras'],
+                    ['accesorios','gafas','bisutería','cinturones','correas','gorros','fundas','bufandas','medias','decoración']],
+                'Mercedes Campuzano':[
+                    ['camisas','camisetas','jerséis','blusas','tops'],
+                    ['pantalones','jeans','bermudas'],
+                    ['vestidos','petos'],
+                    ['faldas','shorts','short'],
+                    ['cazadoras','abrigos','chalecos','chaleco','sobrecamisas','chaquetas','blazers','cardigans','cárdigans', 'blasier'],
+                    ['sudaderas','joggers','chándal','sport','legging','leggings'],
+                    ['zapatos','baletas','botas','tacones','sandalias','tennis','tenis','mocasines','oxford','zuecos','spadrillas','shoes','zapatillas','piel'],
+                    ['bolsos','bandoleras','carteras','mochilas','riñoneras'],
+                    ['accesorios','gafas','bisutería','cinturones','correas','gorros','fundas','bufandas','medias','decoración']],
+                'Pull & Bear':[
+                    ['camisas','camisetas','jerséis','blusas','tops'],
+                    ['pantalones','jeans','bermudas'],
+                    ['vestidos','petos'],
+                    ['faldas','shorts','short'],
+                    ['cazadoras','abrigos','chalecos','chaleco','sobrecamisas','chaquetas','blazers','cardigans','cárdigans', 'blasier'],
+                    ['sudaderas','joggers','chándal','sport','legging','leggings'],
+                    ['zapatos','baletas','botas','tacones','sandalias','tennis','tenis','mocasines','oxford','zuecos','spadrillas','shoes','zapatillas','piel'],
+                    ['bolsos','bandoleras','carteras','mochilas','riñoneras'],
+                    ['accesorios','gafas','bisutería','cinturones','correas','gorros','fundas','bufandas','medias','decoración']],
+                'Stradivarius':[
+                    ['camisas','camisetas','jerséis','blusas','tops'],
+                    ['pantalones','jeans','bermudas'],
+                    ['vestidos','petos'],
+                    ['faldas','shorts','short'],
+                    ['jackets','gilet', 'waistcoat','cazadoras','abrigos','chalecos','chaleco','sobrecamisas','chaquetas','blazers','cardigans','cárdigans', 'blasier'],
+                    ['sudaderas','joggers','chándal','sport','legging','leggings'],
+                    ['zapatos','baletas','botas','tacones','sandalias','tennis','tenis','mocasines','oxford','zuecos','spadrillas','shoes','zapatillas','piel'],
+                    ['bags','bolsos','bandoleras','carteras','mochilas','riñoneras'],
+                    ['belts','fashion jewellery','accesorios','gafas','bisutería','cinturones','correas','gorros','fundas','bufandas','medias','decoración']],
+                'Zara':[
+                    ['camisas','camisetas','jerséis','blusas','tops'],
+                    ['pantalones','jeans','bermudas'],
+                    ['vestidos','petos'],
+                    ['faldas','shorts','short'],
+                    ['cazadoras','abrigos','chalecos','chaleco','sobrecamisas','chaquetas','blazers','cardigans','cárdigans', 'blasier'],
+                    ['sudaderas','joggers','chándal','sport','legging','leggings'],
+                    ['zapatos','baletas','botas','tacones','sandalias','tennis','tenis','mocasines','oxford','zuecos','spadrillas','shoes','zapatillas','piel'],
+                    ['bolsos','bandoleras','carteras','mochilas','riñoneras'],
+                    ['accesorios','gafas','bisutería','cinturones','correas','gorros','fundas','bufandas','medias','decoración']]
+                }
+            brands_subcategories={
+                'Bershka':              [[['camisa','shirt','blusa','blouse','bluson','blusón'],['camiseta','shirt','t-shirt','tshirt','basic','básica','basica','estampado','estampada','license','licencia','manga','jacket','jersey','jersei','jerséi','polo','suéter','sueter','sweater'],['top','bandeau','bralette'],['body', 'bodies']],[['pantalon','pantalón','bermuda','bermudas','capris','trousers'],['jeans','jean','jeggings']],[['vestido','peto','pichi','chaleco','túnica'],['enterizo','kimono','cuerpo','mono']],[['falda','minifalda','skirt','skort'],['shorts','short','bermuda']],[['abrigo','chaqueta','gabardina','chaleco','parka','buzo','capa','cárdigan','saco','cazadora','saco','chubasquero','parka','manguitos','plumíferos','plumiferos','cardigan','rompevientos','jersey','sudadera'],['sobrecamisa','buzo','blazer']],[['sudadera','jogger','chándal'],['leggings', 'leggins','bicicletero', 'capri', 'cycling', 'ciclista'],['sport', 'sporty']],[['tenis','tennis','deportivas','deportivos'],['oxford','clásico','clasico','zuecos'],['sandalias','trespuntadas'],['baletas','spadrillas','bamba'],['tacones','tacón','zapatos','zapatillas'],['botas','botínes']],[['bolso','bandolera','cartera','mochila','riñonera','shopper','maletin','maletín','morral']],[['correa','gorro','bufanda','medias','cadenas','collares','aretes','anillos','tobilleras']],[[]]],
+                'Mango': [
+                    [   ['camisa','shirt','blusa','blouse','bluson','blusón'],
+                        ['camiseta','shirt','t-shirt','tshirt','basic','básica','basica','estampado','estampada','license','licencia','manga','jacket','jersey','jersei','jerséi','polo','suéter','sueter','sweater'],
+                        ['top','bandeau','bralette'],
+                        ['body', 'bodies']],
+                    [   ['pantalon','pantalón','bermuda','bermudas','capris','trousers'],
+                        ['jeans','jean','jeggings']],
+                    [   ['vestido','peto','pichi','chaleco','túnica'],
+                        ['enterizo','kimono','cuerpo','mono']],
+                    [   ['falda','minifalda','skirt','skort'],
+                        ['shorts','short','bermuda']],
+                    [   ['abrigo','chaqueta','americana','gabardina','chaleco','parka','buzo','capa','cárdigan','cazadora','saco','chubasquero','parka','manguitos','plumíferos','plumiferos','cardigan','rompevientos','jersey','sudadera'],
+                        ['sobrecamisa','buzo','blazer']],
+                    [   ['sudadera','jogger','chándal'],
+                        ['leggings', 'leggins','bicicletero', 'capri', 'cycling', 'ciclista'],
+                        ['sport', 'sporty']],
+                    [   ['tenis','tennis','deportivas','deportivos'],
+                        ['oxford','clásico','clasico','zuecos'],
+                        ['sandalias','trespuntadas'],
+                        ['baletas','spadrillas','bamba'],
+                        ['tacones','tacón','zapatos','zapatillas'],
+                        ['botas','botínes']],
+                    [   ['bolso','bandolera','cartera','mochila','riñonera','shopper','maletin','maletín','morral']],
+                    [   ['correa','gorro','bufanda','medias','cadenas','collares','aretes','anillos','tobilleras']],[[]]],
+                'Mercedes Campuzano':   [[['camisa','shirt','blusa','blouse','bluson','blusón'],['camiseta','shirt','t-shirt','tshirt','basic','básica','basica','estampado','estampada','license','licencia','manga','jacket','jersey','jersei','jerséi','polo','suéter','sueter','sweater'],['top','bandeau','bralette'],['body', 'bodies']],[['pantalon','pantalón','bermuda','bermudas','capris','trousers'],['jeans','jean','jeggings']],[['vestido','peto','pichi','chaleco','túnica'],['enterizo','kimono','cuerpo','mono']],[['falda','minifalda','skirt','skort'],['shorts','short','bermuda']],[['abrigo','chaqueta','gabardina','chaleco','parka','buzo','capa','cárdigan','saco','cazadora','saco','chubasquero','parka','manguitos','plumíferos','plumiferos','cardigan','rompevientos','jersey','sudadera'],['sobrecamisa','buzo','blazer']],[['sudadera','jogger','chándal'],['leggings', 'leggins','bicicletero', 'capri', 'cycling', 'ciclista'],['sport', 'sporty']],[['tenis','tennis','deportivas','deportivos'],['oxford','clásico','clasico','zuecos'],['sandalias','trespuntadas'],['baletas','spadrillas','bamba'],['tacones','tacón','zapatos','zapatillas'],['botas','botínes']],[['bolso','bandolera','cartera','mochila','riñonera','shopper','maletin','maletín','morral']],[['correa','gorro','bufanda','medias','cadenas','collares','aretes','anillos','tobilleras']],[[]]],
+                'Pull & Bear':          [[['camisa','shirt','blusa','blouse','bluson','blusón'],['camiseta','shirt','t-shirt','tshirt','basic','básica','basica','estampado','estampada','license','licencia','manga','jacket','jersey','jersei','jerséi','polo','suéter','sueter','sweater'],['top','bandeau','bralette'],['body', 'bodies']],[['pantalon','pantalón','bermuda','bermudas','capris','trousers'],['jeans','jean','jeggings']],[['vestido','peto','pichi','chaleco','túnica'],['enterizo','kimono','cuerpo','mono']],[['falda','minifalda','skirt','skort'],['shorts','short','bermuda']],[['abrigo','chaqueta','gabardina','chaleco','parka','buzo','capa','cárdigan','saco','cazadora','saco','chubasquero','parka','manguitos','plumíferos','plumiferos','cardigan','rompevientos','jersey','sudadera'],['sobrecamisa','buzo','blazer']],[['sudadera','jogger','chándal'],['leggings', 'leggins','bicicletero', 'capri', 'cycling', 'ciclista'],['sport', 'sporty']],[['tenis','tennis','deportivas','deportivos','bamba'],['oxford','clásico','clasico','zuecos'],['sandalias','trespuntadas'],['baletas','spadrillas'],['tacones','tacón','zapatos','zapatillas'],['botas','botínes']],[['bolso','bandolera','cartera','mochila','riñonera','shopper','maletin','maletín','morral']],[['correa','gorro','bufanda','medias','cadenas','collares','aretes','anillos','tobilleras']],[[]]],
+                'Stradivarius':         [
+                    [   ['camisa','shirt','blusa','blouse','bluson','blusón'],
+                        ['camiseta','shirt','t-shirt','tshirt','basic','básica','basica','estampado','estampada','license','licencia','manga','jacket','jersey','jersei','jerséi','polo','suéter','sueter','sweater'],
+                        ['top','bandeau','bralette'],
+                        ['body', 'bodies','bodysuit']],
+                    [   ['pantalon','pantalón','bermuda','bermudas','capris','trousers'],
+                        ['jeans','jean','jeggings']],
+                    [   ['vestido','peto','pichi','chaleco','túnica'],
+                        ['enterizo','kimono','cuerpo','mono']],
+                    [   ['falda','minifalda','skirt','skort'],
+                        ['shorts','short','bermuda']],
+                    [   ['gilet','waistcoat','jacket','abrigo','chaqueta','gabardina','chaleco','parka','buzo','capa','cárdigan','saco','cazadora','saco','chubasquero','parka','manguitos','plumíferos','plumiferos','cardigan','rompevientos','jersey','sudadera'],
+                        ['sobrecamisa','buzo','blazer']],
+                    [   ['sudadera','jogger','chándal'],
+                        ['leggings', 'leggins','bicicletero', 'capri', 'cycling', 'ciclista'],
+                        ['sport', 'sporty']],
+                    [   ['tenis','tennis','deportivas','deportivos'],
+                        ['oxford','clásico','clasico','zuecos'],
+                        ['sandalias','trespuntadas'],
+                        ['baletas','spadrillas','bamba'],
+                        ['tacones','tacón','zapatos','zapatillas'],
+                        ['botas','botínes','botines']],
+                    [   ['bag','bolso','bandolera','cartera','mochila','riñonera','shopper','maletin','maletín','morral']],
+                    [   ['correa','gorro','bufanda','medias','cadenas','collares','aretes','anillos','tobilleras']],[[]]],
+                'Zara':                 [[['camisa','shirt','blusa','blouse','bluson','blusón'],['camiseta','shirt','t-shirt','tshirt','basic','básica','basica','estampado','estampada','license','licencia','manga','jacket','jersey','jersei','jerséi','polo','suéter','sueter','sweater'],['top','bandeau','bralette'],['body', 'bodies']],[['pantalon','pantalón','bermuda','bermudas','capris','trousers'],['jeans','jean','jeggings']],[['vestido','peto','pichi','chaleco','túnica'],['enterizo','kimono','cuerpo','mono']],[['falda','minifalda','skirt','skort'],['shorts','short','bermuda']],[['abrigo','chaqueta','gabardina','chaleco','parka','buzo','capa','cárdigan','saco','cazadora','saco','chubasquero','parka','manguitos','plumíferos','plumiferos','cardigan','rompevientos','jersey','sudadera'],['sobrecamisa','buzo','blazer']],[['sudadera','jogger','chándal'],['leggings', 'leggins','bicicletero', 'capri', 'cycling', 'ciclista'],['sport', 'sporty']],[['tenis','tennis','deportivas','deportivos'],['oxford','clásico','clasico','zuecos'],['sandalias','trespuntadas'],['baletas','spadrillas','bamba'],['tacones','tacón','zapatos','zapatillas'],['botas','botínes']],[['bolso','bandolera','cartera','mochila','riñonera','shopper','maletin','maletín','morral']],[['correa','gorro','bufanda','medias','cadenas','collares','aretes','anillos','tobilleras']],[[]]],
             }
-        brands_subcategories={
-            'Bershka':              [[['camisa','shirt','blusa','blouse','bluson','blusón'],['camiseta','shirt','t-shirt','tshirt','basic','básica','basica','estampado','estampada','license','licencia','manga','jacket','jersey','jersei','jerséi','polo','suéter','sueter','sweater'],['top','bandeau','bralette'],['body', 'bodies']],[['pantalon','pantalón','bermuda','bermudas','capris','trousers'],['jeans','jean','jeggings']],[['vestido','peto','pichi','chaleco','túnica'],['enterizo','kimono','cuerpo','mono']],[['falda','minifalda','skirt','skort'],['shorts','short','bermuda']],[['abrigo','chaqueta','gabardina','chaleco','parka','buzo','capa','cárdigan','saco','cazadora','saco','chubasquero','parka','manguitos','plumíferos','plumiferos','cardigan','rompevientos','jersey','sudadera'],['sobrecamisa','buzo','blazer']],[['sudadera','jogger','chándal'],['leggings', 'leggins','bicicletero', 'capri', 'cycling', 'ciclista'],['sport', 'sporty']],[['tenis','tennis','deportivas','deportivos'],['oxford','clásico','clasico','zuecos'],['sandalias','trespuntadas'],['baletas','spadrillas','bamba'],['tacones','tacón','zapatos','zapatillas'],['botas','botínes']],[['bolso','bandolera','cartera','mochila','riñonera','shopper','maletin','maletín','morral']],[['correa','gorro','bufanda','medias','cadenas','collares','aretes','anillos','tobilleras']],[[]]],
-            'Mango': [
-                [   ['camisa','shirt','blusa','blouse','bluson','blusón'],
-                    ['camiseta','shirt','t-shirt','tshirt','basic','básica','basica','estampado','estampada','license','licencia','manga','jacket','jersey','jersei','jerséi','polo','suéter','sueter','sweater'],
-                    ['top','bandeau','bralette'],
-                    ['body', 'bodies']],
-                [   ['pantalon','pantalón','bermuda','bermudas','capris','trousers'],
-                    ['jeans','jean','jeggings']],
-                [   ['vestido','peto','pichi','chaleco','túnica'],
-                    ['enterizo','kimono','cuerpo','mono']],
-                [   ['falda','minifalda','skirt','skort'],
-                    ['shorts','short','bermuda']],
-                [   ['abrigo','chaqueta','americana','gabardina','chaleco','parka','buzo','capa','cárdigan','cazadora','saco','chubasquero','parka','manguitos','plumíferos','plumiferos','cardigan','rompevientos','jersey','sudadera'],
-                    ['sobrecamisa','buzo','blazer']],
-                [   ['sudadera','jogger','chándal'],
-                    ['leggings', 'leggins','bicicletero', 'capri', 'cycling', 'ciclista'],
-                    ['sport', 'sporty']],
-                [   ['tenis','tennis','deportivas','deportivos'],
-                    ['oxford','clásico','clasico','zuecos'],
-                    ['sandalias','trespuntadas'],
-                    ['baletas','spadrillas','bamba'],
-                    ['tacones','tacón','zapatos','zapatillas'],
-                    ['botas','botínes']],
-                [   ['bolso','bandolera','cartera','mochila','riñonera','shopper','maletin','maletín','morral']],
-                [   ['correa','gorro','bufanda','medias','cadenas','collares','aretes','anillos','tobilleras']],[[]]],
-            'Mercedes Campuzano':   [[['camisa','shirt','blusa','blouse','bluson','blusón'],['camiseta','shirt','t-shirt','tshirt','basic','básica','basica','estampado','estampada','license','licencia','manga','jacket','jersey','jersei','jerséi','polo','suéter','sueter','sweater'],['top','bandeau','bralette'],['body', 'bodies']],[['pantalon','pantalón','bermuda','bermudas','capris','trousers'],['jeans','jean','jeggings']],[['vestido','peto','pichi','chaleco','túnica'],['enterizo','kimono','cuerpo','mono']],[['falda','minifalda','skirt','skort'],['shorts','short','bermuda']],[['abrigo','chaqueta','gabardina','chaleco','parka','buzo','capa','cárdigan','saco','cazadora','saco','chubasquero','parka','manguitos','plumíferos','plumiferos','cardigan','rompevientos','jersey','sudadera'],['sobrecamisa','buzo','blazer']],[['sudadera','jogger','chándal'],['leggings', 'leggins','bicicletero', 'capri', 'cycling', 'ciclista'],['sport', 'sporty']],[['tenis','tennis','deportivas','deportivos'],['oxford','clásico','clasico','zuecos'],['sandalias','trespuntadas'],['baletas','spadrillas','bamba'],['tacones','tacón','zapatos','zapatillas'],['botas','botínes']],[['bolso','bandolera','cartera','mochila','riñonera','shopper','maletin','maletín','morral']],[['correa','gorro','bufanda','medias','cadenas','collares','aretes','anillos','tobilleras']],[[]]],
-            'Pull & Bear':          [[['camisa','shirt','blusa','blouse','bluson','blusón'],['camiseta','shirt','t-shirt','tshirt','basic','básica','basica','estampado','estampada','license','licencia','manga','jacket','jersey','jersei','jerséi','polo','suéter','sueter','sweater'],['top','bandeau','bralette'],['body', 'bodies']],[['pantalon','pantalón','bermuda','bermudas','capris','trousers'],['jeans','jean','jeggings']],[['vestido','peto','pichi','chaleco','túnica'],['enterizo','kimono','cuerpo','mono']],[['falda','minifalda','skirt','skort'],['shorts','short','bermuda']],[['abrigo','chaqueta','gabardina','chaleco','parka','buzo','capa','cárdigan','saco','cazadora','saco','chubasquero','parka','manguitos','plumíferos','plumiferos','cardigan','rompevientos','jersey','sudadera'],['sobrecamisa','buzo','blazer']],[['sudadera','jogger','chándal'],['leggings', 'leggins','bicicletero', 'capri', 'cycling', 'ciclista'],['sport', 'sporty']],[['tenis','tennis','deportivas','deportivos','bamba'],['oxford','clásico','clasico','zuecos'],['sandalias','trespuntadas'],['baletas','spadrillas'],['tacones','tacón','zapatos','zapatillas'],['botas','botínes']],[['bolso','bandolera','cartera','mochila','riñonera','shopper','maletin','maletín','morral']],[['correa','gorro','bufanda','medias','cadenas','collares','aretes','anillos','tobilleras']],[[]]],
-            'Stradivarius':         [
-                [   ['camisa','shirt','blusa','blouse','bluson','blusón'],
-                    ['camiseta','shirt','t-shirt','tshirt','basic','básica','basica','estampado','estampada','license','licencia','manga','jacket','jersey','jersei','jerséi','polo','suéter','sueter','sweater'],
-                    ['top','bandeau','bralette'],
-                    ['body', 'bodies','bodysuit']],
-                [   ['pantalon','pantalón','bermuda','bermudas','capris','trousers'],
-                    ['jeans','jean','jeggings']],
-                [   ['vestido','peto','pichi','chaleco','túnica'],
-                    ['enterizo','kimono','cuerpo','mono']],
-                [   ['falda','minifalda','skirt','skort'],
-                    ['shorts','short','bermuda']],
-                [   ['gilet','waistcoat','jacket','abrigo','chaqueta','gabardina','chaleco','parka','buzo','capa','cárdigan','saco','cazadora','saco','chubasquero','parka','manguitos','plumíferos','plumiferos','cardigan','rompevientos','jersey','sudadera'],
-                    ['sobrecamisa','buzo','blazer']],
-                [   ['sudadera','jogger','chándal'],
-                    ['leggings', 'leggins','bicicletero', 'capri', 'cycling', 'ciclista'],
-                    ['sport', 'sporty']],
-                [   ['tenis','tennis','deportivas','deportivos'],
-                    ['oxford','clásico','clasico','zuecos'],
-                    ['sandalias','trespuntadas'],
-                    ['baletas','spadrillas','bamba'],
-                    ['tacones','tacón','zapatos','zapatillas'],
-                    ['botas','botínes','botines']],
-                [   ['bag','bolso','bandolera','cartera','mochila','riñonera','shopper','maletin','maletín','morral']],
-                [   ['correa','gorro','bufanda','medias','cadenas','collares','aretes','anillos','tobilleras']],[[]]],
-            'Zara':                 [[['camisa','shirt','blusa','blouse','bluson','blusón'],['camiseta','shirt','t-shirt','tshirt','basic','básica','basica','estampado','estampada','license','licencia','manga','jacket','jersey','jersei','jerséi','polo','suéter','sueter','sweater'],['top','bandeau','bralette'],['body', 'bodies']],[['pantalon','pantalón','bermuda','bermudas','capris','trousers'],['jeans','jean','jeggings']],[['vestido','peto','pichi','chaleco','túnica'],['enterizo','kimono','cuerpo','mono']],[['falda','minifalda','skirt','skort'],['shorts','short','bermuda']],[['abrigo','chaqueta','gabardina','chaleco','parka','buzo','capa','cárdigan','saco','cazadora','saco','chubasquero','parka','manguitos','plumíferos','plumiferos','cardigan','rompevientos','jersey','sudadera'],['sobrecamisa','buzo','blazer']],[['sudadera','jogger','chándal'],['leggings', 'leggins','bicicletero', 'capri', 'cycling', 'ciclista'],['sport', 'sporty']],[['tenis','tennis','deportivas','deportivos'],['oxford','clásico','clasico','zuecos'],['sandalias','trespuntadas'],['baletas','spadrillas','bamba'],['tacones','tacón','zapatos','zapatillas'],['botas','botínes']],[['bolso','bandolera','cartera','mochila','riñonera','shopper','maletin','maletín','morral']],[['correa','gorro','bufanda','medias','cadenas','collares','aretes','anillos','tobilleras']],[[]]],
-        }
         categories = ["Camisas y Camisetas","Pantalones y Jeans","Vestidos y Enterizos","Faldas y Shorts","Abrigos y Blazers","Ropa deportiva","Zapatos","Bolsos","Accesorios","Otros"]
         self.category = ''
         categories_list = brands_categories[self.brand]
@@ -382,7 +386,7 @@ class Item:
                 return 'Tacones'
             elif any(s in sub+name for s in subs[5]):
                 return 'Botas'
-        return f'_{index}_{self.category}'
+        return self.category
         
 
 def getColorSrc(colorName,url):
@@ -438,19 +442,6 @@ def getColorSrc(colorName,url):
     elif "az" in colorName:
         return "https://static.e-stradivarius.net/5/photos3/2021/V/0/1/p/2512/446/010/2512446010_3_1_5.jpg?t=1606152337393"
     else:
-    #     try:
-    #         with open("C:/Users/JoelBook/Documents/Molova/Items/COLORS.txt","r",encoding="utf8") as f:
-    #             line=colorName[colorName.index("'")+1:]
-    #             line=line[:line.index("'")]
-    #             if not any(line in l for l in f.readlines()):
-    #                 f.close()
-    #                 with open("Items/COLORS.txt","a",encoding="utf8") as f:
-    #                     f.write("{}:{}\n".format(line,url))
-    #                 f.close()
-    #             else:
-    #                 f.close()
-    #     except:
-    #         pass
         return "https://static.e-stradivarius.net/5/photos3/2021/V/0/1/p/2545/990/001/2545990001_3_1_5.jpg?t=1613467824691"
 
 def toInt(s):
