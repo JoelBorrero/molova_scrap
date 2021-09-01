@@ -403,10 +403,14 @@ def check_broken_links(databases = [bDb, mDb, zDb, pDb, sDb], start=0):
     open('./Database/Broken.json', 'w').close()
     requests.post('https://2ksanrpxtd.execute-api.us-east-1.amazonaws.com/dev/molova/delete', f'{{"data": {to_delete}}}'.replace("'",'"')).json()
 
-def sync():
-    for last in ['Camisas%20y%20Camisetas','Pantalones%20y%20Jeans','Vestidos%20y%20Enterizos','Faldas%20y%20Shorts','Abrigos%20y%20Blazers','Ropa%20Deportiva', 'Zapatos','Bolsos','Accesorios']:
+def sync(brand=''):
+    if brand and brand in 'Bershka Mango Pull & Bear Stradivarius Zara':
+        brand = f'marcas/{brand}'
+    else:
+        brand = 'coleccion'
+    for last in ['Camisas y Camisetas','Pantalones y Jeans','Vestidos y Enterizos','Faldas y Shorts','Abrigos y Blazers','Ropa Deportiva', 'Zapatos','Bolsos','Accesorios']:
         for index in [0,1]:
-            endpoint = f"https://2ksanrpxtd.execute-api.us-east-1.amazonaws.com/dev/molova/coleccion/{index}/{last}"
+            endpoint = f'https://2ksanrpxtd.execute-api.us-east-1.amazonaws.com/dev/molova/{brand}/{index}/{last}'.replace(' ','%20')
             print(last,'sale' if index else 'col')
             res = requests.get(endpoint).json()
             percentage, bar, totalItems = 0, '', len(res['items'])
@@ -423,8 +427,8 @@ def sync():
                     db = zDb
                 elif 'Mango' == item['brand']:
                     db = mngDb
-                item.pop('id')
-                item.pop('id_producto')
+                for pop in ['data', 'date_time', 'id', 'id_producto']:
+                    item.pop(pop)
                 if not type(item['allPricesNow']) == list:
                     item['allPricesNow'] = [item['allPricesNow']]
                 db.add(item, sync=True)
@@ -438,10 +442,10 @@ def clear_remote_db():
     driver = webdriver.Chrome("./chromedriver")
     driver.maximize_window()
     driver.set_page_load_timeout(10)
-    for last in ['Camisas%20y%20Camisetas','Pantalones%20y%20Jeans','Vestidos%20y%20Enterizos','Faldas%20y%20Shorts','Abrigos%20y%20Blazers','Ropa%20Deportiva', 'Zapatos','Bolsos','Accesorios']:
+    for last in ['Camisas y Camisetas','Pantalones y Jeans','Vestidos y Enterizos','Faldas y Shorts','Abrigos y Blazers','Ropa Deportiva', 'Zapatos','Bolsos','Accesorios']:
         for index in [0,1]:
             to_delete = []
-            endpoint = f"https://2ksanrpxtd.execute-api.us-east-1.amazonaws.com/dev/molova/coleccion/{index}/{last}"
+            endpoint = f"https://2ksanrpxtd.execute-api.us-east-1.amazonaws.com/dev/molova/coleccion/{index}/{last}".replace(' ','%20')
             res = requests.get(endpoint).json()
             for item in res['items']:
                 url = item['id_producto']

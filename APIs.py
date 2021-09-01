@@ -17,9 +17,7 @@ except FileNotFoundError:
     settings = {'Mango': {'endpoints': [],'endpoint': ''}, 'Stradivarius': {'endpoints': [], 'endpoint': ''}}
     with open('./.settings','w') as s:
         s.write(str(settings))
-brands = [
-    {'name': 'Mango', 'endpoint': 'https://shop.mango.com/services/productlist/products/CO/she/sections_she_colombia_rebajas_SpecialSale_HighViz.rebajas_she_mobile/?saleSeasons=4,5,3,8&pageNum=1&rowsPerPage=20&columnsPerRow=4', 'updates': True, "endpoints": settings['Mango']['endpoints']},
-    {'name': 'Stradivarius', 'endpoint': 'https://www.stradivarius.com/itxrest/2/catalog/store/55009615/50331099/category/1020093507/product?languageId=-48&appId=1', 'updates': True, "endpoints": settings['Stradivarius']['endpoints']}]
+brands = [{'name': 'Stradivarius', 'endpoint': 'https://www.stradivarius.com/itxrest/2/catalog/store/55009615/50331099/category/1020093507/product?languageId=-48&appId=1', 'updates': True, "endpoints": settings['Stradivarius']['endpoints']}, {'name': 'Mango', 'endpoint': 'https://shop.mango.com/services/productlist/products/CO/she/sections_she_colombia_rebajas_SpecialSale_HighViz.rebajas_she_mobile/?saleSeasons=4,5,3,8&pageNum=1&rowsPerPage=20&columnsPerRow=4', 'updates': True, "endpoints": settings['Mango']['endpoints']}]
 class Catcher:
     def __init__(self):
         self.tz = pytz.timezone('America/Bogota')
@@ -90,8 +88,7 @@ class Catcher:
                     else:
                         for p in data:
                             if product['name'] == p['name']:
-                                product_exist = True
-                                product_updated = True
+                                product_exist, product_updated = True, True
                                 break
                     if not product_exist:
                         new += 1

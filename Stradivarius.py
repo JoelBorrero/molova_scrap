@@ -1,10 +1,10 @@
-import os
 import ast
 import requests
 from time import sleep
 from random import uniform
 from datetime import datetime
 import pytz
+from urllib.parse import quote
 
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
@@ -30,7 +30,7 @@ xpaths={
     'imgs':'.//div[@class="image-container"]/img',
     'main_categories':'.//div[contains(@class,"menu-list-item main-category ")]',
     'name':'.//h1[@class="product-name-title"]',
-    'priceBfr':'.//div[@class="product-price block-height"]//div[@class="one-old-price"]//span',
+    'priceBfr':'.//div[@class="product-price block-height"]//div[@class="one-old-price"]//span|.//div[@class="product-price block-height"]//div[@class="current-price"]//span',
     'priceNow':'.//div[@class="product-price block-height"]//div[@class="current-price"]//span',
     'priceNow2':'.//div[@class="c-product-info--header"]/div[@class="prices"]/div/span',
     'ref': './/div[@class="product-ref-details block-height "]/span',
@@ -234,7 +234,7 @@ def scrap_for_links():
             netData = driver.execute_script(get_network)
             for i in netData:
                 if all(e in i['name'] for e in ['https://www.stradivarius.com/itxrest/2/catalog/store/55009615/50331099/category/','product?']) and i['name'] not in endpoints:
-                    endpoints.insert(0,(c,i['name']))
+                    endpoints.append((c,i['name']))
     driver.quit()
     settings = ast.literal_eval(open('./.settings','r').read())
     settings[brand]['endpoints']=endpoints
@@ -321,7 +321,7 @@ class APICrawler:
                     except:
                         price_bfr = price_now
                         sale = False
-                    url = f'{endpoint[0][:endpoint[0].index("-c")]}/{name.lower().replace(" ","-")}-c{cat_id}p{prod_id}.html'
+                    url = f'{endpoint[0][:endpoint[0].index("-c")]}/{quote(name.lower().replace(" ","-"))}-c{cat_id}p{prod_id}.html'
                     allSizes = []
                     colors = []
                     for color in product['colors']:
@@ -365,11 +365,14 @@ class APICrawler:
                                         images.append(image)
                             allImages.append(images)
                         item.allImages = allImages
-                        db.add(item, sync=True)
-                        logs = open('./Database/LogsSTR.txt','a')
-                        logs.write(f'    + {datetime.now(tz).hour}:{datetime.now(tz).minute}:{datetime.now(tz).second}   -   {name}\n')
-                        logs.close()
+                    db.add(item, sync=True)
+                    logs = open('./Database/LogsSTR.txt','a')
+                    logs.write(f'    + {datetime.now(tz).hour}:{datetime.now(tz).minute}:{datetime.now(tz).second}   -   {name}\n')
+                    logs.close()
                 except Exception as e:
+                    logs = open('./Database/LogsSTR.txt','a')
+                    logs.write(f'X {datetime.now(tz).hour}:{datetime.now(tz).minute}:{datetime.now(tz).second}   -   {e}\n')
+                    logs.close()
                     print(e)
             sleep(uniform(120,300))
             session = requests.session()
