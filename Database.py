@@ -94,6 +94,9 @@ class Database:
     def delete(self, url):
         self.db.remove(where('url') == url)
 
+    def clear(self):
+        self.db.remove(self.q.url != '')
+
     def getAllUrls(self):
         '''Return a list with all urls in the Urls database'''
         res = []

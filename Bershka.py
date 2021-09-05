@@ -32,17 +32,6 @@ xpaths = {
 
 class ScrapBershka:
     def __init__(self):
-        # options = Options()
-        # options.add_argument("enable-automation")
-        # options.add_argument("--headless")
-        # options.add_argument("--window-size=1920,1080")
-        # options.add_argument("--no-sandbox")
-        # options.add_argument("--disable-extensions")
-        # options.add_argument("--dns-prefetch-disable")
-        # options.add_argument("--disable-gpu")
-        # options.add_argument("user-data-dir=./Cookies/Bershka")
-        # self.driver = webdriver.Chrome("./chromedriver.exe", options=options)
-        # self.driver = webdriver.Chrome("./chromedriver.exe")
         self.driver = webdriver.Chrome('./chromedriver')
         self.driver.set_page_load_timeout(30)
         self.driver.maximize_window()
@@ -56,12 +45,8 @@ class ScrapBershka:
         categories = [[], [], self.driver.find_elements_by_xpath(xpaths['sale'])]
         for c in categories[2]:
             cat = c.get_attribute('innerText').replace('\n', '')
+            categories[0].append(cat.strip())
             categories[1].append(c.get_attribute('href'))
-            while cat.startswith(' '):
-                cat = cat[1:]
-            while cat.endswith(' '):
-                cat = cat[:-1]
-            categories[0].append(cat)
         for c in range(len(categories[0])):
             self.category = categories[0][c]
             self.originalCategory = self.category
@@ -170,14 +155,10 @@ class ScrapBershka:
                 for s in sizesTags:
                     try:
                         s.find_element_by_xpath(xpaths['coming'])
-                        sizes.append(
-                            f'{s.get_attribute("innerText")}(Próximamente)'
-                        )
+                        sizes.append(f'{s.get_attribute("innerText")}(Próximamente)')
                     except:
                         if "is-disabled" in s.get_attribute("class"):
-                            sizes.append(
-                                f'{s.get_attribute("innerText")}(Agotado)'
-                            )
+                            sizes.append(f'{s.get_attribute("innerText")}(Agotado)')
                         else:
                             sizes.append(s.get_attribute('innerText'))
                 if not sizes:

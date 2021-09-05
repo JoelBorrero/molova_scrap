@@ -18,11 +18,13 @@ except FileNotFoundError:
     with open('./.settings','w') as s:
         s.write(str(settings))
 brands = [{'name': 'Stradivarius', 'endpoint': 'https://www.stradivarius.com/itxrest/2/catalog/store/55009615/50331099/category/1020093507/product?languageId=-48&appId=1', 'updates': True, "endpoints": settings['Stradivarius']['endpoints']}, {'name': 'Mango', 'endpoint': 'https://shop.mango.com/services/productlist/products/CO/she/sections_she_colombia_rebajas_SpecialSale_HighViz.rebajas_she_mobile/?saleSeasons=4,5,3,8&pageNum=1&rowsPerPage=20&columnsPerRow=4', 'updates': True, "endpoints": settings['Mango']['endpoints']}]
+
+
 class Catcher:
     def __init__(self):
         self.tz = pytz.timezone('America/Bogota')
         self.today = f'{datetime.now(self.tz).day} - {datetime.now(self.tz).month}'
-        self.columns = ['Hora','Cambió','Nuevos', 'Actualizados']
+        self.columns = ['Hora', 'Cambió', 'Nuevos', 'Actualizados']
         self.filename = './Database/Catcher.xlsx'
         self.df = {}
         try:
@@ -61,8 +63,8 @@ class Catcher:
         except:
             self.df[self.today] = pd.DataFrame(columns=self.columns)
         self.df[self.today] = self.df[self.today].append(pd.Series(data, index=self.columns), ignore_index=True)
-        for i,j in enumerate(self.df):
-            self.df[j].to_excel(self.writer,j, startcol=brand*5, index=False)
+        for i, j in enumerate(self.df):
+            self.df[j].to_excel(self.writer, j, startcol=brand*5, index=False)
         self.writer.save()
 
     def check(self):
@@ -94,20 +96,24 @@ class Catcher:
                         new += 1
                     if product_updated:
                         updated += 1
-                self.write([f'{datetime.now(self.tz).hour}:{datetime.now(self.tz).minute}', data!=new_data, new, updated],brands.index(brand))
-                brand['updates'] = brand['updates'] or data!=new_data
-                with open(f'./Database/changes_{brand["name"]}.txt','w') as f:
+                self.write([f'{datetime.now(self.tz).hour}:{datetime.now(self.tz).minute}', data != new_data, new, updated],brands.index(brand))
+                brand['updates'] = brand['updates'] or data != new_data
+                with open(f'./Database/changes_{brand["name"]}.txt', 'w') as f:
                     f.write(str(new_data))
             count += 1
             if count == 6:
                 for brand in brands:
                     if brand['updates']:
+                        print(f'Crawling {brand["name"]}')
                         exec(f'{brand["name"]}.APICrawler(brand["endpoints"])')
                 post()
                 count = 0
-            sleep(uniform(3000,4000))
+            sleep(uniform(3000, 4000))
+
 
 def scrap_links():
     for brand in brands:
         exec(f'{brand["name"]}.scrap_for_links()')
+
+
 self = Catcher()

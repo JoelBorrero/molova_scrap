@@ -16,9 +16,9 @@ brand = 'Stradivarius'
 db = Database(brand)
 # db = Database(brand+'API')
 tz = pytz.timezone('America/Bogota')
-xpaths={
-    'categories':'.//div[@class="categories-menu "]/div[contains(@class,"items-menu")]/div/a[not(@href="javascript:void(0)")]|.//div[@class="categories-menu "]/div[contains(@class,"items-menu")]/div[./a[@href="javascript:void(0)"]]/following-sibling::div[position()=1]//a',
-    'categoriesSale':'.//ul[@class="product-categories"]/li/ul/li/a[span[contains(@style,"#f")]]',
+xpaths = {
+    'categories': './/div[@class="categories-menu "]/div[contains(@class,"items-menu")]/div/a[not(@href="javascript:void(0)")]|.//div[@class="categories-menu "]/div[contains(@class,"items-menu")]/div[./a[@href="javascript:void(0)"]]/following-sibling::div[position()=1]//a',
+    'categoriesSale': './/ul[@class="product-categories"]/li/ul/li/a[span[contains(@style,"#f")]]',
     'colorsBtn':'.//div[@class="set-colors-product parent-center-child"]//img[@src]',
     'description':'.//span[@class="c-product-info--description-text"]',
     'discount':'.//div[@class="discount-percentage"]',
@@ -37,8 +37,11 @@ xpaths={
     'sizesTags':'.//div[@id="productComponentRight"]//div[@class="size-grid-sizes-container"]//span',
     'subCats':'.//div[@class="display-inline-block child-center-parent slider-items-container"]/div/a',
     'subCats2':'.//div[@class="category-badges-list"]/a[not(text()="Ver todo")]'}
+try:
+    endpoints = ast.literal_eval(open('./.settings','r').read())[brand]['endpoints']
+except:
+    endpoints = []
 
-endpoints = [('https://www.stradivarius.com/co/mujer/home-%26-living/compra-por-producto/papeler%C3%ADa-c1020367598.html', 'https://www.stradivarius.com/itxrest/2/catalog/store/55009615/50331099/category/1020367598/product?languageId=-48&appId=1'), ('https://www.stradivarius.com/co/mujer/home-%26-living/compra-por-producto/decoraci%C3%B3n-c1020367623.html', 'https://www.stradivarius.com/itxrest/2/catalog/store/55009615/50331099/category/1020367623/product?languageId=-48&appId=1'), ('https://www.stradivarius.com/co/mujer/pijamas/calzado-c1020367661.html', 'https://www.stradivarius.com/itxrest/2/catalog/store/55009615/50331099/category/1020367659/product?languageId=-48&appId=1'), ('https://www.stradivarius.com/co/mujer/pijamas/lencer%C3%ADa-c1020367660.html', 'https://www.stradivarius.com/itxrest/2/catalog/store/55009615/50331099/category/1020367659/product?languageId=-48&appId=1'), ('https://www.stradivarius.com/co/mujer/pijamas/pijamas-c1020367658.html', 'https://www.stradivarius.com/itxrest/2/catalog/store/55009615/50331099/category/1020367659/product?languageId=-48&appId=1'), ('https://www.stradivarius.com/co/mujer/pijamas/ver-todo-c1020367659.html', 'https://www.stradivarius.com/itxrest/2/catalog/store/55009615/50331099/category/1020367659/product?languageId=-48&appId=1'), ('https://www.stradivarius.com/co/mujer/pijamas-c1020367657.html', 'https://www.stradivarius.com/itxrest/2/catalog/store/55009615/50331099/category/1020367659/product?languageId=-48&appId=1'), ('https://www.stradivarius.com/co/mujer/accesorios/compra-por-producto/gafas-c1393014.html', 'https://www.stradivarius.com/itxrest/2/catalog/store/55009615/50331099/category/1393014/product?languageId=-48&appId=1'), ('https://www.stradivarius.com/co/mujer/accesorios/compra-por-producto/accesorios-de-pelo-c1393013.html', 'https://www.stradivarius.com/itxrest/2/catalog/store/55009615/50331099/category/1393013/product?languageId=-48&appId=1'), ('https://www.stradivarius.com/co/mujer/accesorios/compra-por-producto/correas-c1393011.html', 'https://www.stradivarius.com/itxrest/2/catalog/store/55009615/50331099/category/1393011/product?languageId=-48&appId=1'), ('https://www.stradivarius.com/co/mujer/accesorios/compra-por-producto/bisuter%C3%ADa/ver-todo-c1718569.html', 'https://www.stradivarius.com/itxrest/2/catalog/store/55009615/50331099/category/1718569/product?languageId=-48&appId=1'), ('https://www.stradivarius.com/co/mujer/accesorios/compra-por-producto/monederos-c1695503.html', 'https://www.stradivarius.com/itxrest/2/catalog/store/55009615/50331099/category/1695503/product?languageId=-48&appId=1'), ('https://www.stradivarius.com/co/mujer/zapatos/compra-por-producto/baletas-c1399024.html', 'https://www.stradivarius.com/itxrest/2/catalog/store/55009615/50331099/category/1399024/product?languageId=-48&appId=1'), ('https://www.stradivarius.com/co/mujer/zapatos/compra-por-producto/sandalias-c1020001528.html', 'https://www.stradivarius.com/itxrest/2/catalog/store/55009615/50331099/category/1020001528/product?languageId=-48&appId=1'), ('https://www.stradivarius.com/co/mujer/zapatos/compra-por-producto/tenis-c1399023.html', 'https://www.stradivarius.com/itxrest/2/catalog/store/55009615/50331099/category/1399023/product?languageId=-48&appId=1'), ('https://www.stradivarius.com/co/mujer/zapatos/compra-por-producto/todos/todos-c1020178528.html', 'https://www.stradivarius.com/itxrest/2/catalog/store/55009615/50331099/category/1020178528/product?languageId=-48&appId=1'), ('https://www.stradivarius.com/co/mujer/str-teen/calzado-c1020367571.html', 'https://www.stradivarius.com/itxrest/2/catalog/store/55009615/50331099/category/1020367566/product?languageId=-48&appId=1'), ('https://www.stradivarius.com/co/mujer/str-teen/vestidos-c1020367568.html', 'https://www.stradivarius.com/itxrest/2/catalog/store/55009615/50331099/category/1020367566/product?languageId=-48&appId=1'), ('https://www.stradivarius.com/co/mujer/str-teen/punto-c1020367565.html', 'https://www.stradivarius.com/itxrest/2/catalog/store/55009615/50331099/category/1020367566/product?languageId=-48&appId=1'), ('https://www.stradivarius.com/co/mujer/str-teen/camisetas-c1020367564.html', 'https://www.stradivarius.com/itxrest/2/catalog/store/55009615/50331099/category/1020367566/product?languageId=-48&appId=1'), ('https://www.stradivarius.com/co/mujer/str-teen/pantalones-c1020367563.html', 'https://www.stradivarius.com/itxrest/2/catalog/store/55009615/50331099/category/1020367566/product?languageId=-48&appId=1'), ('https://www.stradivarius.com/co/mujer/str-teen/jeans-c1020367572.html', 'https://www.stradivarius.com/itxrest/2/catalog/store/55009615/50331099/category/1020367566/product?languageId=-48&appId=1'), ('https://www.stradivarius.com/co/mujer/str-teen/shorts-c1020367570.html', 'https://www.stradivarius.com/itxrest/2/catalog/store/55009615/50331099/category/1020367566/product?languageId=-48&appId=1'), ('https://www.stradivarius.com/co/mujer/str-teen/ver-todo-c1020367566.html', 'https://www.stradivarius.com/itxrest/2/catalog/store/55009615/50331099/category/1020367566/product?languageId=-48&appId=1'), ('https://www.stradivarius.com/co/mujer/sport/compra-por-producto/partes-de-abajo/ver-todo-c1020367546.html', 'https://www.stradivarius.com/itxrest/2/catalog/store/55009615/50331099/category/1020367546/product?languageId=-48&appId=1'), ('https://www.stradivarius.com/co/mujer/sport/compra-por-producto/partes-de-arriba-c1020367551.html', 'https://www.stradivarius.com/itxrest/2/catalog/store/55009615/50331099/category/1020367551/product?languageId=-48&appId=1'), ('https://www.stradivarius.com/co/mujer/sport/compra-por-producto/conjuntos-combinados-c1020385315.html', 'https://www.stradivarius.com/itxrest/2/catalog/store/55009615/50331099/category/1020385315/product?languageId=-48&appId=1'), ('https://www.stradivarius.com/co/mujer/sport/compra-por-producto/ver-todo/ver-todo-c1020367540.html', 'https://www.stradivarius.com/itxrest/2/catalog/store/55009615/50331099/category/1020367540/product?languageId=-48&appId=1'), ('https://www.stradivarius.com/co/mujer/ropa/compra-por-producto/packs-c1020371005.html', 'https://www.stradivarius.com/itxrest/2/catalog/store/55009615/50331099/category/1020371005/product?languageId=-48&appId=1'), ('https://www.stradivarius.com/co/mujer/ropa/compra-por-producto/shorts/ver-todo-c1020377546.html', 'https://www.stradivarius.com/itxrest/2/catalog/store/55009615/50331099/category/1020377546/product?languageId=-48&appId=1'), ('https://www.stradivarius.com/co/mujer/ropa/compra-por-producto/faldas/ver-todo-c1718525.html', 'https://www.stradivarius.com/itxrest/2/catalog/store/55009615/50331099/category/1718525/product?languageId=-48&appId=1'), ('https://www.stradivarius.com/co/mujer/ropa/compra-por-producto/camisas/ver-todo-c1718502.html', 'https://www.stradivarius.com/itxrest/2/catalog/store/55009615/50331099/category/1718502/product?languageId=-48&appId=1'), ('https://www.stradivarius.com/co/mujer/nuevo-c1020093507.html', 'https://www.stradivarius.com/itxrest/2/catalog/store/55009615/50331099/category/1020093507/product?languageId=-48&appId=1')]
 
 class ScrapStradivarius:
     def __init__(self):
@@ -89,7 +92,6 @@ class ScrapStradivarius:
             self.scrapCategory(categories[1][c])
         self.driver.quit()
         # APICrawler()
-
 
     def scrapCategory(self, url):
         self.driver.get(url)
@@ -143,7 +145,6 @@ class ScrapStradivarius:
                     self.scrapProduct(href)
             except:
                 print('Error')
-            
 
     def scrapProduct(self, url):
         self.driver.execute_script('window.open("{}", "new window")'.format(url))
@@ -243,7 +244,7 @@ def scrap_for_links():
 
 
 class APICrawler:
-    def __init__(self, endpoints):
+    def __init__(self, endpoints=endpoints):
         session = requests.session()
         headers = {
             'accept': '*/*',

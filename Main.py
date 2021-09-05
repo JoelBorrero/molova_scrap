@@ -22,24 +22,21 @@ zDb = Database('Zara')
 latest = Database('Latest')
 broken = Database('Broken')
 
-def merge():
+def merge(databases = [bDb, mDb, zDb, pDb, sDb]):
     totalItems = 0
     percentage = 0
     index = 0
     bar = ''
     path = './Database'
+    total_urls = []
+    for db in databases:
+        total_urls.extend(db.getAllUrls())
+    with open('./URLS.txt','w') as f:
+        f.write(str(total_urls))
+    totalItems = len(total_urls)
     files = []
     for file in os.listdir(path):
         files.append(file)
-    for file in files:
-        if '.json' in file and any(n in file for n in ['1','2','3','4','5','6']):
-            with open('{}/{}'.format(path, file), 'r', encoding='utf8') as f:
-                try:
-                    j = json.loads(f.read())
-                    totalItems+=len(j['Items'])
-                    print(file,len(j['Items']))
-                except:
-                    pass
     for file in files:
         if '.json' in file and any(n in file for n in ['1','2','3','4','5','6']):
             print(file)
@@ -77,9 +74,14 @@ def merge():
                             print('{}% ({} de {}) {}'.format(percentage, index, totalItems, bar))
                 except Exception as e:
                     print(e)
+    total_urls = []
+    for db in databases:
+        total_urls.extend(db.getAllUrls())
+    with open('./URLS_NEW.txt','w') as f:
+        f.write(str(total_urls))
     # input('\nPresione enter para salir\n')
 
-def scrap(brands = ['Stradivarius','Mango', 'PullAndBear', 'Bershka', 'MercedesCampuzano', 'Zara']):
+def scrap(brands = ["""'Stradivarius','Mango',""" 'PullAndBear', 'Bershka', 'MercedesCampuzano', 'Zara']):
     for brand in brands:
         print('>>>>> ',brand,' <<<<<')
         try:
@@ -460,6 +462,18 @@ def clear_remote_db():
                         brand.db.delete(url)
                         to_delete.append(url)
             requests.post('https://2ksanrpxtd.execute-api.us-east-1.amazonaws.com/dev/molova/delete', f'{{"data": {to_delete}}}'.replace("'",'"')).json()
+
+def create_proxy():
+    url = "https://proxy-orbit1.p.rapidapi.com/v1/"
+    headers = {
+        'x-rapidapi-host': "proxy-orbit1.p.rapidapi.com",
+        'x-rapidapi-key': "9d9755e9camshfaf216df46e23cap1df9acjsn48e435520d1d"
+    }
+    response = requests.request("GET", url, headers=headers)
+    response = json.loads(response.text)
+    proxy = response['curl']
+    return proxy
+
 
 # Main code
 def main():

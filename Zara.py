@@ -4,7 +4,7 @@ from time import sleep
 from Database import Database
 from selenium import webdriver
 
-brand = "Zara"
+brand = 'Zara'
 db = Database(brand)
 xpaths = {
     'categories': './/ul[@class="layout-categories__container"]/li[position()=1]/ul/li/ul/li/a',
@@ -33,24 +33,23 @@ xpaths = {
 
 class ScrapZara:
     def __init__(self):
-        self.driver = webdriver.Chrome("./chromedriver")
+        self.driver = webdriver.Chrome('./chromedriver')
         self.driver.set_page_load_timeout(30)
         self.sale = False
         self.driver.maximize_window()
-        self.driver.get("https://www.zara.com/co/")
+        self.driver.get('https://www.zara.com/co/')
         sleep(3)
         try:
             self.driver.find_element_by_xpath('.//button[@class="modal__close-button"]').click()
-            print('clicked')
             sleep(2)
             self.driver.find_element_by_xpath('.//button[@class="modal__close-button"]').click()
         except:
-            print('No dismiss')
+            pass
         cats=[[],[]]
         for cat in self.driver.find_elements_by_xpath(xpaths['categories']):
             c = cat.get_attribute('innerText').capitalize()
             cats[0].append(c)
-            cats[1].append(cat.get_attribute("href"))
+            cats[1].append(cat.get_attribute('href'))
         cats[0].reverse()
         cats[1].reverse()
         for i in range(len(cats[0])):
@@ -58,12 +57,12 @@ class ScrapZara:
             self.originalCategory = self.category
             if 'mujer' in cats[1][i] or 'woman' in cats[1][i]:
                 self.gender = 'Mujer'
-                self.scrapCategoria(cats[1][i])
+                self.scrap_category(cats[1][i])
             else:
                 self.gender = 'Hombre'
-            # self.scrapCategoria(cats[1][i])
+            # self.scrap_category(cats[1][i])
 
-    def scrapCategoria(self, url):
+    def scrap_category(self, url):
         self.driver.get(url)
         try:
             self.subcategory = self.driver.find_element_by_xpath(xpaths['subcategory']).text.capitalize()
@@ -77,7 +76,7 @@ class ScrapZara:
                         subcats[s].click()
                         sleep(5)
                         self.subcategory = self.driver.find_element_by_xpath(xpaths['subcategory']).text.capitalize()
-                        self.scrapSubcategory()
+                        self.scrap_subcategory()
                     except:
                         # try:
                         self.driver.find_element_by_xpath('.//button[@class="variable-width-carousel__arrow variable-width-carousel__arrow--right"]').click()
@@ -85,39 +84,39 @@ class ScrapZara:
                         subcats[s].click()
                         sleep(5)
                         self.subcategory = self.driver.find_element_by_xpath(xpaths['subcategory']).text.capitalize()
-                        self.scrapSubcategory()
+                        self.scrap_subcategory()
                         # except:
                         #     print('Never click')
                 subcats = self.driver.find_elements_by_xpath(xpaths['subCats'])
         else:
-            self.scrapSubcategory()
+            self.scrap_subcategory()
             
-    def scrapSubcategory(self):
+    def scrap_subcategory(self):
         self.originalSubcategory = self.subcategory
-        itemsWebElems = self.driver.find_elements_by_xpath(xpaths['elems'])
-        self.driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
+        elems = self.driver.find_elements_by_xpath(xpaths['elems'])
+        self.driver.execute_script('window.scrollTo(0, document.body.scrollHeight);')
         sleep(3)
         loading = True
         while loading:
-            self.driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
+            self.driver.execute_script('window.scrollTo(0, document.body.scrollHeight);')
             sleep(3)
-            loading = len(itemsWebElems) < len(self.driver.find_elements_by_xpath(xpaths['elems']))
-            itemsWebElems = self.driver.find_elements_by_xpath(xpaths['elems'])
-        while itemsWebElems:
-            elem = itemsWebElems.pop()
-            self.driver.execute_script("arguments[0].scrollIntoView();", elem)
+            loading = len(elems) < len(self.driver.find_elements_by_xpath(xpaths['elems']))
+            elems = self.driver.find_elements_by_xpath(xpaths['elems'])
+        while elems:
+            elem = elems.pop()
+            self.driver.execute_script('arguments[0].scrollIntoView();', elem)
             url = elem.find_element_by_xpath(xpaths['href']).get_attribute('href')
             try:
                 image = elem.find_element_by_xpath(xpaths['fast_image']).get_attribute('src')
-                if db.contains(url, image):
-                    db.update_product(elem, url, xpaths)
-                else:
-                    self.scrapProduct(url)
             except:
-                self.scrapProduct(url)
+                image = ''
+            if db.contains(url, image):
+                db.update_product(elem, url, xpaths)
+            else:
+                self.scrap_product(url)
 
 
-    def scrapProduct(self, url):
+    def scrap_product(self, url):
         mouse = webdriver.ActionChains(self.driver)
         self.driver.execute_script('window.open("{}", "new window")'.format(url))
         self.driver.switch_to.window(self.driver.window_handles[1])
@@ -142,13 +141,13 @@ class ScrapZara:
             allImages = []
             if len(colorsBtn) == 0:
                 color = self.driver.find_element_by_xpath(xpaths['color'])
-                colors.append(color.text.replace("Color: ", "").replace('"', "").capitalize())
+                colors.append(color.text.replace('Color: ', '').replace('"', '').capitalize())
                 sizes = []
                 for t in self.driver.find_elements_by_xpath(xpaths['sizesTags']):
-                    if "disabled" in t.get_attribute("class"):
-                        sizes.append("{}(Agotado)".format(t.find_element_by_xpath("./div/div/span").get_attribute("innerText")))
+                    if 'disabled' in t.get_attribute('class'):
+                        sizes.append('{}(Agotado)'.format(t.find_element_by_xpath('./div/div/span').get_attribute('innerText')))
                     else:
-                        sizes.append(t.find_element_by_xpath("./div/div/span").get_attribute("innerText"))
+                        sizes.append(t.find_element_by_xpath('./div/div/span').get_attribute('innerText'))
                 allSizes.append(sizes)
                 images = []
                 thumbnails = self.driver.find_elements_by_xpath(xpaths['thumbnails'])
@@ -156,8 +155,8 @@ class ScrapZara:
                     mouse.move_to_element(thumbnails[i]).perform()
                     thumbnails[i].click()
                 for i in self.driver.find_elements_by_xpath(xpaths['imgs']):
-                    if not 'transparent-background' in i.get_attribute("src"):
-                        images.append(i.get_attribute("src"))
+                    if not 'transparent-background' in i.get_attribute('src'):
+                        images.append(i.get_attribute('src'))
                 allImages.append(images)
             for c in range(len(colorsBtn)):
                 colorsBtn[c].click()
@@ -165,10 +164,10 @@ class ScrapZara:
                 while not self.driver.find_elements_by_xpath('.//ul[contains(@id,"product-size-selector-product-detail-info")]/li'):
                     sleep(0.1)
                 for t in self.driver.find_elements_by_xpath('.//ul[contains(@id,"product-size-selector-product-detail-info")]/li'):
-                    if "disabled" in t.get_attribute("class"):
-                        sizes.append("{}(Agotado)".format(t.find_element_by_xpath("./div/div/span").get_attribute("innerText")))
+                    if 'disabled' in t.get_attribute('class'):
+                        sizes.append('{}(Agotado)'.format(t.find_element_by_xpath('./div/div/span').get_attribute('innerText')))
                     else:
-                        sizes.append(t.find_element_by_xpath("./div/div/span").get_attribute("innerText"))
+                        sizes.append(t.find_element_by_xpath('./div/div/span').get_attribute('innerText'))
                 allSizes.append(sizes)
                 images = []
                 thumbnails = self.driver.find_elements_by_xpath(xpaths['thumbnails'])
@@ -176,11 +175,11 @@ class ScrapZara:
                     mouse.move_to_element(thumbnails[i]).perform()
                     thumbnails[i].click()
                 for i in self.driver.find_elements_by_xpath(xpaths['imgs']):
-                    if not 'transparent-background' in i.get_attribute("src"):
-                        images.append(i.get_attribute("src"))
-                        print(i.get_attribute("src"))
+                    if not 'transparent-background' in i.get_attribute('src'):
+                        images.append(i.get_attribute('src'))
+                        print(i.get_attribute('src'))
                 allImages.append(images)
-                colors.append(colorsBtn[c].get_attribute("innerText").replace("Color: ", "").replace('"', "").capitalize())
+                colors.append(colorsBtn[c].get_attribute('innerText').replace('Color: ', '').replace('"', '').capitalize())
                 colorsBtn = self.driver.find_elements_by_xpath('.//ul[@class="product-detail-info-color-selector__colors"]/li/button')
             db.add(Item(brand,name,ref,description,priceBfr,[priceNow],discount,allImages,url,allSizes,colors,self.category,self.originalCategory,self.subcategory,self.originalSubcategory,self.sale, self.gender))
         except Exception as e:
