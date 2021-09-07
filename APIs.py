@@ -9,12 +9,12 @@ import pandas as pd
 
 import Mango
 import Stradivarius
-from Main import post
+from Main import check_broken_links, post
 
 try:
     settings = ast.literal_eval(open('./.settings','r').read())
 except FileNotFoundError:
-    settings = {'Mango': {'endpoints': [],'endpoint': ''}, 'Stradivarius': {'endpoints': [], 'endpoint': ''}}
+    settings = {'Mango': {'endpoints': [], 'endpoint': ''}, 'Stradivarius': {'endpoints': [], 'endpoint': ''}, 'Zara': {'endpoints': [], 'endpoint': ''}}
     with open('./.settings','w') as s:
         s.write(str(settings))
 brands = [{'name': 'Stradivarius', 'endpoint': 'https://www.stradivarius.com/itxrest/2/catalog/store/55009615/50331099/category/1020093507/product?languageId=-48&appId=1', 'updates': True, "endpoints": settings['Stradivarius']['endpoints']}, {'name': 'Mango', 'endpoint': 'https://shop.mango.com/services/productlist/products/CO/she/sections_she_colombia_rebajas_SpecialSale_HighViz.rebajas_she_mobile/?saleSeasons=4,5,3,8&pageNum=1&rowsPerPage=20&columnsPerRow=4', 'updates': True, "endpoints": settings['Mango']['endpoints']}]
@@ -45,7 +45,7 @@ class Catcher:
         for i,j in enumerate(self.df):
             self.df[j].to_excel(self.writer,j, index=False)
         self.writer.save()
-        # self.check()
+        self.check()
 
     def update_headers(self):
         self.session = requests.session()
@@ -91,8 +91,14 @@ class Catcher:
                         product_exist = True
                     else:
                         for p in data:
-                            if product['name'] == p['name']:
-                                product_exist, product_updated = True, True
+                            try:
+                                if product['name'] == p['name']:
+                                    product_exist, product_updated = True, True
+                                    break
+                            except:
+                                print('ERROR')
+                                with open(f'./Database/changes_{brand["name"]}.txt', 'w') as f:
+                                    f.write(str(product))
                                 break
                     if not product_exist:
                         new += 1
@@ -103,11 +109,12 @@ class Catcher:
                 with open(f'./Database/changes_{brand["name"]}.txt', 'w') as f:
                     f.write(str(new_data))
             count += 1
-            if count == -6:
+            if count == 6:
                 for brand in brands:
                     if brand['updates']:
                         print(f'Crawling {brand["name"]}')
                         exec(f'{brand["name"]}.APICrawler(brand["endpoints"])')
+                check_broken_links(crawling=True)
                 post()
                 count = 0
             sleep(uniform(3000, 4000))

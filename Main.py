@@ -14,15 +14,15 @@ from Database import Database
 
 
 bDb = Database('Bershka')
-mngDb = Database('Mango')
 mDb = Database('Mercedes Campuzano')
+mngDb = Database('Mango')
 pDb = Database('Pull & Bear')
 sDb = Database('Stradivarius')
 zDb = Database('Zara')
-latest = Database('Latest')
 broken = Database('Broken')
+latest = Database('Latest')
 
-def merge(databases = [bDb, mDb, zDb, pDb, sDb]):
+def merge(databases = [bDb, mDb, zDb, pDb, sDb, mngDb]):
     totalItems = 0
     percentage = 0
     index = 0
@@ -346,58 +346,62 @@ def post(databases = [mngDb, bDb, mDb, zDb, pDb, sDb]):
                 bar = bar+'°'
                 print(f'{percentage}% ({index} de {totalItems}) {bar}')
 
-def check_broken_links(databases = [bDb, mDb, zDb, pDb, sDb], start=0):
+def check_broken_links(databases = [bDb, mDb, zDb, pDb, sDb], start=0, crawling=False):
     '''Check each url that was not present in the last scrap'''
     print('Looking for broken links...')
     to_delete= []
     for db in databases:
-        for item in db.getAllItems():
-            if not latest.contains_url(item['url']):
-                to_delete.append(item['url'])
+        urls = []
+        for url in db.getAllUrls():
+            if not latest.contains_url(url):
+                urls.append(url)
+        if len(db.getAllUrls()) - len(urls) > 1000:
+            to_delete.extend(urls)
     print(len(to_delete),'items to review')
-    driver = webdriver.Chrome("./chromedriver")
-    driver.maximize_window()
-    driver.set_page_load_timeout(20)
-    for url in to_delete[start:]:
-        if not start%10:
-            print(start)
-        start+=1
-        try:
-            driver.get(url)
-        except:
-            driver.quit()
-            sleep(5)
-            driver = webdriver.Chrome("./chromedriver")
-            driver.maximize_window()
-            driver.set_page_load_timeout(20)
-            driver.get(url)
-        try:
-            brand = Bershka if 'bershka.com' in url else Mango if 'mango.com' in url else MercedesCampuzano if 'mercedescampuzano.com' in url else PullAndBear if 'pullandbear.com' in url  else Stradivarius if  'stradivarius.com' in url else Zara
-            if not driver.find_elements_by_xpath(brand.xpaths['name']):
-                sleep(2)
-            if not driver.find_elements_by_xpath(brand.xpaths['name']):
-                if not driver.find_elements_by_xpath(brand.xpaths['imgs']):
-                    broken.db.insert({'url':url})
-                    brand.db.delete(url)
-            else:
-                try:
+    if not crawling:
+        driver = webdriver.Chrome('./chromedriver')
+        driver.maximize_window()
+        driver.set_page_load_timeout(20)
+        for url in to_delete[start:]:
+            if not start%10:
+                print(start)
+            start+=1
+            try:
+                driver.get(url)
+            except:
+                driver.quit()
+                sleep(5)
+                driver = webdriver.Chrome('./chromedriver')
+                driver.maximize_window()
+                driver.set_page_load_timeout(20)
+                driver.get(url)
+            try:
+                brand = Bershka if 'bershka.com' in url else Mango if 'mango.com' in url else MercedesCampuzano if 'mercedescampuzano.com' in url else PullAndBear if 'pullandbear.com' in url  else Stradivarius if  'stradivarius.com' in url else Zara
+                if not driver.find_elements_by_xpath(brand.xpaths['name']):
+                    sleep(2)
+                if not driver.find_elements_by_xpath(brand.xpaths['name']):
+                    if not driver.find_elements_by_xpath(brand.xpaths['imgs']):
+                        broken.db.insert({'url':url})
+                        brand.db.delete(url)
+                else:
                     try:
-                        priceBfr = driver.find_element_by_xpath(brand.xpaths['priceBfr']).text
-                    except:
-                        sleep(1)
-                        priceBfr = driver.find_element_by_xpath(brand.xpaths['priceBfr']).text
-                    try:
-                        priceNow = driver.find_element_by_xpath(brand.xpaths['priceNow']).text
-                        discount = driver.find_element_by_xpath(brand.xpaths['discount']).text
-                    except:
-                        priceNow = priceBfr
-                        discount = 0
-                    brand.db.update_product([discount, priceBfr, priceNow], url)
-                except Exception as e:
-                    print('Error updating:',url,e)
-        except:
-            print('Error getting')
-    to_delete = broken.getAllUrls()
+                        try:
+                            priceBfr = driver.find_element_by_xpath(brand.xpaths['priceBfr']).text
+                        except:
+                            sleep(1)
+                            priceBfr = driver.find_element_by_xpath(brand.xpaths['priceBfr']).text
+                        try:
+                            priceNow = driver.find_element_by_xpath(brand.xpaths['priceNow']).text
+                            discount = driver.find_element_by_xpath(brand.xpaths['discount']).text
+                        except:
+                            priceNow = priceBfr
+                            discount = 0
+                        brand.db.update_product([discount, priceBfr, priceNow], url)
+                    except Exception as e:
+                        print('Error updating:',url,e)
+            except:
+                print('Error getting')
+        to_delete = broken.getAllUrls()
     latest.close()
     broken.close()
     print(len(to_delete),'items deleted')
@@ -406,6 +410,8 @@ def check_broken_links(databases = [bDb, mDb, zDb, pDb, sDb], start=0):
     requests.post('https://2ksanrpxtd.execute-api.us-east-1.amazonaws.com/dev/molova/delete', f'{{"data": {to_delete}}}'.replace("'",'"')).json()
 
 def sync(brand=''):
+    for db in [bDb, mDb, mngDb, pDb, sDb, zDb, broken, latest]:
+        db.clear()
     if brand and brand in 'Bershka Mango Pull & Bear Stradivarius Zara':
         brand = f'marcas/{brand}'
     else:
@@ -415,30 +421,33 @@ def sync(brand=''):
             endpoint = f'https://2ksanrpxtd.execute-api.us-east-1.amazonaws.com/dev/molova/{brand}/{index}/{last}'.replace(' ','%20')
             print(last,'sale' if index else 'col')
             res = requests.get(endpoint).json()
-            percentage, bar, totalItems = 0, '', len(res['items'])
-            for item in res['items']:
-                if 'Bershka' == item['brand']:
-                    db = bDb
-                elif 'Mercedes' in item['brand']:
-                    db = mDb
-                elif 'Pull' in item['brand']:
-                    db = pDb
-                elif 'Stradivarius' == item['brand']:
-                    db = sDb
-                elif 'Zara' == item['brand']:
-                    db = zDb
-                elif 'Mango' == item['brand']:
-                    db = mngDb
-                for pop in ['data', 'date_time', 'id', 'id_producto']:
-                    item.pop(pop)
-                if not type(item['allPricesNow']) == list:
-                    item['allPricesNow'] = [item['allPricesNow']]
-                db.add(item, sync=True)
-                index += 1
-                if not percentage == int(index / totalItems * 100):
-                    percentage = int(index / totalItems * 100)
-                    bar = bar+'°'
-                    print(f'{percentage}% ({index} de {totalItems}) {bar}')
+            if 'items' in res:
+                percentage, bar, totalItems = 0, '', len(res['items'])
+                for item in res['items']:
+                    if 'Bershka' == item['brand']:
+                        db = bDb
+                    elif 'Mercedes' in item['brand']:
+                        db = mDb
+                    elif 'Pull' in item['brand']:
+                        db = pDb
+                    elif 'Stradivarius' == item['brand']:
+                        db = sDb
+                    elif 'Zara' == item['brand']:
+                        db = zDb
+                    elif 'Mango' == item['brand']:
+                        db = mngDb
+                    for pop in ['data', 'date_time', 'id', 'id_producto']:
+                        item.pop(pop)
+                    if not type(item['allPricesNow']) == list:
+                        item['allPricesNow'] = [item['allPricesNow']]
+                    db.add(item, sync=True)
+                    index += 1
+                    if not percentage == int(index / totalItems * 100):
+                        percentage = int(index / totalItems * 100)
+                        bar = bar+'°'
+                        print(f'{percentage}% ({index} de {totalItems}) {bar}')
+            else:
+                print('ERROR:'+endpoint)
 
 def clear_remote_db():
     driver = webdriver.Chrome("./chromedriver")
@@ -463,16 +472,9 @@ def clear_remote_db():
                         to_delete.append(url)
             requests.post('https://2ksanrpxtd.execute-api.us-east-1.amazonaws.com/dev/molova/delete', f'{{"data": {to_delete}}}'.replace("'",'"')).json()
 
-def create_proxy():
-    url = "https://proxy-orbit1.p.rapidapi.com/v1/"
-    headers = {
-        'x-rapidapi-host': "proxy-orbit1.p.rapidapi.com",
-        'x-rapidapi-key': "9d9755e9camshfaf216df46e23cap1df9acjsn48e435520d1d"
-    }
-    response = requests.request("GET", url, headers=headers)
-    response = json.loads(response.text)
-    proxy = response['curl']
-    return proxy
+def scrap_for_links():
+    for brand in [Mango, Stradivarius]:
+        brand.scrap_for_links()
 
 
 # Main code

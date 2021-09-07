@@ -12,6 +12,7 @@ from Database import Database
 
 brand = 'Mango'
 db = Database(brand)
+tz = pytz.timezone('America/Bogota')
 xpaths={
     'categories':'.//div[@class="section-detail-container section-detail-hidden "]/div/ul[@class="section-detail"]/li[not(contains(@class,"desktop-label-hidden") or contains(@class," label-hidden"))]/a',
     'discount':'.//span[@class="product-discount"]',
@@ -57,9 +58,12 @@ def scrap_for_links():
                 endpoint = endpoint[:endpoint.index('&pageNum=')]
                 if not endpoint in endpoints:
                     endpoints.append((category, endpoint))
+                    if 'rebajas' in category:
+                        new = endpoint
     driver.quit()
-    settings = ast.literal_eval(open('./settings','r').read())
-    settings[brand]['endpoints']=endpoints
+    settings = ast.literal_eval(open('./.settings','r').read())
+    settings[brand]['endpoints'] = endpoints
+    settings[brand]['endpoint'] = new if new else endpoints[0]
     with open('./settings','w') as s:
         s.write(str(settings))
 

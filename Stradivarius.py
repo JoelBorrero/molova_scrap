@@ -14,7 +14,6 @@ from Database import Database
 
 brand = 'Stradivarius'
 db = Database(brand)
-# db = Database(brand+'API')
 tz = pytz.timezone('America/Bogota')
 xpaths = {
     'categories': './/div[@class="categories-menu "]/div[contains(@class,"items-menu")]/div/a[not(@href="javascript:void(0)")]|.//div[@class="categories-menu "]/div[contains(@class,"items-menu")]/div[./a[@href="javascript:void(0)"]]/following-sibling::div[position()=1]//a',
@@ -228,6 +227,7 @@ def scrap_for_links():
         main_categories.append(c.get_attribute('href'))
     get_network = 'var performance = window.performance || window.mozPerformance || window.msPerformance || window.webkitPerformance || {}; var network = performance.getEntries() || {}; return network;'
     endpoints.clear()
+    news = ''
     for c in main_categories:
         if not 'javascript:void' in c:
             driver.get(c)
@@ -236,9 +236,12 @@ def scrap_for_links():
             for i in netData:
                 if all(e in i['name'] for e in ['https://www.stradivarius.com/itxrest/2/catalog/store/55009615/50331099/category/','product?']) and i['name'] not in endpoints:
                     endpoints.append((c,i['name']))
+                    if 'nuevo-c' in c:
+                        news = i['name']
     driver.quit()
     settings = ast.literal_eval(open('./.settings','r').read())
-    settings[brand]['endpoints']=endpoints
+    settings[brand]['endpoints'] = endpoints
+    settings[brand]['endpoint'] = news if news else endpoints[0][1]
     with open('./.settings','w') as s:
         s.write(str(settings))
 

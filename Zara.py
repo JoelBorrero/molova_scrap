@@ -1,11 +1,19 @@
 import os
-from Item import Item
+import ast
+import requests
+from random import uniform
+from datetime import datetime
+import pytz
 from time import sleep
-from Database import Database
+
 from selenium import webdriver
+
+from Item import Item
+from Database import Database
 
 brand = 'Zara'
 db = Database(brand)
+tz = pytz.timezone('America/Bogota')
 xpaths = {
     'categories': './/ul[@class="layout-categories__container"]/li[position()=1]/ul/li/ul/li/a',
     'color':'.//p[contains(@class,"product-detail-selected-color")]',
@@ -30,6 +38,11 @@ xpaths = {
     'subCats':'.//li[@class="variable-width-carousel__item"]/a/div/span',
     'thumbnails': './/ul[@class="product-detail-images-thumbnails product-detail-images__thumbnails"]/li/button',
 }
+try:
+    endpoints = ast.literal_eval(open('./.settings','r').read())[brand]['endpoints']
+except:
+    endpoints = []
+
 
 class ScrapZara:
     def __init__(self):
@@ -188,5 +201,89 @@ class ScrapZara:
         self.driver.close()
         self.driver.switch_to.window(self.driver.window_handles[0])
 
-# Main Code
-# ScrapZara()
+
+def scrap_for_links():
+    driver = webdriver.Chrome('./chromedriver')
+    driver.set_page_load_timeout(30)
+    driver.maximize_window()
+    driver.get('https://www.zara.com/co/')
+    try:
+        driver.find_element_by_xpath('.//button[@class="modal__close-button"]').click()
+        sleep(2)
+        driver.find_element_by_xpath('.//button[@class="modal__close-button"]').click()
+    except:
+        pass
+    main_categories = []
+    for c in driver.find_elements_by_xpath(xpaths['categories']):
+        main_categories.append(c.get_attribute('href'))
+    get_network = 'var performance = window.performance || window.mozPerformance || window.msPerformance || window.webkitPerformance || {}; var network = performance.getEntries() || {}; return network;'
+    endpoints.clear()
+    news = ''
+    for c in main_categories:
+        driver.get(c)
+        sleep(1)
+        netData = driver.execute_script(get_network)
+        for i in netData:
+            if 'products?ajax' in i['name']:
+                endpoints.append((c,i['name']))
+                if 'nuevo-' in c:
+                    news = i['name']
+    driver.quit()
+    settings = ast.literal_eval(open('./.settings','r').read())
+    settings[brand]['endpoints'] = endpoints
+    settings[brand]['endpoint'] = news if news else endpoints[0][1]
+    with open('./.settings','w') as s:
+        s.write(str(settings))
+
+
+
+class APICrawler:
+    def __init__(self, endpoints=endpoints):
+        session = requests.session()
+        headers = {
+            'accept': '*/*',
+            'accept-encoding': 'gzip, deflate, br',
+            'accept-language': 'en-US,en;q=0.9',
+            'cache-control': 'no-cache',
+            'cookie': 'ITXSESSIONID=d458e4b17f001e37dfdd0cc93fbe1717; web_version=STANDARD; bm_sz=B77396026A92E8F97FA258393551A02E~YAAQpKpLaP3Jm7R6AQAAMbyEvg2KTcnl6zbnIQp+bZr8QZF8eXTyts74BzbwCO5yOYGfgrQ1IK/ZtgBxEIdaxz/4vh4DW3DjZOvD6jMhLg7HWKxSEJLwRG3QE9en2at6n104IgL8ncgIML9rNJfv9bzJoKScK+FbZnG9Xav64FI9U850vPuzCcC2Q7yluiPX1McNYw0glOBo7TH6dO5feI2rFAWAJJfHv6Y2eQ6gYu46OZ7vOanrBwTi4HaeVptV80R+3gLetroqBfLaWXZIIT82hBO90y27hL8JeHD/HtE0~3424833~4273222; _abck=AD1BE4EBB69FA500FE0C71CB433A60B0~0~YAAQpKpLaAPKm7R6AQAAj8GEvgZ+SRGl6rrPLN5AeYGCRe76FBuhKFLzvcf3qD+YdOCRYAq2AO4JgUfWq00iE7KWe9B8TeKUqodFqzD/yAoJrN+LvAfwmmP5mO+hPcndGJYxcSWBTUZRrzFyR8labOPBk04SMr6ie4QMrOtjwfo8W8vG9PDex8FGoZhZqcE4Qu10CbBlOpzcumdc0ka6X2L/D2XMfq19EyBgvRiWSKHCHZOC6R4SxI8z1VrDxGvpcdxDNSq+UzOWpjPuV8xRJwQfoKfItmWWPzEcPn3OF2mwQGhHy6JUaE/mIF1ldde8qpRz38KFsrLYX2n+Htlim5tgX0gLSo1UhSmYgVDXx/KbM2Yr0l5ImcUGgNE2lCZsj6hJ5tQT12ARz8zv/FBvQZxCmNiFaw==~-1~-1~-1; ak_bmsc=8329DA2709C86864C6E40D3ACBA821AE~000000000000000000000000000000~YAAQpKpLaAvKm7R6AQAAP8WEvg33e6w414subhHXC3mgw6uB3YZvjS22aPHbCCOR2laB3AF2hINX/nG2ud2aPU/v5/kJFsIbuoaI5WTCKYiqIyJEks63rvazFKn4okA8r5u/Q0pvGUpPz/L8GdmTOHxrU7cvHqltA5MS/nD0C1Ctt6TXz0M1kmZKBOEJHmlPH1mQPoNiZQVieRSO4+bk4Im9ml5yO691ogvDxw//dHwUd4xvWylRyyHAqTl89Mbar93V2xmKl/ANvdzPRwtzdFxVameqNjlL+nYLPAlPNxsLfKPKcKjHhl45G5iAtcMbc5BahKLAwQ4QuutHfVnFWaWANAO7UH1v7h1kOT5LqM8L+bTryXq0xWUSLpL/R6D++Uaz1J69mEfisXiH5VVeyHtXiInPxYiucKayF5bLUE60rCT9fSsVfb8zxwRkdaPx4AQ+Vdhcc/X6ujcubVnBZyyrh4j3OhxF+ZmUsOcrZmEr9wrTpxpN/w==; rid=61e5ec44-e21e-4a15-a356-817a5015c536; vwr_global=1.1.1630988978.b8630a30-29c8-4f68-a346-56eeff82262b.1630988978..M4EHYfBDQijUPEKmwTyNXh4yy6_bS2cOX-QOKMWkhow; storepath=co%2Fes; cart-was-updated-in-standard=true; rskxRunCookie=0; rCookie=jo27kadi1hlmxxaul4r3kt9kq6n1; chin={"status":"chat-status:not_connected","isChatAttended":false,"privacyAccepted":false,"email":"","userJid":"","uiCurrentView":"view:hidden","timeShowInteractiveChat":0,"compatMode":true,"businessKind":"online"}; lastRskxRun=1630988990053; _ga=GA1.2.1818226498.1630988991; _gid=GA1.2.237491462.1630988991; _fbp=fb.1.1630988991038.1662346990; _gat_UA-18083935-1=1; OptanonConsent=isIABGlobal=false&datestamp=Mon+Sep+06+2021+23%3A29%3A51+GMT-0500+(Colombia+Standard+Time)&version=6.8.0&hosts=&consentId=a9608d84-85af-48dd-b839-cfa5e1d8d766&interactionCount=1&landingPath=https%3A%2F%2Fwww.zara.com%2Fco%2Fes%2Fmujer-nuevo-l1180.html%3Fv1%3D1881787&groups=C0001%3A1%2CC0002%3A1%2CC0003%3A1%2CC0004%3A1; RT="z=1&dm=zara.com&si=38791a9a-8027-4374-94b3-e222789fe077&ss=kt9kq31v&sl=4&tt=emy&bcn=%2F%2F17c8edc7.akstat.io%2F&ld=dz3&ul=y6f&hd=ycs"; _ga_D8SW45BC2Z=GS1.1.1630988990.1.0.1630989019.31',
+            'pragma': 'no-cache',
+            'referer': 'https://www.zara.com/co/es/mujer-nuevo-l1180.html?v1=1881787',
+            'sec-ch-ua': '"Chromium";v="92", " Not A;Brand";v="99", "Google Chrome";v="92"',
+            'sec-ch-ua-mobile': '?0',
+            'sec-fetch-dest': 'empty',
+            'sec-fetch-mode': 'cors',
+            'sec-fetch-site': 'same-origin',
+            'user-agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/92.0.4515.159 Safari/537.36'}
+        session.headers.update(headers)
+        filename = './Database/LogsZARA.txt'
+        open(filename, 'w').close()
+        for endpoint in endpoints:
+            logs = open(filename, 'a')
+            headers = session.headers
+            products = session.get(endpoint[1]).json()['productGroups'][0]['elements']
+            logs.write(f'{datetime.now(tz).hour}:{datetime.now(tz).minute}   -   {len(products)} productos  -  {endpoint[0]}\n')
+            logs.close()
+            for product in products:
+                try:
+                    layout = product['layout'] #1G
+                    product = product['commercialComponents'][0]
+                    name = product['name']
+                    description = product['description']
+                    price_before = product['price']/100
+                    category = product['familyName']
+                    subcategory = product['subfamilyName']
+                    product = product['detail']
+                    ref = product['displayReference']
+                    colors, all_images, all_sizes = [], [], []
+                    for color in product['colors']:
+                        colors.append(color['name'])
+                        images, sizes = [], []
+                        for image in color['xmedia']:
+                            images.append(f'https://static.zara.net/photos//{image["path"]}/w/563/{image["name"]}.jpg?ts={image["timestamp"]}')
+                        all_images.append(images)
+                    item = Item(brand,name,ref,description,price_before,[price_now],0,all_images,url,all_sizes,colors,category,category,subcategory,subcategory,sale,'Mujer')
+                except Exception as e:
+                    logs = open(filename, 'a')
+                    logs.write(f'X {datetime.now(tz).hour}:{datetime.now(tz).minute}:{datetime.now(tz).second}   -   {e}\n')
+                    logs.close()
+                    print(e)
