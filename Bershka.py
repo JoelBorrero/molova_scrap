@@ -18,7 +18,7 @@ db = Database(brand)
 tz = pytz.timezone('America/Bogota')
 xpaths = {
     'categories': './/li[@class="sub-menu-item"]/a[not(contains(@href,"total-look")) and not(contains(@href,"join")) and not(contains(@href,"creators")) and not(@aria-label="Ir a Ver Todo")]',
-    'colorsBtn': './/ul[@class="swiper-wrapper"]/li/a/div/img',
+    'colorsBtn': './/ul[@class="swiper-wrapper"]/li/a/span/img',
     'coming': './span/span/span',
     'description': './/section[@class="product-info"]',
     'discount': './/div[contains(@class,"price-elem")]/span[@class="discount-tag"]',
@@ -26,7 +26,7 @@ xpaths = {
     'fast_discount': './div/div/span',
     'fast_priceBfr':'.//span[contains(@class,"old-price")]',
     'fast_priceNow':'.//div[contains(@class,"price-elem")]/span[contains(@class,"current")]',
-    'imgs': './/div/button/div[@class="image-item-wrapper"]/img',
+    'imgs': './/div/button/span[@class="image-item-wrapper"]/img',
     'name': './/h1[@class="product-title"]',
     'priceBfr': './/span[@class="old-price-elem"]|.//div[@class="top-group"]/div/span[@class="current-price-elem"]',
     'priceNow': './/span[contains(@class,"current-price-elem")]',
@@ -121,6 +121,7 @@ class ScrapBershka:
             elems = self.driver.find_elements_by_xpath(xpaths['elems'])
         while elems:
             e = elems.pop()
+            self.driver.execute_script('arguments[0].scrollIntoView();', e)
             url = e.get_attribute('href')
             if db.contains(url):
                 db.update_product(e, url, xpaths)
@@ -145,36 +146,40 @@ class ScrapBershka:
                 discount = '0'
             colorsBtn = self.driver.find_elements_by_xpath(xpaths['colorsBtn'])
             colors, allSizes, allImages = [], [], []
-            for c in colorsBtn:
-                try:
-                    c.click()
-                except:
-                    sleep(2)
-                    c.click()
-                colors.append(c.get_attribute('src'))
-                sizes, images = [], []
-                sizesTags = self.driver.find_elements_by_xpath(xpaths['sizesTags'])
-                for s in sizesTags:
-                    try:
-                        s.find_element_by_xpath(xpaths['coming'])
-                        sizes.append(f'{s.get_attribute("innerText")}(Próximamente)')
-                    except:
-                        if "is-disabled" in s.get_attribute("class"):
-                            sizes.append(f'{s.get_attribute("innerText")}(Agotado)')
-                        else:
-                            sizes.append(s.get_attribute('innerText'))
-                if not sizes:
-                    sizes = ['Única']
-                allSizes.append(sizes)
-                self.driver.find_element_by_xpath('.//body').send_keys(Keys.END)
-                while not images:
+            for c in range(len(colorsBtn)):
+                colorsBtn = self.driver.find_elements_by_xpath(xpaths['colorsBtn'])
+                if c < len(colorsBtn): # Founds 2x then 1x
+                    c = colorsBtn[c]
                     sleep(1)
-                    for i in self.driver.find_elements_by_xpath(xpaths['imgs']):
-                        images.append(i.get_attribute('src'))
-                allImages.append(images)
-                self.driver.find_element_by_xpath('.//body').send_keys(Keys.HOME)
+                    try:
+                        c.click()
+                    except:
+                        sleep(2)
+                        c.click()
+                    colors.append(c.get_attribute('src'))
+                    sizes, images = [], []
+                    sizesTags = self.driver.find_elements_by_xpath(xpaths['sizesTags'])
+                    for s in sizesTags:
+                        try:
+                            s.find_element_by_xpath(xpaths['coming'])
+                            sizes.append(f'{s.get_attribute("innerText")}(Próximamente)')
+                        except:
+                            if "is-disabled" in s.get_attribute("class"):
+                                sizes.append(f'{s.get_attribute("innerText")}(Agotado)')
+                            else:
+                                sizes.append(s.get_attribute('innerText'))
+                    if not sizes:
+                        sizes = ['Única']
+                    allSizes.append(sizes)
+                    self.driver.find_element_by_xpath('.//body').send_keys(Keys.END)
+                    while not images:
+                        sleep(1)
+                        for i in self.driver.find_elements_by_xpath(xpaths['imgs']):
+                            images.append(i.get_attribute('src'))
+                    allImages.append(images)
+                    self.driver.find_element_by_xpath('.//body').send_keys(Keys.HOME)
             if not colorsBtn:
-                sizes = []
+                sizes, images = [], []
                 sizesTags = self.driver.find_elements_by_xpath(xpaths['sizesTags'])
                 for s in sizesTags:
                     try:
@@ -192,7 +197,6 @@ class ScrapBershka:
                 if not sizes:
                     sizes = ['Única']
                 allSizes.append(sizes)
-                images = []
                 self.driver.find_element_by_xpath('.//body').send_keys(Keys.END)
                 if len(self.driver.find_elements_by_xpath(xpaths['imgs'])) < 2:
                     sleep(3)

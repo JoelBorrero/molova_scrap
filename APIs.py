@@ -20,8 +20,8 @@ except FileNotFoundError:
         s.write(str(settings))
 brands = [
     {'name': 'Stradivarius', 'endpoint': settings['Stradivarius']['endpoint'], 'endpoints': settings['Stradivarius']['endpoints'], 'updates': True},
-    {'name': 'Mango', 'endpoint': settings['Mango']['endpoints'], 'endpoints': settings['Mango']['endpoints'], 'updates': True},
-    {'name': 'Zara', 'endpoint': settings['Zara']['endpoints'], 'endpoints': settings['Zara']['endpoints'], 'updates': True}]
+    {'name': 'Mango', 'endpoint': settings['Mango']['endpoint'], 'endpoints': settings['Mango']['endpoints'], 'updates': True},
+    {'name': 'Zara', 'endpoint': settings['Zara']['endpoint'], 'endpoints': settings['Zara']['endpoints'], 'updates': True}]
 
 class Catcher:
     def __init__(self):
@@ -79,7 +79,12 @@ class Catcher:
             self.update_headers()
             for brand in brands:
                 res = self.session.get(brand['endpoint']).json()
-                new_data = res['products'] if brand['name'] == 'Stradivarius' else res['groups'][0]['garments']
+                new_data = res['products'] if brand['name'] == 'Stradivarius' else res['groups'][0]['garments'] if brand['name'] == 'Mango' else res['productGroups'][0]['elements']
+                if type(new_data) is dict:
+                    new_list = []
+                    for _,key in enumerate(new_data):
+                        new_list.append(new_data[key])
+                    new_data = new_list
                 if len(new_data) > 100:
                     new_data = new_data[:100]
                 try:

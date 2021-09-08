@@ -58,10 +58,8 @@ def scrap_for_links():
                 endpoint = i['name']
                 endpoint = endpoint[:endpoint.index('&pageNum=')]
                 if not endpoint in str(endpoints):
-                    print('Added')
                     endpoints.append((category, endpoint))
                     if 'rebajas' in category:
-                        print('REBAJA')
                         new = endpoint
     driver.quit()
     settings = ast.literal_eval(open('./.settings','r').read())
