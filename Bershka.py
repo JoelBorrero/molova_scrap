@@ -21,15 +21,15 @@ xpaths = {
     'colorsBtn': './/ul[@class="swiper-wrapper"]/li/a/div/img',
     'coming': './span/span/span',
     'description': './/section[@class="product-info"]',
-    'discount': './/span[@class="discount-tag"]',
+    'discount': './/div[contains(@class,"price-elem")]/span[@class="discount-tag"]',
     'elems': './/ul[@class="grid-container"]/li/div/a',
     'fast_discount': './div/div/span',
-    'fast_priceBfr':'.//span[@class="old-price-elem"]',
-    'fast_priceNow':'.//div[contains(@class,"current-price-elem")]',
+    'fast_priceBfr':'.//span[contains(@class,"old-price")]',
+    'fast_priceNow':'.//div[contains(@class,"price-elem")]/span[contains(@class,"current")]',
     'imgs': './/div/button/div[@class="image-item-wrapper"]/img',
     'name': './/h1[@class="product-title"]',
-    'priceBfr': './/span[@class="old-price-elem"]|.//div[@class="top-group"]/div/div[@class="current-price-elem"]',
-    'priceNow': './/div[contains(@class,"current-price-elem")]',
+    'priceBfr': './/span[@class="old-price-elem"]|.//div[@class="top-group"]/div/span[@class="current-price-elem"]',
+    'priceNow': './/span[contains(@class,"current-price-elem")]',
     'ref': './/div[@class="product-reference"]',
     'sale': './/ul[@class="sub-menu-container is-active"]/li/a',
     'sizesTags': './/div[@class="sizes-list-detail"]/ul/li/button',
@@ -71,13 +71,9 @@ class ScrapBershka:
         self.sale = False
         categories = [[], [], self.driver.find_elements_by_xpath(xpaths['categories'])]
         for c in categories[2]:
-            cat = c.get_attribute('innerText').replace('\n', '')
-            categories[1].append(c.get_attribute('href'))
-            while cat.startswith(' '):
-                cat = cat[1:]
-            while cat.endswith(' '):
-                cat = cat[:-1]
+            cat = c.get_attribute('innerText').replace('\n', '').strip()
             categories[0].append(cat)
+            categories[1].append(c.get_attribute('href'))
         categories[2].clear()
         for c in range(len(categories[0])):
             self.category = categories[0][c]
@@ -100,7 +96,6 @@ class ScrapBershka:
         if subCats:
             for s in range(len(subCats)):
                 if not 'Todas' in subCats[s].get_attribute('innerText'):
-                    # try:
                     self.driver.find_element_by_xpath('.//body').send_keys(Keys.HOME)
                     sleep(1)
                     subCats[s].click()
@@ -110,8 +105,6 @@ class ScrapBershka:
                     self.subcategory = subCats[s].get_attribute('innerText')
                     self.originalSubcategory = subCats[s].get_attribute('innerText')
                     self.scrapSubcategory()
-                    # except:
-                    #     print('Error clicking')
         else:
             self.subcategory = self.category
             self.originalSubcategory = self.category
@@ -151,9 +144,7 @@ class ScrapBershka:
                 priceBfr = priceNow
                 discount = '0'
             colorsBtn = self.driver.find_elements_by_xpath(xpaths['colorsBtn'])
-            colors = []
-            allSizes = []
-            allImages = []
+            colors, allSizes, allImages = [], [], []
             for c in colorsBtn:
                 try:
                     c.click()
@@ -161,7 +152,7 @@ class ScrapBershka:
                     sleep(2)
                     c.click()
                 colors.append(c.get_attribute('src'))
-                sizes = []
+                sizes, images = [], []
                 sizesTags = self.driver.find_elements_by_xpath(xpaths['sizesTags'])
                 for s in sizesTags:
                     try:
@@ -175,7 +166,6 @@ class ScrapBershka:
                 if not sizes:
                     sizes = ['Única']
                 allSizes.append(sizes)
-                images = []
                 self.driver.find_element_by_xpath('.//body').send_keys(Keys.END)
                 while not images:
                     sleep(1)
@@ -296,7 +286,33 @@ class APICrawler:
             for product in products:
                 try:
                     name = product['name']
-                    
+                    category = product['relatedCategories'][0]['name']
+                    product = product['detail']
+                    description = product['description'] if product['description'] else product['longDescription']
+                    price_before = product['price']/100
+                    try:
+                        price_now = product['price_discount']#NOT REAL
+                        discount = product['discount']
+                        sale = True
+                    except KeyError:
+                        price_now = price_before
+                        discount = 0
+                        sale = False
+                    url = f'https://www.zara.com/co/es/{product["seo"]["keyword"]}-p{product["seo"]["seoProductId"]}.html'
+                    subcategory = product['subfamilyName']
+                    ref = product['displayReference']
+                    colors, all_images, all_sizes = [], [], []
+                    for color in product['bundleColors']:
+                        colors.append(color['name'])
+                        images, sizes = [], []
+                        for image in color['xmedia']:
+                            images.append(f'https://static.zara.net/photos//{image["path"]}/w/563/{image["name"]}.jpg?ts={image["timestamp"]}')
+                        all_images.append(images)
+                    item = Item(brand,name,ref,description,price_before,[price_now],0,all_images,url,all_sizes,colors,category,category,subcategory,subcategory,sale,'Mujer')
+                    db.add(item)
+                    logs = open(filename, 'a')
+                    logs.write(f'    + {datetime.now(tz).hour}:{datetime.now(tz).minute}:{datetime.now(tz).second}   -   {name}\n')
+                    logs.close()
                 except Exception as e:
                     logs = open(filename, 'a')
                     logs.write(f'X {datetime.now(tz).hour}:{datetime.now(tz).minute}:{datetime.now(tz).second}   -   {e}\n')

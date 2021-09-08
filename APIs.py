@@ -9,7 +9,8 @@ import pandas as pd
 
 import Mango
 import Stradivarius
-from Main import check_broken_links, post
+import Zara
+from Main import check_broken_links, post, sync
 
 try:
     settings = ast.literal_eval(open('./.settings','r').read())
@@ -47,7 +48,7 @@ class Catcher:
         for i,j in enumerate(self.df):
             self.df[j].to_excel(self.writer,j, index=False)
         self.writer.save()
-        self.check()
+        # self.check()
 
     def update_headers(self):
         self.session = requests.session()
@@ -116,7 +117,7 @@ class Catcher:
                         print(f'Crawling {brand["name"]}')
                         exec(f'{brand["name"]}.APICrawler(brand["endpoints"])')
                 check_broken_links(crawling=True)
-                post()
+                post(crawling=True)
                 count = 0
             sleep(randint(3000, 4000))
 

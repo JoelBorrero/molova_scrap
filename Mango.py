@@ -48,23 +48,26 @@ def scrap_for_links():
     categories = []
     for i in driver.find_elements_by_xpath(xpaths['categories']):
         categories.append(i.get_attribute('href'))
+    scriptToExecute = 'var performance = window.performance || window.mozPerformance || window.msPerformance || window.webkitPerformance || {}; var network = performance.getEntries() || {}; return network;'
+    new = ''
     for category in categories:
         driver.get(category)
-        scriptToExecute = 'var performance = window.performance || window.mozPerformance || window.msPerformance || window.webkitPerformance || {}; var network = performance.getEntries() || {}; return network;'
         netData = driver.execute_script(scriptToExecute)
         for i in netData:
             if '/services/productlist/products/CO/she/' in i['name']:
-                endpoint = (i['name'])
+                endpoint = i['name']
                 endpoint = endpoint[:endpoint.index('&pageNum=')]
-                if not endpoint in endpoints:
+                if not endpoint in str(endpoints):
+                    print('Added')
                     endpoints.append((category, endpoint))
                     if 'rebajas' in category:
+                        print('REBAJA')
                         new = endpoint
     driver.quit()
     settings = ast.literal_eval(open('./.settings','r').read())
     settings[brand]['endpoints'] = endpoints
-    settings[brand]['endpoint'] = new if new else endpoints[0]
-    with open('./settings','w') as s:
+    settings[brand]['endpoint'] = new if new else endpoints[0][1]
+    with open('./.settings','w') as s:
         s.write(str(settings))
 
 

@@ -81,7 +81,7 @@ def merge(databases = [bDb, mDb, zDb, pDb, sDb, mngDb]):
         f.write(str(total_urls))
     # input('\nPresione enter para salir\n')
 
-def scrap(brands = ["""'Stradivarius','Mango',""" 'PullAndBear', 'Bershka', 'MercedesCampuzano', 'Zara']):
+def scrap(brands = ["""'Stradivarius','Mango', 'Zara'""" 'PullAndBear', 'Bershka', 'MercedesCampuzano']):
     for brand in brands:
         print('>>>>> ',brand,' <<<<<')
         try:
@@ -329,7 +329,9 @@ def jsonToBody(json):
     json['colors'] = '__colors__'
     return str(json).replace("'",'"').replace('"sale": True','"sale": 1').replace('"sale": False','"sale": 0').replace('"__allPricesNow__"',str(_backup[0])).replace('__allImages__',str(_backup[1])).replace('__allSizes__',str(_backup[2])).replace('__colors__',str(_backup[3])).replace('á','a').replace('é','e').replace('í','i').replace('ó','o').replace('ú','u').replace('Á','A').replace('É','E').replace('Í','I').replace('Ó','O').replace('Ú','U')
 
-def post(databases = [mngDb, bDb, mDb, zDb, pDb, sDb]):
+def post(databases = [bDb, mDb, pDb, zDb, mngDb, sDb], crawling=False):
+    if crawling:
+        databases = databases[3:]
     totalItems = 0
     percentage = 0
     index = 0
@@ -404,18 +406,19 @@ def check_broken_links(databases = [bDb, mDb, zDb, pDb, sDb], start=0, crawling=
         to_delete = broken.getAllUrls()
     latest.close()
     broken.close()
-    print(len(to_delete),'items deleted')
-    open('./Database/Latest.json', 'w').close()
-    open('./Database/Broken.json', 'w').close()
-    requests.post('https://2ksanrpxtd.execute-api.us-east-1.amazonaws.com/dev/molova/delete', f'{{"data": {to_delete}}}'.replace("'",'"')).json()
+    if to_delete:
+        print(len(to_delete),'items deleted')
+        open('./Database/Latest.json', 'w').close()
+        open('./Database/Broken.json', 'w').close()
+        requests.post('https://2ksanrpxtd.execute-api.us-east-1.amazonaws.com/dev/molova/delete', f'{{"data": {to_delete}}}'.replace("'",'"')).json()
 
 def sync(brand=''):
-    for db in [bDb, mDb, mngDb, pDb, sDb, zDb, broken, latest]:
-        db.clear()
     if brand and brand in 'Bershka Mango Pull & Bear Stradivarius Zara':
         brand = f'marcas/{brand}'
     else:
         brand = 'coleccion'
+        for db in [bDb, mDb, mngDb, pDb, sDb, zDb, broken, latest]:
+            db.clear()
     for last in ['Camisas y Camisetas','Pantalones y Jeans','Vestidos y Enterizos','Faldas y Shorts','Abrigos y Blazers','Ropa Deportiva', 'Zapatos','Bolsos','Accesorios']:
         for index in [0,1]:
             endpoint = f'https://2ksanrpxtd.execute-api.us-east-1.amazonaws.com/dev/molova/{brand}/{index}/{last}'.replace(' ','%20')
