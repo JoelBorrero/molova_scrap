@@ -297,7 +297,6 @@ class APICrawler:
         open('./Database/LogsSTR.txt','w').close()
         for endpoint in endpoints:
             logs = open('./Database/LogsSTR.txt','a')
-            headers = session.headers
             res = session.get(endpoint[1]).json()
             logs.write(f'{datetime.now(tz).hour}:{datetime.now(tz).minute}   -   {len(res["products"])} productos  -  {endpoint[0]}\n')
             logs.close()
@@ -369,7 +368,7 @@ class APICrawler:
                                         images.append(image)
                             allImages.append(images)
                         item.allImages = allImages
-                    db.add(item, sync=True)
+                    db.add(item)
                     logs = open('./Database/LogsSTR.txt','a')
                     logs.write(f'    + {datetime.now(tz).hour}:{datetime.now(tz).minute}:{datetime.now(tz).second}   -   {name}\n')
                     logs.close()
@@ -378,6 +377,7 @@ class APICrawler:
                     logs.write(f'X {datetime.now(tz).hour}:{datetime.now(tz).minute}:{datetime.now(tz).second}   -   {e}\n')
                     logs.close()
                     print(e)
+            headers = session.headers
             sleep(uniform(120,300))
             session = requests.session()
             session.headers.update(headers)

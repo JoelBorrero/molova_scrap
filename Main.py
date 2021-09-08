@@ -473,7 +473,7 @@ def clear_remote_db():
             requests.post('https://2ksanrpxtd.execute-api.us-east-1.amazonaws.com/dev/molova/delete', f'{{"data": {to_delete}}}'.replace("'",'"')).json()
 
 def scrap_for_links():
-    for brand in [Mango, Stradivarius]:
+    for brand in [Mango, Stradivarius, Zara]:
         brand.scrap_for_links()
 
 

@@ -2,7 +2,7 @@ import ast
 import pytz
 import requests
 from time import sleep
-from random import uniform
+from random import randint
 from datetime import datetime
 
 import pandas as pd
@@ -17,8 +17,10 @@ except FileNotFoundError:
     settings = {'Mango': {'endpoints': [], 'endpoint': ''}, 'Stradivarius': {'endpoints': [], 'endpoint': ''}, 'Zara': {'endpoints': [], 'endpoint': ''}}
     with open('./.settings','w') as s:
         s.write(str(settings))
-brands = [{'name': 'Stradivarius', 'endpoint': 'https://www.stradivarius.com/itxrest/2/catalog/store/55009615/50331099/category/1020093507/product?languageId=-48&appId=1', 'updates': True, "endpoints": settings['Stradivarius']['endpoints']}, {'name': 'Mango', 'endpoint': 'https://shop.mango.com/services/productlist/products/CO/she/sections_she_colombia_rebajas_SpecialSale_HighViz.rebajas_she_mobile/?saleSeasons=4,5,3,8&pageNum=1&rowsPerPage=20&columnsPerRow=4', 'updates': True, "endpoints": settings['Mango']['endpoints']}]
-
+brands = [
+    {'name': 'Stradivarius', 'endpoint': settings['Stradivarius']['endpoint'], 'endpoints': settings['Stradivarius']['endpoints'], 'updates': True},
+    {'name': 'Mango', 'endpoint': settings['Mango']['endpoints'], 'endpoints': settings['Mango']['endpoints'], 'updates': True},
+    {'name': 'Zara', 'endpoint': settings['Zara']['endpoints'], 'endpoints': settings['Zara']['endpoints'], 'updates': True}]
 
 class Catcher:
     def __init__(self):
@@ -54,8 +56,7 @@ class Catcher:
             'accept-encoding': 'gzip, deflate, br',
             'accept-language': 'es-US,es;q=0.9',
             'content-type': 'application/json',
-            # 'cookie': 'ITXSESSIONID=182592649f55aa1d98689723945fba3c; _abck=98D0A42A991781EA9192E81AB1B3DA3F~-1~YAAQT/1Vvs+4hLh6AQAAeqNzSgaJEW8ixKACFBQiOORFishd5S4Qz7WkGyAvA0LNo/wTMQ4S6a5NkeaLagHp/t9Zbk9B6ga2UTgMBMhrC0rtyMirxcWjDCX8+hXQRF5Eex8lXYCu4V7H7HyTvSBPuK29LvIW3aFHvmqxw17hbJBndu67nAhdmxNNZ7r7wuqF861oo9dVhzLHYbhiBjPUmuOr5x22PV8HNtU3a15bH/pTOp/86mPMTWdWmmsO40hy/cFHprjRPILbrZqtt5zsZ46U6d+ODU2pGvwyvOXyIwQ4rSrPcBKcgmUw6Dtq/GBqlVzS9wfKc5RsbjAvn2anQyRSLhdS2ClIRGBc7knewLNuoBXxNrPFq3lPzdt5uXs=~-1~-1~-1; ak_bmsc=DD61DFF3B5C9D1B3E4463FEA8F6BDEC3~000000000000000000000000000000~YAAQT/1VvtC4hLh6AQAAeqNzSgzQJDKMApzD4ibQ2yO5D+QCMRHgTZRmSgabRaqtAeQTyqfPc0D1k3m0S66Jr5kvkwDl1rr1NNCyBLA+jZ83hwbE3Oq2KmOponQVKwsCHqbtQVS7W9Ne7/8kmLznO6z2fbKXtMG8Zntc+aeqY4eJ46PIzSdQPjrIoFu5zqPAOEbnSa99LDEcuJpIErezw5E+EDrbrh8n0OnL5xHzyiyTMYrq9uPKMfzzpM4NDUovIBvvN0TwGcDU0b6Ju+UlF9cqiMUhMaoLZCXw+RcFF/4aAhpstC8h5gJa4BCk/P7EIeBpOFJg9nKgWeqiP6Hkhh46mn3XN67SPHCt4/3iyVYumSCtiKryOQktUcVzkEO9V30=; bm_sz=972FA142E752B8D15050CD920326B68B~YAAQT/1VvtG4hLh6AQAAeqNzSgzXXX/95f+VvKgIwgtfU2OQW+ZMBBTicVhdB7msgrQ1jZ+P5pI1kwmpg3hmAD/29FxFdJTtw6yQTmmoLL8J2d2ZJj6JryxZIjM1uqDkZ7gy1mIP8kKwn61leSzqsZvRD+Zc5wYav5rroxMeNcFT0InjGA+juZx8ZtWfZ1PI5fD2iK1fDhUoZxcLAHJc5ALWycjN/fqV8WpnA+YJKNJVr7ePQncd0aNN3tLJGptKK49ts8dEtjYh2GbwUhuRRO5NQJCGvdpcpdjhTtruOEjQgrgevMA7naI=~3491394~3425845',
-            'user-agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/92.0.4515.131 Safari/537.36',})
+            'user-agent': ['Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/92.0.4515.131 Safari/537.36', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.111 Safari/537.36', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_2) AppleWebKit/601.3.9 (KHTML, like Gecko) Version/9.0.2 Safari/601.3.9', 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:15.0) Gecko/20100101 Firefox/15.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.2311.135 Safari/537.36 Edge/12.246'][randint(0, 4)]})
 
     def write(self, data, brand):
         self.today = f'{datetime.now(self.tz).day} - {datetime.now(self.tz).month}'
@@ -117,12 +118,11 @@ class Catcher:
                 check_broken_links(crawling=True)
                 post()
                 count = 0
-            sleep(uniform(3000, 4000))
+            sleep(randint(3000, 4000))
 
 
 def scrap_links():
     for brand in brands:
         exec(f'{brand["name"]}.scrap_for_links()')
-
 
 self = Catcher()

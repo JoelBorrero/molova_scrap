@@ -1,14 +1,21 @@
-from Item import Item
+import ast
+import pytz
+import requests
 from time import sleep
-from Database import Database
+from datetime import datetime
+from random import randint
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
+from Item import Item
+from Database import Database
+
 brand = 'Bershka'
 db = Database(brand)
+tz = pytz.timezone('America/Bogota')
 xpaths = {
     'categories': './/li[@class="sub-menu-item"]/a[not(contains(@href,"total-look")) and not(contains(@href,"join")) and not(contains(@href,"creators")) and not(@aria-label="Ir a Ver Todo")]',
     'colorsBtn': './/ul[@class="swiper-wrapper"]/li/a/div/img',
@@ -28,6 +35,10 @@ xpaths = {
     'sizesTags': './/div[@class="sizes-list-detail"]/ul/li/button',
     'subCats': './/div[@class="filter-tag-swiper"]/div/ul/li',
 }
+try:
+    endpoints = ast.literal_eval(open('./.settings','r').read())[brand]['endpoints']
+except:
+    endpoints = []
 
 
 class ScrapBershka:
@@ -225,7 +236,76 @@ class ScrapBershka:
             print(e)
         self.driver.close()
         self.driver.switch_to.window(self.driver.window_handles[0])
-        
-        
+
+
+def scrap_for_links():
+    driver = webdriver.Chrome('./chromedriver')
+    driver.set_page_load_timeout(30)
+    driver.maximize_window()
+    driver.get('https://www.bershka.com/co/')
+    try:
+        driver.find_element_by_xpath('.//button[@class="modal__close-button"]').click()
+        sleep(2)
+        driver.find_element_by_xpath('.//button[@class="modal__close-button"]').click()
+    except:
+        pass
+    main_categories = []
+    for c in driver.find_elements_by_xpath(xpaths['categories']):
+        main_categories.append(c.get_attribute('href'))
+    get_network = 'var performance = window.performance || window.mozPerformance || window.msPerformance || window.webkitPerformance || {}; var network = performance.getEntries() || {}; return network;'
+    endpoints.clear()
+    news = ''
+    for c in main_categories:
+        driver.get(c)
+        sleep(1)
+        netData = driver.execute_script(get_network)
+        for i in netData:
+            if 'products?ajax' in i['name']:
+                endpoints.append((c,i['name']))
+                if 'nuevo-' in c:
+                    news = i['name']
+    driver.quit()
+    settings = ast.literal_eval(open('./.settings','r').read())
+    settings[brand]['endpoints'] = endpoints
+    settings[brand]['endpoint'] = news if news else endpoints[0][1]
+    with open('./.settings','w') as s:
+        s.write(str(settings))
+
+
+class APICrawler:
+    def __init__(self, endpoints=endpoints):
+        session = requests.session()
+        headers = {
+            'accept': 'application/json, text/plain, */*',
+            'accept-encoding': 'gzip, deflate, br',
+            'accept-language': 'en-US,en;q=0.9',
+            'referer': 'https://www.bershka.com/',
+            'sec-ch-ua-mobile': '?0',
+            'sec-fetch-dest': 'empty',
+            'sec-fetch-mode': 'cors',
+            'sec-fetch-site': 'same-origin',
+            'user-agent': ['Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/92.0.4515.131 Safari/537.36', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.111 Safari/537.36', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_2) AppleWebKit/601.3.9 (KHTML, like Gecko) Version/9.0.2 Safari/601.3.9', 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:15.0) Gecko/20100101 Firefox/15.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.2311.135 Safari/537.36 Edge/12.246'][randint(0, 4)]}
+        session.headers.update(headers)
+        filename = './Database/LogsBERSHKA.txt'
+        open(filename, 'w').close()
+        for endpoint in endpoints:
+            logs = open(filename, 'a')
+            products = session.get(endpoint[1]).json()['products']
+            logs.write(f'{datetime.now(tz).hour}:{datetime.now(tz).minute}   -   {len(products)} productos  -  {endpoint[0]}\n')
+            logs.close()
+            for product in products:
+                try:
+                    name = product['name']
+                    
+                except Exception as e:
+                    logs = open(filename, 'a')
+                    logs.write(f'X {datetime.now(tz).hour}:{datetime.now(tz).minute}:{datetime.now(tz).second}   -   {e}\n')
+                    logs.close()
+                    print(e)
+            headers = session.headers
+            sleep(randint(120,300))
+            session = requests.session()
+            session.headers.update(headers)
+
 # Main Code
 # ScrapBershka()

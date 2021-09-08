@@ -1,7 +1,7 @@
 import requests
 import ast
 from time import sleep
-from random import uniform
+from random import randint
 from datetime import datetime
 import pytz
 
@@ -120,7 +120,7 @@ class APICrawler:
                     pageNum = 0
                 else:
                     pageNum += 1
-                sleep(uniform(30,120))
+                sleep(randint(30,120))
             logs.close()
         db.close()
 
