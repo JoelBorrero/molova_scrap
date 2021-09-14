@@ -1,4 +1,5 @@
 import os
+import ast
 import json
 # import scrapy
 import requests
@@ -11,6 +12,7 @@ import Bershka, Mango, MercedesCampuzano, PullAndBear, Stradivarius, Zara
 
 from Item import Item, toInt
 from Database import Database
+from Widgets import LoadingBar
 
 
 bDb = Database('Bershka')
@@ -351,7 +353,13 @@ def post(databases = [bDb, mDb, pDb, zDb, mngDb, sDb], crawling=False):
 def check_broken_links(databases = [bDb, mDb, zDb, pDb, sDb], start=0, crawling=False):
     '''Check each url that was not present in the last scrap'''
     print('Looking for broken links...')
-    to_delete= []
+    to_delete = []
+    with open('./Files/.old_urls', 'r') as o:
+        old_urls = ast.literal_eval(o.read())
+    for url in old_urls:
+        db = get_database(url)
+        if not db.contains_url(url):
+            to_delete.append(url)
     for db in databases:
         urls = []
         for url in db.getAllUrls():
@@ -360,7 +368,7 @@ def check_broken_links(databases = [bDb, mDb, zDb, pDb, sDb], start=0, crawling=
         if len(db.getAllUrls()) - len(urls) > 1000:
             to_delete.extend(urls)
     print(len(to_delete),'items to review')
-    if not crawling:
+    if not crawling and to_delete:
         driver = webdriver.Chrome('./chromedriver')
         driver.maximize_window()
         driver.set_page_load_timeout(20)
@@ -403,13 +411,13 @@ def check_broken_links(databases = [bDb, mDb, zDb, pDb, sDb], start=0, crawling=
                         print('Error updating:',url,e)
             except:
                 print('Error getting')
-        to_delete = broken.getAllUrls()
-    latest.close()
-    broken.close()
+        to_delete.extend(broken.getAllUrls())
+        driver.quit()
     if to_delete:
         print(len(to_delete),'items deleted')
         open('./Database/Latest.json', 'w').close()
         open('./Database/Broken.json', 'w').close()
+        open('./Files/.old_urls', 'w').close()
         requests.post('https://2ksanrpxtd.execute-api.us-east-1.amazonaws.com/dev/molova/delete', f'{{"data": {to_delete}}}'.replace("'",'"')).json()
 
 def sync(brand=''):
@@ -425,30 +433,18 @@ def sync(brand=''):
             print(last,'sale' if index else 'col')
             res = requests.get(endpoint).json()
             if 'items' in res:
-                percentage, bar, totalItems = 0, '', len(res['items'])
+                bar = LoadingBar(len(res['items']))
+                i = 0
                 for item in res['items']:
-                    if 'Bershka' == item['brand']:
-                        db = bDb
-                    elif 'Mercedes' in item['brand']:
-                        db = mDb
-                    elif 'Pull' in item['brand']:
-                        db = pDb
-                    elif 'Stradivarius' == item['brand']:
-                        db = sDb
-                    elif 'Zara' == item['brand']:
-                        db = zDb
-                    elif 'Mango' == item['brand']:
-                        db = mngDb
+                    db = get_database(item['brand'])
                     for pop in ['data', 'date_time', 'id', 'id_producto']:
                         item.pop(pop)
                     if not type(item['allPricesNow']) == list:
                         item['allPricesNow'] = [item['allPricesNow']]
                     db.add(item, sync=True)
                     index += 1
-                    if not percentage == int(index / totalItems * 100):
-                        percentage = int(index / totalItems * 100)
-                        bar = bar+'°'
-                        print(f'{percentage}% ({index} de {totalItems}) {bar}')
+                    i += 1
+                    bar.update(index)
             else:
                 print('ERROR:'+endpoint)
 
@@ -479,6 +475,20 @@ def scrap_for_links():
     for brand in [Mango, Stradivarius, Zara]:
         brand.scrap_for_links()
 
+def get_database(brand):
+    brand = brand.lower()
+    if 'bershka' in brand:
+        return bDb
+    elif 'mercedes' in brand:
+        return mDb
+    elif all(pb in brand for pb in ['pull', 'bear']):
+        return pDb
+    elif 'stradivarius' in brand:
+        return sDb
+    elif 'zara' in brand:
+        return zDb
+    elif 'mango' in brand:
+        return mngDb
 
 # Main code
 def main():

@@ -12,36 +12,38 @@ class Database:
     def add(self, item, debug=False, sync=False):
         if not type(item) is dict:
             item = item.__dict__
-        def update():
-            categories = [
-                "Camisas y Camisetas",
-                "Pantalones y Jeans",
-                "Vestidos y Enterizos",
-                "Faldas y Shorts",
-                "Abrigos y Blazers",
-                "Ropa deportiva",
-                "Zapatos",
-                "Bolsos",
-                "Accesorios",]
-            def transform(doc):
-                for field in ["name","description","priceBefore","allPricesNow","discount","allSizes","sale", "colors", "url","allImages","category","subcategory", "allSizes"]:
-                    if not doc[field] == item[field]:
-                        doc[field] = item[field]
-                for field in ["category", "originalCategory"]:
-                    if not doc[field] in categories and item[field] in categories:
-                        doc[field] = item[field]
-            return transform
-        it = self.contains(item["url"], str(item["allImages"]), sync)
-        if it:  # Update it
-            self.db.update(update(), doc_ids=[it.doc_id])
-            if debug:
-                print('DB:Updating', it.doc_id)
-            return int(it.doc_id)
-        else:  # Create it
-            if debug:
-                print('DB:Adding',item["url"])
-            item['url'] = normalyze_url(item['url'])
-            return int(self.db.insert(item))
+        img = item['allImages'][0][0]
+        if item['allImages'][0]:
+            def update():
+                categories = [
+                    "Camisas y Camisetas",
+                    "Pantalones y Jeans",
+                    "Vestidos y Enterizos",
+                    "Faldas y Shorts",
+                    "Abrigos y Blazers",
+                    "Ropa deportiva",
+                    "Zapatos",
+                    "Bolsos",
+                    "Accesorios",]
+                def transform(doc):
+                    for field in ["name", "description", "priceBefore", "allPricesNow", "discount", "allSizes", "sale", "colors", "url", "allImages", "category", "subcategory", "allSizes"]:
+                        if not doc[field] == item[field]:
+                            doc[field] = item[field]
+                    for field in ["category", "originalCategory"]:
+                        if not doc[field] in categories and item[field] in categories:
+                            doc[field] = item[field]
+                return transform
+            it = self.contains(item["url"], str(item["allImages"]), sync)
+            if it:  # Update it
+                self.db.update(update(), doc_ids=[it.doc_id])
+                if debug:
+                    print('DB:Updating', it.doc_id)
+                return int(it.doc_id)
+            else:  # Create it
+                if debug:
+                    print('DB:Adding',item["url"])
+                item['url'] = normalyze_url(item['url'])
+                return int(self.db.insert(item))
 
     def update_product(self, elem, url, xpaths={}):
         '''Update the item if its exists in database
@@ -70,6 +72,7 @@ class Database:
 
     def contains_url(self, url):
         return True if self.db.get(self.q.url == url) else False
+        
     def contains(self, url, allImages='', sync=False):
         def has_image(val, image):
             if 'pullandbear' in image:

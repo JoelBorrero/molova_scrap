@@ -21,7 +21,7 @@ xpaths={
     'priceBfr':'.//span[contains(@class,"product-sale") and not(contains(@class,"discount"))]',
     'priceNow':'.//span[contains(@class,"product-sale")]'}
 try:
-    endpoints = ast.literal_eval(open('./.settings','r').read())[brand]['endpoints']
+    endpoints = ast.literal_eval(open('./Files/.settings','r').read())[brand]['endpoints']
 except:
     endpoints = []
 
@@ -62,20 +62,19 @@ def scrap_for_links():
                     if 'rebajas' in category:
                         new = endpoint
     driver.quit()
-    settings = ast.literal_eval(open('./.settings','r').read())
+    settings = ast.literal_eval(open('./Files/.settings','r').read())
     settings[brand]['endpoints'] = endpoints
     settings[brand]['endpoint'] = new if new else endpoints[0][1]
-    with open('./.settings','w') as s:
+    with open('./Files/.settings','w') as s:
         s.write(str(settings))
 
 
 class APICrawler:
     def __init__(self, endpoints=endpoints):
-        open('./Database/Mango.json', 'w').close()
-        open('./Database/LogsMNG.txt','w').close()
+        open('./Files/LogsMNG.txt','w').close()
         tz = pytz.timezone('America/Bogota')
         for endpoint in endpoints:
-            logs = open('./Database/LogsMNG.txt','a')
+            logs = open('./Files/LogsMNG.txt','a')
             logs.write(f'{datetime.now(tz).hour}:{datetime.now(tz).minute}   -   {endpoint[0]}\n')
             pageNum = 1
             while pageNum != 0:
@@ -121,9 +120,9 @@ class APICrawler:
                     pageNum = 0
                 else:
                     pageNum += 1
-                sleep(randint(30,120))
+                sleep(randint(30, 120))
             logs.close()
-        db.close()
+        # db.close()
 
 
 # ScrapMango()

@@ -36,7 +36,8 @@ xpaths = {
     'subCats': './/div[@class="filter-tag-swiper"]/div/ul/li',
 }
 try:
-    endpoints = ast.literal_eval(open('./.settings','r').read())[brand]['endpoints']
+    with open('./.settings','r') as settings:
+        endpoints = ast.literal_eval(settings.read())[brand]['endpoints']
 except:
     endpoints = []
 
@@ -254,11 +255,12 @@ def scrap_for_links():
         sleep(1)
         netData = driver.execute_script(get_network)
         for i in netData:
-            if 'products?ajax' in i['name']:
+            if '/product?' in i['name']:
                 endpoints.append((c,i['name']))
                 if 'nuevo-' in c:
                     news = i['name']
     driver.quit()
+    print(endpoints)
     settings = ast.literal_eval(open('./.settings','r').read())
     settings[brand]['endpoints'] = endpoints
     settings[brand]['endpoint'] = news if news else endpoints[0][1]
@@ -280,7 +282,7 @@ class APICrawler:
             'sec-fetch-site': 'same-origin',
             'user-agent': ['Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/92.0.4515.131 Safari/537.36', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.111 Safari/537.36', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_2) AppleWebKit/601.3.9 (KHTML, like Gecko) Version/9.0.2 Safari/601.3.9', 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:15.0) Gecko/20100101 Firefox/15.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.2311.135 Safari/537.36 Edge/12.246'][randint(0, 4)]}
         session.headers.update(headers)
-        filename = './Database/LogsBERSHKA.txt'
+        filename = './Files/LogsBERSHKA.txt'
         open(filename, 'w').close()
         for endpoint in endpoints:
             logs = open(filename, 'a')
@@ -323,7 +325,7 @@ class APICrawler:
                     logs.close()
                     print(e)
             headers = session.headers
-            sleep(randint(120,300))
+            sleep(randint(30, 120))
             session = requests.session()
             session.headers.update(headers)
 

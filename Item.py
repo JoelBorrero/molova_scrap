@@ -156,7 +156,7 @@ class Item:
 
     def get_categories(self, data=''):
         try:
-            data = ast.literal_eval(open('./.settings','r').read())
+            data = ast.literal_eval(open('./Files/.settings','r').read())
             brands_categories = data['brands_categories']
             brands_subcategories = data['brands_subcategories']
         except:

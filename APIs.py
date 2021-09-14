@@ -13,22 +13,28 @@ import Zara
 from Main import check_broken_links, post, sync
 
 try:
-    settings = ast.literal_eval(open('./.settings','r').read())
+    settings = ast.literal_eval(open('./Files/.settings','r').read())
 except FileNotFoundError:
     settings = {'Mango': {'endpoints': [], 'endpoint': ''}, 'Stradivarius': {'endpoints': [], 'endpoint': ''}, 'Zara': {'endpoints': [], 'endpoint': ''}}
-    with open('./.settings','w') as s:
+    with open('./Files/.settings','w') as s:
         s.write(str(settings))
+try:
+    old_urls = ast.literal_eval(open('./Files/.old_urls','r').read())
+except (FileNotFoundError, SyntaxError):
+    old_urls = []
+    with open('./Files/.old_urls','w') as o:
+        o.write('[]')
 brands = [
-    {'name': 'Stradivarius', 'endpoint': settings['Stradivarius']['endpoint'], 'endpoints': settings['Stradivarius']['endpoints'], 'updates': True},
     {'name': 'Mango', 'endpoint': settings['Mango']['endpoint'], 'endpoints': settings['Mango']['endpoints'], 'updates': True},
-    {'name': 'Zara', 'endpoint': settings['Zara']['endpoint'], 'endpoints': settings['Zara']['endpoints'], 'updates': True}]
+    {'name': 'Zara', 'endpoint': settings['Zara']['endpoint'], 'endpoints': settings['Zara']['endpoints'], 'updates': True},
+    {'name': 'Stradivarius', 'endpoint': settings['Stradivarius']['endpoint'], 'endpoints': settings['Stradivarius']['endpoints'], 'updates': True}]
 
 class Catcher:
     def __init__(self):
         self.tz = pytz.timezone('America/Bogota')
         self.today = f'{datetime.now(self.tz).day} - {datetime.now(self.tz).month}'
         self.columns = ['Hora', 'Cambió', 'Nuevos', 'Actualizados']
-        self.filename = './Database/Catcher.xlsx'
+        self.filename = './Files/Catcher.xlsx'
         self.df = {}
         try:
             self.df = pd.read_excel(self.filename, sheet_name=None,engine='openpyxl')
@@ -74,7 +80,7 @@ class Catcher:
     def check(self):
         count = 5
         for brand in brands:
-            open(f'./Database/changes_{brand["name"]}.txt','w').close()
+            open(f'./Files/.changes_{brand["name"]}','w').close()
         while True:
             self.update_headers()
             for brand in brands:
@@ -88,7 +94,7 @@ class Catcher:
                 if len(new_data) > 100:
                     new_data = new_data[:100]
                 try:
-                    data = ast.literal_eval(open(f'./Database/changes_{brand["name"]}.txt','r').read())
+                    data = ast.literal_eval(open(f'./Files/.changes_{brand["name"]}','r').read())
                 except SyntaxError:
                     data = new_data
                 new, updated = 0, 0
@@ -99,12 +105,13 @@ class Catcher:
                     else:
                         for p in data:
                             try:
-                                if product['name'] == p['name']:
+                                key = 'id' if brand['name'] == 'Zara' else 'name'
+                                if product[key] == p[key]:
                                     product_exist, product_updated = True, True
                                     break
                             except:
                                 print('ERROR')
-                                with open(f'./Database/changes_{brand["name"]}.txt', 'w') as f:
+                                with open(f'./Files/.changes_{brand["name"]}', 'w') as f:
                                     f.write(str(product))
                                 break
                     if not product_exist:
@@ -113,13 +120,16 @@ class Catcher:
                         updated += 1
                 self.write([f'{datetime.now(self.tz).hour}:{datetime.now(self.tz).minute}', data != new_data, new, updated],brand['name'])
                 brand['updates'] = brand['updates'] or data != new_data
-                with open(f'./Database/changes_{brand["name"]}.txt', 'w') as f:
+                with open(f'./Files/.changes_{brand["name"]}', 'w') as f:
                     f.write(str(new_data))
             count += 1
             if count == 6:
                 for brand in brands:
                     if brand['updates']:
                         print(f'Crawling {brand["name"]}')
+                        exec(f'old_urls.extend({brand["name"]}.db.getAllUrls())')
+                        with open('./Files/.old_urls', 'w') as o:
+                            o.write(str(old_urls))
                         exec(f'{brand["name"]}.APICrawler(brand["endpoints"])')
                 check_broken_links(crawling=True)
                 post(crawling=True)

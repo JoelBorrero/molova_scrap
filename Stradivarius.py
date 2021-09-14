@@ -37,7 +37,7 @@ xpaths = {
     'subCats':'.//div[@class="display-inline-block child-center-parent slider-items-container"]/div/a',
     'subCats2':'.//div[@class="category-badges-list"]/a[not(text()="Ver todo")]'}
 try:
-    endpoints = ast.literal_eval(open('./.settings','r').read())[brand]['endpoints']
+    endpoints = ast.literal_eval(open('./Files/.settings','r').read())[brand]['endpoints']
 except:
     endpoints = []
 
@@ -239,10 +239,10 @@ def scrap_for_links():
                     if 'nuevo-c' in c:
                         news = i['name']
     driver.quit()
-    settings = ast.literal_eval(open('./.settings','r').read())
+    settings = ast.literal_eval(open('./Files/.settings','r').read())
     settings[brand]['endpoints'] = endpoints
     settings[brand]['endpoint'] = news if news else endpoints[0][1]
-    with open('./.settings','w') as s:
+    with open('./Files/.settings','w') as s:
         s.write(str(settings))
 
 
@@ -294,9 +294,9 @@ class APICrawler:
                                         endpoints.append(endpoint)
             print(endpoints)
         image_formats = ('image/png', 'image/jpeg', 'image/jpg')
-        open('./Database/LogsSTR.txt','w').close()
+        open('./Files/LogsSTR.txt','w').close()
         for endpoint in endpoints:
-            logs = open('./Database/LogsSTR.txt','a')
+            logs = open('./Files/LogsSTR.txt','a')
             res = session.get(endpoint[1]).json()
             logs.write(f'{datetime.now(tz).hour}:{datetime.now(tz).minute}   -   {len(res["products"])} productos  -  {endpoint[0]}\n')
             logs.close()
@@ -340,7 +340,6 @@ class APICrawler:
                         allSizes.append(sizes)
                     allImages = []
                     item = Item(brand,name,ref,description,price_bfr,[price_now],0,allImages,url,allSizes,colors,category,category,subcategory,subcategory,sale,'Mujer')
-                    extra = product['xmedia']
                     optional_images = []
                     for media in product["xmedia"]:
                         color = []
@@ -352,9 +351,11 @@ class APICrawler:
                     for color in optional_images:
                         for i in color:
                             if not image:
-                                r = requests.head(i)
+                                r = session.head(i)
                                 if r.headers["content-type"] in image_formats:
                                     image = i
+                                else:
+                                    color.remove(i)
                     found = db.contains(url, image,sync=True)
                     if found:
                         item.allImages = found['allImages']
@@ -362,23 +363,23 @@ class APICrawler:
                         for color in optional_images:
                             images = []
                             for image in color:
-                                if len(optional_images)==1 or len(images)<2:
-                                    r = requests.head(image)
+                                if len(optional_images) == 1 or len(images) < 2:
+                                    r = session.head(image)
                                     if r.headers["content-type"] in image_formats:
                                         images.append(image)
                             allImages.append(images)
                         item.allImages = allImages
                     db.add(item)
-                    logs = open('./Database/LogsSTR.txt','a')
+                    logs = open('./Files/LogsSTR.txt','a')
                     logs.write(f'    + {datetime.now(tz).hour}:{datetime.now(tz).minute}:{datetime.now(tz).second}   -   {name}\n')
                     logs.close()
                 except Exception as e:
-                    logs = open('./Database/LogsSTR.txt','a')
+                    logs = open('./Files/LogsSTR.txt','a')
                     logs.write(f'X {datetime.now(tz).hour}:{datetime.now(tz).minute}:{datetime.now(tz).second}   -   {e}\n')
                     logs.close()
                     print(e)
             headers = session.headers
-            sleep(uniform(120,300))
+            sleep(uniform(30, 120))
             session = requests.session()
             session.headers.update(headers)
 

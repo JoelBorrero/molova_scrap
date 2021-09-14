@@ -1,0 +1,635 @@
+0:10   -   630 productos  -  https://www.stradivarius.com/co/mujer/nuevo-c1020093507.html
+    + 0:10:53   -   Embroidered oversized sweatshirt
+    + 0:11:3   -   Double-breasted blazer
+    + 0:11:9   -   Loafers with buckle detail
+    + 0:11:16   -   Fabric backpack with pockets
+    + 0:11:22   -   Polo dress with gathered detail
+    + 0:11:28   -   Bota plana caucho
+    + 0:11:28   -   Polo dress with gathered detail
+    + 0:11:33   -   Lace-up flat ankle boots
+    + 0:11:36   -   Camisa boyfriend combinada
+    + 0:11:45   -   Top with tie
+    + 0:11:58   -   Falda plisada
+    + 0:11:58   -   Bota plana caucho
+    + 0:12:4   -   Michelangelo sweatshirt
+    + 0:12:8   -   Gafas cuadradas carey
+    + 0:12:12   -   Bolso shoppper acolchado
+    + 0:12:18   -   Check knit cardigan
+    + 0:12:23   -   Short T-shirt with drawstring
+    + 0:12:24   -   Wide leg trousers
+    + 0:12:29   -   Full-length minimalist trousers
+    + 0:12:40   -   Short jersey shirt
+    + 0:12:54   -   Rustic everyday shirt
+X 0:12:54   -   list index out of range
+    + 0:13:2   -   Resin sunglasses
+    + 0:13:4   -   Double-breasted blazer
+    + 0:13:4   -   Double-breasted blazer
+    + 0:13:8   -   Poplin pyjama trousers
+    + 0:13:14   -   Cropped cardigan
+    + 0:13:22   -   Botines deportivos detalle piezas
+    + 0:13:22   -   Bomber jacket
+    + 0:13:30   -   Straight fit smart trousers
+    + 0:13:36   -   Checked overshirt
+    + 0:13:36   -   Checked overshirt
+    + 0:13:43   -   Ribbed midi dress with buttons
+    + 0:13:44   -   Checked overshirt
+    + 0:13:44   -   Loafers with buckle detail
+    + 0:13:44   -   Cropped cardigan
+    + 0:13:50   -   Checked box pleat skirt
+    + 0:13:50   -   Bota plana caucho
+    + 0:13:55   -   Cropped puffer gilet
+    + 0:14:0   -   Fabric tote bag with zips
+    + 0:14:1   -   Cropped sweater with diamonds
+    + 0:14:1   -   Cropped sweater with diamonds
+    + 0:14:9   -   Cropped cargo trousers
+    + 0:14:12   -   Manos libres acolchado
+    + 0:14:15   -   Oversize puffer jacket
+    + 0:14:19   -   Nylon loose track trousers
+    + 0:14:19   -   Oversize puffer jacket
+    + 0:14:23   -   Varsity cable-knit vest
+    + 0:14:23   -   Nylon loose track trousers
+    + 0:14:28   -   Leggings with side stripes
+    + 0:14:30   -   Puffer jacket
+    + 0:14:35   -   Varsity knit cardigan
+    + 0:14:39   -   Nylon track trousers
+    + 0:14:42   -   Asymmetric knit top
+    + 0:14:45   -   Twill bootcut trousers
+    + 0:14:45   -   Printed strappy maxi dress
+    + 0:14:45   -   Bomber jacket
+    + 0:14:46   -   Wide leg trousers
+    + 0:14:47   -   Blazer dress
+    + 0:14:47   -   Ottoman split-hem leggings
+    + 0:14:48   -   Camisa satín
+    + 0:14:48   -   Stretch T-shirt with cut-out detail
+    + 0:14:48   -   Jacquard cardigan with designs
+    + 0:14:48   -   Pantalón bota campana liso
+    + 0:14:48   -   Quilted crossbody bag
+    + 0:14:48   -   Satin midi skirt
+    + 0:14:48   -   Knit cardigan with polo collar
+    + 0:14:49   -   Botines planos elásticos suela track
+    + 0:14:49   -   Wave print scarf
+    + 0:14:50   -   Long knit cardigan
+    + 0:14:51   -   Soft-touch flared trousers
+    + 0:14:51   -   Set of 4 chain and faux pearl necklaces
+    + 0:14:52   -   Puffer gilet
+    + 0:14:52   -   Short shirt dress
+    + 0:14:54   -   Mini chain crossbody bag
+    + 0:14:54   -   Stiletto heel shoes
+    + 0:14:56   -   Flared split-hem trousers
+    + 0:15:0   -   Short flowing shirt
+    + 0:15:5   -   Knit shirt
+    + 0:15:5   -   Full-length minimalist trousers
+    + 0:15:5   -   Full-length minimalist trousers
+    + 0:15:8   -   Botines deportivos tejido
+    + 0:15:13   -   Mini skort
+    + 0:15:25   -   Camiseta bailarina seamless
+    + 0:15:28   -   Set of 4 semi-precious stone necklaces
+    + 0:15:32   -   Set of 3 pairs of medium hoop earrings
+    + 0:15:36   -   Set of 4 faux pearl rings
+    + 0:15:47   -   Camisa recta
+    + 0:15:48   -   Flared wavy print trousers
+    + 0:15:55   -   Botas planas XL suela track
+    + 0:15:56   -   Set of 4 metal hair clips
+    + 0:15:59   -   Faux-patent chain wallet
+    + 0:15:59   -   Flared wavy print trousers
+    + 0:16:0   -   Double-breasted blazer
+    + 0:16:2   -   Satiny puffer jacket
+    + 0:16:2   -   High neck top with zip
+    + 0:16:7   -   Botas altas planas con cordones
+    + 0:16:13   -   Jacquard mini skirt
+    + 0:16:14   -   Loafers with chain detail
+    + 0:16:17   -   Puffer gilet
+    + 0:16:17   -   Short shirt dress
+    + 0:16:20   -   Stirrup leggings
+    + 0:16:24   -   Smart waistcoat
+    + 0:16:24   -   Short jersey shirt
+    + 0:16:24   -   Pantalón bota campana liso
+    + 0:16:26   -   Stiletto heel shoes
+    + 0:16:27   -   Cropped puffer gilet
+    + 0:16:31   -   Quilted crossbody bag with chain strap
+    + 0:16:36   -   Split ottoman leggings
+    + 0:16:36   -   Jacquard mini skirt
+    + 0:16:36   -   Camiseta bailarina seamless
+    + 0:16:39   -   Heeled cowboy boots
+    + 0:16:45   -   Hoodie with shoulder pads
+    + 0:16:45   -   Stirrup leggings
+    + 0:16:47   -   Double-breasted blazer
+    + 0:16:48   -   Gathered knit shirt
+    + 0:16:53   -   Chic cargo trousers
+    + 0:16:53   -   Smart waistcoat
+    + 0:16:58   -   Seamless jacquard T-shirt
+    + 0:16:58   -   Wide leg trousers
+    + 0:16:59   -   Loafers with chain detail
+    + 0:17:5   -   White high-top trainers
+    + 0:17:5   -   Midi camisole dress
+    + 0:17:6   -   Set 4 cadenas
+    + 0:17:14   -   Camisa larga popelina
+    + 0:17:17   -   Belted twill trousers
+    + 0:17:18   -   Lace-up flat ankle boots
+    + 0:17:20   -   Printed high-neck T-shirt
+    + 0:17:23   -   Gafas metal hexagonales
+    + 0:17:27   -   Smart trousers with side stripes
+    + 0:17:27   -   Knit cardigan with polo collar
+    + 0:17:34   -   White trainers with side stripe detail
+    + 0:17:35   -   Jacquard mini skirt
+    + 0:17:35   -   Camisa recta
+    + 0:17:35   -   Camisa recta
+    + 0:17:35   -   Gathered knit shirt
+    + 0:17:40   -   Correa cadena
+    + 0:17:41   -   Soft-touch flared trousers
+    + 0:17:41   -   Printed strappy maxi dress
+    + 0:17:42   -   Cropped puffer gilet
+    + 0:17:42   -   Gathered knit shirt
+    + 0:17:42   -   Wide leg trousers
+    + 0:17:46   -   Corduroy cargo overshirt
+    + 0:17:46   -   Jacquard mini skirt
+    + 0:17:51   -   Oval resin sunglasses
+    + 0:17:53   -   Wide leg
+    + 0:17:55   -   Strappy jacquard top
+    + 0:17:56   -   Double-breasted blazer
+    + 0:18:2   -   Paperbag-waist cargo trousers
+    + 0:18:7   -   Seamless printed high-neck top
+    + 0:18:10   -   Tulle polo dress
+    + 0:18:10   -   Stirrup leggings
+    + 0:18:11   -   
+    + 0:18:11   -   Camisa satín
+    + 0:18:12   -   Silky midi skirt
+    + 0:18:12   -   Midi camisole dress
+    + 0:18:13   -   Seamless printed high-neck top
+    + 0:18:14   -   Blazer dress
+    + 0:18:19   -   Cut-out midi dress
+    + 0:18:23   -   Knit overshirt
+    + 0:18:24   -   Flared split-hem trousers
+    + 0:18:24   -   Silky midi skirt
+    + 0:18:25   -   Mesh camisole dress
+    + 0:18:25   -   Knit shirt
+    + 0:18:26   -   Double-breasted blazer
+    + 0:18:42   -   Flowing shirt
+    + 0:18:44   -   Double-breasted blazer
+    + 0:18:45   -   Saco abierto tejido punto cremallera
+    + 0:18:50   -   Top with tied neckline
+    + 0:18:54   -   Wrap ballet top
+    + 0:18:55   -   Mini Oxford shirt dress
+    + 0:18:56   -   Flared split-hem trousers
+    + 0:18:56   -   Saco abierto tejido punto cremallera
+    + 0:19:1   -   Jacquard midi dress
+    + 0:19:5   -   Cropped knit overshirt
+    + 0:19:5   -   Silky midi skirt
+    + 0:19:7   -   Satin V-neck blouse
+    + 0:19:12   -   Flared satin trousers
+X 0:19:12   -   list index out of range
+    + 0:19:12   -   Knit cardigan with polo collar
+    + 0:19:12   -   Jacquard mini skirt
+    + 0:19:17   -   Printed shirt dress
+    + 0:19:22   -   Oversize faux leather gilet
+    + 0:19:26   -   Quilted nylon coat
+    + 0:19:26   -   Jacquard mini skirt
+    + 0:19:27   -   Kick flare trousers
+    + 0:19:30   -   Long tailored waistcoat
+    + 0:19:30   -   Short shirt dress
+    + 0:19:30   -   Mini skort
+    + 0:19:34   -   Wide shimmer belt
+    + 0:19:35   -   Blazer dress
+    + 0:19:36   -   Short shirt dress
+    + 0:19:36   -   Printed high-neck T-shirt
+    + 0:19:36   -   Camisa satín
+    + 0:19:36   -   Flared wavy print trousers
+    + 0:19:40   -   High neck sweater
+    + 0:19:42   -   Cropped puffer jacket
+    + 0:19:42   -   Flared wavy print trousers
+    + 0:19:42   -   Satin midi skirt
+    + 0:19:46   -   Loose-fitting open blazer
+    + 0:19:50   -   Sweater with cut-out back
+    + 0:19:50   -   Sweater with cut-out back
+    + 0:19:54   -   Leggings with shiny side detail
+    + 0:19:54   -   Short shirt dress
+    + 0:19:59   -   Legging efecto cuero
+    + 0:20:0   -   Mini chain crossbody bag
+    + 0:20:6   -   Shiny belt
+    + 0:20:9   -   Skinny leggings
+    + 0:20:10   -   Camisa satín
+    + 0:20:10   -   Long knit cardigan
+    + 0:20:10   -   Gathered knit shirt
+    + 0:20:10   -   Puffer gilet
+    + 0:20:14   -   Cropped blazer
+    + 0:20:15   -   Straight fit smart trousers
+    + 0:20:15   -   Gathered knit shirt
+    + 0:20:19   -   Buttoned knit gilet-style top
+    + 0:20:20   -   Puffer gilet
+    + 0:20:20   -   Gathered knit shirt
+    + 0:20:20   -   Knit cardigan with polo collar
+    + 0:20:21   -   Seamless long-sleeved T-shirt
+    + 0:20:25   -   Smart carrot-fit trousers
+    + 0:20:27   -   Water-resistant puffer jacket with hood
+    + 0:20:27   -   Printed strappy maxi dress
+    + 0:20:35   -   Camiseta cuello alto
+    + 0:20:36   -   Short corduroy overshirt
+    + 0:20:36   -   Camiseta bailarina seamless
+    + 0:20:36   -   Mini Oxford shirt dress
+    + 0:20:36   -   Short corduroy overshirt
+    + 0:20:37   -   Basic mini skort
+    + 0:20:42   -   Printed strappy midi dress
+    + 0:20:42   -   Belted twill trousers
+    + 0:20:42   -   Buttoned knit gilet-style top
+    + 0:20:46   -   Double-breasted waistcoat
+    + 0:20:46   -   Oversize puffer jacket
+    + 0:20:47   -   Water-repellent trench coat
+    + 0:21:30   -   Pantalón jogger felpa
+    + 0:21:31   -   Ottoman split-hem leggings
+    + 0:21:33   -   Ottoman split-hem leggings
+    + 0:21:35   -   Oversized knit overshirt
+    + 0:21:42   -   Mid-length faux leather biker jacket
+    + 0:21:45   -   Mock turtleneck sweater
+X 0:22:6   -   list index out of range
+    + 0:22:10   -   Cropped corduroy overshirt
+    + 0:22:11   -   Faux suede biker jacket with belt
+    + 0:22:12   -   Cropped puffer gilet
+    + 0:22:12   -   High neck sweater
+    + 0:22:12   -   Seamless jacquard T-shirt
+    + 0:22:12   -   Jacquard mini skirt
+    + 0:22:13   -   Camiseta bailarina seamless
+    + 0:22:14   -   Shiny puffer jacket
+    + 0:22:14   -   
+    + 0:22:17   -   Short sleeve printed dress
+    + 0:22:18   -   Double-breasted blazer
+    + 0:22:18   -   Buttoned knit gilet-style top
+    + 0:22:20   -   Camisole dress with gathered detail
+    + 0:22:23   -   Skinny jeans with slit
+    + 0:22:24   -   Camisole dress with gathered detail
+    + 0:22:24   -   Mock turtleneck sweater
+    + 0:22:24   -   Puffer gilet
+    + 0:22:24   -   Asymmetric knit top
+    + 0:22:25   -   Printed V-neck blouse
+    + 0:22:28   -   Paisley satin midi skirt
+    + 0:22:34   -   Oversize faux leather gilet
+    + 0:22:38   -   Knit T-shirt
+    + 0:22:43   -   Jean straight tiro bajo
+    + 0:22:43   -   Cropped puffer jacket
+    + 0:22:48   -   Short satin jacquard dress
+    + 0:22:50   -   Texan belt
+    + 0:22:55   -   Zip neck polo shirt
+    + 0:22:55   -   Water-resistant puffer jacket with hood
+    + 0:22:57   -   It bag
+    + 0:22:58   -   High neck sweater
+    + 0:23:4   -   Pleated nylon mini skirt
+    + 0:23:9   -   Plush varsity jacket
+    + 0:23:12   -   Fine plush sweatshirt
+    + 0:23:16   -   Ruffled mini skirt
+    + 0:23:21   -   Cropped polo collar jumper
+    + 0:23:21   -   Cropped cargo trousers
+    + 0:23:22   -   Knit T-shirt
+    + 0:23:26   -   Cropped jumper
+    + 0:23:32   -   Nylon sweatshirt
+    + 0:23:41   -   Straight-leg worker trousers
+    + 0:23:45   -   Nylon trousers
+    + 0:23:49   -   Jersey cut out
+    + 0:23:54   -   Oversize argyle sweater
+    + 0:23:54   -   Racerback top with diamantés
+    + 0:23:54   -   Racerback top with diamantés
+    + 0:23:56   -   Fabric backpack with pockets
+    + 0:23:57   -   Knit T-shirt
+    + 0:24:1   -   Flare trousers
+    + 0:24:6   -   Puff-sleeve T-shirt
+    + 0:24:8   -   Relaxed-fit cargo trousers
+    + 0:24:13   -   Blazer with rolled-up sleeves
+    + 0:24:13   -   Kick flare trousers
+    + 0:24:15   -   Casual tote bag
+    + 0:24:17   -   Manos libres efecto coco
+    + 0:24:18   -   T-shirt with lettuce-edge trims
+    + 0:24:19   -   Zip neck polo shirt
+    + 0:24:23   -   Seamless V-neck T-shirt
+    + 0:24:28   -   Floral midi dress
+    + 0:24:33   -   Cropped polo collar sweater
+    + 0:24:35   -   Asymmetric knit top
+    + 0:24:37   -   Cropped puffer gilet
+    + 0:24:40   -   Sleeveless knit top
+    + 0:24:40   -   Sleeveless knit top
+    + 0:24:43   -   Striped flare trousers
+    + 0:24:44   -   Mock turtleneck sweater
+    + 0:24:45   -   Check knit cardigan
+    + 0:24:47   -   Jean mom fit cintura asimétrica
+    + 0:24:53   -   Hooded cardigan
+    + 0:25:26   -   Buzo básico capucha
+    + 0:25:29   -   Slim flared jeans with vent
+    + 0:25:29   -   High neck sweater
+    + 0:25:35   -   Chaqueta acolchada con capucha
+    + 0:25:44   -   Jean skinny tiro medio
+    + 0:25:44   -   Hooded cardigan
+    + 0:25:45   -   Buttoned knit gilet-style top
+    + 0:25:47   -   Cropped puffer gilet
+    + 0:25:50   -   Quilted crossbody bag with chain strap
+    + 0:25:51   -   Suéter crop
+    + 0:25:51   -   Pantalón culotte tejido
+    + 0:25:52   -   Embroidered jumper
+    + 0:25:53   -   Blazer with rolled-up sleeves
+    + 0:25:56   -   High collar puffer jacket
+    + 0:25:59   -   Sweatshirt
+    + 0:26:0   -   Puffer jacket
+    + 0:26:0   -   Michelangelo sweatshirt
+    + 0:26:5   -   Long knit trench coat
+    + 0:26:5   -   Seamless V-neck T-shirt
+    + 0:26:6   -   Jacquard vest
+    + 0:26:6   -   Metal hair clips
+    + 0:26:9   -   Basic seamed sweatshirt
+    + 0:26:9   -   Jacquard vest
+    + 0:26:10   -   High collar puffer jacket
+    + 0:26:10   -   Basic mini skort
+    + 0:26:12   -   Checked box pleat skirt
+    + 0:26:12   -   Seamless V-neck T-shirt
+    + 0:26:12   -   Knit cardigan with polo collar
+    + 0:26:15   -   Open double-breasted blazer
+    + 0:26:15   -   Checked box pleat skirt
+    + 0:26:16   -   Open double-breasted blazer
+    + 0:26:16   -   Pantalón jogger felpa
+    + 0:26:16   -   Seamless long-sleeved T-shirt
+    + 0:26:16   -   Long knit cardigan
+    + 0:26:20   -   Colour block cargo trousers
+    + 0:26:20   -   Puffer jacket
+    + 0:26:21   -   Oversize puffer jacket
+    + 0:26:22   -   Mini chain bag
+    + 0:26:22   -   Mini chain bag
+    + 0:26:24   -   Sudadera print
+    + 0:26:24   -   Seamless V-neck T-shirt
+    + 0:26:25   -   Nautical cap with trim
+    + 0:26:25   -   Mini chain bag
+    + 0:26:25   -   Oversized knit overshirt
+    + 0:26:29   -   Knotted shirt
+    + 0:26:33   -   Zip sweatshirt
+    + 0:26:38   -   Manos libres smartphone brillos
+X 0:28:0   -   list index out of range
+    + 0:28:0   -   Casual tote bag
+    + 0:28:3   -   Mini crossbody bag with rhinestones
+    + 0:28:3   -   It bag
+    + 0:28:4   -   Bell sleeve shirt
+    + 0:28:5   -   Shiny puffer jacket
+    + 0:28:5   -   Basic mini skort
+    + 0:28:5   -   Quilted crossbody bag
+    + 0:28:6   -   Camiseta cuello alto
+    + 0:28:6   -   Wide leg trousers
+    + 0:28:7   -   Pantalón jogger felpa
+    + 0:28:7   -   Camiseta cuello alto
+    + 0:28:10   -   2-pack of floral print bandanas
+    + 0:28:12   -   Sudadera print
+    + 0:28:28   -   Abrigo punto perchado
+    + 0:28:28   -   Buzo básico capucha
+    + 0:28:29   -   Sweater with zip
+    + 0:28:29   -   Seamless long-sleeved T-shirt
+    + 0:28:34   -   3-pack of romantic socks
+    + 0:28:34   -   Short corduroy overshirt
+    + 0:28:38   -   Square buckle belt
+    + 0:28:42   -   Round neck sweater
+    + 0:29:9   -   Suéter cuello tortuga
+    + 0:29:9   -   Suéter cuello tortuga
+    + 0:29:9   -   Long knit cardigan
+    + 0:29:10   -   Suéter cuello tortuga
+    + 0:29:10   -   Water-repellent trench coat
+    + 0:29:27   -   Camiseta tacto suave
+    + 0:29:30   -   2-pack of colourful striped socks
+    + 0:29:31   -   Suéter cuello tortuga
+    + 0:29:31   -   Sweater with cut-out back
+    + 0:29:31   -   Texan belt
+    + 0:29:35   -   2-pack of geometric print bandanas
+    + 0:29:35   -   Buzo básico capucha
+    + 0:29:36   -   Printed pyjama trousers
+    + 0:29:37   -   Printed pyjama trousers
+    + 0:29:37   -   Dreamers pyjama top
+    + 0:29:37   -   Dreamers pyjama top
+    + 0:29:40   -   Friends pyjama set
+    + 0:29:43   -   Gossip Girl pyjama set
+    + 0:29:49   -   Tenis detalle piezas
+    + 0:29:54   -   White trainers with trim detail
+    + 0:29:54   -   Botines deportivos tejido
+    + 0:29:54   -   Lace-up flat ankle boots
+X 0:30:53   -   list index out of range
+    + 0:30:53   -   Faux suede biker jacket with belt
+    + 0:31:0   -   Short lettuce edge dress
+    + 0:31:3   -   Nylon trousers with side taping
+    + 0:31:6   -   Oversized waistcoat
+    + 0:31:10   -   Mini skirt with waistband
+    + 0:31:13   -   Romantic floral scarf
+    + 0:31:19   -   Geometric print scarf
+    + 0:31:23   -   Polka dot scarf
+    + 0:31:27   -   Pack of 2 paisley print bandanas
+    + 0:31:32   -   2-Pack of retro floral and polka dot bandanas
+    + 0:31:36   -   2-pack of black and white bandanas
+    + 0:31:37   -   Set of 3 pairs of medium hoop earrings
+    + 0:31:42   -   2-pack of striped socks with metallic thread
+    + 0:31:42   -   2-pack of striped socks with metallic thread
+    + 0:31:46   -   Print card holder/ purse
+    + 0:31:46   -   Short flowing shirt
+    + 0:31:47   -   Smart trousers with side stripes
+    + 0:31:50   -   Cropped faux leather jacket
+    + 0:31:53   -   Double-faced faux suede biker jacket
+    + 0:31:54   -   Short lettuce edge dress
+    + 0:31:54   -   Short lettuce edge dress
+    + 0:31:54   -   Short lettuce edge dress
+    + 0:31:54   -   Short lettuce edge dress
+    + 0:31:55   -   Printed high-neck T-shirt
+    + 0:32:5   -   Slim flared jeans with vent
+    + 0:32:5   -   Split ottoman leggings
+    + 0:32:6   -   Cropped cardigan
+    + 0:32:6   -   Cropped cardigan
+    + 0:32:6   -   Cropped cardigan
+    + 0:32:6   -   Printed strappy maxi dress
+    + 0:32:9   -   Tie-dye sweatshirt
+    + 0:32:26   -   Chaqueta efecto cuero básica correa
+    + 0:32:26   -   Tulle polo dress
+    + 0:32:27   -   Tulle polo dress
+    + 0:32:27   -   Tulle polo dress
+    + 0:32:31   -   Sweatshirt
+    + 0:32:31   -   Camisa satín
+    + 0:32:31   -   Camisa satín
+    + 0:32:33   -   Double-breasted blazer
+    + 0:32:33   -   Cropped cardigan
+    + 0:32:33   -   Chic cargo trousers
+    + 0:32:37   -   Lace-trimmed seamless bodysuit
+    + 0:32:41   -   Zip sweatshirt
+    + 0:32:44   -   Falda mini efecto cuero
+    + 0:32:45   -   Basic seamed sweatshirt
+    + 0:32:45   -   Zip sweatshirt
+    + 0:32:45   -   Zip sweatshirt
+    + 0:32:45   -   Zip sweatshirt
+    + 0:32:45   -   Basic seamed sweatshirt
+    + 0:32:46   -   Basic seamed sweatshirt
+    + 0:32:46   -   Basic seamed sweatshirt
+    + 0:32:47   -   Vintage boyfriend jeans
+    + 0:32:50   -   Full-length minimalist jeans
+    + 0:32:50   -   Abrigo punto perchado
+X 0:33:4   -   list index out of range
+X 0:33:13   -   list index out of range
+    + 0:33:13   -   Abrigo punto perchado
+    + 0:33:13   -   Abrigo punto perchado
+    + 0:33:13   -   Set of 4 metal hair clips
+    + 0:33:14   -   Set of 4 metal hair clips
+    + 0:33:15   -   Embroidered floral pencil case
+    + 0:33:15   -   Wave print scarf
+    + 0:33:21   -   2-pack of striped and floral bandanas
+    + 0:33:21   -   Faux-patent chain wallet
+    + 0:33:22   -   Faux-patent chain wallet
+    + 0:33:25   -   Belt with eyelets
+    + 0:33:26   -   Set of 4 semi-precious stone necklaces
+    + 0:33:26   -   Set of 4 chain and faux pearl necklaces
+    + 0:33:29   -   Metallic cateye sunglasses
+    + 0:33:31   -   Correa cadena
+    + 0:33:35   -   Shiny crossbody bag
+    + 0:33:38   -   Wrap polo collar sweater
+    + 0:33:38   -   Short jersey shirt
+    + 0:33:39   -   Printed high-neck T-shirt
+    + 0:33:39   -   Short jersey shirt
+    + 0:33:40   -   Short jersey shirt
+    + 0:34:0   -   Pantalón bota recta
+    + 0:34:1   -   Checked overshirt
+    + 0:34:2   -   Checked overshirt
+    + 0:34:3   -   Cool touch technical sports T-shirt
+    + 0:34:8   -   Textured T-shirt with long sleeves
+    + 0:34:10   -   Pack of 3 pairs of ankle socks
+    + 0:34:10   -   Pack of 3 pairs of ankle socks
+    + 0:34:15   -   2-pack of yoga socks
+    + 0:34:15   -   Cool touch technical sports T-shirt
+    + 0:34:17   -   Seamless sports bra
+    + 0:34:17   -   Seamless sports bra
+    + 0:34:17   -   Seamless sports bra
+    + 0:34:21   -   Embroidered sports sweatshirt
+    + 0:34:21   -   Cropped sweater with diamonds
+    + 0:34:25   -   Sculpt sports leggings
+    + 0:34:25   -   Sculpt sports leggings
+    + 0:34:25   -   Sculpt sports leggings
+    + 0:34:26   -   Textured T-shirt with long sleeves
+    + 0:34:26   -   Textured T-shirt with long sleeves
+    + 0:34:26   -   Cropped sweater with diamonds
+    + 0:34:32   -   Sparkly slim fit mom jeans
+    + 0:34:38   -   Buzo oversize
+    + 0:34:39   -   Buzo oversize
+    + 0:34:39   -   Cropped sweater with diamonds
+    + 0:34:39   -   Buzo oversize
+    + 0:34:40   -   Buzo oversize
+    + 0:35:15   -   Legging seamless
+    + 0:35:26   -   Pantalón tiro alto coating
+    + 0:35:26   -   Pantalón tiro alto coating
+    + 0:35:26   -   Pantalón tiro alto coating
+    + 0:35:27   -   Pantalón tiro alto coating
+    + 0:35:27   -   Satiny puffer jacket
+    + 0:35:28   -   Satiny puffer jacket
+    + 0:35:28   -   Fleece quilted jacket
+    + 0:35:28   -   Fleece quilted jacket
+    + 0:35:32   -   Jacket with collar
+    + 0:35:36   -   Cloud print puffer jacket
+    + 0:35:41   -   Striped scarf
+    + 0:35:45   -   Metal hair clips
+    + 0:35:50   -   Set 5 aros
+    + 0:35:57   -   Knit beret
+    + 0:35:58   -   Knit beret
+    + 0:35:59   -   Knit beret
+    + 0:35:59   -   Camisa satín
+    + 0:35:59   -   Camisa boyfriend combinada
+    + 0:36:2   -   Camiseta básica
+    + 0:36:13   -   Jean mom fit
+    + 0:36:17   -   Short dress with cut-out detail
+    + 0:36:21   -   Gathered printed shirt
+    + 0:36:21   -   Gathered printed shirt
+    + 0:36:21   -   Gathered printed shirt
+    + 0:36:21   -   Gathered printed shirt
+    + 0:36:21   -   Short jersey shirt
+    + 0:36:28   -   Short chain dress
+    + 0:36:34   -   Satin dress with rhinestones
+    + 0:36:40   -   Satin top with rhinestones
+    + 0:36:47   -   Halter top with chain
+    + 0:36:47   -   Poplin pyjama trousers
+    + 0:36:47   -   Poplin pyjama trousers
+    + 0:36:47   -   Poplin pyjama trousers
+    + 0:36:48   -   Seamless top with square neckline
+    + 0:36:48   -   Seamless top with square neckline
+    + 0:36:48   -   Seamless top with square neckline
+    + 0:37:14   -   Chaleco oversize cuello en V
+    + 0:37:15   -   Chaleco oversize cuello en V
+    + 0:37:16   -   Chaleco oversize cuello en V
+    + 0:37:29   -   Suéter cuello alto
+    + 0:37:29   -   Suéter cuello alto
+    + 0:37:29   -   Suéter cuello alto
+    + 0:37:30   -   Suéter cuello alto
+    + 0:37:31   -   Camiseta tacto suave
+    + 0:37:32   -   Camiseta tacto suave
+    + 0:37:32   -   Camiseta tacto suave
+    + 0:37:36   -   Faux leather wrap skort
+    + 0:37:37   -   Suéter cuello tortuga
+    + 0:37:46   -   Pantalón realce coating
+    + 0:37:47   -   Compression sports bra
+    + 0:37:47   -   Compression sports bra
+    + 0:37:48   -   Pantalón tiro alto coating
+    + 0:38:17   -   Jean recto
+    + 0:38:20   -   Long flowing trench coat
+    + 0:38:20   -   Mock turtleneck sweater
+    + 0:38:25   -   Oversized faux leather biker jacket
+    + 0:38:30   -   Retro flower neckerchief
+    + 0:38:31   -   Metal chain belt
+    + 0:38:31   -   Metal chain belt
+    + 0:38:35   -   Faux leather cap
+    + 0:38:42   -   
+    + 0:38:48   -   
+    + 0:38:53   -   Embroidered Mickey Mouse planner
+    + 0:38:53   -   Varsity knit cardigan
+    + 0:38:53   -   Varsity cable-knit vest
+    + 0:38:54   -   Nylon track trousers
+    + 0:38:54   -   Nylon loose track trousers
+    + 0:38:57   -   Pleated mini skirt
+    + 0:38:57   -   Leggings with side stripes
+    + 0:39:0   -   Plush straight fit trousers
+    + 0:39:0   -   Plush straight fit trousers
+    + 0:39:0   -   Plush straight fit trousers
+    + 0:39:1   -   Plush straight fit trousers
+    + 0:39:4   -   Crossover crop top
+    + 0:39:6   -   Monedero estampado
+    + 0:39:6   -   Monedero estampado
+    + 0:39:12   -   Set of 6 diamanté hoop earrings
+    + 0:39:16   -   Set of 3 diamanté hoop earrings
+    + 0:39:19   -   Set of 6 rhinestone rings
+    + 0:39:20   -   Camiseta tacto suave
+    + 0:39:23   -   Straight fit comfort jeans
+    + 0:39:23   -   Tulle polo dress
+    + 0:39:23   -   Short T-shirt with drawstring
+    + 0:39:24   -   Polo dress with gathered detail
+    + 0:39:24   -   Short T-shirt with drawstring
+    + 0:39:24   -   Short T-shirt with drawstring
+    + 0:39:24   -   Short T-shirt with drawstring
+    + 0:39:28   -   Crop top with back laces
+    + 0:39:32   -   Sparkly slim fit mom jeans
+    + 0:39:36   -   Embroidered seamless T-shirt
+    + 0:39:36   -   Embroidered seamless T-shirt
+    + 0:39:37   -   Compression sports bra
+    + 0:39:38   -   Compression sports bra
+    + 0:39:38   -   Compression sports leggings
+    + 0:39:38   -   Compression sports leggings
+    + 0:39:39   -   Compression sports leggings
+    + 0:39:39   -   Compression sports leggings
+    + 0:39:41   -   Printed crossover crop top
+    + 0:39:41   -   Crossover crop top
+    + 0:39:41   -   Crossover crop top
+    + 0:39:42   -   Seamless ballet cardigan
+    + 0:39:42   -   Flowing shirt
+    + 0:39:42   -   Flowing shirt
+    + 0:39:47   -   Oversized hooded sweatshirt
+    + 0:39:47   -   Embroidered oversized sweatshirt
+    + 0:39:49   -   Ribbed midi dress with buttons
+    + 0:39:49   -   Jacquard T-shirt
+    + 0:39:50   -   Jacquard T-shirt
+    + 0:39:50   -   Jacquard T-shirt
+    + 0:39:51   -   Sculpting sports bra
+    + 0:39:51   -   Sculpting sports bra
+    + 0:39:51   -   Sculpting sports bra
+    + 0:39:51   -   Suéter cuello tortuga
+    + 0:39:51   -   Embroidered seamless T-shirt
+    + 0:40:13   -   Jean baggy sarga
+    + 0:40:13   -   Seamless ballet cardigan
+    + 0:40:14   -   Seamless ballet cardigan
+    + 0:40:18   -   Wide-leg trousers
+    + 0:40:21   -   Short dress with bell sleeves
+    + 0:40:22   -   Buzo básico capucha
+    + 0:40:24   -   Vestido polo
+    + 0:40:24   -   Vestido polo
+    + 0:40:31   -   Vestido polo
+    + 0:40:41   -   Pantalón coating tiro superalto
+    + 0:40:48   -   Set of 2 metal hair clips
+0:41   -   259 productos  -  https://www.stradivarius.com/co/mujer/ropa/compra-por-producto/jeans/ver-todo-c1718557.html
+    + 0:41:33   -   Vintage flared jeans
+    + 0:41:40   -   Short jean rotos
+    + 0:41:41   -   Jean mom fit cintura asimétrica
