@@ -86,6 +86,9 @@ class Catcher:
             for brand in brands:
                 res = self.session.get(brand['endpoint']).json()
                 new_data = res['products'] if brand['name'] == 'Stradivarius' else res['groups'][0]['garments'] if brand['name'] == 'Mango' else res['productGroups'][0]['elements']
+                # try:
+                # except:
+                #     new_data = []
                 if type(new_data) is dict:
                     new_list = []
                     for _,key in enumerate(new_data):
