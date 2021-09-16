@@ -15,7 +15,7 @@ brand = 'Zara'
 db = Database(brand)
 tz = pytz.timezone('America/Bogota')
 xpaths = {
-    'categories': './/ul[@class="layout-categories__container"]/li[position()=1]/ul/li/ul/li/a',
+    'categories': './/ul[@class="layout-categories__container"]/li[position()=2]/ul/li/ul/li/a',
     'color':'.//p[contains(@class,"product-detail-selected-color")]',
     'colorsBtn': './/ul[contains(@class,"-color-selector__colors")]/li/button',
     'coming': '',
@@ -220,14 +220,15 @@ def scrap_for_links():
     endpoints.clear()
     news = ''
     for c in main_categories:
-        driver.get(c)
-        sleep(1)
-        netData = driver.execute_script(get_network)
-        for i in netData:
-            if 'products?ajax' in i['name']:
-                endpoints.append((c,i['name']))
-                if 'nuevo-' in c:
-                    news = i['name']
+        if c:
+            driver.get(c)
+            sleep(1)
+            netData = driver.execute_script(get_network)
+            for i in netData:
+                if 'products?ajax' in i['name']:
+                    endpoints.append((c,i['name']))
+                    if 'nuevo-' in c:
+                        news = i['name']
     driver.quit()
     settings = ast.literal_eval(open('./Files/.settings','r').read())
     settings[brand]['endpoints'] = endpoints

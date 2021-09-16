@@ -59,7 +59,7 @@ def scrap_for_links():
                 endpoint = endpoint[:endpoint.index('&pageNum=')]
                 if not endpoint in str(endpoints):
                     endpoints.append((category, endpoint))
-                    if 'rebajas' in category:
+                    if 'destacados/nuevo' in category:
                         new = endpoint
     driver.quit()
     settings = ast.literal_eval(open('./Files/.settings','r').read())
@@ -77,50 +77,53 @@ class APICrawler:
             logs = open('./Files/LogsMNG.txt','a')
             logs.write(f'{datetime.now(tz).hour}:{datetime.now(tz).minute}   -   {endpoint[0]}\n')
             pageNum = 1
-            while pageNum != 0:
-                response = requests.get(endpoint[1]+str(pageNum)).json()
-                self.category = response['titleh1']
-                garments = response['groups'][0]['garments']
-                logs.write(f'    {datetime.now(tz).hour}:{datetime.now(tz).minute}:{datetime.now(tz).second}   -   {len(garments)} products. (Page {pageNum})\n')
-                for item in garments:
-                    it = garments[item]
-                    allImages, allSizes, colors = [], [], []
-                    for color in it['colors']:
-                        images = []
-                        sizes = []
-                        for image in color['images']:
-                            images.append(image['img1Src'])
-                        for size in color['sizes']:
-                            sizes.append(size['label']+('(Agotado)' if size['stock'] == 0 else ''))
-                        allImages.append(images)
-                        allSizes.append(sizes)
-                        colors.append(color['iconUrl'].replace(' ',''))
-                    allImages.reverse()#I don't know why
-                    db.add(
-                        Item(
-                            brand,
-                            it['shortDescription'],
-                            it['garmentId'],
-                            it['shortDescription'],
-                            it['price']['crossedOutPrices'],
-                            [it['price']['salePrice']],
-                            it['price']['discountRate'],
-                            allImages,
-                            'https://shop.mango.com'+it['colors'][0]['linkAnchor'],
-                            allSizes,
-                            colors,
-                            self.category,
-                            self.category,
-                            self.category,
-                            self.category,
-                            False,
-                            'Mujer'))
-                    logs.write(f'      + {datetime.now(tz).hour}:{datetime.now(tz).minute}:{datetime.now(tz).second}   -   {it["shortDescription"]}\n')
-                if len(garments) < 300 or pageNum > 4:
-                    pageNum = 0
-                else:
-                    pageNum += 1
-                sleep(randint(30, 120))
+            try:
+                while pageNum != 0:
+                    response = requests.get(endpoint[1]+str(pageNum)).json()
+                    self.category = response['titleh1']
+                    garments = response['groups'][0]['garments']
+                    logs.write(f'    {datetime.now(tz).hour}:{datetime.now(tz).minute}:{datetime.now(tz).second}   -   {len(garments)} products. (Page {pageNum})\n')
+                    for item in garments:
+                        it = garments[item]
+                        allImages, allSizes, colors = [], [], []
+                        for color in it['colors']:
+                            images = []
+                            sizes = []
+                            for image in color['images']:
+                                images.append(image['img1Src'])
+                            for size in color['sizes']:
+                                sizes.append(size['label']+('(Agotado)' if size['stock'] == 0 else ''))
+                            allImages.append(images)
+                            allSizes.append(sizes)
+                            colors.append(color['iconUrl'].replace(' ',''))
+                        allImages.reverse()#I don't know why
+                        db.add(
+                            Item(
+                                brand,
+                                it['shortDescription'],
+                                it['garmentId'],
+                                it['shortDescription'],
+                                it['price']['crossedOutPrices'],
+                                [it['price']['salePrice']],
+                                it['price']['discountRate'],
+                                allImages,
+                                'https://shop.mango.com'+it['colors'][0]['linkAnchor'],
+                                allSizes,
+                                colors,
+                                self.category,
+                                self.category,
+                                self.category,
+                                self.category,
+                                False,
+                                'Mujer'))
+                        logs.write(f'      + {datetime.now(tz).hour}:{datetime.now(tz).minute}:{datetime.now(tz).second}   -   {it["shortDescription"]}\n')
+                    if len(garments) < 300 or pageNum > 4:
+                        pageNum = 0
+                    else:
+                        pageNum += 1
+                    sleep(randint(30, 120))
+            except Exception as e:
+                print('Error in Mango', e)
             logs.close()
         # db.close()
 

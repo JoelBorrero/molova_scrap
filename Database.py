@@ -64,6 +64,7 @@ class Database:
         priceBfr = toInt(priceBfr)
         priceNow = toInt(priceNow)
         discount = toInt(discount)
+        # print(priceBfr, priceNow, discount, url)
         sale = priceNow < priceBfr
         if discount < 1 or discount >= 60:
             discount = (1-priceNow/priceBfr)*100 if discount else 0

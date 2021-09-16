@@ -23,6 +23,12 @@ sDb = Database('Stradivarius')
 zDb = Database('Zara')
 broken = Database('Broken')
 latest = Database('Latest')
+try:
+    old_urls = ast.literal_eval(open('./Files/.old_urls','r').read())
+except (FileNotFoundError, SyntaxError):
+    old_urls = []
+    with open('./Files/.old_urls','w') as o:
+        o.write('[]')
 
 def merge(databases = [bDb, mDb, zDb, pDb, sDb, mngDb]):
     totalItems = 0
@@ -87,6 +93,9 @@ def scrap(brands = ["""'Stradivarius','Mango', 'Zara'""" 'PullAndBear', 'Bershka
     for brand in brands:
         print('>>>>> ',brand,' <<<<<')
         try:
+            exec(f'old_urls.extend({brand}.db.getAllUrls())')
+            with open('./Files/.old_urls', 'w') as o:
+                o.write(str(old_urls))
             exec('{0}.Scrap{0}()'.format(brand))
         except Exception as e:
            print('Error scrapping', brand, e)
@@ -334,6 +343,8 @@ def jsonToBody(json):
 def post(databases = [bDb, mDb, pDb, zDb, mngDb, sDb], crawling=False):
     if crawling:
         databases = databases[3:]
+    else:
+        databases = databases[:3]
     totalItems = 0
     percentage = 0
     index = 0
@@ -354,8 +365,6 @@ def check_broken_links(databases = [bDb, mDb, zDb, pDb, sDb], start=0, crawling=
     '''Check each url that was not present in the last scrap'''
     print('Looking for broken links...')
     to_delete = []
-    with open('./Files/.old_urls', 'r') as o:
-        old_urls = ast.literal_eval(o.read())
     for url in old_urls:
         db = get_database(url)
         if not db.contains_url(url):
@@ -365,8 +374,8 @@ def check_broken_links(databases = [bDb, mDb, zDb, pDb, sDb], start=0, crawling=
         for url in db.getAllUrls():
             if not latest.contains_url(url):
                 urls.append(url)
-        if len(db.getAllUrls()) - len(urls) > 1000:
-            to_delete.extend(urls)
+        # if len(db.getAllUrls()) - len(urls) > 1000:
+        to_delete.extend(urls)
     print(len(to_delete),'items to review')
     if not crawling and to_delete:
         driver = webdriver.Chrome('./chromedriver')
@@ -402,7 +411,7 @@ def check_broken_links(databases = [bDb, mDb, zDb, pDb, sDb], start=0, crawling=
                             priceBfr = driver.find_element_by_xpath(brand.xpaths['priceBfr']).text
                         try:
                             priceNow = driver.find_element_by_xpath(brand.xpaths['priceNow']).text
-                            discount = driver.find_element_by_xpath(brand.xpaths['discount']).text
+                            discount = 0 # driver.find_element_by_xpath(brand.xpaths['discount']).text
                         except:
                             priceNow = priceBfr
                             discount = 0
@@ -417,7 +426,8 @@ def check_broken_links(databases = [bDb, mDb, zDb, pDb, sDb], start=0, crawling=
         print(len(to_delete),'items deleted')
         open('./Database/Latest.json', 'w').close()
         open('./Database/Broken.json', 'w').close()
-        open('./Files/.old_urls', 'w').close()
+        # with open('./Files/.old_urls', 'w') as o:
+            # o.write('[]')
         requests.post('https://2ksanrpxtd.execute-api.us-east-1.amazonaws.com/dev/molova/delete', f'{{"data": {to_delete}}}'.replace("'",'"')).json()
 
 def sync(brand=''):
