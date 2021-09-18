@@ -11,15 +11,13 @@ def select_db():
     return Database(dbs[int(input(''))]).db
 
 def from_dict(data):
-    return Item(data['brand'],data['name'],data['ref'],data['description'],data['priceBefore'],data['allPricesNow'],data['discount'],data['allImages'],data['url'],data['allSizes'],data['colors'],data['category'],data['originalCategory'],data['subcategory'],data['originalSubcategory'],data['sale'],data['gender'])   
+    return Item(data['brand'],data['name'],'ref',data['description'],data['priceBefore'],data['allPricesNow'],data['discount'],data['allImages'],data['url'],data['allSizes'],data['colors'],data['category'],data['originalCategory'],data['subcategory'],data['originalSubcategory'],data['sale'],data['gender'])   
 
 def get_item(id):
     return from_dict(db.get(doc_id=id))
 
 def verify(id):
     item = get_item(id)
-    print('Name:', item.name, '\nCategory:', item.category, '\nSubcat:', item.subcategory)
-    item.get_categories()
     print('\nNow\nName:', item.name, '\nCategory:', item.category, '\nSubcat:', item.subcategory)
     db.update(item.__dict__, Query().url == item.url)
 

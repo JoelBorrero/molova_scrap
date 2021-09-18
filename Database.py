@@ -7,6 +7,7 @@ class Database:
         TinyDB.default_table_name = "Items"
         self.db = TinyDB(f"./Database/{name}.json")
         self.latest = TinyDB("./Database/Latest.json")
+        self.broken = TinyDB("./Database/Broken.json")
         self.q = Query()
 
     def add(self, item, debug=False, sync=False):
@@ -34,8 +35,11 @@ class Database:
                             doc[field] = item[field]
                 return transform
             it = self.contains(item["url"], str(item["allImages"]), sync)
+            # TODO broken
             if it:  # Update it
                 self.db.update(update(), doc_ids=[it.doc_id])
+                if item['id'] != it['id']:
+                    self.broken.db.insert({'url': it['url']})
                 if debug:
                     print('DB:Updating', it.doc_id)
                 return int(it.doc_id)
@@ -67,7 +71,7 @@ class Database:
         # print(priceBfr, priceNow, discount, url)
         sale = priceNow < priceBfr
         if discount < 1 or discount >= 60:
-            discount = (1-priceNow/priceBfr)*100 if discount else 0
+            discount = (1 - priceNow / priceBfr) * 100 if priceBfr else 0
         if priceBfr > 0 and priceNow > 0:
             self.db.update({"priceBefore":priceBfr, "allPricesNow":[priceNow], 'discount':discount, 'sale':sale}, self.q.url == url)
 

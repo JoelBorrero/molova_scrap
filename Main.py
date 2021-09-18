@@ -1,3 +1,5 @@
+#TODO ocultar si no hay disponibilidad, enviar categorias no linkeadas
+
 import os
 import ast
 import json
@@ -31,33 +33,24 @@ except (FileNotFoundError, SyntaxError):
         o.write('[]')
 
 def merge(databases = [bDb, mDb, zDb, pDb, sDb, mngDb]):
-    totalItems = 0
-    percentage = 0
-    index = 0
-    bar = ''
     path = './Database'
-    total_urls = []
+    total_urls = 0
     for db in databases:
-        total_urls.extend(db.getAllUrls())
-    with open('./URLS.txt','w') as f:
-        f.write(str(total_urls))
-    totalItems = len(total_urls)
-    files = []
+        total_urls += len(db.getAllUrls())
     for file in os.listdir(path):
-        files.append(file)
-    for file in files:
         if '.json' in file and any(n in file for n in ['1','2','3','4','5','6']):
             print(file)
             with open('{}/{}'.format(path, file), 'r', encoding='utf8') as f:
                 try:
                     j = json.loads(f.read())
+                    bar = LoadingBar(len(j['Items']))
                     for k in range(len(j['Items'])):
                         i=''
                         while not i:
                             try:
-                                i = j['Items'][f'{k+1}']
+                                i = j['Items'][str(k + 1)]
                             except:
-                                k+=1
+                                k += 1
                         if 'Bershka' == i['brand']:
                             db = bDb
                         elif 'Mercedes' in i['brand']:
@@ -74,12 +67,8 @@ def merge(databases = [bDb, mDb, zDb, pDb, sDb, mngDb]):
                             ref = i['ref']
                         except:
                             ref = ''
-                        db.add(Item(i['brand'],i['name'],ref,i['description'],i['priceBefore'],i['allPricesNow'],i['discount'],i['allImages'],i['url'],i['allSizes'],i['colors'],i['category'],i['originalCategory'],i['subcategory'],i['originalSubcategory'],i['sale'],i['gender']))
-                        index += 1
-                        if not percentage == int(index / totalItems * 100):
-                            percentage = int(index / totalItems * 100)
-                            bar = '{}°'.format(bar)
-                            print('{}% ({} de {}) {}'.format(percentage, index, totalItems, bar))
+                        db.add(Item(i['brand'], i['name'],ref,i['description'], i['priceBefore'], i['allPricesNow'], i['discount'], i['allImages'], i['url'], i['allSizes'], i['colors'], i['category'], i['originalCategory'], i['subcategory'], i['originalSubcategory'], i['sale'], i['gender']), sync=True)
+                        bar.update()
                 except Exception as e:
                     print(e)
     total_urls = []
@@ -345,42 +334,31 @@ def post(databases = [bDb, mDb, pDb, zDb, mngDb, sDb], crawling=False):
         databases = databases[3:]
     else:
         databases = databases[:3]
-    totalItems = 0
-    percentage = 0
-    index = 0
-    bar = ''
-    # check_broken_links(databases)
+    total_items = 0
     for d in databases:
-        totalItems += len(d.getAllItems())
+        total_items += len(d.getAllUrls())
+    bar = LoadingBar(total_items)
     for d in databases:
         for i in d.getAllItems():
             postItem(i)
-            index += 1
-            if not percentage == int(index / totalItems * 100):
-                percentage = int(index / totalItems * 100)
-                bar = bar+'°'
-                print(f'{percentage}% ({index} de {totalItems}) {bar}')
+            bar.update()
 
 def check_broken_links(databases = [bDb, mDb, zDb, pDb, sDb], start=0, crawling=False):
     '''Check each url that was not present in the last scrap'''
     print('Looking for broken links...')
     to_delete = []
-    for url in old_urls:
-        db = get_database(url)
-        if not db.contains_url(url):
-            to_delete.append(url)
     for db in databases:
         urls = []
         for url in db.getAllUrls():
             if not latest.contains_url(url):
                 urls.append(url)
-        # if len(db.getAllUrls()) - len(urls) > 1000:
-        to_delete.extend(urls)
+        if len(db.getAllUrls()) - len(urls) > 200:
+            to_delete.extend(urls)
     print(len(to_delete),'items to review')
     if not crawling and to_delete:
         driver = webdriver.Chrome('./chromedriver')
         driver.maximize_window()
-        driver.set_page_load_timeout(20)
+        driver.set_page_load_timeout(30)
         for url in to_delete[start:]:
             if not start%10:
                 print(start)
@@ -426,12 +404,10 @@ def check_broken_links(databases = [bDb, mDb, zDb, pDb, sDb], start=0, crawling=
         print(len(to_delete),'items deleted')
         open('./Database/Latest.json', 'w').close()
         open('./Database/Broken.json', 'w').close()
-        # with open('./Files/.old_urls', 'w') as o:
-            # o.write('[]')
         requests.post('https://2ksanrpxtd.execute-api.us-east-1.amazonaws.com/dev/molova/delete', f'{{"data": {to_delete}}}'.replace("'",'"')).json()
 
 def sync(brand=''):
-    if brand and brand in 'Bershka Mango Pull & Bear Stradivarius Zara':
+    if brand in ['Bershka', 'Mango', 'Mercedes Campuzano', 'Pull & Bear', 'Stradivarius', 'Zara']:
         brand = f'marcas/{brand}'
     else:
         brand = 'coleccion'
@@ -499,6 +475,20 @@ def get_database(brand):
         return zDb
     elif 'mango' in brand:
         return mngDb
+
+def remove_brand(brand):
+    if brand and brand in ['Bershka', 'Mango', 'Mercedes Campuzano', 'Pull & Bear', 'Stradivarius', 'Zara']:
+        brand = f'marcas/{brand}'
+        for last in ['Camisas y Camisetas','Pantalones y Jeans','Vestidos y Enterizos','Faldas y Shorts','Abrigos y Blazers','Ropa Deportiva', 'Zapatos','Bolsos','Accesorios']:
+            for index in [0,1]:
+                endpoint = f'https://2ksanrpxtd.execute-api.us-east-1.amazonaws.com/dev/molova/{brand}/{index}/{last}'.replace(' ','%20')
+                res = requests.get(endpoint).json()
+                to_delete = [item['id_producto'] for item in res['items']]
+                requests.post('https://2ksanrpxtd.execute-api.us-east-1.amazonaws.com/dev/molova/delete', f'{{"data": {to_delete}}}'.replace("'",'"')).json()
+                print(last, len(to_delete))
+
+    else:
+        print('Marca no encontrada')
 
 # Main code
 def main():

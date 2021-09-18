@@ -276,7 +276,7 @@ class Item:
                     [   ['correa','gorro','bufanda','medias','cadenas','collares','aretes','anillos','tobilleras']],[[]]],
                 'Zara':                 [[['camisa','shirt','blusa','blouse','bluson','blusón'],['camiseta','shirt','t-shirt','tshirt','basic','básica','basica','estampado','estampada','license','licencia','manga','jacket','jersey','jersei','jerséi','polo','suéter','sueter','sweater'],['top','bandeau','bralette'],['body', 'bodies']],[['pantalon','pantalón','bermuda','bermudas','capris','trousers'],['jeans','jean','jeggings']],[['vestido','peto','pichi','chaleco','túnica'],['enterizo','kimono','cuerpo','mono']],[['falda','minifalda','skirt','skort'],['shorts','short','bermuda']],[['abrigo','chaqueta','gabardina','chaleco','parka','buzo','capa','cárdigan','saco','cazadora','saco','chubasquero','parka','manguitos','plumíferos','plumiferos','cardigan','rompevientos','jersey','sudadera'],['sobrecamisa','buzo','blazer']],[['sudadera','jogger','chándal'],['leggings', 'leggins','bicicletero', 'capri', 'cycling', 'ciclista'],['sport', 'sporty']],[['tenis','tennis','deportivas','deportivos'],['oxford','clásico','clasico','zuecos'],['sandalias','trespuntadas'],['baletas','spadrillas','bamba'],['tacones','tacón','zapatos','zapatillas'],['botas','botínes']],[['bolso','bandolera','cartera','mochila','riñonera','shopper','maletin','maletín','morral']],[['correa','gorro','bufanda','medias','cadenas','collares','aretes','anillos','tobilleras']],[[]]],
             }
-        categories = ["Camisas y Camisetas","Pantalones y Jeans","Vestidos y Enterizos","Faldas y Shorts","Abrigos y Blazers","Ropa deportiva","Zapatos","Bolsos","Accesorios","Otros"]
+        categories = ['Camisas y Camisetas','Pantalones y Jeans','Vestidos y Enterizos','Faldas y Shorts','Abrigos y Blazers','Ropa deportiva','Zapatos','Bolsos','Accesorios','Otros']
         self.category = ''
         categories_list = brands_categories[self.brand]
         subcategories_list = brands_subcategories[self.brand]
@@ -387,7 +387,7 @@ class Item:
             elif any(s in sub+name for s in subs[5]):
                 return 'Botas'
         return self.category
-        
+  
 
 def getColorSrc(colorName,url):
     colorName = colorName.lower()

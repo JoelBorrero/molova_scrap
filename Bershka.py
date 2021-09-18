@@ -36,7 +36,7 @@ xpaths = {
     'subCats': './/div[@class="filter-tag-swiper"]/div/ul/li',
 }
 try:
-    with open('./.settings','r') as settings:
+    with open('./Files/.settings','r') as settings:
         endpoints = ast.literal_eval(settings.read())[brand]['endpoints']
 except:
     endpoints = []
@@ -202,7 +202,7 @@ class ScrapBershka:
                 if len(self.driver.find_elements_by_xpath(xpaths['imgs'])) < 2:
                     sleep(3)
                 for i in self.driver.find_elements_by_xpath(xpaths['imgs']):
-                    images.append(i.get_attribute('src').replace('/2021/I/','/2021/V/'))
+                    images.append(i.get_attribute('src')) # .replace('/2021/I/','/2021/V/'))
                 allImages.append(images)
                 colors.append(images[0])
             db.add(
@@ -292,28 +292,26 @@ class APICrawler:
             for product in products:
                 try:
                     name = product['name']
+                    prod_id = product['id']
                     category = product['relatedCategories'][0]['name']
-                    product = product['detail']
+                    product = product['bundleProductSummaries'][0]['detail']
                     description = product['description'] if product['description'] else product['longDescription']
-                    price_before = product['price']/100
-                    try:
-                        price_now = product['price_discount']#NOT REAL
-                        discount = product['discount']
-                        sale = True
-                    except KeyError:
-                        price_now = price_before
-                        discount = 0
-                        sale = False
-                    url = f'https://www.zara.com/co/es/{product["seo"]["keyword"]}-p{product["seo"]["seoProductId"]}.html'
-                    subcategory = product['subfamilyName']
                     ref = product['displayReference']
+                    subcategory = product['subfamilyInfo']['subFamilyName']
+                    url = f'https://www.bershka.com/co/{name.lower().replace(" ","-")}-c0p{prod_id}.html'
+
+
+                    
                     colors, all_images, all_sizes = [], [], []
-                    for color in product['bundleColors']:
-                        colors.append(color['name'])
-                        images, sizes = [], []
-                        for image in color['xmedia']:
-                            images.append(f'https://static.zara.net/photos//{image["path"]}/w/563/{image["name"]}.jpg?ts={image["timestamp"]}')
-                        all_images.append(images)
+                    for color in product['colors']:
+                        colors.append(f'https://static.bershka.net/4/photos2{color["image"]["url"]}_2_4_5.jpg?t={color["image"]["timestamp"]}')
+                        for size in color['sizes']:
+                            images, sizes = [], []
+                            stock = '' if size['visibilityValue'] == 'SHOW' else '(AGOTADO)'
+                            sizes.append(size['name'] + stock)
+                            for image in color['xmedia']:
+                                images.append(f'https://static.zara.net/photos//{image["path"]}/w/563/{image["name"]}.jpg?ts={image["timestamp"]}')
+                            all_images.append(images)
                     item = Item(brand,name,ref,description,price_before,[price_now],0,all_images,url,all_sizes,colors,category,category,subcategory,subcategory,sale,'Mujer')
                     db.add(item)
                     logs = open(filename, 'a')

@@ -24,7 +24,7 @@ xpaths = {
     'name': './/span[@class="vtex-store-components-3-x-productBrand "]',
     'name2': './/span[contains(@class,"vtex-store-components-3-x-currencyInteger vtex-store-components-3-x-currencyInteger--price"]',
     'priceBfr': './/div[contains(@class,"priceContainer")]/div/span',
-    'priceNow': './/span[@class="vtex-product-price-1-x-currencyContainer vtex-product-price-1-x-currencyContainer--summary"]',
+    'priceNow': './/span[contains(@class,"vtex-store-components-3-x-price_sellingPrice--price")]',
     'prices': './/span[@class="vtex-store-components-3-x-currencyContainer vtex-store-components-3-x-currencyContainer--price"]',
     'ref': '',
     'saleCategory': './/a[@class="vtex-breadcrumb-1-x-link vtex-breadcrumb-1-x-link--1 dib pv1 link ph2 c-muted-2 hover-c-link"]',
@@ -48,7 +48,6 @@ class ScrapMercedesCampuzano:
                 self.driver.find_element_by_xpath(xpaths["closeBtn"]).click()
                 break
             except:
-                print("sleep", i)
                 sleep(2)
         subCats = []
         categories = self.driver.find_elements_by_xpath(xpaths["categories"])
