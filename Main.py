@@ -25,12 +25,6 @@ sDb = Database('Stradivarius')
 zDb = Database('Zara')
 broken = Database('Broken')
 latest = Database('Latest')
-try:
-    old_urls = ast.literal_eval(open('./Files/.old_urls','r').read())
-except (FileNotFoundError, SyntaxError):
-    old_urls = []
-    with open('./Files/.old_urls','w') as o:
-        o.write('[]')
 
 def merge(databases = [bDb, mDb, zDb, pDb, sDb, mngDb]):
     path = './Database'
@@ -44,13 +38,8 @@ def merge(databases = [bDb, mDb, zDb, pDb, sDb, mngDb]):
                 try:
                     j = json.loads(f.read())
                     bar = LoadingBar(len(j['Items']))
-                    for k in range(len(j['Items'])):
-                        i=''
-                        while not i:
-                            try:
-                                i = j['Items'][str(k + 1)]
-                            except:
-                                k += 1
+                    for _, index in j['Items']:
+                        i = j['Items'][index]
                         if 'Bershka' == i['brand']:
                             db = bDb
                         elif 'Mercedes' in i['brand']:
@@ -78,13 +67,10 @@ def merge(databases = [bDb, mDb, zDb, pDb, sDb, mngDb]):
         f.write(str(total_urls))
     # input('\nPresione enter para salir\n')
 
-def scrap(brands = ["""'Stradivarius','Mango', 'Zara'""" 'PullAndBear', 'Bershka', 'MercedesCampuzano']):
+def scrap(brands = ['PullAndBear', 'Bershka', 'MercedesCampuzano']):
     for brand in brands:
         print('>>>>> ',brand,' <<<<<')
         try:
-            exec(f'old_urls.extend({brand}.db.getAllUrls())')
-            with open('./Files/.old_urls', 'w') as o:
-                o.write(str(old_urls))
             exec('{0}.Scrap{0}()'.format(brand))
         except Exception as e:
            print('Error scrapping', brand, e)
@@ -430,7 +416,7 @@ def sync(brand=''):
                     db.add(item, sync=True)
                     index += 1
                     i += 1
-                    bar.update(index)
+                    bar.update()
             else:
                 print('ERROR:'+endpoint)
 
