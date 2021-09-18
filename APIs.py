@@ -18,12 +18,6 @@ except FileNotFoundError:
     settings = {'Mango': {'endpoints': [], 'endpoint': ''}, 'Stradivarius': {'endpoints': [], 'endpoint': ''}, 'Zara': {'endpoints': [], 'endpoint': ''}}
     with open('./Files/.settings','w') as s:
         s.write(str(settings))
-try:
-    old_urls = ast.literal_eval(open('./Files/.old_urls','r').read())
-except (FileNotFoundError, SyntaxError):
-    old_urls = []
-    with open('./Files/.old_urls','w') as o:
-        o.write('[]')
 brands = [
     {'name': 'Mango', 'endpoint': settings['Mango']['endpoint'], 'endpoints': settings['Mango']['endpoints'], 'updates': True},
     {'name': 'Zara', 'endpoint': settings['Zara']['endpoint'], 'endpoints': settings['Zara']['endpoints'], 'updates': True},
@@ -54,7 +48,8 @@ class Catcher:
         for i,j in enumerate(self.df):
             self.df[j].to_excel(self.writer,j, index=False)
         self.writer.save()
-        # self.check()
+        sync()
+        self.check()
 
     def update_headers(self):
         self.session = requests.session()
@@ -130,9 +125,6 @@ class Catcher:
                 for brand in brands:
                     if brand['updates']:
                         print(f'Crawling {brand["name"]}')
-                        exec(f'old_urls.extend({brand["name"]}.db.getAllUrls())')
-                        with open('./Files/.old_urls', 'w') as o:
-                            o.write(str(old_urls))
                         exec(f'{brand["name"]}.APICrawler(brand["endpoints"])')
                 check_broken_links(crawling=True)
                 post(crawling=True)

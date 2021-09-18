@@ -37,11 +37,11 @@ class Database:
             it = self.contains(item["url"], str(item["allImages"]), sync)
             # TODO broken
             if it:  # Update it
-                self.db.update(update(), doc_ids=[it.doc_id])
-                if item['id'] != it['id']:
+                if item['url'] != it['url']:
                     self.broken.db.insert({'url': it['url']})
                 if debug:
                     print('DB:Updating', it.doc_id)
+                self.db.update(update(), doc_ids=[it.doc_id])
                 return int(it.doc_id)
             else:  # Create it
                 if debug:
