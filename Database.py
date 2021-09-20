@@ -38,7 +38,10 @@ class Database:
             # TODO broken
             if it:  # Update it
                 if item['url'] != it['url']:
-                    self.broken.db.insert({'url': it['url']})
+                    try:
+                        self.broken.insert({'url': it['url']})
+                    except:
+                        pass
                 if debug:
                     print('DB:Updating', it.doc_id)
                 self.db.update(update(), doc_ids=[it.doc_id])
