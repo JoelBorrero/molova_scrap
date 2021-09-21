@@ -89,6 +89,8 @@ class Database:
                 image = image[:image.index('/w/')]
             elif 'stradivarius' in image:
                 image = image[:image.rindex('_')]
+            if '.jpg?t' in image:
+                image = image[:image.index('.jpg?t') + 4]
             return image in str(val)
         url = normalyze_url(url)
         it = self.db.get(self.q.url == url)

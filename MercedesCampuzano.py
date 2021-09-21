@@ -74,8 +74,7 @@ class ScrapMercedesCampuzano:
         self.driver.get(url)
         sleep(5)
         if self.sale:
-            self.category = self.driver.find_element_by_xpath(
-                xpaths["saleCategory"]).text
+            self.category = self.driver.find_element_by_xpath(xpaths["saleCategory"]).text
             self.subcategory = self.category
             self.originalCategory = self.category
             self.originalSubcategory = self.category
