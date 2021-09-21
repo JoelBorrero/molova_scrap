@@ -409,11 +409,11 @@ def sync(brand=''):
                 i = 0
                 for item in res['items']:
                     db = get_database(item['brand'])
-                    for pop in ['data', 'date_time', 'id', 'id_producto']:
-                        item.pop(pop)
-                    if not type(item['allPricesNow']) == list:
-                        item['allPricesNow'] = [item['allPricesNow']]
-                    db.add(item, sync=True)
+                    # for pop in ['data', 'date_time', 'id', 'id_producto']:
+                    #     item.pop(pop)
+                    # if not type(item['allPricesNow']) == list:
+                    #     item['allPricesNow'] = [item['allPricesNow']]
+                    db.add(Item(item['brand'], item['name'],'ref',item['description'], item['priceBefore'], item['allPricesNow'], item['discount'], item['allImages'], item['url'], item['allSizes'], item['colors'], item['category'], item['originalCategory'], item['subcategory'], item['originalSubcategory'], item['sale'], item['gender']), sync=True)
                     index += 1
                     i += 1
                     bar.update()
