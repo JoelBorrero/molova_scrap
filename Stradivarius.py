@@ -294,9 +294,11 @@ class APICrawler:
                                         endpoints.append(endpoint)
             print(endpoints)
         image_formats = ('image/png', 'image/jpeg', 'image/jpg')
-        open('./Files/LogsSTR.txt','w').close()
+        filename = './Files/LogsSTR.txt'
+        open(filename, 'w').close()
+        logs = open(filename, 'a')
+        logs.write(f'··········{datetime.now(tz).month} - {datetime.now(tz).day}··········\n')
         for endpoint in endpoints:
-            logs = open('./Files/LogsSTR.txt','a')
             res = session.get(endpoint[1]).json()
             logs.write(f'{datetime.now(tz).hour}:{datetime.now(tz).minute}   -   {len(res["products"])} productos  -  {endpoint[0]}\n')
             logs.close()
@@ -370,14 +372,11 @@ class APICrawler:
                             allImages.append(images)
                         item.allImages = allImages
                     db.add(item)
-                    logs = open('./Files/LogsSTR.txt','a')
                     logs.write(f'    + {datetime.now(tz).hour}:{datetime.now(tz).minute}:{datetime.now(tz).second}   -   {name}\n')
-                    logs.close()
                 except Exception as e:
-                    logs = open('./Files/LogsSTR.txt','a')
                     logs.write(f'X {datetime.now(tz).hour}:{datetime.now(tz).minute}:{datetime.now(tz).second}   -   {e}\n')
-                    logs.close()
                     print(e)
+                logs.close()
             headers = session.headers
             sleep(uniform(30, 120))
             session = requests.session()

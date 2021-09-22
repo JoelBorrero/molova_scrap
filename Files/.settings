@@ -570,202 +570,28 @@
     },
     "brands_subcategories": {
         "Bershka": [
-            [
-                [
-                    "camisa",
-                    "shirt",
-                    "blusa",
-                    "blouse",
-                    "bluson",
-                    "blusón"
-                ],
-                [
-                    "camiseta",
-                    "shirt",
-                    "t-shirt",
-                    "tshirt",
-                    "basic",
-                    "básica",
-                    "basica",
-                    "license",
-                    "licencia",
-                    "manga",
-                    "jacket",
-                    "jersey",
-                    "jersei",
-                    "jerséi",
-                    "polo",
-                    "suéter",
-                    "sueter",
-                    "sweater"
-                ],
-                [
-                    "top",
-                    "bandeau",
-                    "bralette"
-                ],
-                [
-                    "body",
-                    "bodies"
-                ]
-            ],
-            [
-                [
-                    "pantalon",
-                    "pantalón",
-                    "bermuda",
-                    "bermudas",
-                    "capris",
-                    "trousers",
-                    "legging"
-                ],
-                [
-                    "jeans",
-                    "jean",
-                    "jeggings"
-                ]
-            ],
-            [
-                [
-                    "vestido",
-                    "peto",
-                    "pichi",
-                    "chaleco",
-                    "túnica"
-                ],
-                [
-                    "enterizo",
-                    "kimono",
-                    "cuerpo",
-                    "mono"
-                ]
-            ],
-            [
-                [
-                    "falda",
-                    "minifalda",
-                    "skirt",
-                    "skort"
-                ],
-                [
-                    "shorts",
-                    "short",
-                    "bermuda"
-                ]
-            ],
-            [
-                [
-                    "abrigo",
-                    "chaqueta",
-                    "gabardina",
-                    "chaleco",
-                    "parka",
-                    "buzo",
-                    "capa",
-                    "cárdigan",
-                    "saco",
-                    "cazadora",
-                    "saco",
-                    "chubasquero",
-                    "parka",
-                    "manguitos",
-                    "plumíferos",
-                    "plumiferos",
-                    "cardigan",
-                    "rompevientos",
-                    "jersey",
-                    "sudadera"
-                ],
-                [
-                    "sobrecamisa",
-                    "buzo",
-                    "blazer"
-                ]
-            ],
-            [
-                [
-                    "sudadera",
-                    "jogger",
-                    "chándal"
-                ],
-                [
-                    "leggings",
-                    "leggins",
-                    "bicicletero",
-                    "capri",
-                    "cycling",
-                    "ciclista"
-                ],
-                [
-                    "sport",
-                    "sporty"
-                ]
-            ],
-            [
-                [
-                    "tenis",
-                    "tennis",
-                    "deportivas",
-                    "deportivos"
-                ],
-                [
-                    "oxford",
-                    "clásico",
-                    "clasico",
-                    "zuecos"
-                ],
-                [
-                    "sandalias",
-                    "trespuntadas"
-                ],
-                [
-                    "baletas",
-                    "spadrillas",
-                    "bamba"
-                ],
-                [
-                    "tacones",
-                    "tacón",
-                    "zapatos",
-                    "zapatillas"
-                ],
-                [
-                    "botas",
-                    "botínes"
-                ]
-            ],
-            [
-                [
-                    "bolso",
-                    "bandolera",
-                    "cartera",
-                    "mochila",
-                    "riñonera",
-                    "shopper",
-                    "maletin",
-                    "maletín",
-                    "morral"
-                ]
-            ],
-            [
-                [
-                    "correa",
-                    "gorro",
-                    "bufanda",
-                    "cadenas",
-                    "collares",
-                    "aretes",
-                    "anillos",
-                    "medias",
-                    "tobilleras",
-                    "calcetines",
-                    "socks"
-                ]
-            ],
-            [
-                []
-            ]
-        ],
+            [   ["camisa", "shirt", "blusa", "blouse", "bluson", "blusón"],
+                ["camiseta", "shirt", "t-shirt", "tshirt", "basic", "básica", "basica", "license", "licencia", "manga", "jacket", "jersey", "jersei", "jerséi", "polo", "suéter", "sueter", "sweater"],["top", "bandeau", "bralette"],
+                ["body", "bodies"]],
+            [   ["pantalon", "pantalón", "bermuda", "bermudas", "capris", "trousers", "legging"],
+                ["jeans", "jean", "jeggings"]],
+            [   ["vestido", "peto", "pichi", "chaleco", "túnica"],
+                ["enterizo", "kimono", "cuerpo", "mono"]],
+            [   ["falda", "minifalda", "skirt", "skort"],
+                ["shorts", "short", "bermuda"]],
+            [   ["abrigo", "chaqueta", "gabardina", "chaleco", "parka", "buzo", "capa", "cárdigan", "saco", "cazadora", "saco", "chubasquero", "parka", "manguitos", "plumíferos", "plumiferos", "cardigan", "rompevientos", "jersey", "sudadera"],
+                ["sobrecamisa", "buzo", "blazer"]],
+            [   ["sudadera", "jogger", "chándal"],["leggings", "leggins", "bicicletero", "capri", "cycling", "ciclista"],
+                ["sport", "sporty"]],
+            [   ["tenis", "tennis", "deportivas", "deportivos", "zapatillas"],
+                ["oxford", "clásico", "clasico", "zuecos"],
+                ["sandalias", "trespuntadas"],
+                ["baletas", "spadrillas", "bamba"],
+                ["tacones", "tacón", "zapatos"],
+                ["botas", "botínes"]],
+            [["bolso", "bandolera", "cartera", "mochila", "riñonera", "shopper", "maletin", "maletín", "morral"]],
+            [["correa", "gorro", "bufanda", "cadenas", "collares", "aretes", "anillos", "medias", "tobilleras", "calcetines", "socks"]],
+            [[]]],
         "Mango": [
             [
                 [
@@ -1107,13 +933,15 @@
                     "zuecos"
                 ],
                 [
+                    "sandalia",
                     "sandalias",
-                    "trespuntadas"
+                    "trespuntada",
+                    "trespuntadas",
+                    "pantufla"
                 ],
                 [
                     "baletas",
                     "spadrillas",
-                    "bamba"
                 ],
                 [
                     "tacones",
@@ -1151,7 +979,8 @@
                     "medias",
                     "tobilleras",
                     "calcetines",
-                    "socks"
+                    "socks",
+                    "bamba"
                 ]
             ],
             [
@@ -1295,7 +1124,8 @@
                     "tenis",
                     "tennis",
                     "deportivas",
-                    "bamba"
+                    "bamba",
+                    "zapatillas"
                 ],
                 [
                     "oxford",
@@ -1314,8 +1144,7 @@
                 [
                     "tacones",
                     "tacón",
-                    "zapatos",
-                    "zapatillas"
+                    "zapatos"
                 ],
                 [
                     "botas",
@@ -1411,33 +1240,10 @@
                     "jeggings"
                 ]
             ],
-            [
-                [
-                    "vestido",
-                    "peto",
-                    "pichi",
-                    "túnica"
-                ],
-                [
-                    "enterizo",
-                    "kimono",
-                    "cuerpo",
-                    "mono"
-                ]
-            ],
-            [
-                [
-                    "falda",
-                    "minifalda",
-                    "skirt",
-                    "skort"
-                ],
-                [
-                    "shorts",
-                    "short",
-                    "bermuda"
-                ]
-            ],
+            [   ["vestido","peto","pichi","túnica"],
+                ["enterizo","kimono","cuerpo","mono"]],
+            [   ["falda","minifalda","skirt","skort"],
+                ["shorts","short","bermuda"]],
             [
                 [
                     "gilet",
@@ -1489,39 +1295,12 @@
                     "sporty"
                 ]
             ],
-            [
-                [
-                    "tenis",
-                    "tennis",
-                    "deportivas",
-                    "deportivos"
-                ],
-                [
-                    "oxford",
-                    "clásico",
-                    "clasico",
-                    "zuecos"
-                ],
-                [
-                    "sandalias",
-                    "trespuntadas"
-                ],
-                [
-                    "baletas",
-                    "spadrillas",
-                    "bamba"
-                ],
-                [
-                    "tacones",
-                    "tacón",
-                    "zapatos",
-                    "zapatillas"
-                ],
-                [
-                    "botas",
-                    "botínes",
-                    "botines"
-                ]
+            [   ["tenis","tennis","deportivas","deportivos"],
+                ["oxford","clásico","clasico","zuecos"],
+                ["sandalias","trespuntadas", "sandals"],
+                ["baletas","spadrillas","bamba", "ballet"],
+                ["tacones","tacón","zapatos","zapatillas", "stilletto"],
+                ["botas","botínes","botines"]
             ],
             [
                 [
@@ -1542,9 +1321,11 @@
                     "correa",
                     "gorro",
                     "bufanda",
+                    "cadena",
                     "cadenas",
-                    "collares",
+                    "collar",
                     "aretes",
+                    "anillo",
                     "anillos",
                     "medias",
                     "tobilleras",
@@ -1701,8 +1482,11 @@
                     "zuecos"
                 ],
                 [
+                    "sandalia",
                     "sandalias",
-                    "trespuntadas"
+                    "trespuntada",
+                    "trespuntadas",
+                    "cangrejera"
                 ],
                 [
                     "baletas",

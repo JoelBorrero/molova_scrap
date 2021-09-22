@@ -257,8 +257,9 @@ class APICrawler:
         session.headers.update(headers)
         filename = './Files/LogsZARA.txt'
         open(filename, 'w').close()
+        logs = open(filename, 'a')
+        logs.write(f'··········{datetime.now(tz).month} - {datetime.now(tz).day}··········\n')
         for endpoint in endpoints:
-            logs = open(filename, 'a')
             products = session.get(endpoint[1]).json()['productGroups'][0]['elements']
             logs.write(f'{datetime.now(tz).hour}:{datetime.now(tz).minute}   -   {len(products)} productos  -  {endpoint[0]}\n')
             logs.close()

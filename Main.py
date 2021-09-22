@@ -286,6 +286,7 @@ def scrap(brands = ['PullAndBear', 'Bershka', 'MercedesCampuzano']):
     process.crawl(ItemsSpider)
     process.start()"""
 
+
 def postItem(data):
     '''Create or update the element with the same url'''
     temp = jsonToBody(data)#.replace(''allPricesNow'',''allPriceNow'').replace(''allSizes'',''allSize'').replace(''subcategory'',''subCategory'').replace(''originalSubcategory'',''originalSubCategory'')
@@ -395,6 +396,8 @@ def check_broken_links(databases = [bDb, mDb, zDb, pDb, sDb], start=0, crawling=
 def sync(brand=''):
     if brand in ['Bershka', 'Mango', 'Mercedes Campuzano', 'Pull & Bear', 'Stradivarius', 'Zara']:
         brand = f'marcas/{brand}'
+        db = get_database(brand)
+        db.clear()
     else:
         brand = 'coleccion'
         for db in [bDb, mDb, mngDb, pDb, sDb, zDb, broken, latest]:
@@ -406,7 +409,6 @@ def sync(brand=''):
             res = requests.get(endpoint).json()
             if 'items' in res:
                 bar = LoadingBar(len(res['items']))
-                i = 0
                 for item in res['items']:
                     db = get_database(item['brand'])
                     # for pop in ['data', 'date_time', 'id', 'id_producto']:
@@ -415,7 +417,6 @@ def sync(brand=''):
                     #     item['allPricesNow'] = [item['allPricesNow']]
                     db.add(Item(item['brand'], item['name'],'ref',item['description'], item['priceBefore'], item['allPricesNow'], item['discount'], item['allImages'], item['url'], item['allSizes'], item['colors'], item['category'], item['originalCategory'], item['subcategory'], item['originalSubcategory'], item['sale'], item['gender']), sync=True)
                     index += 1
-                    i += 1
                     bar.update()
             else:
                 print('ERROR:'+endpoint)

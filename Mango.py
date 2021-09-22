@@ -71,10 +71,12 @@ def scrap_for_links():
 
 class APICrawler:
     def __init__(self, endpoints=endpoints):
-        open('./Files/LogsMNG.txt','w').close()
         tz = pytz.timezone('America/Bogota')
+        filename = './Files/LogsMNG.txt'
+        open(filename, 'w').close()
+        logs = open(filename, 'a')
+        logs.write(f'··········{datetime.now(tz).month} - {datetime.now(tz).day}··········\n')
         for endpoint in endpoints:
-            logs = open('./Files/LogsMNG.txt','a')
             logs.write(f'{datetime.now(tz).hour}:{datetime.now(tz).minute}   -   {endpoint[0]}\n')
             pageNum = 1
             try:
@@ -82,7 +84,7 @@ class APICrawler:
                     response = requests.get(endpoint[1]+str(pageNum))
                     if response.status_code == 200:
                         response = response.json()
-                        if response['lastPage']:
+                        if response['lastPage'] or pageNum == 5:
                             pageNum = 0
                         else:
                             pageNum += 1
