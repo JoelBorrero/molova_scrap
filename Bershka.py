@@ -282,14 +282,17 @@ class APICrawler:
             'sec-fetch-site': 'same-origin',
             'user-agent': ['Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/92.0.4515.131 Safari/537.36', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.111 Safari/537.36', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_2) AppleWebKit/601.3.9 (KHTML, like Gecko) Version/9.0.2 Safari/601.3.9', 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:15.0) Gecko/20100101 Firefox/15.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.2311.135 Safari/537.36 Edge/12.246'][randint(0, 4)]}
         session.headers.update(headers)
+        image_formats = ('image/png', 'image/jpeg', 'image/jpg')
         filename = './Files/LogsBERSHKA.txt'
-        open(filename, 'w').close()
+        with open(filename, 'w') as logs:
+            logs.write(f'··········{datetime.now(tz).month} - {datetime.now(tz).day}··········\n')
         for endpoint in endpoints:
-            logs = open(filename, 'a')
             products = session.get(endpoint[1]).json()['products']
+            logs = open(filename, 'a')
             logs.write(f'{datetime.now(tz).hour}:{datetime.now(tz).minute}   -   {len(products)} productos  -  {endpoint[0]}\n')
             logs.close()
             for product in products:
+                logs = open(filename, 'a')
                 try:
                     name = product['name']
                     prod_id = product['id']
@@ -299,29 +302,55 @@ class APICrawler:
                     ref = product['displayReference']
                     subcategory = product['subfamilyInfo']['subFamilyName']
                     url = f'https://www.bershka.com/co/{name.lower().replace(" ","-")}-c0p{prod_id}.html'
-
-
-                    
                     colors, all_images, all_sizes = [], [], []
                     for color in product['colors']:
                         colors.append(f'https://static.bershka.net/4/photos2{color["image"]["url"]}_2_4_5.jpg?t={color["image"]["timestamp"]}')
+                        sizes = []
                         for size in color['sizes']:
-                            images, sizes = [], []
                             stock = '' if size['visibilityValue'] == 'SHOW' else '(AGOTADO)'
                             sizes.append(size['name'] + stock)
-                            for image in color['xmedia']:
-                                images.append(f'https://static.zara.net/photos//{image["path"]}/w/563/{image["name"]}.jpg?ts={image["timestamp"]}')
+                        all_sizes.append(sizes)
+                    price_now = [int(product['colors'][0]['sizes'][0]['price']) / 100]
+                    try:
+                        price_before = int(product['colors'][0]['sizes'][0]['oldPrice']) / 100
+                    except TypeError:
+                        price_before = price_now[0]
+
+                    item = Item(brand,name,ref,description,price_before,price_now,0,all_images,url,all_sizes,colors,category,category,subcategory,subcategory,False,'Mujer')
+                    optional_images = []
+                    for media in product['xmedia']:
+                        color = []
+                        for i in media['xmediaItems'][0]['medias']:
+                            color.append(f'https://static.bershka.net/4/photos2/{media["path"]}/{i["idMedia"]}3.jpg?ts={i["timestamp"]}')
+                        optional_images.append(color)
+                    image = ''
+                    for color in optional_images:
+                        for i in color:
+                            if not image:
+                                r = session.head(i)
+                                if r.headers["content-type"] in image_formats:
+                                    image = i
+                                else:
+                                    color.remove(i)
+                    found = db.contains(url, image,sync=True)
+                    if found:
+                        item.allImages = found['allImages']
+                    else:
+                        for color in optional_images:
+                            images = []
+                            for image in color:
+                                if len(optional_images) == 1 or len(images) < 2:
+                                    r = session.head(image)
+                                    if r.headers["content-type"] in image_formats:
+                                        images.append(image)
                             all_images.append(images)
-                    item = Item(brand,name,ref,description,price_before,[price_now],0,all_images,url,all_sizes,colors,category,category,subcategory,subcategory,sale,'Mujer')
+                        item.allImages = all_images
                     db.add(item)
-                    logs = open(filename, 'a')
                     logs.write(f'    + {datetime.now(tz).hour}:{datetime.now(tz).minute}:{datetime.now(tz).second}   -   {name}\n')
-                    logs.close()
                 except Exception as e:
-                    logs = open(filename, 'a')
-                    logs.write(f'X {datetime.now(tz).hour}:{datetime.now(tz).minute}:{datetime.now(tz).second}   -   {e}\n')
-                    logs.close()
                     print(e)
+                    logs.write(f'X {datetime.now(tz).hour}:{datetime.now(tz).minute}:{datetime.now(tz).second}   -   {e}\n')
+                logs.close()
             headers = session.headers
             sleep(randint(30, 120))
             session = requests.session()

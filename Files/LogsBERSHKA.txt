@@ -1,1 +1,111 @@
-17:13   -   146 productos  -  https://www.bershka.com/co/mujer/ropa/lo-m%C3%A1s-vendido-c1010261502.html
+··········9 - 22··········
+10:58   -   139 productos  -  https: //www.bershka.com/co/mujer/ropa/lo-m%C3%A1s-vendido-c1010261502.html
+    + 10:58:58   -   Top corset C. TANGANA X BERSHKA
+    + 10:58:58   -   Pantalón flare efecto piel C. TANGANA X BERSHKA
+    + 10:58:58   -   Botines tacón ajustados
+    + 10:58:59   -   Blazer cropped efecto piel C. TANGANA X BERSHKA
+    + 10:58:59   -   Gabardina trench efecto piel
+    + 10:58:59   -   Cazadora doble faz
+    + 10:58:59   -   Botines tacón charol
+    + 10:58:59   -   Chaleco doble faz
+    + 10:58:59   -   Pantalón straight efecto piel
+    + 10:58:59   -   Camisa manga larga oversize bolsillo
+    + 10:58:59   -   Camisa oversize popelín print Mickey
+    + 10:58:59   -   Camisa oversize popelín print Mickey
+    + 10:58:59   -   Camisa manga larga popelin oversize
+    + 10:58:59   -   Sudadera manga larga print C. TANGANA X BERSHKA
+    + 10:58:59   -   Mono manga corta velvet bordado C. TANGANA X BERSHKA
+    + 10:58:59   -   Mocasín detalle metalizado
+    + 10:58:59   -   Camiseta manga corta print C. TANGANA X BERSHKA
+    + 10:59:0   -   Camiseta manga corta print Tupac
+    + 10:59:0   -   Sudadera Nirvana
+    + 10:59:0   -   Beanie sport
+    + 10:59:0   -   Jeans straight high waist
+    + 10:59:0   -   Camiseta manga corta print Nirvana
+    + 10:59:0   -   Pantalón wide leg bolsillo trasero
+    + 10:59:0   -   Blazer fluida botones
+    + 10:59:0   -   Gorra retro Santa Mónica
+    + 10:59:0   -   Zapatillas multipiezas suela volumen
+    + 10:59:0   -   Pantalón wide leg bolsillo trasero
+    + 10:59:0   -   Abrigo acolchado ligero efecto nylon
+    + 10:59:0   -   Chaqueta larga oversize
+    + 10:59:0   -   Vestido manga larga rib midi escote corazón
+    + 10:59:0   -   Vestido midi asimétrico cut out
+    + 10:59:0   -   Botines charol caña alta
+    + 10:59:1   -   Bufanda lisa
+    + 10:59:1   -   Sobrecamisa lanera
+    + 10:59:1   -   Beanie label
+    + 10:59:1   -   Sobrecamisa corta cuadros
+    + 10:59:1   -   Abrigo efecto lana hombro caído
+    + 10:59:1   -   Pantalón wide leg cintura
+    + 10:59:1   -   Blazer corte masculino
+    + 10:59:1   -   Camiseta manga larga asimétrica
+    + 10:59:1   -   Cazadora bomber college mangas contraste
+    + 10:59:1   -   Zapatillas abotinadas detalles metalizados
+    + 10:59:1   -   Pantalón pinzas straight
+    + 10:59:1   -   Blazer corte masculino
+    + 10:59:1   -   Blazer cruzada
+    + 10:59:2   -   Blazer cuadros
+    + 10:59:2   -   Pantalón kick flare
+    + 10:59:2   -   Pantalón wide leg cintura
+    + 10:59:2   -   Abrigo con lana cinturón
+    + 10:59:2   -   Skort accesorio
+    + 10:59:2   -   Gorra retro texto
+    + 10:59:2   -   Sudadera oversize bordado print
+    + 10:59:2   -   Jeans skinny high waist abertura
+    + 10:59:2   -   Jeans wide leg 90´s rotos
+    + 10:59:2   -   Jeans straight high waist rotos
+    + 10:59:2   -   Jeans straight high waist
+    + 10:59:2   -   Jeans mom
+    + 10:59:2   -   Cazadora varsity parches
+    + 10:59:2   -   Cazadora parches
+    + 10:59:2   -   Cazadora bomber college mangas contraste
+    + 10:59:3   -   Cazadora bomber nylon
+    + 10:59:3   -   Chaleco efecto nylon acolchado
+    + 10:59:3   -   Chaleco efecto nylon reversible
+    + 10:59:3   -   Zapatillas abotinadas plataforma
+    + 10:59:3   -   Chaleco efecto nylon acolchado
+    + 10:59:3   -   Chaleco efecto nylon reversible
+    + 10:59:3   -   Set 9 anillos boho
+    + 10:59:5   -   Set 9 pendientes esmalte osito
+    + 10:59:8   -   Set 4 collares cadena
+    + 10:59:13   -   Set 3 pendientes aro textura corazón
+    + 10:59:15   -   Blusa manga larga satinada escote blonda
+    + 10:59:20   -   Camiseta manga larga tul corset
+X 10:59:20   -   list index out of range
+    + 10:59:21   -   Camisa detalle corset
+    + 10:59:25   -   Blazer cropped efecto piel
+    + 10:59:27   -   Cazadora biker efecto piel
+    + 10:59:29   -   Falda mini efecto piel cremallera
+    + 10:59:30   -   Blazer efecto piel
+    + 10:59:32   -   Gorra baker efecto piel
+    + 10:59:36   -   Corset hebillas
+    + 10:59:39   -   Bolso acolchado
+    + 10:59:43   -   Mochila tejido reciclado
+    + 10:59:45   -   Corset efecto piel
+    + 10:59:48   -   Vestido mini cuello alto cut out hombros
+    + 10:59:52   -   Vestido otomán manguitos tul
+    + 10:59:53   -   Vestido asimétrico manga larga cut out
+    + 10:59:57   -   Vestido mini manga larga escote
+    + 11:0:1   -   Vestido mini print flores
+    + 11:0:6   -   Cazadora bomber efecto nylon bicolor
+    + 11:0:10   -   Vestido camisero popelín lace up
+    + 11:0:13   -   Botines acordonados plataforma rayada
+    + 11:0:17   -   Vestido manga larga escote cuadrado fruncido
+    + 11:0:20   -   Vestido algodón con lino manga larga nudo
+    + 11:0:26   -   Pantalón wide leg cargo
+    + 11:0:29   -   Botines planos acordonados
+    + 11:0:32   -   Set 2 pinzas pelo color
+    + 11:0:34   -   Sobrecamisa efecto piel
+    + 11:0:36   -   Pinza pelo cuadros
+    + 11:0:41   -   Vestido efecto piel escote cuadrado
+    + 11:0:44   -   Bolso cadena chunky
+    + 11:0:48   -   Pichi efecto piel ajustado
+    + 11:0:50   -   Pantalón flare
+    + 11:0:53   -   Pantalón flare rayas
+    + 11:0:57   -   Jersey cropped rib cuello alto
+    + 11:1:0   -   Jersey rib manguitos
+    + 11:1:2   -   Pantalón high waist cadena
+    + 11:1:5   -   Pantalón sarga wide leg cargo
+    + 11:1:7   -   Camiseta manga larga doble capa
+    + 11:1:10   -   Camiseta manga larga cuello alto

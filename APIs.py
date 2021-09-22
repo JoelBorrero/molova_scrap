@@ -7,6 +7,7 @@ from datetime import datetime
 
 import pandas as pd
 
+import Bershka
 import Mango
 import Stradivarius
 import Zara
@@ -21,7 +22,8 @@ except FileNotFoundError:
 brands = [
     {'name': 'Mango', 'endpoint': settings['Mango']['endpoint'], 'endpoints': settings['Mango']['endpoints'], 'updates': True},
     {'name': 'Zara', 'endpoint': settings['Zara']['endpoint'], 'endpoints': settings['Zara']['endpoints'], 'updates': True},
-    {'name': 'Stradivarius', 'endpoint': settings['Stradivarius']['endpoint'], 'endpoints': settings['Stradivarius']['endpoints'], 'updates': True}]
+    {'name': 'Stradivarius', 'endpoint': settings['Stradivarius']['endpoint'], 'endpoints': settings['Stradivarius']['endpoints'], 'updates': True},
+    {'name': 'Bershka', 'endpoint': settings['Bershka']['endpoint'], 'endpoints': settings['Bershka']['endpoints'], 'updates': True}]
 
 class Catcher:
     def __init__(self):
@@ -80,7 +82,7 @@ class Catcher:
             self.update_headers()
             for brand in brands:
                 res = self.session.get(brand['endpoint']).json()
-                new_data = res['products'] if brand['name'] == 'Stradivarius' else res['groups'][0]['garments'] if brand['name'] == 'Mango' else res['productGroups'][0]['elements']
+                new_data = res['groups'][0]['garments'] if brand['name'] == 'Mango' else res['productGroups'][0]['elements'] if brand['name'] == 'Zara' else res['products']
                 # try:
                 # except:
                 #     new_data = []

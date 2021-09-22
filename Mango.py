@@ -73,10 +73,10 @@ class APICrawler:
     def __init__(self, endpoints=endpoints):
         tz = pytz.timezone('America/Bogota')
         filename = './Files/LogsMNG.txt'
-        open(filename, 'w').close()
-        logs = open(filename, 'a')
-        logs.write(f'··········{datetime.now(tz).month} - {datetime.now(tz).day}··········\n')
+        with open(filename, 'w') as logs:
+            logs.write(f'··········{datetime.now(tz).month} - {datetime.now(tz).day}··········\n')
         for endpoint in endpoints:
+            logs = open(filename, 'a')
             logs.write(f'{datetime.now(tz).hour}:{datetime.now(tz).minute}   -   {endpoint[0]}\n')
             pageNum = 1
             try:

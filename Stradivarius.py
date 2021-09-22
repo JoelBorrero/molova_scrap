@@ -295,14 +295,15 @@ class APICrawler:
             print(endpoints)
         image_formats = ('image/png', 'image/jpeg', 'image/jpg')
         filename = './Files/LogsSTR.txt'
-        open(filename, 'w').close()
-        logs = open(filename, 'a')
-        logs.write(f'··········{datetime.now(tz).month} - {datetime.now(tz).day}··········\n')
+        with open(filename, 'w') as logs:
+            logs.write(f'··········{datetime.now(tz).month} - {datetime.now(tz).day}··········\n')
         for endpoint in endpoints:
             res = session.get(endpoint[1]).json()
+            logs = open(filename, 'a')
             logs.write(f'{datetime.now(tz).hour}:{datetime.now(tz).minute}   -   {len(res["products"])} productos  -  {endpoint[0]}\n')
             logs.close()
             for product in res['products']:
+                logs = open(filename, 'a')
                 try:
                     ref = f'{product["detail"]["displayReference"]}'
                     category = product['detail']['familyInfo']['familyName']
@@ -343,11 +344,10 @@ class APICrawler:
                     allImages = []
                     item = Item(brand,name,ref,description,price_bfr,[price_now],0,allImages,url,allSizes,colors,category,category,subcategory,subcategory,sale,'Mujer')
                     optional_images = []
-                    for media in product["xmedia"]:
+                    for media in product['xmedia']:
                         color = []
-                        for i in media["xmediaItems"][0]["medias"]:
-                            image = f'https://static.e-stradivarius.net/5/photos3{media["path"]}/{i["idMedia"]}2.jpg?t={i["timestamp"]}'
-                            color.append(image)
+                        for i in media['xmediaItems'][0]['medias']:
+                            color.append(f'https://static.e-stradivarius.net/5/photos3{media["path"]}/{i["idMedia"]}2.jpg?t={i["timestamp"]}')
                         optional_images.append(color)
                     image = ''
                     for color in optional_images:
