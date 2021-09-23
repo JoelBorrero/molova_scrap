@@ -211,7 +211,7 @@ class Item:
         self.subcategory = self.get_subcategory(categories.index(self.category), subcategories_list)
 
     def get_subcategory(self, index, subcategories_list):
-        sub = self.originalSubcategory.lower()
+        sub = self.originalSubcategory.lower().split(' ')
         name = self.name.lower()
         subs = subcategories_list[index] if index <7 else ''
         if index == 0:
@@ -283,14 +283,14 @@ class Item:
                 return 'Tenis'
             elif any(s in sub+name for s in subs[1]):
                 return 'Clásicos'
-            elif any(s in sub+name for s in subs[2]):
-                return 'Sandalias'
             elif any(s in sub+name for s in subs[3]):
                 return 'Baletas'
-            elif any(s in sub+name for s in subs[4]):
-                return 'Tacones'
             elif any(s in sub+name for s in subs[5]):
                 return 'Botas'
+            elif any(s in sub+name for s in subs[4]):
+                return 'Tacones'
+            elif any(s in sub+name for s in subs[2]):
+                return 'Sandalias'
         return self.category
   
 

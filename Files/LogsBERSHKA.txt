@@ -1,111 +1,812 @@
 ··········9 - 22··········
-10:58   -   139 productos  -  https: //www.bershka.com/co/mujer/ropa/lo-m%C3%A1s-vendido-c1010261502.html
-    + 10:58:58   -   Top corset C. TANGANA X BERSHKA
-    + 10:58:58   -   Pantalón flare efecto piel C. TANGANA X BERSHKA
-    + 10:58:58   -   Botines tacón ajustados
-    + 10:58:59   -   Blazer cropped efecto piel C. TANGANA X BERSHKA
-    + 10:58:59   -   Gabardina trench efecto piel
-    + 10:58:59   -   Cazadora doble faz
-    + 10:58:59   -   Botines tacón charol
-    + 10:58:59   -   Chaleco doble faz
-    + 10:58:59   -   Pantalón straight efecto piel
-    + 10:58:59   -   Camisa manga larga oversize bolsillo
-    + 10:58:59   -   Camisa oversize popelín print Mickey
-    + 10:58:59   -   Camisa oversize popelín print Mickey
-    + 10:58:59   -   Camisa manga larga popelin oversize
-    + 10:58:59   -   Sudadera manga larga print C. TANGANA X BERSHKA
-    + 10:58:59   -   Mono manga corta velvet bordado C. TANGANA X BERSHKA
-    + 10:58:59   -   Mocasín detalle metalizado
-    + 10:58:59   -   Camiseta manga corta print C. TANGANA X BERSHKA
-    + 10:59:0   -   Camiseta manga corta print Tupac
-    + 10:59:0   -   Sudadera Nirvana
-    + 10:59:0   -   Beanie sport
-    + 10:59:0   -   Jeans straight high waist
-    + 10:59:0   -   Camiseta manga corta print Nirvana
-    + 10:59:0   -   Pantalón wide leg bolsillo trasero
-    + 10:59:0   -   Blazer fluida botones
-    + 10:59:0   -   Gorra retro Santa Mónica
-    + 10:59:0   -   Zapatillas multipiezas suela volumen
-    + 10:59:0   -   Pantalón wide leg bolsillo trasero
-    + 10:59:0   -   Abrigo acolchado ligero efecto nylon
-    + 10:59:0   -   Chaqueta larga oversize
-    + 10:59:0   -   Vestido manga larga rib midi escote corazón
-    + 10:59:0   -   Vestido midi asimétrico cut out
-    + 10:59:0   -   Botines charol caña alta
-    + 10:59:1   -   Bufanda lisa
-    + 10:59:1   -   Sobrecamisa lanera
-    + 10:59:1   -   Beanie label
-    + 10:59:1   -   Sobrecamisa corta cuadros
-    + 10:59:1   -   Abrigo efecto lana hombro caído
-    + 10:59:1   -   Pantalón wide leg cintura
-    + 10:59:1   -   Blazer corte masculino
-    + 10:59:1   -   Camiseta manga larga asimétrica
-    + 10:59:1   -   Cazadora bomber college mangas contraste
-    + 10:59:1   -   Zapatillas abotinadas detalles metalizados
-    + 10:59:1   -   Pantalón pinzas straight
-    + 10:59:1   -   Blazer corte masculino
-    + 10:59:1   -   Blazer cruzada
-    + 10:59:2   -   Blazer cuadros
-    + 10:59:2   -   Pantalón kick flare
-    + 10:59:2   -   Pantalón wide leg cintura
-    + 10:59:2   -   Abrigo con lana cinturón
-    + 10:59:2   -   Skort accesorio
-    + 10:59:2   -   Gorra retro texto
-    + 10:59:2   -   Sudadera oversize bordado print
-    + 10:59:2   -   Jeans skinny high waist abertura
-    + 10:59:2   -   Jeans wide leg 90´s rotos
-    + 10:59:2   -   Jeans straight high waist rotos
-    + 10:59:2   -   Jeans straight high waist
-    + 10:59:2   -   Jeans mom
-    + 10:59:2   -   Cazadora varsity parches
-    + 10:59:2   -   Cazadora parches
-    + 10:59:2   -   Cazadora bomber college mangas contraste
-    + 10:59:3   -   Cazadora bomber nylon
-    + 10:59:3   -   Chaleco efecto nylon acolchado
-    + 10:59:3   -   Chaleco efecto nylon reversible
-    + 10:59:3   -   Zapatillas abotinadas plataforma
-    + 10:59:3   -   Chaleco efecto nylon acolchado
-    + 10:59:3   -   Chaleco efecto nylon reversible
-    + 10:59:3   -   Set 9 anillos boho
-    + 10:59:5   -   Set 9 pendientes esmalte osito
-    + 10:59:8   -   Set 4 collares cadena
-    + 10:59:13   -   Set 3 pendientes aro textura corazón
-    + 10:59:15   -   Blusa manga larga satinada escote blonda
-    + 10:59:20   -   Camiseta manga larga tul corset
-X 10:59:20   -   list index out of range
-    + 10:59:21   -   Camisa detalle corset
-    + 10:59:25   -   Blazer cropped efecto piel
-    + 10:59:27   -   Cazadora biker efecto piel
-    + 10:59:29   -   Falda mini efecto piel cremallera
-    + 10:59:30   -   Blazer efecto piel
-    + 10:59:32   -   Gorra baker efecto piel
-    + 10:59:36   -   Corset hebillas
-    + 10:59:39   -   Bolso acolchado
-    + 10:59:43   -   Mochila tejido reciclado
-    + 10:59:45   -   Corset efecto piel
-    + 10:59:48   -   Vestido mini cuello alto cut out hombros
-    + 10:59:52   -   Vestido otomán manguitos tul
-    + 10:59:53   -   Vestido asimétrico manga larga cut out
-    + 10:59:57   -   Vestido mini manga larga escote
-    + 11:0:1   -   Vestido mini print flores
-    + 11:0:6   -   Cazadora bomber efecto nylon bicolor
-    + 11:0:10   -   Vestido camisero popelín lace up
-    + 11:0:13   -   Botines acordonados plataforma rayada
-    + 11:0:17   -   Vestido manga larga escote cuadrado fruncido
-    + 11:0:20   -   Vestido algodón con lino manga larga nudo
-    + 11:0:26   -   Pantalón wide leg cargo
-    + 11:0:29   -   Botines planos acordonados
-    + 11:0:32   -   Set 2 pinzas pelo color
-    + 11:0:34   -   Sobrecamisa efecto piel
-    + 11:0:36   -   Pinza pelo cuadros
-    + 11:0:41   -   Vestido efecto piel escote cuadrado
-    + 11:0:44   -   Bolso cadena chunky
-    + 11:0:48   -   Pichi efecto piel ajustado
-    + 11:0:50   -   Pantalón flare
-    + 11:0:53   -   Pantalón flare rayas
-    + 11:0:57   -   Jersey cropped rib cuello alto
-    + 11:1:0   -   Jersey rib manguitos
-    + 11:1:2   -   Pantalón high waist cadena
-    + 11:1:5   -   Pantalón sarga wide leg cargo
-    + 11:1:7   -   Camiseta manga larga doble capa
-    + 11:1:10   -   Camiseta manga larga cuello alto
+16:45   -   139 productos  -  https: //www.bershka.com/co/mujer/ropa/lo-m%C3%A1s-vendido-c1010261502.html
+    + 16:45:37   -   Top corset C. TANGANA X BERSHKA
+    + 16:45:37   -   Pantalón flare efecto piel C. TANGANA X BERSHKA
+    + 16:45:37   -   Botines tacón ajustados
+    + 16:45:37   -   Blazer cropped efecto piel C. TANGANA X BERSHKA
+    + 16:45:38   -   Gabardina trench efecto piel
+    + 16:45:38   -   Cazadora doble faz
+    + 16:45:38   -   Botines tacón charol
+    + 16:45:38   -   Chaleco doble faz
+    + 16:45:39   -   Pantalón straight efecto piel
+    + 16:45:39   -   Camisa manga larga oversize bolsillo
+    + 16:45:39   -   Camisa oversize popelín print Mickey
+    + 16:45:39   -   Camisa oversize popelín print Mickey
+    + 16:45:39   -   Camisa manga larga popelin oversize
+    + 16:45:40   -   Sudadera manga larga print C. TANGANA X BERSHKA
+    + 16:45:40   -   Mono manga corta velvet bordado C. TANGANA X BERSHKA
+    + 16:45:40   -   Mocasín detalle metalizado
+    + 16:45:40   -   Camiseta manga corta print C. TANGANA X BERSHKA
+    + 16:45:40   -   Camiseta manga corta print Tupac
+    + 16:45:41   -   Sudadera Nirvana
+    + 16:45:41   -   Beanie sport
+    + 16:45:41   -   Jeans straight high waist
+    + 16:45:41   -   Camiseta manga corta print Nirvana
+    + 16:45:42   -   Pantalón wide leg bolsillo trasero
+    + 16:45:42   -   Blazer fluida botones
+    + 16:45:42   -   Gorra retro Santa Mónica
+    + 16:45:42   -   Zapatillas multipiezas suela volumen
+    + 16:45:42   -   Pantalón wide leg bolsillo trasero
+    + 16:45:43   -   Abrigo acolchado ligero efecto nylon
+    + 16:45:43   -   Chaqueta larga oversize
+    + 16:45:43   -   Vestido manga larga rib midi escote corazón
+    + 16:45:43   -   Vestido midi asimétrico cut out
+    + 16:45:43   -   Botines charol caña alta
+    + 16:45:44   -   Bufanda lisa
+    + 16:45:44   -   Sobrecamisa lanera
+    + 16:45:44   -   Beanie label
+    + 16:45:44   -   Sobrecamisa corta cuadros
+    + 16:45:45   -   Abrigo efecto lana hombro caído
+    + 16:45:45   -   Pantalón wide leg cintura
+    + 16:45:45   -   Blazer corte masculino
+    + 16:45:45   -   Camiseta manga larga asimétrica
+    + 16:45:45   -   Cazadora bomber college mangas contraste
+    + 16:45:46   -   Zapatillas abotinadas detalles metalizados
+    + 16:45:46   -   Pantalón pinzas straight
+    + 16:45:46   -   Blazer corte masculino
+    + 16:45:46   -   Blazer cruzada
+    + 16:45:46   -   Blazer cuadros
+    + 16:45:47   -   Pantalón kick flare
+    + 16:45:47   -   Pantalón wide leg cintura
+    + 16:45:47   -   Abrigo con lana cinturón
+    + 16:45:47   -   Skort accesorio
+    + 16:45:47   -   Gorra retro texto
+    + 16:45:48   -   Sudadera oversize bordado print
+    + 16:45:48   -   Jeans skinny high waist abertura
+    + 16:45:48   -   Jeans wide leg 90´s rotos
+    + 16:45:48   -   Jeans straight high waist rotos
+    + 16:45:48   -   Jeans straight high waist
+    + 16:45:49   -   Jeans mom
+    + 16:45:49   -   Cazadora varsity parches
+    + 16:45:49   -   Cazadora parches
+    + 16:45:49   -   Cazadora bomber college mangas contraste
+    + 16:45:49   -   Cazadora bomber nylon
+    + 16:45:50   -   Chaleco efecto nylon acolchado
+    + 16:45:50   -   Chaleco efecto nylon reversible
+    + 16:45:50   -   Zapatillas abotinadas plataforma
+    + 16:45:50   -   Chaleco efecto nylon acolchado
+    + 16:45:50   -   Chaleco efecto nylon reversible
+    + 16:45:50   -   Set 9 anillos boho
+    + 16:45:51   -   Set 9 pendientes esmalte osito
+    + 16:45:51   -   Set 4 collares cadena
+    + 16:45:51   -   Set 3 pendientes aro textura corazón
+    + 16:45:51   -   Blusa manga larga satinada escote blonda
+    + 16:45:51   -   Camiseta manga larga tul corset
+X 16:45:51   -   list index out of range
+    + 16:45:51   -   Camisa detalle corset
+    + 16:45:52   -   Blazer cropped efecto piel
+    + 16:45:52   -   Cazadora biker efecto piel
+    + 16:45:52   -   Falda mini efecto piel cremallera
+    + 16:45:52   -   Blazer efecto piel
+    + 16:45:53   -   Gorra baker efecto piel
+    + 16:45:53   -   Corset hebillas
+    + 16:45:53   -   Bolso acolchado
+    + 16:45:53   -   Mochila tejido reciclado
+    + 16:45:53   -   Corset efecto piel
+    + 16:45:54   -   Vestido mini cuello alto cut out hombros
+    + 16:45:54   -   Vestido otomán manguitos tul
+    + 16:45:54   -   Vestido asimétrico manga larga cut out
+    + 16:45:54   -   Vestido mini manga larga escote
+    + 16:45:54   -   Vestido mini print flores
+    + 16:45:55   -   Cazadora bomber efecto nylon bicolor
+    + 16:45:55   -   Vestido camisero popelín lace up
+    + 16:45:55   -   Botines acordonados plataforma rayada
+    + 16:45:55   -   Vestido manga larga escote cuadrado fruncido
+    + 16:45:56   -   Vestido algodón con lino manga larga nudo
+    + 16:45:56   -   Pantalón wide leg cargo
+    + 16:45:56   -   Botines planos acordonados
+    + 16:45:56   -   Set 2 pinzas pelo color
+    + 16:45:56   -   Sobrecamisa efecto piel
+    + 16:45:57   -   Pinza pelo cuadros
+    + 16:45:57   -   Vestido efecto piel escote cuadrado
+    + 16:45:57   -   Bolso cadena chunky
+    + 16:45:57   -   Pichi efecto piel ajustado
+    + 16:45:57   -   Pantalón flare
+    + 16:45:58   -   Pantalón flare rayas
+    + 16:45:58   -   Jersey cropped rib cuello alto
+    + 16:45:58   -   Jersey rib manguitos
+    + 16:45:58   -   Pantalón high waist cadena
+    + 16:45:58   -   Pantalón sarga wide leg cargo
+    + 16:45:59   -   Camiseta manga larga doble capa
+    + 16:45:59   -   Camiseta manga larga cuello alto
+    + 16:45:59   -   Chaqueta efecto pelo botones
+    + 16:45:59   -   Jersey rib cuello alto
+    + 16:46:0   -   Gabardina trench algodón
+    + 16:46:0   -   Camiseta manga larga cremallera
+    + 16:46:0   -   Pantalón sarga wide leg fluido
+    + 16:46:0   -   Camiseta bustier tul print escote cruzado
+    + 16:46:0   -   Bolso efecto nylon
+    + 16:46:0   -   Sudadera capucha oversize cremallera
+    + 16:46:1   -   Falda tablas cadena
+    + 16:46:1   -   Chaqueta felpa capucha
+    + 16:46:1   -   Sudadera oversize print
+    + 16:46:1   -   Sudadera oversize print
+    + 16:46:2   -   Abrigo acolchado efecto nylon cinturón
+    + 16:46:2   -   Sobrecamisa lanera cuadros
+    + 16:46:2   -   Jeans mom
+    + 16:46:2   -   Cazadora puffy nylon capucha pelo
+    + 16:46:2   -   Mocasín detalle metalizado
+    + 16:46:3   -   Jersey ajustado off shoulder
+    + 16:46:3   -   Camisa popelín ajustada tipo corset
+    + 16:46:3   -   Zapatillas plataforma combinadas
+    + 16:46:3   -   Chaleco acolchado efecto piel
+    + 16:46:3   -   Pantalón flare efecto piel
+    + 16:46:4   -   Cazadora puffy efecto piel capucha
+X 16:46:4   -   list index out of range
+    + 16:46:4   -   Bolso acolchado
+X 16:46:4   -   list index out of range
+    + 16:46:4   -   Cazadora puffy corta efecto nylon
+    + 16:46:4   -   Zapatillas plataforma adorno.
+    + 16:46:5   -   Sobrecamisa pana
+    + 16:46:5   -   Cazadora teddy capucha
+16:47   -   99 productos  -  https://www.bershka.com/co/mujer/ropa/camisas-c1010193221.html
+    + 16:47:43   -   Camisa manga larga popelín cinturón
+    + 16:47:44   -   Camisa manga larga popelin oversize
+    + 16:47:44   -   Camisa manga larga oversize bolsillo
+    + 16:47:44   -   Camisa manga larga oversize bolsillo
+    + 16:47:44   -   Camisa manga larga oversize bolsillo
+    + 16:47:44   -   Camisa manga larga oversize bolsillo
+    + 16:47:44   -   Camisa manga larga ajustada lazos
+    + 16:47:44   -   Camisa efecto piel costuras contraste
+    + 16:47:45   -   Camisa manga larga efecto piel bolsillos
+    + 16:47:45   -   Camisa efecto piel bolsillos
+    + 16:47:45   -   Camisa efecto piel bolsillos
+    + 16:47:45   -   Blusa manga larga satinada escote blonda
+    + 16:47:45   -   Camisa detalle corset
+    + 16:47:45   -   Camisa detalle corset
+    + 16:47:45   -   Camisa manga larga tul
+    + 16:47:46   -   Camisa manga larga tul
+    + 16:47:46   -   Camisa popelín ajustada tipo corset
+    + 16:47:46   -   Camisa manga corta con lino bolsillo efecto lavado
+    + 16:47:46   -   Camisa manga corta print
+    + 16:47:46   -   Camisa manga corta con lino bolsillo efecto lavado
+    + 16:47:47   -   Camisa oversize popelín print Mickey
+    + 16:47:47   -   Camisa oversize popelín print Mickey
+    + 16:47:47   -   Camisa manga larga satinada print dragones
+    + 16:47:47   -   Camisa satinada print dragones
+    + 16:47:47   -   Camisa oversize manga larga print horóscopo
+    + 16:47:48   -   Camisa oversize manga larga print horóscopo
+    + 16:47:48   -   Camisa manga corta print serpientes
+    + 16:47:48   -   Camisa manga corta print
+    + 16:47:48   -   Camisa print bandana
+    + 16:47:48   -   Camisa cropped print
+    + 16:47:49   -   Camisa manga corta print flores
+    + 16:47:49   -   Camisa manga larga cropped cuadros
+    + 16:47:49   -   Camisa manga larga efecto chifón print cuadros
+    + 16:47:49   -   Camisa manga larga cuadros
+    + 16:47:49   -   Camisa algodón con lino cropped frunce
+    + 16:47:50   -   Blusa popelín volúmen mangas lazada hombros
+    + 16:47:50   -   Camisa cuadros cropped
+    + 16:47:50   -   Camisa cuadros cropped
+    + 16:47:50   -   Camisa popelín ajustada tipo corset
+    + 16:47:50   -   Blusa popelín volúmen mangas lazada hombros
+    + 16:47:50   -   Camisa manga larga tul
+    + 16:47:51   -   Camisa manga larga cuadros
+    + 16:47:51   -   Blusa manga larga goma canilla vichy
+    + 16:47:51   -   Blusa popelín fruncido
+    + 16:47:51   -   Blusa popelín fruncido
+    + 16:47:51   -   Blusa fruncido escote v
+    + 16:47:52   -   Blusa print flores botones
+    + 16:47:52   -   Blusa popelín lazadas
+    + 16:47:52   -   Blusa frunce delantero print flores
+    + 16:47:52   -   Camisa cropped print racing
+    + 16:47:52   -   Camisa manga larga cropped cuadros
+    + 16:47:52   -   Camisa cropped cuadros
+    + 16:47:53   -   Camisa print cuadros
+    + 16:47:53   -   Blusa cropped manga volúmen
+    + 16:47:53   -   Camisa estructura cuello polo
+    + 16:47:53   -   Camisa manga corta print flores
+    + 16:47:53   -   Camisa manga corta print
+    + 16:47:53   -   Camisa manga corta print
+    + 16:47:54   -   Camisa manga corta print
+    + 16:47:54   -   Camisa manga corta print
+    + 16:47:54   -   Camisa print cebra manga sisa
+    + 16:47:54   -   
+    + 16:47:54   -   
+    + 16:47:55   -   Camisa manga corta con lino cropped
+    + 16:47:55   -   Camisa manga corta lino cropped
+    + 16:47:55   -   Camisa estructura cuello polo
+    + 16:47:55   -   Blusa popelín volúmen mangas lazada hombros
+    + 16:47:55   -   Camisa satinada print dragones
+    + 16:47:55   -   Blusa fruncido escote v
+    + 16:47:56   -   Camisa popelín sin mangas print Mickey
+    + 16:47:56   -   Camisa manga corta print
+    + 16:47:56   -   Camisa manga corta cuadros vichy
+    + 16:47:56   -   Blusa popelín volúmen frunce
+    + 16:47:57   -   Blusa popelín volúmen frunce
+    + 16:47:57   -   Camisa manga corta boxy cuadros vichy
+    + 16:47:57   -   Chaleco entallado con lino goma canilla espalda
+    + 16:47:57   -   Camisa con lino nudo delantero
+    + 16:47:57   -   Blusa asimétrica algodón lino
+    + 16:47:58   -   Blusa asimétrica algodón lino
+X 16:47:58   -   list index out of range
+X 16:47:58   -   list index out of range
+    + 16:47:58   -   Camisa manga larga popelin oversize
+    + 16:47:58   -   Camisa manga corta bordado suizo bolsillo
+X 16:47:58   -   list index out of range
+    + 16:47:58   -   Camisa manga larga cropped
+    + 16:47:58   -   Camisa manga larga popelin oversize
+    + 16:47:58   -   Camisa manga larga popelin oversize
+    + 16:47:59   -   Camisa manga larga popelin oversize
+    + 16:47:59   -   Camisa manga larga print retro
+    + 16:47:59   -   Camisa cuadros cropped
+    + 16:47:59   -   Sobrecamisa cuadros
+    + 16:47:59   -   Sobrecamisa cuadros
+    + 16:47:59   -   Sobrecamisa pana
+    + 16:47:59   -   Sobrecamisa pana
+X 16:47:59   -   list index out of range
+    + 16:47:59   -   Sobrecamisa pana
+    + 16:48:0   -   Sobrecamisa cuadros parches
+    + 16:48:0   -   Sobrecamisa contraste cuadros
+    + 16:48:0   -   Sobrecamisa efecto lana contraste denim
+16:49   -   95 productos  -  https://www.bershka.com/co/mujer/ropa/shorts-y-bermudas-c1010194517.html
+    + 16:49:52   -   Bermuda felpa parches varsity
+    + 16:49:52   -   Bermuda felpa parches varsity
+    + 16:49:52   -   Short sarga 5 bolsillos
+    + 16:49:53   -   Short print
+    + 16:49:53   -   Pantalón ciclista jacquard print flores
+    + 16:49:53   -   Short denim rotos
+    + 16:49:53   -   Bermuda print Garfield
+    + 16:49:53   -   Skort accesorio
+    + 16:49:54   -   Short sarga algodón print
+    + 16:49:54   -   Bermuda satinada NBA + Bershka
+    + 16:49:54   -   Bermuda jacquard satinada NBA + Bershka
+    + 16:49:54   -   Bermuda sarga
+    + 16:49:54   -   Bermuda denim baggy Chicago Bulls NBA + Bershka
+    + 16:49:55   -   Bermuda felpa
+    + 16:49:55   -   Short denim básico
+    + 16:49:55   -   Skort accesorio
+    + 16:49:55   -   Skort accesorio
+    + 16:49:55   -   Skort accesorio
+    + 16:49:55   -   Short patchwork print
+    + 16:49:55   -   Short rayas
+    + 16:49:55   -   Short denim detalle bolsillos
+    + 16:49:56   -   Short denim bolsillo
+    + 16:49:56   -   Short denim cadena strass
+    + 16:49:56   -   Short denim high waist abalorios
+    + 16:49:56   -   Short denim cristales
+    + 16:49:56   -   Bermuda denim vintage
+    + 16:49:57   -   Pantalón ciclista rib
+    + 16:49:57   -   Pantalón ciclista rib
+    + 16:49:57   -   Pantalón ciclista
+    + 16:49:57   -   Short denim bordado plátanos
+    + 16:49:57   -   Short denim baggy
+    + 16:49:58   -   Bermuda satinada NBA + Bershka
+    + 16:49:58   -   Bermuda toalla Lakers NBA + Bershka
+    + 16:49:58   -   Bermuda Lakers NBA + Bershka
+    + 16:49:58   -   Short lino
+    + 16:49:59   -   Bermuda lino print tropical
+    + 16:49:59   -   Short sarga evasé
+    + 16:49:59   -   Skort cuadros accesorio
+    + 16:49:59   -   Short lino
+    + 16:49:59   -   Short denim
+    + 16:50:0   -   Skort denim bajo desflecado
+    + 16:50:0   -   Short denim flores bordado
+    + 16:50:0   -   Short denim strass
+    + 16:50:0   -   Short denim detalle cintura
+    + 16:50:0   -   Short crochet cordón
+    + 16:50:1   -   Short crochet bordado flores
+    + 16:50:1   -   Short crochet rayas
+    + 16:50:1   -   Short felpa print
+    + 16:50:1   -   Short denim high waist
+    + 16:50:1   -   Short felpa bordado
+    + 16:50:2   -   Short felpa print
+    + 16:50:2   -   Short denim high waist
+    + 16:50:2   -   Skort denim doble capa bicolor
+    + 16:50:2   -   Short tondosado cordón
+    + 16:50:2   -   Short tondosado cordón
+    + 16:50:2   -   Short sarga
+    + 16:50:3   -   Bermuda print Hot Stuff
+    + 16:50:3   -   Short felpa bordado
+    + 16:50:3   -   Short felpa bordado
+    + 16:50:3   -   Short satén print dragones
+    + 16:50:4   -   Short sarga paperbag
+    + 16:50:4   -   Short felpa print
+    + 16:50:4   -   Short denim mom high waist
+    + 16:50:4   -   Short denim detalle lateral
+    + 16:50:4   -   Short denim bolsillo
+    + 16:50:4   -   Short tondosado cordón
+    + 16:50:5   -   Short sarga bicolor
+    + 16:50:5   -   Short sarga bicolor
+    + 16:50:5   -   Pantalón ciclista cut out
+    + 16:50:5   -   Short denim cut out
+    + 16:50:5   -   Skort algodón lazada
+    + 16:50:5   -   Short denim high waist vuelta
+    + 16:50:6   -   Short denim high waist vuelta
+    + 16:50:6   -   Short denim high waist elástico
+    + 16:50:6   -   Short denim high waist elástico
+    + 16:50:6   -   Short denim high waist elástico
+    + 16:50:6   -   Short sarga 5 bolsillos
+    + 16:50:7   -   Short sarga 5 bolsillos
+    + 16:50:7   -   Short sarga 5 bolsillos
+    + 16:50:7   -   Short sarga paperbag
+    + 16:50:7   -   Short contraste bicolor
+    + 16:50:7   -   Short contraste
+    + 16:50:7   -   Short sarga bicolor
+    + 16:50:7   -   Short denim high waist
+    + 16:50:7   -   Short toalla
+    + 16:50:8   -   Short toalla
+    + 16:50:8   -   Short satén print dragones
+    + 16:50:8   -   Short denim laser print flores
+    + 16:50:8   -   Short crochet parches
+    + 16:50:8   -   Pantalón ciclista rib
+X 16:50:8   -   list index out of range
+X 16:50:8   -   list index out of range
+    + 16:50:9   -   Short boxy efecto piel
+    + 16:50:9   -   Short denim vintage
+    + 16:50:9   -   Short denim vintage
+16:51   -   70 productos  -  https://www.bershka.com/co/mujer/ropa/twin-sets-c1010429555.html
+    + 16:51:44   -   Set blazer y pantalón rayas
+    + 16:51:44   -   Set blazer y pantalón
+    + 16:51:44   -   Set blazer y pantalón cuadros
+    + 16:51:44   -   Set blazer y falda con anillas
+    + 16:51:44   -   Set camisa y falda efecto piel
+    + 16:51:45   -   Set camisa y pantalón print retro
+    + 16:51:45   -   Set camiseta y pantalón print
+    + 16:51:45   -   Set camiseta y pantalón print
+    + 16:51:45   -   Set top y falda print
+    + 16:51:46   -   Set camiseta y falda print
+    + 16:51:46   -   Set blazer, top y pantalón C. TANGANA X BERSHKA
+    + 16:51:46   -   Set camiseta y pantalón C. TANGANA X BERSHKA
+    + 16:51:46   -   Set camiseta y leggings cut-out
+    + 16:51:47   -   Set camiseta y leggings
+    + 16:51:47   -   Set chaqueta y falda denim
+    + 16:51:47   -   Set chaqueta y jeans Mickey
+    + 16:51:47   -   Set top y jeans bicolor
+    + 16:51:47   -   Set sudadera y pantalón felpa
+    + 16:51:48   -   Set sudadera y pantalón felpa
+    + 16:51:48   -   Set sudadera y pantalón felpa
+    + 16:51:48   -   Set chaqueta y pantalón contraste
+    + 16:51:49   -   Set sudadera y pantalón felpa
+    + 16:51:49   -   Set sudadera y pantalón felpa
+    + 16:51:49   -   Set sudadera y short felpa
+    + 16:51:49   -   Set sudadera y pantalón print
+    + 16:51:49   -   Set sudadera y pantalón felpa
+    + 16:51:49   -   Set camiseta y pantalón cáñale
+    + 16:51:50   -   Set camiseta y pantalón cáñale
+    + 16:51:50   -   Set sudadera y pantalón print
+    + 16:51:50   -   Set camiseta y pantalón canalé
+    + 16:51:50   -   Set camiseta y leggings
+X 16:51:50   -   list index out of range
+    + 16:51:51   -   Set sudadera y pantalón print
+    + 16:51:51   -   Set sudadera y pantalón Nirvana
+    + 16:51:51   -   Set sudadera y pantalón felpa
+    + 16:51:51   -   Set sudadera y pantalón felpa
+    + 16:51:52   -   Set sudadera y pantalón felpa
+    + 16:51:52   -   Set sudadera y pantalón felpa
+    + 16:51:52   -   Set chaqueta, top y falda print
+    + 16:51:52   -   Set chaqueta y pantalón Benee
+    + 16:51:52   -   Set camiseta y pantalón Benee
+    + 16:51:53   -   Set sudadera y pantalón Betty Boop
+    + 16:51:53   -   Set sudadera y pantalón felpa
+    + 16:51:53   -   Set camiseta y short NBA + Bershka
+    + 16:51:53   -   Set chaqueta y pantalón contraste
+    + 16:51:53   -   Set sudadera y pantalón felpa
+    + 16:51:54   -   Set camiseta y short Garfield
+    + 16:51:54   -   Set sudadera y pantalon NBA + Bershka
+    + 16:51:54   -   Set top y pantalón textura
+    + 16:51:54   -   Set de chaqueta y falda
+    + 16:51:54   -   Set sudadera y pantalón felpa
+    + 16:51:55   -   Set top y pantalón print
+    + 16:51:55   -   Set camiseta y ciclista jacquard
+    + 16:51:55   -   Set camisa y falda cebra
+    + 16:51:55   -   Set top y ciclista print
+    + 16:51:56   -   Set top y pantalón print
+    + 16:51:56   -   Set chaqueta y short NBA + Bershka
+    + 16:51:56   -   Set chaqueta y short NBA + Bershka
+    + 16:51:56   -   Set blazer y short NBA + Bershka
+    + 16:51:57   -   Set chaqueta y pantalón cuadros
+    + 16:51:57   -   Set top y pantalón flores
+    + 16:51:57   -   Set top y falda lazada
+    + 16:51:57   -   Set top y short Hot Stuff
+    + 16:51:57   -   Set top y falda cremallera
+    + 16:51:58   -   Set top y falda cremallera
+    + 16:51:58   -   Set top y falda strass
+    + 16:51:58   -   Set top y falda crochet
+    + 16:51:58   -   Set top y falda flores
+    + 16:51:59   -   Set top y pantalón flores
+    + 16:51:59   -   Set sudadera y pantalón Hatsune
+16:53   -   20 productos  -  https://www.bershka.com/co/mujer/zapatos/sandalia-tac%C3%B3n-c1010205529.html
+    + 16:53:14   -   Sandalia tacón tiras con pulsera
+    + 16:53:15   -   Sandalia tacón tiras con pulsera
+    + 16:53:15   -   Sandalia tacón ancho
+    + 16:53:15   -   Sandalia tacón ancho irisada
+    + 16:53:15   -   Sandalia tacón medio tiras charol
+    + 16:53:16   -   Sandalia tacón medio tiras
+    + 16:53:16   -   Sandalia vinilo tacón metacrilato
+    + 16:53:16   -   Sandalia tacón vinilo irisado
+    + 16:53:17   -   Sandalia tacón acolchada
+    + 16:53:17   -   Sandalia tacón metacrilato detalle vinilo.
+    + 16:53:17   -   Sandalia tacón metacrilato detalle vinilo.
+    + 16:53:18   -   Sandalia vinilo tacón metacrilato
+    + 16:53:18   -   Sandalia tacón vinilo
+    + 16:53:18   -   Sandalia plataforma acolchada
+    + 16:53:19   -   Sandalia tacón tiras pulsera
+    + 16:53:19   -   Sandalia tacón tiras metalizada
+    + 16:53:19   -   Sandalia tacón tiras pulsera
+    + 16:53:19   -   Sandalia tacón acolchada.
+    + 16:53:20   -   Sandalia tacón acolchada
+    + 16:53:20   -   Sandalia tacón acolchada
+16:55   -   7 productos  -  https://www.bershka.com/co/mujer/zapatos/special-prices-c1010372580.html
+    + 16:55:20   -   Sandalia plataforma tie dye
+    + 16:55:20   -   Sandalia plana hebillas
+    + 16:55:20   -   Sandalia tacón medio tiras charol
+    + 16:55:20   -   Sandalia tacón medio tiras
+    + 16:55:20   -   Sandalia tacón ancho irisada
+    + 16:55:20   -   Sandalia tacón ancho
+    + 16:55:21   -   Sandalia plana hebillas
+16:56   -   68 productos  -  https://www.bershka.com/co/mujer/accesorios/bolsos-c1010193138.html
+    + 16:56:40   -   Bolso acolchado
+    + 16:56:41   -   Bolso acolchado doble cremallera
+    + 16:56:41   -   Porta teléfono nylon acolchado
+    + 16:56:41   -   Bolso acolchado cadena eslabones
+    + 16:56:41   -   Bolso acolchado cremallera
+    + 16:56:42   -   Bolso efecto nylon
+    + 16:56:42   -   Bolso acolchado nylon
+    + 16:56:42   -   Bolso shopper acolchado
+    + 16:56:42   -   Bolso sobre efecto cocodrilo
+    + 16:56:42   -   Bolso multipocket tejido reciclado
+    + 16:56:43   -   Bolso cadena
+    + 16:56:43   -   Monedero liso
+    + 16:56:43   -   Bolso acolchado cremallera
+    + 16:56:43   -   Bolso sobre acolchado cadena
+    + 16:56:43   -   Bolso acolchado doble cremallera
+    + 16:56:43   -   Bolso acolchado cadena eslabones
+    + 16:56:46   -   Bolso cadena efecto cocodrilo
+    + 16:56:46   -   Bolso cadena
+    + 16:56:46   -   Bolso multipocket tejido reciclado
+    + 16:56:46   -   Mochila tejido reciclado
+    + 16:56:46   -   Bolso cadena chunky
+    + 16:56:47   -   Bolso satinado cadena
+    + 16:56:47   -   Bolso acolchado nylon
+    + 16:56:47   -   Bolso multipocket
+    + 16:56:47   -   Tarjetero efecto piel cocodrilo
+    + 16:56:48   -   Porta teléfono acolchado efecto nylon
+    + 16:56:48   -   Bolso sobre efecto cocodrilo
+    + 16:56:48   -   Bolso satinado cadena
+    + 16:56:48   -   Bolso acolchado cadena eslabones
+    + 16:56:48   -   Bolso logo
+    + 16:56:48   -   Bolso cadena
+    + 16:56:49   -   Tarjetero efecto piel cocodrilo
+    + 16:56:49   -   Mochila tirador mariposa
+    + 16:56:49   -   Bolso print damero
+    + 16:56:49   -   Bolso print mariposas
+    + 16:56:50   -   Bolso cadena efecto cocodrilo
+    + 16:56:50   -   Bolso hombro efecto cocodrilo
+    + 16:56:51   -   Tarjetero efecto piel cocodrilo
+    + 16:56:51   -   Bolso mini efecto cocodrilo
+    + 16:56:51   -   Bolso efecto cocodrilo bolsillo
+    + 16:56:51   -   Bolso sobre cadena
+    + 16:56:51   -   Bolso tejido reciclado
+    + 16:56:52   -   Porta teléfono charm
+    + 16:56:52   -   Tarjetero tejido reciclado
+    + 16:56:52   -   Bolso nylon hebilla eyelets
+    + 16:56:52   -   Bolso cadena
+    + 16:56:52   -   Bolso shopper tejido reciclado
+    + 16:56:53   -   Bolso varsity
+    + 16:56:53   -   Bolso strass Angel
+    + 16:56:53   -   Monedero nylon
+    + 16:56:53   -   Mochila tejido reciclado bolsillo
+    + 16:56:54   -   Bolso shopper canvas
+    + 16:56:54   -   Bolso shopper canvas
+    + 16:56:54   -   Bolso sobre efecto cocodrilo
+X 16:56:56   -   list index out of range
+    + 16:56:57   -   Bolso cadena
+    + 16:56:57   -   Bolso acolchado
+    + 16:56:57   -   Bolso shopper cuadros
+    + 16:56:57   -   Bolso C. TANGANA X BERSHKA
+    + 16:56:57   -   Bolso shopper
+    + 16:56:58   -   Tarjetero tejido reciclado
+    + 16:56:58   -   Bolso sobre grande bordado
+    + 16:56:58   -   Bolso denim flores
+    + 16:56:58   -   Bolso mini cantoneras cadena
+    + 16:56:58   -   Bolso bolsillos efecto cocodrilo
+    + 16:56:59   -   Bolso multipocket efecto cocodrilo
+    + 16:56:59   -   Bolso efecto pelo print damero
+    + 16:56:59   -   Porta teléfono print
+16:58   -   88 productos  -  https://www.bershka.com/co/mujer/accesorios/bisuter%C3%ADa-c1010193140.html
+    + 16:58:31   -   Set 8 anillos finos cruz
+    + 16:58:31   -   Collar baño oro 18K C. TANGANA X BERSHKA
+    + 16:58:31   -   Set 9 pendientes corazón
+    + 16:58:31   -   Set 9 anillos corazón
+    + 16:58:32   -   Set 4 collares cadena
+    + 16:58:32   -   Set 9 pendientes varsity
+    + 16:58:32   -   Pendientes aros
+    + 16:58:32   -   Set collares abecedario
+    + 16:58:32   -   Set 2 collares cadena charms
+    + 16:58:33   -   Set 9 pendientes esmalte osito
+    + 16:58:33   -   Set 4 collares amor
+    + 16:58:33   -   Set 9 pendientes corazón
+    + 16:58:33   -   Set 4 collares corazón
+    + 16:58:34   -   Set 4 collares corazón
+    + 16:58:34   -   Set 4 collares perlas
+    + 16:58:34   -   Set 9 anillos baby
+    + 16:58:34   -   Set 4 collares cadena estrella
+    + 16:58:34   -   Set 9 anillos boho
+    + 16:58:35   -   Collar zodiaco Capricornio
+    + 16:58:35   -   Set 9 anillos sello
+    + 16:58:35   -   Set 9 pendientes luna
+    + 16:58:35   -   Set 9 anillos varsity
+    + 16:58:36   -   Set 9 pendientes osito
+    + 16:58:36   -   Set 10 pendientes estrella
+    + 16:58:36   -   Set 3 pendientes aro
+    + 16:58:36   -   Set 3 pendientes aros
+    + 16:58:36   -   Set 9 pendientes cruz
+    + 16:58:37   -   Set 9 pendientes aro perlas
+    + 16:58:37   -   Set 9 anillos llama
+    + 16:58:37   -   Set 9 anillos piedras
+    + 16:58:37   -   Set 5 anillos Benee
+    + 16:58:38   -   Pendientes aro dragón
+    + 16:58:38   -   Set 8 pendientes abalorios
+    + 16:58:38   -   Set 3 pendientes aro textura corazón
+    + 16:58:38   -   Collar zodiaco Libra
+    + 16:58:38   -   Collar zodiaco Virgo
+    + 16:58:39   -   Collar zodiaco Geminis
+    + 16:58:39   -   Collar zodiaco Piscis
+    + 16:58:39   -   Collar zodiaco Tauro
+    + 16:58:39   -   Set 5 anillos resina mariposa
+    + 16:58:40   -   Set 9 anillos resina dragón
+    + 16:58:40   -   Set 3 pendientes amor
+    + 16:58:40   -   Set 5 pulseras dragón
+    + 16:58:40   -   Set 4 anillos colores babe
+    + 16:58:40   -   Set 5 anillos amor
+    + 16:58:41   -   Set 3 collares osito
+    + 16:58:41   -   Set 3 collares cadena corazón
+    + 16:58:41   -   Set 4 collares alas
+    + 16:58:41   -   Set 4 collares varsity
+    + 16:58:41   -   Set 9 pendientes estrella
+    + 16:58:42   -   Set 4 collares corazón
+    + 16:58:42   -   Set 3 collares corazón
+    + 16:58:42   -   Set 3 collares corazón
+    + 16:58:42   -   Set 3 pendientes septum
+    + 16:58:43   -   Set 4 collares alas
+    + 16:58:43   -   Set 4 collares cadena mariposa
+    + 16:58:43   -   Set 8 anillos babe
+    + 16:58:43   -   Set 3 collares charms
+    + 16:58:43   -   Set 9 pendientes alas
+    + 16:58:44   -   Set 9 anillos alas
+    + 16:58:44   -   Set 9 pendientes corazón
+    + 16:58:44   -   Set 9 pendientes cadena cruz
+    + 16:58:44   -   Set 9 pendientes flecha
+    + 16:58:44   -   Set 9 anillos perlas mariposa
+    + 16:58:45   -   Set 3 collares perlas
+    + 16:58:45   -   Set 4 collares cadena corazón
+    + 16:58:45   -   Set 9 pendientes aros charm
+    + 16:58:45   -   Set 4 collares cruz
+    + 16:58:46   -   Set 4 collares corazón
+    + 16:58:46   -   Set 3 collares cadena
+    + 16:58:46   -   Set 9 pendientes piedras
+    + 16:58:46   -   Pendientes aro
+    + 16:58:46   -   Set 3 collares dragón
+    + 16:58:47   -   Set 4 collares boho
+    + 16:58:47   -   Set 9 pendientes ear cuff piedras
+    + 16:58:47   -   Set 4 cadenas mariposa
+    + 16:58:47   -   Set 9 anillos cruz
+    + 16:58:48   -   Set 3 collares
+    + 16:58:48   -   Set 9 anillos
+    + 16:58:48   -   Collar zodiaco Aries
+    + 16:58:48   -   Collar zodiaco Leo
+    + 16:58:49   -   Collar zodiaco Cancer
+    + 16:58:49   -   Collar zodiaco Sagitario
+    + 16:58:49   -   Collar zodiaco Acuario
+    + 16:58:49   -   Collar zodiaco Escorpio
+    + 16:58:49   -   Set de 9 anillos piedras
+    + 16:58:49   -   Set bisutería boho
+    + 16:58:50   -   Pack 9 anillos
+17:0   -   53 productos  -  https://www.bershka.com/co/mujer/accesorios/accesorios-de-m%C3%B3vil-c1010193148.html
+    + 17:0:47   -   Cadena móvil
+    + 17:0:47   -   Cadena móvil
+    + 17:0:47   -   Cadena móvil
+    + 17:0:48   -   Cadena móvil larga
+    + 17:0:48   -   Carcasa stickers iPhone 11
+    + 17:0:48   -   Carcasa stickers iPhone XR
+    + 17:0:48   -   Carcasa stickers iPhone 6/7/8
+    + 17:0:48   -   Pack funda AirPods, carcasa iPhone 11 y soporte de móvil
+X 17:0:48   -   'NoneType' object is not iterable
+X 17:0:48   -   'NoneType' object is not iterable
+X 17:0:48   -   'NoneType' object is not iterable
+    + 17:0:48   -   Funda AirPods Piolín
+X 17:0:48   -   'NoneType' object is not iterable
+X 17:0:48   -   'NoneType' object is not iterable
+X 17:0:48   -   'NoneType' object is not iterable
+X 17:0:48   -   'NoneType' object is not iterable
+X 17:0:48   -   'NoneType' object is not iterable
+X 17:0:48   -   'NoneType' object is not iterable
+X 17:0:48   -   'NoneType' object is not iterable
+X 17:0:48   -   'NoneType' object is not iterable
+X 17:0:48   -   'NoneType' object is not iterable
+X 17:0:48   -   'NoneType' object is not iterable
+X 17:0:48   -   'NoneType' object is not iterable
+X 17:0:48   -   'NoneType' object is not iterable
+X 17:0:48   -   'NoneType' object is not iterable
+X 17:0:48   -   'NoneType' object is not iterable
+X 17:0:48   -   'NoneType' object is not iterable
+X 17:0:48   -   'NoneType' object is not iterable
+X 17:0:48   -   'NoneType' object is not iterable
+X 17:0:48   -   'NoneType' object is not iterable
+X 17:0:48   -   'NoneType' object is not iterable
+X 17:0:48   -   'NoneType' object is not iterable
+X 17:0:48   -   'NoneType' object is not iterable
+X 17:0:48   -   'NoneType' object is not iterable
+X 17:0:48   -   'NoneType' object is not iterable
+X 17:0:48   -   'NoneType' object is not iterable
+X 17:0:48   -   'NoneType' object is not iterable
+X 17:0:49   -   'NoneType' object is not iterable
+    + 17:0:49   -   Carcasa iPhone 6/7/8 horóscopo Piscis
+    + 17:0:49   -   Soporte de móvil Piolín
+    + 17:0:49   -   Cadena móvil
+    + 17:0:49   -   Cordón móvil charms
+    + 17:0:49   -   Carcasa iPhone 6/7/8 horóscopo Virgo
+    + 17:0:49   -   Carcasa iPhone 11/XR horóscopo Geminis
+    + 17:0:50   -   Carcasa iPhone 6/7/8 horóscopo Aries
+    + 17:0:50   -   Carcasa iPhone 6/7/8 horóscopo Libra
+    + 17:0:50   -   Funda AirPods con mosquetón
+    + 17:0:50   -   Funda AirPods con mosquetón
+    + 17:0:50   -   Carcasa iPhone 6/7/8 horóscopo Sagitario
+    + 17:0:50   -   Carcasa iPhone 11/XR horóscopo Leo
+    + 17:0:51   -   Carcasa iPhone 11/XR horóscopo Cáncer
+    + 17:0:51   -   Carcasa iPhone 6/7/8 horóscopo Escorpio
+    + 17:0:51   -   Carcasa iPhone 11/XR horóscopo Piscis
+17:2   -   24 productos  -  https://www.bershka.com/co/mujer/accesorios/calcetines-c1010194004.html
+    + 17:2:36   -   Pack 3 calcetines Tweety
+    + 17:2:36   -   Pack 2 calcetines print
+    + 17:2:37   -   Pack 3 calcetines Betty Boop
+    + 17:2:37   -   Calcetines efecto pelo
+    + 17:2:37   -   Pack 3 calcetines bordado
+    + 17:2:37   -   Pack 2 calcetines print Benee
+    + 17:2:37   -   Pack 3 calcetines varsity
+    + 17:2:37   -   Pack 3 calcetines tobilleros bordado
+    + 17:2:37   -   Pack 3 calcetines print
+    + 17:2:38   -   Pack 3 calcetines print
+    + 17:2:38   -   Pack 2 calcetines print
+    + 17:2:38   -   Pack 3 calcetines print
+    + 17:2:38   -   Pack 2 calcetines nubes
+    + 17:2:38   -   Pack 3 calcetines altos
+    + 17:2:38   -   Pack 2 calcetines altos print
+X 17:2:38   -   list index out of range
+    + 17:2:38   -   Pack 3 calcetines rib bordado sushi
+    + 17:2:38   -   Pack 3 calcetines footie
+    + 17:2:39   -   Pack 3 calcetines print
+    + 17:2:39   -   Pack 3 calcetines bordado
+    + 17:2:39   -   Pack 3 calcetines bordado
+    + 17:2:39   -   Pack 3 calcetines Kuromi
+    + 17:2:39   -   Pack de 4 calcetines tobilleros
+    + 17:2:39   -   Pack 3 calcetines print
+17:3   -   33 productos  -  https://www.bershka.com/co/hombre/ropa/varsity-c1010513002.html
+    + 17:3:23   -   Cazadora bomber varsity mangas efecto piel
+    + 17:3:23   -   Jeans baggy
+    + 17:3:23   -   Cazadora denim varsity
+    + 17:3:23   -   Gorra básica
+    + 17:3:23   -   Jeans baggy
+    + 17:3:24   -   Cazadora bomber varsity pana
+    + 17:3:24   -   Zapatillas talón color hombre
+    + 17:3:24   -   Gorra print varsity
+    + 17:3:24   -   Jeans wide leg con pliegues
+    + 17:3:24   -   Chaqueta botones Varsity
+    + 17:3:24   -   Mochila cremallera
+    + 17:3:24   -   Chaleco felpa capucha print Harvard University
+    + 17:3:25   -   Jeans baggy carpenter
+    + 17:3:25   -   Jersey Varsity parches
+    + 17:3:25   -   Cazadora bomber
+    + 17:3:25   -   Sudadera capucha
+    + 17:3:25   -   Chaleco trenzas
+    + 17:3:25   -   Jeans flare
+    + 17:3:25   -   Chaleco varsity
+    + 17:3:26   -   Chaleco varsity
+    + 17:3:26   -   Mochila cremallera
+    + 17:3:26   -   Cazadora bomber
+    + 17:3:26   -   Jersey cuello pico
+    + 17:3:26   -   Polo texto rotos
+    + 17:3:26   -   Camiseta polo manga larga print varsity
+    + 17:3:27   -   Sudadera cuello redondo
+    + 17:3:27   -   Gorra básica
+    + 17:3:27   -   Jeans baggy carpenter
+    + 17:3:27   -   Pantalón jogger print Yale University
+    + 17:3:27   -   Sudadera capucha print Yale University
+    + 17:3:27   -   Bomber acolchada
+    + 17:3:28   -   Chaleco cuello pico
+    + 17:3:28   -   Gorra básica
+17:4   -   15 productos  -  https://www.bershka.com/co/hombre/ropa/activewear-c1010447001.html
+    + 17:4:14   -   Pantalón legging FUTURE-READY ACTIVEWEAR
+    + 17:4:14   -   Banda reflectante FUTURE-READY ACTIVEWEAR
+    + 17:4:14   -   Pantalón jogger técnico FUTURE-READY ACTIVEWEAR cremallera
+    + 17:4:15   -   Sudadera capucha FUTURE-READY ACTIVEWEAR efecto nylon
+    + 17:4:15   -   Camiseta manga corta FUTURE-READY ACTIVEWEAR mesh print
+    + 17:4:15   -   Pantalón jogger FUTURE-READY ACTIVEWEAR multicargo con legging
+    + 17:4:15   -   Camiseta manga corta extra loose FUTURE-READY ACTIVEWEAR
+    + 17:4:15   -   Cazadora FUTURE-READY ACTIVEWEAR
+    + 17:4:15   -   Pantalón legging FUTURE-READY ACTIVEWEAR print
+    + 17:4:16   -   Mochila chaleco FUTURE-READY ACTIVEWEAR
+    + 17:4:16   -   Set sudadera y pantalón
+    + 17:4:16   -   Gorra FUTURE-READY ACTIVEWEAR
+    + 17:4:16   -   Set 2 mosquetones FUTURE-READY ACTIVEWEAR
+    + 17:4:16   -   Camiseta manga corta extra loose FUTURE-READY ACTIVEWEAR
+    + 17:4:16   -   Set 3 calcetines FUTURE-READY ACTIVEWEAR
+17:5   -   25 productos  -  https://www.bershka.com/co/hombre/zapatos/botines-c1010205532.html
+    + 17:5:1   -   Botas acordonadas detalle arandela hombre
+    + 17:5:1   -   Botas acordonadas suela XL hombre
+    + 17:5:2   -   Botas acordonadas detalle arandela hombre
+    + 17:5:2   -   Botas acordonadas suela XL hombre
+    + 17:5:2   -   Botas acordonadas hombre
+    + 17:5:2   -   Botines elásticos hombre
+    + 17:5:3   -   Botines elásticos hombre
+    + 17:5:3   -   Botines elásticos hombre
+    + 17:5:3   -   Botas acordonadas PIEL hombre
+    + 17:5:4   -   Zapatillas abotinadas hombre
+    + 17:5:4   -   Zapatillas abotinadas hombre
+    + 17:5:4   -   Botines elásticos suela volumen hombre
+    + 17:5:4   -   Botines elásticos suela volumen translúcida hombre
+    + 17:5:4   -   Botas acordonadas hombre
+    + 17:5:5   -   Botines elásticos suela volumen hombre
+    + 17:5:5   -   Botas acordonadas hombre
+    + 17:5:5   -   Botines elásticos hombre suela translúcida
+    + 17:5:6   -   Zapatillas abotinadas hombre
+    + 17:5:6   -   Zapatillas abotinadas hombre
+    + 17:5:6   -   Botines elásticos hombre suela translúcida
+    + 17:5:6   -   Botines elásticos hombre
+    + 17:5:6   -   Zapatillas abotinadas combinadas hombre
+    + 17:5:7   -   Deportivas abotinadas combinadas hombre
+    + 17:5:7   -   Zapatillas abotinadas combinadas hombre
+    + 17:5:7   -   Zapatillas abotinada hombre
+17:6   -   3 productos  -  https://www.bershka.com/co/hombre/zapatos/zapatos-vestir-c1010205527.html
+    + 17:6:41   -   Slipper C.TANGANA X BERSHKA hombre
+    + 17:6:41   -   Slipper C.TANGANA X BERSHKA hombre
+    + 17:6:41   -   Slipper C.TANGANA X BERSHKA hombre
+17:8   -   4 productos  -  https://www.bershka.com/co/hombre/zapatos/special-prices-c1010389518.html
+    + 17:8:42   -   Sandalia acolchada tira adherente hombre.
+    + 17:8:42   -   Sandalia acolchada tira adherente hombre.
+    + 17:8:42   -   Sandalia tiras hombre
+    + 17:8:42   -   Sandalia tiras tejido hombre
+17:9   -   47 productos  -  https://www.bershka.com/co/hombre/accesorios/bisuter%C3%ADa-c1010206031.html
+    + 17:9:58   -   Collar baño oro 18K C. TANGANA X BERSHKA
+    + 17:9:58   -   Collar cadena cruz
+    + 17:9:58   -   Set 3 anillos cruz sello
+    + 17:9:58   -   Set 3 anillos cruz cadena
+    + 17:9:59   -   Collar cruz
+    + 17:9:59   -   Pack 3 anillos
+    + 17:9:59   -   Set 9 pendientes llamas
+    + 17:9:59   -   Collar perlas letras
+    + 17:10:0   -   Collar letras
+    + 17:10:0   -   Collar mensaje
+    + 17:10:0   -   Collar doble mosqueton
+    + 17:10:0   -   Collar UFC
+    + 17:10:1   -   Anillo UFC
+    + 17:10:1   -   Collar intercambiable NBA + Bershka
+    + 17:10:1   -   Set 3 anillos NBA + Bershka
+    + 17:10:1   -   Collar cruz
+    + 17:10:1   -   Set 3 anillos cruz
+    + 17:10:2   -   Set 3 anillos calavera
+    + 17:10:2   -   Collar cruz
+    + 17:10:2   -   Set 5 pulseras cruz
+    + 17:10:2   -   Set 5 pulseras naturales
+    + 17:10:3   -   Set 5 pulseras llamas
+    + 17:10:3   -   Set 5 pulseras mosquetón
+    + 17:10:3   -   Set 5 pulseras básicas
+    + 17:10:3   -   Set 3 anillos
+    + 17:10:4   -   Set 3 anillos gótico
+    + 17:10:4   -   Set 4 anillos sellos
+    + 17:10:4   -   Collar cruces
+    + 17:10:4   -   Set 3 anillos calavera
+    + 17:10:4   -   Set 9 pendientes cruz
+    + 17:10:5   -   Collar doble cruz
+    + 17:10:5   -   Set 4 anillos cruz
+    + 17:10:5   -   Set 9 pendientes color
+    + 17:10:5   -   Set 3 anillos llamas
+    + 17:10:6   -   Collar placa
+    + 17:10:6   -   Collar cadena
+    + 17:10:6   -   Collar llamas
+    + 17:10:6   -   Collar candado
+    + 17:10:6   -   Collar cadena
+    + 17:10:7   -   Collar
+    + 17:10:7   -   Collar gótico
+    + 17:10:7   -   Set 9 pendientes brillo
+    + 17:10:7   -   Set 3 anillos
+    + 17:10:8   -   Collar mosquetón
+    + 17:10:8   -   Collar colgante
+    + 17:10:8   -   Collar chunky placa
+    + 17:10:8   -   Set 3 anillos tuerca
+17:11   -   4 productos  -  https://www.bershka.com/co/hombre/accesorios/mochilas-c1010206018.html
+    + 17:11:9   -   Mochila cremallera
+    + 17:11:9   -   Mochila cremallera
+    + 17:11:9   -   Mochila chaleco FUTURE-READY ACTIVEWEAR
+    + 17:11:9   -   Mochila detalle cadena
