@@ -235,7 +235,7 @@ class ScrapBershka:
 
 def scrap_for_links():
     driver = webdriver.Chrome('./chromedriver')
-    driver.set_page_load_timeout(30)
+    driver.set_page_load_timeout(40)
     driver.maximize_window()
     driver.get('https://www.bershka.com/co/')
     try:
@@ -252,19 +252,23 @@ def scrap_for_links():
     news = ''
     for c in main_categories:
         driver.get(c)
-        sleep(1)
-        netData = driver.execute_script(get_network)
-        for i in netData:
+        m = 0
+        for i in range(10):
+            net = driver.execute_script(get_network)
+            if len(net) > m:
+                net_data = net
+                m = len(net)
+            sleep(.3)
+        for i in net_data:
             if '/product?' in i['name']:
                 endpoints.append((c,i['name']))
                 if 'nuevo-' in c:
                     news = i['name']
-    driver.quit()
-    print(endpoints)
-    settings = ast.literal_eval(open('./.settings','r').read())
+        driver.quit()
+    settings = ast.literal_eval(open('./Files/.settings','r').read())
     settings[brand]['endpoints'] = endpoints
     settings[brand]['endpoint'] = news if news else endpoints[0][1]
-    with open('./.settings','w') as s:
+    with open('./Files/.settings','w') as s:
         s.write(str(settings))
 
 

@@ -391,7 +391,7 @@ def check_broken_links(databases = [bDb, mDb, zDb, pDb, sDb], start=0, crawling=
         print(len(to_delete),'items deleted')
         open('./Database/Latest.json', 'w').close()
         open('./Database/Broken.json', 'w').close()
-        requests.post('https://2ksanrpxtd.execute-api.us-east-1.amazonaws.com/dev/molova/delete', f'{{"data": {to_delete}}}'.replace("'",'"')).json()
+        delete(to_delete)
 
 def sync(brand=''):
     if brand in ['Bershka', 'Mango', 'Mercedes Campuzano', 'Pull & Bear', 'Stradivarius', 'Zara']:
@@ -442,10 +442,10 @@ def clear_remote_db():
                         print(url,'borrado')
                         brand.db.delete(url)
                         to_delete.append(url)
-            requests.post('https://2ksanrpxtd.execute-api.us-east-1.amazonaws.com/dev/molova/delete', f'{{"data": {to_delete}}}'.replace("'",'"')).json()
+            delete(to_delete)
 
 def scrap_for_links():
-    for brand in [Mango, Stradivarius, Zara]:
+    for brand in [Bershka, Mango, Stradivarius, Zara]:
         brand.scrap_for_links()
 
 def get_database(brand):
@@ -463,6 +463,7 @@ def get_database(brand):
     elif 'mango' in brand:
         return mngDb
 
+
 def remove_brand(brand):
     if brand and brand in ['Bershka', 'Mango', 'Mercedes Campuzano', 'Pull & Bear', 'Stradivarius', 'Zara']:
         brand = f'marcas/{brand}'
@@ -471,13 +472,17 @@ def remove_brand(brand):
                 endpoint = f'https://2ksanrpxtd.execute-api.us-east-1.amazonaws.com/dev/molova/{brand}/{index}/{last}'.replace(' ','%20')
                 res = requests.get(endpoint).json()
                 to_delete = [item['id_producto'] for item in res['items']]
-                requests.post('https://2ksanrpxtd.execute-api.us-east-1.amazonaws.com/dev/molova/delete', f'{{"data": {to_delete}}}'.replace("'",'"')).json()
+                delete(to_delete)
                 print(last, len(to_delete))
 
     else:
         print('Marca no encontrada')
 
-# Main code
+
+def delete(to_delete):
+    return requests.post('https://2ksanrpxtd.execute-api.us-east-1.amazonaws.com/dev/molova/delete', f'{{"data": {to_delete}}}'.replace("'",'"')).json()
+
+
 def main():
     print('Comma separated(1,2,3)\n1. Merge\n2. Scrap\n3. Check for broken links\n4. Post\n5. Sync\n6. Clear remote db')
     to_do = input('>')
