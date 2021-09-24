@@ -226,7 +226,7 @@ def scrap_for_links():
             netData = driver.execute_script(get_network)
             for i in netData:
                 if 'products?ajax' in i['name']:
-                    endpoints.append((c,i['name']))
+                    endpoints.append([c,i['name']])
                     if 'nuevo-' in c:
                         news = i['name']
     driver.quit()

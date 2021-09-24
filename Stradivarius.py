@@ -235,7 +235,7 @@ def scrap_for_links():
             netData = driver.execute_script(get_network)
             for i in netData:
                 if all(e in i['name'] for e in ['https://www.stradivarius.com/itxrest/2/catalog/store/55009615/50331099/category/','product?']) and i['name'] not in endpoints:
-                    endpoints.append((c,i['name']))
+                    endpoints.append([c,i['name']])
                     if 'nuevo-c' in c:
                         news = i['name']
     driver.quit()

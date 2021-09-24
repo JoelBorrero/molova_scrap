@@ -58,7 +58,7 @@ def scrap_for_links():
                 endpoint = i['name']
                 endpoint = endpoint[:endpoint.index('&pageNum=')]
                 if not endpoint in str(endpoints):
-                    endpoints.append((category, endpoint))
+                    endpoints.append([category, endpoint])
                     if 'destacados/nuevo' in category:
                         new = endpoint
     driver.quit()

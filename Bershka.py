@@ -261,7 +261,7 @@ def scrap_for_links():
             sleep(.3)
         for i in net_data:
             if '/product?' in i['name']:
-                endpoints.append((c,i['name']))
+                endpoints.append([c,i['name']])
                 if 'nuevo-' in c:
                     news = i['name']
         driver.quit()
