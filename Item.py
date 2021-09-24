@@ -20,7 +20,7 @@ class Item:
             self.allPricesNow = [self.allPricesNow]
         for p in range(len(self.allPricesNow)):
             self.allPricesNow[p] = toInt(self.allPricesNow[p])
-        if not discount or toInt(discount)<1:
+        if not discount or toInt(discount) < 1:
             self.discount = (1-self.allPricesNow[0]/self.priceBefore)*100
         else:
             self.discount = discount
@@ -156,7 +156,7 @@ class Item:
 
     def get_categories(self, data=''):
         try:
-            data = ast.literal_eval(open('./Files/.settings','r').read())
+            data = ast.literal_eval(open('./Files/Settings.json','r').read())
             brands_categories = data['brands_categories']
             brands_subcategories = data['brands_subcategories']
             categories_exceptions = data['categories_exceptions']
@@ -182,29 +182,33 @@ class Item:
         self.category = ''
         categories_list = brands_categories[self.brand]
         subcategories_list = brands_subcategories[self.brand]
+        name = self.name.lower()
         for c in categories_list:
             for cat in c:
                 if cat in self.originalCategory.lower():
                     index = categories_list.index(c)
                     if index == 0:
                         # If any cardigan in shirts
-                        if any(s in self.name.lower() for s in categories_list[4]):
+                        if any(s in name for s in categories_list[4]):
                             index = 4
                     elif index == 1:
                         # If any short in pants
-                        if any(s in self.name.lower() for s in categories_list[3]):
+                        if any(s in name for s in categories_list[3]):
                             index = 3
                         # If any leggin in pants
-                        elif any(s in self.name.lower() for s in categories_list[5]):
+                        elif any(s in name for s in categories_list[5]):
                             index = 5
+                    elif index == 4:
+                        if any(s in name for s in categories_list[0]):
+                            index = 0
                     elif index == 6:
-                        if any(s in self.name.lower() for s in ['sock', 'socks', 'calcetines']):
+                        if any(s in name for s in ['sock', 'socks', 'calcetines']):
                             index = 9
                     self.category = categories[index]
         if not self.category:
             for i, c in enumerate(subcategories_list):
                 for cat in c:
-                    if any(s in cat for s in self.name.lower().split(' ')) and not self.category and not any(s in categories_exceptions[i] for s in self.name.lower().split(' ')):
+                    if any(s in cat for s in name.split(' ')) and not self.category and not any(s in categories_exceptions[i] for s in name.split(' ')):
                         self.category = categories[i]
         if not self.category:
             self.category = categories[-1]

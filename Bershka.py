@@ -36,7 +36,7 @@ xpaths = {
     'subCats': './/div[@class="filter-tag-swiper"]/div/ul/li',
 }
 try:
-    with open('./Files/.settings','r') as settings:
+    with open('./Files/Settings.json','r') as settings:
         endpoints = ast.literal_eval(settings.read())[brand]['endpoints']
 except:
     endpoints = []
@@ -265,10 +265,10 @@ def scrap_for_links():
                 if 'nuevo-' in c:
                     news = i['name']
         driver.quit()
-    settings = ast.literal_eval(open('./Files/.settings','r').read())
+    settings = ast.literal_eval(open('./Files/Settings.json','r').read())
     settings[brand]['endpoints'] = endpoints
     settings[brand]['endpoint'] = news if news else endpoints[0][1]
-    with open('./Files/.settings','w') as s:
+    with open('./Files/Settings.json','w') as s:
         s.write(str(settings))
 
 

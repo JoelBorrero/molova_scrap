@@ -1,1258 +1,442 @@
-··········9 - 22··········
-18:46   -   30 productos  -  https://www.stradivarius.com/co/mujer/ropa/compra-por-producto/packs-c1020371005.html
-    + 18:46:43   -   Set of 2 seamless strappy tops
-    + 18:46:45   -   Gossip Girl pyjama set
-    + 18:46:47   -   Friends pyjama set
-    + 18:46:47   -   Set of 2 plush shorts
-    + 18:46:47   -   Pack 2 suéter cuello tortuga
-    + 18:46:49   -   2-pack of seamless tops
-    + 18:46:49   -   Set of 2 plush shorts
-    + 18:46:50   -   Pack de 2 pantalones jogger
-    + 18:46:52   -   Pack of 2 round neck tops
-    + 18:46:52   -   2-pack of basic V-neck T-shirts
-    + 18:46:52   -   Pack 2 crop top manga corta
-    + 18:46:52   -   Pack 2 bandeau básico
-    + 18:46:53   -   Pack 2 camisetas cuello halter
-    + 18:46:53   -   Pack 2 bodies cuello halter
-    + 18:46:56   -   Set of 3 strappy tops
-    + 18:46:57   -   Pack 2 camisetas básicas
-    + 18:46:57   -   Strappy top with seamless leggings set
-    + 18:46:57   -   Pack 2 camisetas básicas
-    + 18:46:57   -   Strappy top with seamless leggings set
-    + 18:46:57   -   Pack pantalón jogger y buzo
-    + 18:46:57   -   Pack pantalón jogger y buzo
-    + 18:46:58   -   Pack pantalón jogger y buzo
-    + 18:46:58   -   Pack pantalón jogger y buzo
-    + 18:46:58   -   Pack 2 crop top tirantas
-    + 18:46:58   -   Pack 2 crop top tirantas
-    + 18:47:0   -   Set of 2 seamless crop tops
-    + 18:47:1   -   Pack leggings y top seamless
-    + 18:47:1   -   Pack leggings y top seamless
-    + 18:47:2   -   Pack 2 tops cropped
-    + 18:47:2   -   Pack 2 tops cropped
-18:48   -   36 productos  -  https://www.stradivarius.com/co/mujer/ropa/compra-por-producto/special-prices-c1020387599.html
-    + 18:48:40   -   Leggins sculpt cortes STR-EET
-    + 18:48:40   -   Leggins sculpt cortes STR-EET
-    + 18:48:41   -   Blond lace bodysuit
-    + 18:48:41   -   Blond lace bodysuit
-    + 18:48:41   -   Blond lace bodysuit
-    + 18:48:41   -   Disney foil T-shirt
-    + 18:48:42   -   Disney foil T-shirt
-    + 18:48:43   -   Camiseta print
-    + 18:48:43   -   Camiseta print
-    + 18:48:43   -   Camiseta print
-    + 18:48:43   -   Camiseta print
-    + 18:48:44   -   Oversize Disney T-shirt
-    + 18:48:44   -   Oversize Disney T-shirt
-    + 18:48:45   -   Oversized Mickey T-shirt
-    + 18:48:45   -   Foil print T-shirt
-    + 18:48:49   -   Romantic mini dress
-    + 18:48:49   -   Romantic mini dress
-    + 18:48:49   -   Romantic mini dress
-    + 18:48:49   -   Romantic mini dress
-    + 18:48:49   -   Short dress
-    + 18:48:50   -   Floral bomber jacket
-    + 18:48:51   -   Straight fit floral jeans
-    + 18:48:51   -   Striped twill mini skirt
-    + 18:48:51   -   Striped twill cropped trousers
-    + 18:48:56   -   Long floral dungarees
-    + 18:48:56   -   Camiseta graffiti
-    + 18:48:57   -   Disney print T-shirt
-    + 18:48:57   -   Disney print T-shirt
-    + 18:48:57   -   Disney print T-shirt
-    + 18:48:57   -   Enterizo costuras invisibles
-X 18:48:57   -   list index out of range
-    + 18:48:57   -   Sporty pedal pusher leggings
-    + 18:48:57   -   Leggins sculpt cortes STR-EET
-    + 18:48:57   -   Leggins sculpt cortes STR-EET
-    + 18:48:58   -   Leggins sculpt STR-EET
-    + 18:48:59   -   Leggins sculpt STR-EET
-18:50   -   7 productos  -  https://www.stradivarius.com/co/mujer/sport/compra-por-producto/shorts-c1020391178.html
-    + 18:50:46   -   Short fluido tejido de punto STR-EET
-    + 18:50:46   -   Sporty hot pants
-    + 18:50:46   -   Sporty hot pants
-    + 18:50:46   -   Short fluido tejido de punto STR-EET
-    + 18:50:47   -   Sporty hot pants
-    + 18:50:47   -   Short fluido tejido de punto STR-EET
-    + 18:50:47   -   Short fluido tejido de punto STR-EET
-18:51   -   7 productos  -  https://www.stradivarius.com/co/mujer/sport/compra-por-producto/camisetas-c1020390680.html
-    + 18:51:41   -   Cool touch technical sports T-shirt
-    + 18:51:47   -   Cool touch technical sports T-shirt
-    + 18:51:53   -   Soft touch technical sports T-shirt
-    + 18:51:53   -   Cool touch technical sports T-shirt
-    + 18:51:53   -   Cool touch technical sports T-shirt
-    + 18:52:10   -   Crop básico manga corta
-    + 18:52:10   -   Camiseta bailarina seamless
-18:53   -   9 productos  -  https://www.stradivarius.com/co/mujer/sport/compra-por-producto/shoes-%26-accesories-c1020367561.html
-    + 18:53:18   -   Trainers with decorative trims
-    + 18:53:22   -   Trainers with decorative trims
-    + 18:53:22   -   Tenis detalle piezas
-    + 18:53:26   -   White trainers with trim detail
-    + 18:53:27   -   Tenis detalle piezas
-    + 18:53:30   -   White high-top trainers
-    + 18:53:30   -   Tenis detalle multipiezas
-    + 18:53:33   -   White platform trainers
-    + 18:53:36   -   White fabric high-top trainers
-18:55   -   246 productos  -  https://www.stradivarius.com/co/mujer/str-teen-c1020367562.html
-    + 18:55:16   -   Geometric quilted coat
-    + 18:55:20   -   Velvet sweatshirt with zip
-    + 18:55:22   -   Stretch ankle boots with track soles
-    + 18:55:22   -   Flare corduroy leggings
-    + 18:55:22   -   Flare corduroy leggings
-    + 18:55:22   -   Flare corduroy leggings
-    + 18:55:26   -   Soft-touch turtleneck
-    + 18:55:26   -   Soft-touch turtleneck
-    + 18:55:31   -   Track sole stretch heeled ankle boots
-    + 18:55:32   -   Bota plana caucho
-    + 18:55:33   -   Bota plana caucho
-    + 18:55:33   -   Plush straight fit trousers
-    + 18:55:34   -   Mini skirt with waistband
-    + 18:55:34   -   Seamless cycling leggings
-    + 18:55:34   -   Top seamless espalda fantasía
-    + 18:55:34   -   Top seamless espalda fantasía
-    + 18:55:36   -   Nylon trousers with side taping
-    + 18:55:36   -   Velvet bomber jacket
-    + 18:55:40   -   Oversize argyle sweater
-    + 18:55:42   -   Ribbed top with gathered detail
-    + 18:55:45   -   Polo T-Shirt
-    + 18:55:48   -   White trainers with heel detail
-    + 18:55:48   -   Colour block cargo trousers
-    + 18:55:52   -   V-neck T-shirt
-    + 18:55:55   -   Crossover t-shirt
-    + 18:55:55   -   Plush straight fit trousers
-    + 18:55:55   -   Low-waist flare jeans
-    + 18:55:56   -   Hooded cardigan
-    + 18:55:59   -   Sweater with cut-out back
-    + 18:56:0   -   Double-faced nylon jacket
-    + 18:56:0   -   Varsity plush bomber jacket
-    + 18:56:0   -   Varsity plush bomber jacket
-    + 18:56:1   -   Twill bootcut trousers
-    + 18:56:4   -   Embroidered oversized sweatshirt
-    + 18:56:4   -   Puffer jacket
-    + 18:56:4   -   Embroidered oversized sweatshirt
-    + 18:56:5   -   Oversize puffer jacket
-    + 18:56:5   -   Nylon loose track trousers
-    + 18:56:5   -   Oversize puffer jacket
-    + 18:56:10   -   Varsity cable-knit vest
-    + 18:56:10   -   Nylon loose track trousers
-    + 18:56:10   -   Leggings with side stripes
-    + 18:56:11   -   Varsity knit cardigan
-    + 18:56:11   -   Nylon track trousers
-    + 18:56:13   -   Asymmetric knit top
-    + 18:56:13   -   Nylon trousers
-    + 18:56:14   -   Plush varsity jacket
-    + 18:56:17   -   Nylon sweatshirt
-    + 18:56:17   -   Plush varsity jacket
-    + 18:56:18   -   Pleated nylon mini skirt
-    + 18:56:18   -   Racerback top with diamantés
-    + 18:56:19   -   Paperbag culotte jeans
-    + 18:56:19   -   Nylon trousers
-    + 18:56:20   -   White high-top trainers
-    + 18:56:20   -   Pleated nylon mini skirt
-    + 18:56:22   -   Contrast T-shirt
-    + 18:56:26   -   Jersey cut out
-    + 18:56:26   -   Jersey cut out
-    + 18:56:27   -   Straight-leg worker trousers
-    + 18:56:27   -   Oversize argyle sweater
-    + 18:56:27   -   Soft-touch turtleneck
-    + 18:56:27   -   Seamless cycling leggings
-    + 18:56:27   -   Top seamless espalda fantasía
-    + 18:56:28   -   Stretch ankle boots with track soles
-    + 18:56:28   -   Hooded cardigan
-    + 18:56:33   -   Black chelsea heeled ankle boots
-    + 18:56:33   -   Tenis detalle piezas
-    + 18:56:33   -   Plush straight fit trousers
-    + 18:56:33   -   Plush straight fit trousers
-    + 18:56:33   -   Puffer jacket
-    + 18:56:33   -   Oversize puffer jacket
-    + 18:56:34   -   Cloud print puffer jacket
-    + 18:56:34   -   Oversize puffer jacket
-    + 18:56:34   -   Puffer jacket
-    + 18:56:34   -   Hooded puffer jacket
-    + 18:56:34   -   Colour block jacket
-    + 18:56:34   -   Satiny puffer jacket
-    + 18:56:34   -   Satiny puffer jacket
-    + 18:56:36   -   Flat Chelsea boots
-    + 18:56:36   -   White trainers with trim detail
-    + 18:56:36   -   Soft-touch turtleneck
-    + 18:56:37   -   Nylon track trousers
-    + 18:56:37   -   Nylon loose track trousers
-    + 18:56:37   -   Hooded cardigan
-    + 18:56:37   -   Pleated mini skirt
-    + 18:56:37   -   Leggings with side stripes
-    + 18:56:40   -   White trainers with side stripe detail
-    + 18:56:40   -   Varsity plush bomber jacket
-    + 18:56:40   -   Embroidered oversized sweatshirt
-    + 18:56:40   -   Top seamless espalda fantasía
-    + 18:56:41   -   Straight fit cargo trousers
-    + 18:56:44   -   Tulle shirt
-    + 18:56:44   -   Polo T-Shirt
-    + 18:56:46   -   Zebra print mini skirt
-    + 18:56:46   -   Satin puffer gilet
-    + 18:56:47   -   Puffer gilet
-    + 18:56:47   -   Low-waist flared jeans
-    + 18:56:47   -   Fleece quilted jacket
-    + 18:56:47   -   Fleece quilted jacket
-    + 18:56:47   -   Low-waist flared jeans
-    + 18:56:47   -   Jean mom fit cintura asimétrica
-    + 18:56:48   -   Plush varsity jacket
-    + 18:56:48   -   Oversized waistcoat
-    + 18:56:48   -   Varsity knit cardigan
-    + 18:56:48   -   Chaleco tejido punto trenzas
-    + 18:56:48   -   Varsity cable-knit vest
-    + 18:56:48   -   Tenis detalle piezas
-    + 18:56:49   -   Jacket with collar
-    + 18:56:49   -   Polo T-Shirt
-    + 18:56:49   -   Crossover t-shirt
-    + 18:56:49   -   Crossover t-shirt
-    + 18:56:54   -   Cut-out knit top
-    + 18:56:54   -   Botines deportivos detalle piezas
-    + 18:56:54   -   Floral jeans
-    + 18:56:54   -   Botas altas planas con cordones
-    + 18:56:54   -   Flared trousers with side slit
-    + 18:56:55   -   Plush shorts
-    + 18:56:59   -   Collared polo shirt with zip
-    + 18:57:1   -   Stretch T-shirt with cut-out detail
-    + 18:57:1   -   White high-top trainers
-    + 18:57:2   -   Plush shorts
-    + 18:57:3   -   Mom jeans
-    + 18:57:6   -   Twill culottes
-    + 18:57:6   -   Flat Chelsea boots
-    + 18:57:6   -   90’s straight leg jeans
-    + 18:57:6   -   Pantalón bota campana acanalado
-    + 18:57:10   -   Polo tejido de punto
-    + 18:57:10   -   Botines deportivos detalle piezas
-    + 18:57:11   -   Lace-up flat ankle boots
-    + 18:57:11   -   Twill culottes
-    + 18:57:11   -   Colour block mom shorts
-    + 18:57:11   -   Botines deportivos detalle piezas
-    + 18:57:12   -   Paperbag culotte jeans
-    + 18:57:12   -   Flared trousers with side slit
-    + 18:57:12   -   Darted baggy trousers
-    + 18:57:13   -   Colour block mom shorts
-    + 18:57:13   -   Denim Bermuda shorts
-    + 18:57:13   -   Twill bootcut trousers
-    + 18:57:18   -   Crochet dress with border
-    + 18:57:19   -   Mom jeans
-    + 18:57:19   -   Sweater with cut-out back
-    + 18:57:19   -   Sweater with cut-out back
-    + 18:57:19   -   Twill bootcut trousers
-    + 18:57:20   -   Daisy print strappy dress
-    + 18:57:23   -   Strappy dress with lace detail
-    + 18:57:26   -   Cut-out top
-    + 18:57:26   -   Cut-out top
-    + 18:57:26   -   Cut-out top
-    + 18:57:30   -   Wrap polo collar sweater
-    + 18:57:31   -   Flat Chelsea boots
-    + 18:57:31   -   Racerback top with diamantés
-    + 18:57:35   -   Zig zag crochet dress
-    + 18:57:35   -   Racerback top with diamantés
-    + 18:57:36   -   Ribbed top with gathered detail
-    + 18:57:36   -   Twill bootcut trousers
-    + 18:57:39   -   Knit mini dress
-    + 18:57:39   -   Ribbed top with gathered detail
-    + 18:57:39   -   Set of 2 plush shorts
-    + 18:57:39   -   Twill bermuda shorts
-    + 18:57:39   -   Flared trousers with side slit
-    + 18:57:40   -   White platform trainers
-    + 18:57:40   -   Twill bootcut trousers
-    + 18:57:40   -   Floral denim shorts
-    + 18:57:40   -   Jean bota ancha
-    + 18:57:41   -   Flare trousers
-X 18:57:41   -   list index out of range
-X 18:57:41   -   list index out of range
-    + 18:57:41   -   Jean bota recta vintage
-    + 18:57:41   -   Stretch T-shirt with cut-out detail
-X 18:57:41   -   list index out of range
-    + 18:57:41   -   Set of 2 plush shorts
-    + 18:57:41   -   Stretch T-shirt with cut-out detail
-    + 18:57:41   -   Flare trousers
-    + 18:57:42   -   V-neck T-shirt
-    + 18:57:42   -   Jean bota recta vintage
-    + 18:57:42   -   V-neck T-shirt
-    + 18:57:45   -   Crochet halter neck top
-    + 18:57:46   -   Botines planos elásticos suela track
-    + 18:57:46   -   Jean bota ancha
-    + 18:57:46   -   Ribbed flared trousers
-    + 18:57:46   -   Pantalón bota campana acanalado
-    + 18:57:52   -   Legging básico otomán
-    + 18:57:52   -   Ribbed flared trousers
-    + 18:57:56   -   Floral mini dress
-    + 18:57:56   -   Top seamless espalda fantasía
-    + 18:58:0   -   Top tiras asimétrico
-    + 18:58:0   -   Seamless cycling leggings
-    + 18:58:2   -   Jean tiro alto color
-    + 18:58:4   -   Camiseta asimétrica
-    + 18:58:6   -   Top with embellished back
-    + 18:58:6   -   Camiseta asimétrica
-    + 18:58:9   -   Contrast T-shirt
-    + 18:58:10   -   Top with embellished back
-    + 18:58:12   -   Cut-out halter top
-    + 18:58:12   -   Twill culottes
-    + 18:58:12   -   Contrast T-shirt
-    + 18:58:13   -   Top seamless espalda fantasía
-    + 18:58:13   -   Daisy print strappy dress
-    + 18:58:13   -   Botines planos elásticos suela track
-    + 18:58:13   -   Jean tiro alto
-    + 18:58:16   -   Seamless racerback top
-    + 18:58:16   -   Seamless racerback top
-    + 18:58:18   -   Crochet top with pocket square
-    + 18:58:19   -   Camiseta nadadora
-    + 18:58:28   -   Bralette crochet
-    + 18:58:30   -   Multicoloured bandeau top
-    + 18:58:35   -   Multicoloured halter dress
-    + 18:58:36   -   Tenis detalle piezas
-    + 18:58:36   -   Chaleco tejido punto trenzas
-    + 18:58:39   -   Strappy floral dress
-    + 18:58:43   -   Crossover strap dress
-    + 18:58:43   -   Flare trousers
-    + 18:58:46   -   Crochet dress
-    + 18:58:46   -   Jean tiro alto slim
-    + 18:58:47   -   Strappy dress with lace detail
-    + 18:58:47   -   Top seamless espalda fantasía
-    + 18:58:47   -   Denim patchwork shorts
-    + 18:58:47   -   Colour block denim shorts
-    + 18:58:47   -   Denim shorts with asymmetric waistband
-    + 18:58:47   -   Top tiras asimétrico
-    + 18:58:48   -   Camiseta nadadora
-    + 18:58:48   -   Camiseta asimétrica
-    + 18:58:51   -   Text T-shirt
-    + 18:58:55   -   Asymmetric multicoloured top
-    + 18:58:55   -   Jean bota ancha
-    + 18:58:55   -   Jean tiro alto slim
-    + 18:58:56   -   Jean tiro alto roto
-    + 18:58:57   -   Jeans mom fit color block
-    + 18:59:0   -   Crochet top with pocket square
-    + 18:59:1   -   Crochet top with pocket square
-    + 18:59:5   -   Crochet bralette with border
-    + 18:59:5   -   Pantalón tiro alto skinny rotos
-    + 18:59:5   -   Crochet bralette with border
-    + 18:59:5   -   Abrigo ovejero cuadros
-    + 18:59:8   -   Zebra print flared trousers
-    + 18:59:8   -   Falda midi con cintura asimétrica
-    + 18:59:9   -   Vestido polo
-    + 18:59:10   -   Jean cropped bota campana
-    + 18:59:10   -   Vestido polo
-    + 18:59:14   -   Floral cut-out dress
-    + 18:59:23   -   Camiseta crop elástica tiras
-    + 18:59:24   -   Strappy dress with lace detail
-    + 18:59:27   -   Top cuello en V
-    + 18:59:27   -   Top cuello en V
-    + 18:59:28   -   Short floral dress
-    + 18:59:28   -   Bralette crochet
-19:1   -   9 productos  -  https://www.stradivarius.com/co/mujer/zapatos/compra-por-producto/cowboy-c1020109001.html
-    + 19:1:6   -   Leather cowboy boots
-    + 19:1:6   -   Leather cowboy boots
-    + 19:1:6   -   Leather cowboy boots
-    + 19:1:10   -   Leather cowboy ankle boots
-    + 19:1:11   -   Heeled cowboy boots
-    + 19:1:11   -   Heeled cowboy boots
-    + 19:1:11   -   Heeled cowboy boots
-    + 19:1:14   -   Cowboy ankle boots with heel
-    + 19:1:14   -   Cowboy ankle boots with heel
-19:2   -   47 productos  -  https://www.stradivarius.com/co/mujer/zapatos/compra-por-producto/tenis-c1399023.html
-    + 19:2:1   -   Tenis detalle piezas
-    + 19:2:1   -   Tenis detalle piezas
-    + 19:2:1   -   Tenis detalle piezas
-    + 19:2:1   -   Tenis detalle piezas
-    + 19:2:2   -   Trainers with trims
-    + 19:2:2   -   Trainers with decorative trims
-    + 19:2:2   -   Trainers with decorative trims
-    + 19:2:2   -   Trainers with trims
-    + 19:2:2   -   Trainers with trims
-    + 19:2:2   -   Trainers with decorative trims
-    + 19:2:3   -   Trainers with decorative trims
-    + 19:2:3   -   Tenis detalle piezas
-    + 19:2:3   -   Tenis detalle multipiezas
-    + 19:2:3   -   Botines deportivos tejido
-    + 19:2:3   -   Botines deportivos tejido
-    + 19:2:3   -   Botines deportivos tejido
-    + 19:2:4   -   White fabric high-top trainers
-    + 19:2:4   -   White fabric high-top trainers
-    + 19:2:4   -   White trainers with side stripe detail
-    + 19:2:4   -   White trainers with side stripe detail
-    + 19:2:4   -   White trainers with heel detail
-    + 19:2:5   -   White trainers with heel detail
-    + 19:2:5   -   Tenis detalle talón
-    + 19:2:6   -   Botines deportivos tejido
-    + 19:2:6   -   Botines deportivos tejido
-    + 19:2:7   -   Botines deportivos tejido
-    + 19:2:9   -   Trainers with decorative trims
-    + 19:2:9   -   Tenis detalle piezas
-    + 19:2:9   -   Tenis detalle piezas
-    + 19:2:10   -   Tenis detalle piezas
-    + 19:2:10   -   Tenis detalle piezas
-    + 19:2:10   -   Tenis detalle piezas
-    + 19:2:10   -   Tenis detalle piezas
-    + 19:2:10   -   Botines deportivos detalle piezas
-    + 19:2:10   -   Botines deportivos detalle piezas
-    + 19:2:11   -   Botines deportivos detalle piezas
-    + 19:2:11   -   Botines deportivos detalle piezas
-    + 19:2:11   -   Botines deportivos detalle piezas
-    + 19:2:11   -   White trainers with trim detail
-    + 19:2:11   -   White platform trainers
-    + 19:2:11   -   White trainers with trim detail
-    + 19:2:11   -   White high-top trainers
-    + 19:2:12   -   White high-top trainers
-    + 19:2:12   -   Botines deportivos detalle piezas
-    + 19:2:12   -   Botines deportivos detalle piezas
-    + 19:2:14   -   Tenis negros detalle piezas
-    + 19:2:14   -   Tenis detalle piezas
-19:3   -   23 productos  -  https://www.stradivarius.com/co/mujer/zapatos/compra-por-producto/tacones-c1399025.html
-    + 19:3:53   -   Block heel shoes
-    + 19:3:53   -   Stiletto heel shoes
-    + 19:3:54   -   Stiletto heel shoes
-    + 19:3:54   -   Stiletto heel shoes
-    + 19:3:54   -   Stiletto heel shoes
-    + 19:3:54   -   Stiletto heel shoes
-    + 19:3:54   -   Stiletto heel shoes
-    + 19:3:55   -   Vinyl high-heel mules
-    + 19:3:55   -   Vinyl high-heel mules
-    + 19:3:55   -   Vinyl high-heel mules
-    + 19:3:55   -   Stiletto heel slingbacks
-    + 19:3:55   -   Stiletto heel slingbacks
-    + 19:3:55   -   Stiletto heel slingbacks
-    + 19:3:56   -   Tie-up heels
-    + 19:3:56   -   Tie-up heels
-    + 19:3:56   -   Tie-up heels
-    + 19:3:58   -   Vinyl heel shoes
-    + 19:3:59   -   Vinyl heel shoes
-    + 19:3:59   -   Vinyl heel shoes
-    + 19:4:0   -   Vinyl heel shoes
-    + 19:4:0   -   Vinyl heel shoes
-    + 19:4:1   -   Zuecos tacón madera tachas
-    + 19:4:1   -   Zuecos tacón madera tachas
-19:5   -   15 productos  -  https://www.stradivarius.com/co/mujer/zapatos/compra-por-producto/baletas-c1399024.html
-    + 19:5:22   -   Black flat woven sandals
-    + 19:5:23   -   Black flat woven sandals
-    + 19:5:23   -   Flat ballet flats with bow detail
-    + 19:5:23   -   Flat ballet flats with bow detail
-    + 19:5:23   -   Flat ballet flats with bow detail
-    + 19:5:23   -   Soft ecru loafers with buckle detail
-    + 19:5:25   -   Mules detalle
-    + 19:5:25   -   Blue mules with buckle detail
-    + 19:5:26   -   Mules detalle
-    + 19:5:26   -   Zuecos detalle
-    + 19:5:27   -   Zuecos ovejeros
-    + 19:5:27   -   Black chain detail mules
-    + 19:5:27   -   Black chain detail mules
-    + 19:5:28   -   Loafers with chain detail
-    + 19:5:28   -   Loafers with chain detail
-19:7   -   120 productos  -  https://www.stradivarius.com/co/mujer/accesorios/compra-por-producto/bolsos-y-morrales/ver-todo-c1718540.html
-    + 19:7:0   -   Morral cremallera
-    + 19:7:1   -   Quilted crossbody bag with chain strap
-    + 19:7:1   -   Printed chunky knit tote bag
-    + 19:7:1   -   Quilted crossbody bag
-    + 19:7:1   -   Basic tote bag
-    + 19:7:2   -   Fabric tote bag with zips
-    + 19:7:3   -   Manos libres acolchado
-    + 19:7:3   -   Quilted crossbody bag
-    + 19:7:3   -   Basic tote bag
-    + 19:7:5   -   Mini chain crossbody bag
-    + 19:7:5   -   Mini chain crossbody bag
-    + 19:7:6   -   Casual tote bag
-    + 19:7:6   -   Mini chain crossbody bag
-    + 19:7:6   -   Manos libres efecto coco
-    + 19:7:8   -   Crossbody bowling bag
-    + 19:7:8   -   Quilted crossbody bag
-    + 19:7:8   -   Casual tote bag
-    + 19:7:8   -   Manos libres efecto coco
-    + 19:7:9   -   Backpack with zip pocket
-    + 19:7:9   -   Crossbody bag with quilted pocket
-    + 19:7:9   -   Mini chain bag
-    + 19:7:10   -   It bag
-    + 19:7:10   -   Mini chain crossbody bag
-    + 19:7:11   -   Bolso shoppper acolchado
-    + 19:7:11   -   Bolso celular
-    + 19:7:11   -   Bolso shoppper acolchado
-    + 19:7:11   -   Bolso shoppper acolchado
-    + 19:7:12   -   Morral cremallera
-    + 19:7:12   -   Manos libres acolchado
-    + 19:7:14   -   Quilted crossbody bag with chain strap
-    + 19:7:14   -   Multi pockets backpack
-    + 19:7:15   -   It bag
-    + 19:7:15   -   Mini chain bag
-    + 19:7:15   -   Mock croc smartphone crossbody bag
-    + 19:7:15   -   Mini chain bag
-    + 19:7:16   -   Quilted crossbody bag with chain strap
-    + 19:7:16   -   Multi-compartment crossbody bag
-    + 19:7:17   -   Manos libres acolchado
-    + 19:7:17   -   Mini chain bag
-    + 19:7:17   -   Manos libres cadena
-    + 19:7:17   -   Crossbody bag with chain strap
-    + 19:7:17   -   Crossbody bag with chain strap
-    + 19:7:17   -   Quilted crossbody bag with chain strap
-    + 19:7:19   -   Fabric tote bag with zips
-    + 19:7:19   -   Manos libres tejido
-    + 19:7:21   -   Printed fabric tote bag
-    + 19:7:21   -   Backpack with zip pocket
-    + 19:7:23   -   Fabric backpack with pockets
-    + 19:7:25   -   Printed fabric backpack
-    + 19:7:26   -   Crossbody bag with hardware
-    + 19:7:26   -   Bolso celular
-    + 19:7:26   -   Bandolera smartphone acolchada
-    + 19:7:26   -   Bolso celular
-    + 19:7:27   -   Mock croc smartphone crossbody bag
-    + 19:7:27   -   Quilted crossbody bag with chain strap
-    + 19:7:27   -   Multi pockets backpack
-    + 19:7:28   -   Bolso shopper acolchado
-    + 19:7:29   -   Manos libres acolchado
-    + 19:7:29   -   Mini chain crossbody bag
-    + 19:7:29   -   Printed tote bag
-    + 19:7:30   -   Bandolera smartphone acolchada
-    + 19:7:30   -   Manos libres acolchado
-    + 19:7:30   -   Mock croc smartphone crossbody bag
-    + 19:7:30   -   Morral cremallera
-    + 19:7:30   -   Printed tote bag
-    + 19:7:31   -   Mock croc smartphone crossbody bag
-    + 19:7:31   -   Manos libres tejido
-    + 19:7:32   -   Crossbody bag with zips
-    + 19:7:32   -   Bandolera smartphone acolchada
-    + 19:7:32   -   Multi-compartment crossbody bag
-    + 19:7:32   -   Fabric tote bag with zips
-    + 19:7:33   -   Tote bag with zips
-    + 19:7:33   -   Manos libres smartphone tejido
-    + 19:7:33   -   Manos libres tejido
-    + 19:7:34   -   Quilted crossbody bag with strap
-    + 19:7:34   -   Bandolera smartphone acolchada
-    + 19:7:35   -   Fabric tote bag with zips
-    + 19:7:36   -   Tote bag with zip
-    + 19:7:36   -   Fabric tote bag with zips
-    + 19:7:37   -   Bolso shopper acolchado
-    + 19:7:37   -   Quilted crossbody bag with chain strap
-    + 19:7:37   -   Bandolera smartphone acolchada
-    + 19:7:38   -   Bolso shoppper acolchado
-    + 19:7:38   -   Bolso shoppper acolchado
-    + 19:7:39   -   Printed case
-    + 19:7:39   -   Multi-compartment crossbody bag
-    + 19:7:39   -   Printed case
-    + 19:7:40   -   Quilted crossbody bag with strap
-    + 19:7:40   -   Fabric crossbody bag with chain
-    + 19:7:40   -   Manos libres tejido
-    + 19:7:40   -   Crossbody bag with zips
-    + 19:7:40   -   Basic quilted crossbody bag
-    + 19:7:41   -   Crossbody bag with hardware
-    + 19:7:41   -   Shiny crossbody bag
-    + 19:7:42   -   Crossbody bag with zips
-    + 19:7:42   -   Manos libres acolchado
-    + 19:7:42   -   Crossbody bag with hardware
-    + 19:7:42   -   Crossbody bag with chain strap
-    + 19:7:42   -   Crossbody bag with hardware
-    + 19:7:43   -   Bolso talego rígido
-    + 19:7:43   -   Fabric sporty tote bag
-    + 19:7:45   -   Morral cremallera
-    + 19:7:45   -   Fabric sporty belt bag
-    + 19:7:46   -   Braided tote bag
-    + 19:7:46   -   Mini chain crossbody bag
-    + 19:7:46   -   Morral cremallera
-    + 19:7:46   -   Manos libres smartphone brillos
-    + 19:7:48   -   Manos libres tejido
-    + 19:7:49   -   Bolso celular
-    + 19:7:49   -   Bolso celular
-    + 19:7:49   -   Mini crossbody bag with rhinestones
-    + 19:7:50   -   Crochet tote bag
-    + 19:7:51   -   Crochet tote bag
-    + 19:7:52   -   Manos libres tejido
-    + 19:7:52   -   Bandolera smartphone margaritas
-    + 19:7:52   -   It bag
-    + 19:7:52   -   Tote bag with zip
-    + 19:7:53   -   Tote bag with zip
-    + 19:7:54   -   Mini manos libres coco
-    + 19:7:54   -   Bolso de hombro tejido cadena
-19:9   -   42 productos  -  https://www.stradivarius.com/co/mujer/accesorios/compra-por-producto/monederos-c1695503.html
-    + 19:9:26   -   Monedero estampado
-    + 19:9:26   -   Monedero estampado
-    + 19:9:26   -   Monedero estampado
-    + 19:9:28   -   Faux-patent chain wallet
-    + 19:9:28   -   Faux-patent chain wallet
-    + 19:9:33   -   Print card holder/ purse
-    + 19:9:35   -   Basic printed purse
-    + 19:9:35   -   Basic printed purse
-    + 19:9:41   -   Patchwork wallet with zip
-    + 19:9:46   -   Monedero básico estampado
-    + 19:9:50   -   Basic wallet
-    + 19:9:52   -   Quilted clutch
-    + 19:9:56   -   Basic patchwork purse
-    + 19:10:0   -   Monedero básico
-    + 19:10:0   -   Quilted clutch
-    + 19:10:1   -   Floral fabric toiletry bag
-    + 19:10:2   -   Basic mock croc purse
-    + 19:10:3   -   Monedero patchwork
-    + 19:10:8   -   Print card holder/ purse
-    + 19:10:8   -   Basic mock croc purse
-    + 19:10:14   -   Basic fabric coin purse
-    + 19:10:16   -   Monedero charol
-    + 19:10:19   -   Basic purse
-    + 19:10:21   -   Monedero básico estampado
-    + 19:10:28   -   Monedero básico estampado
-    + 19:10:28   -   Monedero charol
-    + 19:10:32   -   Quilted clutch
-    + 19:10:34   -   Basic wallet with zip
-    + 19:10:34   -   Basic wallet with zip
-    + 19:10:39   -   Monedero básico
-    + 19:10:44   -   Monedero básico mármol
-    + 19:10:44   -   Monedero básico estampado
-    + 19:10:45   -   Quilted clutch
-    + 19:10:45   -   Basic purse
-    + 19:10:45   -   Basic wallet with zip
-    + 19:10:46   -   Printed case
-    + 19:10:46   -   Printed case
-    + 19:10:46   -   Monedero patchwork
-    + 19:10:46   -   Basic purse
-    + 19:10:48   -   Transparent card holder
-    + 19:10:48   -   Transparent card holder
-    + 19:10:49   -   Basic purse
-19:12   -   151 productos  -  https://www.stradivarius.com/co/mujer/accesorios/compra-por-producto/bisuter%C3%ADa/ver-todo-c1718569.html
-    + 19:12:41   -   Set 9 aretes argollas y cristales
-    + 19:12:45   -   Set of 4 diamanté necklaces
-    + 19:12:48   -   Set of 5 acrylic rings
-    + 19:12:48   -   Mesh earrings
-    + 19:12:48   -   Set of 3 basic hoop earrings
-    + 19:12:51   -   Set of 3 pairs of textured hoop earrings
-    + 19:12:55   -   Collar cadena
-    + 19:12:55   -   Set of 5 Smiley ® rings
-    + 19:12:55   -   Set of 3 basic hoop earrings
-    + 19:12:56   -   Set of 3 extra large hoop earrings
-    + 19:12:57   -   Mesh earrings
-    + 19:13:1   -   Set of 2 diamanté earrings
-    + 19:13:4   -   Set of 6 chain and diamanté rings
-    + 19:13:4   -   Set of 3 pairs of diamanté earrings
-    + 19:13:7   -   Set of 6 hoop and long earrings
-    + 19:13:10   -   Set of 4 rhinestone and diamanté necklaces
-    + 19:13:10   -   Set of 3 extra large hoop earrings
-    + 19:13:13   -   Set of 2 metal and acrylic hoop earrings
-    + 19:13:16   -   Set of 5 glazed and diamanté rings
-    + 19:13:19   -   Set of 4 coloured acrylic necklaces
-    + 19:13:20   -   Set aretes y topitos con perlas
-    + 19:13:22   -   Set of 3 large hoop earrings
-    + 19:13:22   -   Set of 3 diamanté hoop earrings
-    + 19:13:22   -   Set of 6 diamanté hoop earrings
-    + 19:13:32   -   Set of 6 rhinestone rings
-    + 19:13:33   -   Set 5 aros
-    + 19:13:33   -   Set of 4 semi-precious stone necklaces
-    + 19:13:33   -   Set of 3 pairs of assorted hoop earrings
-    + 19:13:33   -   Set of 3 large hoop earrings
-    + 19:13:34   -   Set of 4 metal hair clips
-    + 19:13:35   -   Set of 3 pairs of medium hoop earrings
-    + 19:13:36   -   Set of 4 metal hair clips
-    + 19:13:36   -   Set of 4 chain and faux pearl necklaces
-    + 19:13:36   -   Set of 4 faux pearl rings
-    + 19:13:36   -   Set of 4 hoop earrings
-    + 19:13:37   -   Set 4 cadenas
-    + 19:13:37   -   Metal hair clips
-    + 19:13:38   -   Set aretes y topitos con perlas
-    + 19:13:38   -   Set 9 aretes con perlas
-    + 19:13:38   -   Set of 6 pairs of hoop and rhinestone earrings
-    + 19:13:39   -   Set of 6 pairs of pearl bead and heart earrings
-    + 19:13:43   -   Jewellery hanger mirror
-    + 19:13:44   -   Set of 3 pairs of pearl bead hoop earrings
-    + 19:13:44   -   Set of 6 pairs of hoop and rhinestone earrings
-    + 19:13:44   -   Set 6 aretes aros
-    + 19:13:46   -   Set of 2 hair clips
-    + 19:13:46   -   Set of 5 coloured rings
-    + 19:13:46   -   Set of 5 mystical necklaces
-    + 19:13:47   -   Set of 6 rings, including one floral ring
-    + 19:13:47   -   Set of 6 ‘love’ rings
-    + 19:13:47   -   Set of 5 stone necklaces
-    + 19:13:47   -   Set of 9 pairs of sea motif earrings
-    + 19:13:48   -   Set of 5 enamel rings
-    + 19:13:48   -   Set of 9 chilli earrings
-    + 19:13:48   -   Set of 9 pairs of split heart earrings
-    + 19:13:51   -   Ring jewellery box
-    + 19:13:52   -   Set of 4 initial necklaces
-    + 19:13:54   -   Vertical jewellery box with drawers
-    + 19:13:54   -   Set of 5 metallic rings
-    + 19:13:55   -   Set of 6 resin rings
-    + 19:13:57   -   Travel jewellery box
-    + 19:13:57   -   Travel jewellery box
-    + 19:13:57   -   Set of 4 stone necklaces
-    + 19:13:58   -   Set of 4 initial necklaces
-    + 19:13:58   -   Set of 6 pairs of hoop and heart earrings
-    + 19:13:58   -   Set 6 anillos nudo
-    + 19:13:59   -   Set of 4 rings
-    + 19:13:59   -   Set of 6 basic hoop earrings
-    + 19:13:59   -   Set of 4 minimal necklaces
-    + 19:13:59   -   Set of 4 chains with plaque
-    + 19:14:0   -   Set of 5 chilli necklaces
-    + 19:14:0   -   Set of 5 faux pearl and diamanté hair slides
-    + 19:14:0   -   Set of 5 bead necklaces, some perlescant
-    + 19:14:1   -   Set of 6 hoop earrings with small stones
-    + 19:14:1   -   Set of 9 pairs of enamel earrings
-    + 19:14:1   -   Set of 5 feminine necklaces
-    + 19:14:2   -   Set of 5 rose necklaces
-    + 19:14:2   -   Set of 5 mystical necklaces
-    + 19:14:3   -   Set of 5 floral necklaces
-    + 19:14:3   -   Set of 5 flower rings
-    + 19:14:3   -   Set of 4 initial necklaces
-    + 19:14:4   -   Set 4 collares STR monedas y cristales
-    + 19:14:4   -   Set of 6 romantic rings
-    + 19:14:4   -   Set of 9 pairs of romantic earrings
-    + 19:14:6   -   Wooden base jewellery stand
-    + 19:14:6   -   Set of 4 initial necklaces
-    + 19:14:7   -   Set of 6 rings and signet rings
-    + 19:14:7   -   Set of 4 initial necklaces
-    + 19:14:7   -   Set of assorted earrings
-    + 19:14:7   -   Set of 5 Smiley ® rings
-    + 19:14:9   -   Set of 5 soft necklaces
-    + 19:14:9   -   Set of 5 seashell earrings
-    + 19:14:9   -   Set of 9 pairs of lightning bolt earrings
-    + 19:14:9   -   Set of 4 initial necklaces
-    + 19:14:10   -   Set of 9 seashell earrings
-    + 19:14:10   -   Set of 3 floral scrunchies
-    + 19:14:10   -   Set of 5 amore necklaces
-    + 19:14:10   -   Set of 9 seashell earrings
-    + 19:14:11   -   Set of coloured 9 hoop earrings
-    + 19:14:12   -   Set of 5 infinity anklets
-    + 19:14:12   -   Set of 6 pairs of coloured and charm hoop earrings
-    + 19:14:12   -   Set of 5 cherry necklaces
-    + 19:14:13   -   Set 5 anillos corazón
-    + 19:14:13   -   Set 9 aretes perlitas
-    + 19:14:13   -   Set of 5 coloured necklaces
-    + 19:14:14   -   Set of 7 acrylic rings
-    + 19:14:14   -   Set 9 aretes mariposa
-    + 19:14:15   -   Set of 6 enamel rings
-    + 19:14:15   -   Set of 5 starfish anklets
-    + 19:14:15   -   Set of 5 love seashell charm necklaces
-    + 19:14:16   -   Set of 5 coloured stone necklaces
-    + 19:14:16   -   Set of 5 thin necklaces
-    + 19:14:17   -   Floral crystal box
-    + 19:14:17   -   Set of 5 coloured bead necklaces
-    + 19:14:17   -   Set of 4 Smiley ® necklaces
-    + 19:14:18   -   Floral crystal box
-    + 19:14:19   -   Set of 5 seashell charm necklaces
-    + 19:14:22   -   Joyero terciopelo
-    + 19:14:23   -   Set of 5 enamel rings
-    + 19:14:23   -   Set 4 cadenas
-    + 19:14:23   -   Set of 2 seashell chokers
-    + 19:14:23   -   Set 4 cadenas
-    + 19:14:24   -   Set of 5 butterfly necklaces
-    + 19:14:24   -   Set 5 aros
-    + 19:14:24   -   Set of 4 Smiley ® pairs of earrings
-    + 19:14:25   -   Set of 5 metallic rings
-    + 19:14:25   -   Set of 9 pairs of hoop and charm earrings
-    + 19:14:25   -   Set 8 anillos sol
-    + 19:14:27   -   Set of 7 Smiley ® rings
-    + 19:14:27   -   Set 5 aretes earcuff
-    + 19:14:27   -   Set of 5 seashell anklets
-    + 19:14:29   -   Set of 9 pairs of enamelled and charm earrings
-    + 19:14:29   -   Set 8 anillos perlas y cristales
-    + 19:14:30   -   Set 9 aretes cadenas
-    + 19:14:30   -   Set of 4 mushroom and daisy necklaces
-    + 19:14:31   -   Set of 5 daisy necklaces
-    + 19:14:31   -   Set 6 anillos mariposa
-    + 19:14:32   -   Set 9 aretes y aretes argollas textura
-    + 19:14:32   -   Set 6 anillos nudo
-    + 19:14:32   -   Set of 6 pairs of coloured and charm hoop earrings
-    + 19:14:32   -   Set 9 aretes con perlas
-    + 19:14:33   -   Joyero cajones velvet grande
-    + 19:14:33   -   Joyero cajones velvet grande
-    + 19:14:33   -   Collar cadena
-    + 19:14:36   -   Set 3 cadenas perlas
-    + 19:14:38   -   Set 5 collares bolitas color
-    + 19:14:41   -   Set 8 aretes
-    + 19:14:41   -   Set 5 collares
-    + 19:14:43   -   Joyero terciopelo
-    + 19:14:43   -   Set 4 collares STR monedas y cristales
-    + 19:14:45   -   Joyero minimal mármol
-19:15   -   49 productos  -  https://www.stradivarius.com/co/mujer/accesorios/compra-por-producto/correas-c1393011.html
-    + 19:15:49   -   Belt with butterfly buckle
-    + 19:15:49   -   Correa delgada ojales
-    + 19:15:56   -   Correa hebilla ovalada
-    + 19:15:57   -   Correa hebilla ovalada
-    + 19:15:57   -   Metal chain belt
-    + 19:15:57   -   Metal chain belt
-    + 19:15:57   -   Belt with eyelets
-    + 19:15:58   -   Shiny belt
-    + 19:15:59   -   Correa cadena
-    + 19:16:0   -   Transparent rhinestone belt
-    + 19:16:1   -   Wide shimmer belt
-    + 19:16:1   -   Mock croc belt
-    + 19:16:1   -   Correa ojales doble
-    + 19:16:1   -   Square buckle belt
-    + 19:16:1   -   Texan belt
-    + 19:16:1   -   Texan belt
-    + 19:16:1   -   Studded boho belt
-    + 19:16:2   -   Correa ojales grandes
-    + 19:16:3   -   Belt with rectangular buckle
-    + 19:16:4   -   Metallic cowboy belt
-    + 19:16:5   -   Wide boho belt
-    + 19:16:7   -   Sheer belt with eyelets
-    + 19:16:8   -   Mock croc studded belt
-    + 19:16:8   -   Mock croc studded belt
-    + 19:16:8   -   Cowboy belt
-    + 19:16:8   -   Basic belt with topstitching
-    + 19:16:8   -   Buckled belt
-    + 19:16:9   -   Mock croc studded belt
-    + 19:16:9   -   Mock croc studded belt
-    + 19:16:9   -   Correa delgada ojales
-    + 19:16:11   -   Belt with eyelets
-    + 19:16:11   -   Braided belt with cord
-    + 19:16:11   -   Correa ojales
-    + 19:16:11   -   Correa hebilla ovalada
-    + 19:16:11   -   Cinturón hebilla superpuesta
-    + 19:16:11   -   Correa transparente
-    + 19:16:12   -   Correa ojales
-    + 19:16:12   -   Correa ojales grandes
-    + 19:16:15   -   Woven raffia belt
-    + 19:16:15   -   Wide raffia belt
-    + 19:16:15   -   Correa ojales
-    + 19:16:15   -   Correa doble hebilla cruzada
-    + 19:16:15   -   Raffia belt
-    + 19:16:15   -   Raffia belt
-    + 19:16:16   -   Correa fina hebilla cruzada
-    + 19:16:16   -   Correa detalle metal
-    + 19:16:17   -   Correa básica hebilla redonda
-    + 19:16:17   -   Correa básica
-    + 19:16:18   -   Correa vaquera ancha
-19:16   -   49 productos  -  https://www.stradivarius.com/co/mujer/accesorios/compra-por-producto/accesorios-de-pelo-c1393013.html
-    + 19:16:58   -   Furry hair clip
-    + 19:17:1   -   Multicoloured hair clip
-    + 19:17:3   -   Metallic hair clip
-    + 19:17:3   -   Set 3 coleteros pelo
-    + 19:17:3   -   Set 3 coleteros pelo
-    + 19:17:4   -   Metal hair clip with diamantés
-    + 19:17:13   -   Acrylic hair clip with diamantés
-    + 19:17:13   -   Acrylic hair clip with diamantés
-    + 19:17:13   -   Metallic hair clip
-    + 19:17:14   -   Set of 2 metal hair clips
-    + 19:17:18   -   Set of 2 hair clips
-    + 19:17:21   -   Set of 2 pearl bead and diamanté clips
-    + 19:17:22   -   Textured metal hair clip
-    + 19:17:23   -   Chequered hair clip
-    + 19:17:23   -   Oval hair clip
-    + 19:17:24   -   Pearl bead hair clip and slide set
-    + 19:17:24   -   Chequered hair clip
-    + 19:17:24   -   Square metal hair clips
-    + 19:17:25   -   Metal hair clips
-    + 19:17:25   -   Set of 4 metal hair clips
-    + 19:17:28   -   Romantic floral scarf
-    + 19:17:28   -   Set of 4 metal hair clips
-    + 19:17:28   -   Metal hair clips
-    + 19:17:28   -   Set of 3 floral scrunchies with bows
-    + 19:17:28   -   Metal hair clips
-    + 19:17:28   -   Metal hair clips
-    + 19:17:29   -   Set of 2 hair clips
-    + 19:17:30   -   Set of 2 heart hair clips
-    + 19:17:30   -   Butterfly hair clip
-    + 19:17:30   -   Set of 4 rhinestone hair grips
-    + 19:17:30   -   Set of 5 faux pearl and diamanté hair slides
-    + 19:17:30   -   Hairclip
-    + 19:17:31   -   Set of 3 floral scrunchies
-    + 19:17:31   -   Set of 3 floral hair clips
-    + 19:17:32   -   Flower hair clip
-    + 19:17:32   -   Butterfly hair clip
-    + 19:17:32   -   Set of 3 heart scrunchies with bows
-    + 19:17:32   -   Set of 3 floral scrunchies
-    + 19:17:33   -   Set of 3 heart scrunchies with bows
-    + 19:17:33   -   Flower hair clip
-    + 19:17:34   -   Set 3 moñas puntos lazo
-    + 19:17:34   -   Set 3 moñas flores
-    + 19:17:35   -   Set of 3 striped and towel scrunchies
-    + 19:17:35   -   Bamba lazo
-    + 19:17:36   -   Set of 3 daisy scrunchies with bows
-    + 19:17:36   -   Set 3 bambas margaritas
-    + 19:17:37   -   Bamba puntos lazo
-    + 19:17:37   -   Set 3 diademas delgadas
-    + 19:17:38   -   Diadema trenzada
-19:18   -   21 productos  -  https://www.stradivarius.com/co/mujer/accesorios/compra-por-producto/gorros-y-sombreros-c1393015.html
-    + 19:18:50   -   Boina efecto cuero
-    + 19:18:53   -   Rhinestone beret
-    + 19:18:57   -   Faux leather cap
-    + 19:18:57   -   Basic beret
-    + 19:18:57   -   Basic beret
-    + 19:19:1   -   Faux leather nautical cap
-    + 19:19:2   -   Nautical cap with trim
-    + 19:19:3   -   Basic beret
-    + 19:19:8   -   Nylon cap
-    + 19:19:8   -   Basic beret
-    + 19:19:8   -   Basic beret
-    + 19:19:13   -   Knit beret
-    + 19:19:13   -   Basic beret
-    + 19:19:13   -   Nautical cap with trim
-    + 19:19:14   -   Knit beret
-X 19:19:14   -   list index out of range
-    + 19:19:15   -   Knit beret
-    + 19:19:15   -   Floral bucket hat with straps
-    + 19:19:15   -   Reversible floral bucket hat
-    + 19:19:15   -   Reversible floral bucket bag
-    + 19:19:15   -   Bucket hat denim
-19:20   -   26 productos  -  https://www.stradivarius.com/co/mujer/accesorios/compra-por-producto/gafas-c1393014.html
-    + 19:20:10   -   Gafas cuadradas carey
-    + 19:20:11   -   Resin sunglasses
-    + 19:20:15   -   Metallic cateye sunglasses
-    + 19:20:19   -   Oval resin sunglasses
-    + 19:20:19   -   Gafas cuadradas carey
-    + 19:20:24   -   Gafas pasta con detalle metal
-    + 19:20:27   -   Gafas metalizadas geométricas
-    + 19:20:27   -   Resin sunglasses
-    + 19:20:32   -   Gafas de sol cat eye grandes
-    + 19:20:32   -   Oval resin sunglasses
-    + 19:20:35   -   Gafas de sol cat eye
-    + 19:20:35   -   Aviator sunglasses
-    + 19:20:37   -   Gafas metal hexagonales
-    + 19:20:41   -   Large retro sunglasses
-    + 19:20:46   -   Gafas pasta
-    + 19:20:50   -   Gafas redondas metalizadas
-    + 19:20:51   -   Gafas cuadradas carey
-    + 19:20:51   -   Rectangular sunglasses
-    + 19:20:51   -   Resin sunglasses
-    + 19:20:51   -   Square sunglasses
-    + 19:20:55   -   Oval sunglasses
-    + 19:20:55   -   Gafas cat eye carey
-    + 19:20:56   -   Gafas de sol cat eye
-    + 19:21:0   -   Angular cateye sunglasses
-    + 19:21:11   -   Gafas carey cuadradas
-    + 19:21:11   -   Gafas metalizadas geométricas
-19:22   -   49 productos  -  https://www.stradivarius.com/co/mujer/accesorios/compra-por-producto/bufandas-y-pa%C3%B1oletas-c1020178050.html
-    + 19:22:18   -   Retro flower neckerchief
-    + 19:22:20   -   2-pack of black and white bandanas
-    + 19:22:25   -   Striped scarf
-    + 19:22:27   -   Pack of 2 paisley print bandanas
-    + 19:22:30   -   Geometric print scarf
-    + 19:22:30   -   Romantic floral scarf
-    + 19:22:33   -   2-pack of striped and floral bandanas
-    + 19:22:36   -   2-pack of floral print bandanas
-    + 19:22:42   -   2-pack of geometric print bandanas
-    + 19:22:45   -   Wave print scarf
-    + 19:22:45   -   Bufanda cuadros
-    + 19:22:49   -   2-pack of retro floral print bandanas
-    + 19:22:51   -   Polka dot scarf
-    + 19:22:53   -   2-Pack of retro floral and polka dot bandanas
-    + 19:22:56   -   2-pack of floral and wavy bandanas
-    + 19:22:58   -   2-pack of retro and striped bandanas
-    + 19:23:1   -   2-pack of polka dot and wavy bandanas
-    + 19:23:4   -   Contrast chequered scarf
-    + 19:23:7   -   Wide-striped scarf
-    + 19:23:10   -   Rustic check scarf
-    + 19:23:13   -   2-pack of polka dot and striped bandanas
-    + 19:23:13   -   Bufanda cuadros
-    + 19:23:16   -   2-pack of floral and striped bandanas
-    + 19:23:20   -   2-pack of geometric print bandanas
-    + 19:23:22   -   2-pack of polka dot and striped bandanas
-    + 19:23:23   -   Bufanda soft
-    + 19:23:25   -   2-pack of cashmere and animal print bandanas
-    + 19:23:29   -   2-pack of floral and brushstroke bandanas
-    + 19:23:31   -   2-pack of retro floral and striped bandanas
-    + 19:23:35   -   2-pack of striped and leopard print bandanas
-    + 19:23:38   -   2-pack of striped and floral bandanas
-    + 19:23:38   -   Bufanda soft
-    + 19:23:38   -   2-pack of chequered and floral print bandannas
-    + 19:23:39   -   2-pack of patchwork and arty stripe bandanas
-    + 19:23:39   -   Geometric patterned scarf
-    + 19:23:39   -   Large flower print scarf
-    + 19:23:39   -   Floral print scarf
-    + 19:23:40   -   Chequered ‘Love’ bandana
-    + 19:23:40   -   Daisy print neckerchief
-    + 19:23:40   -   2-pack of floral and striped bandanas
-    + 19:23:40   -   Bufanda cuadros
-    + 19:23:43   -   Slogan scarf
-    + 19:23:43   -   Bufanda rayas
-    + 19:23:49   -   Large flower bandana
-    + 19:23:53   -   Pack of 2 wavy and chequered bandanas
-    + 19:23:55   -   Floral print scarf
-    + 19:23:56   -   Chequered ‘Love’ bandana
-    + 19:23:58   -   Large flower print scarf
-    + 19:23:58   -   Bufanda soft
-19:24   -   18 productos  -  https://www.stradivarius.com/co/mujer/accesorios/compra-por-producto/medias-y-pantimedias-c1393010.html
-    + 19:25:4   -   Coloured tights
-    + 19:25:10   -   Geometric tights
-    + 19:25:16   -   2-pack of sparkly socks
-    + 19:25:18   -   Pack of 3 pairs of ankle socks
-    + 19:25:24   -   Mesh tights
-    + 19:25:30   -   Metallic thread tights
-    + 19:25:30   -   Pack of 3 pairs of ankle socks
-    + 19:25:38   -   2-pack of yoga socks
-    + 19:25:45   -   2-pack of striped socks with metallic thread
-    + 19:25:54   -   3-pack of floral and check socks
-    + 19:26:0   -   2-pack of colourful striped socks
-    + 19:26:6   -   3-pack of animal and floral print socks
-    + 19:26:15   -   3-pack of romantic socks
-    + 19:26:16   -   2-pack of striped socks with metallic thread
-    + 19:26:24   -   3-pack of tennis socks
-    + 19:26:29   -   Set of 3 pairs of socks with slogan
-    + 19:26:35   -   3-pack of love socks
-    + 19:26:37   -   Embellished floral socks
-19:27   -   22 productos  -  https://www.stradivarius.com/co/mujer/accesorios/compra-por-producto/lencer%C3%ADa-c1020381007.html
-    + 19:27:51   -   Lace briefs
-    + 19:27:51   -   Triangle bralette
-    + 19:27:51   -   Lace briefs
-    + 19:27:51   -   Triangle bralette
-    + 19:27:52   -   Lace bralette
-    + 19:27:54   -   Lace briefs
-    + 19:27:54   -   Bralette encaje
-    + 19:27:55   -   Tulle bralette
-    + 19:27:58   -   Seamless lacey bralette
-    + 19:27:58   -   Seamless lacey bralette
-    + 19:27:58   -   Seamless lacey bralette
-    + 19:27:59   -   Bralette encaje
-    + 19:28:1   -   Tulle briefs
-    + 19:28:2   -   Floral briefs
-    + 19:28:2   -   Floral briefs
-    + 19:28:2   -   Bralette flores
-    + 19:28:2   -   Bralette flores
-    + 19:28:3   -   Daisy briefs
-    + 19:28:4   -   Daisy bralette
-    + 19:28:4   -   Daisy briefs
-    + 19:28:5   -   Daisy bralette
-    + 19:28:5   -   Daisy briefs
-19:29   -   121 productos  -  https://www.stradivarius.com/co/mujer/pijamas-c1020367657.html
-    + 19:29:6   -   Triangle bralette
-    + 19:29:6   -   Lace briefs
-    + 19:29:6   -   Triangle bralette
-    + 19:29:6   -   Lace briefs
-    + 19:29:7   -   Printed pyjama trousers
-    + 19:29:7   -   Printed pyjama trousers
-    + 19:29:9   -   Dreamers pyjama sweatshirt
-    + 19:29:9   -   Gossip Girl pyjama set
-    + 19:29:9   -   Friends pyjama set
-    + 19:29:9   -   Poplin pyjama trousers
-    + 19:29:9   -   Poplin pyjama trousers
-    + 19:29:9   -   Poplin pyjama trousers
-    + 19:29:10   -   Printed pyjama trousers
-    + 19:29:10   -   Dreamers pyjama top
-    + 19:29:10   -   Dreamers pyjama top
-    + 19:29:10   -   Printed pyjama trousers
-    + 19:29:10   -   Printed pyjama trousers
-    + 19:29:10   -   Lace bralette
-    + 19:29:13   -   Bralette encaje
-    + 19:29:13   -   Floral print pyjama shorts
-    + 19:29:13   -   Cropped pyjama T-shirt
-    + 19:29:13   -   Cropped pyjama T-shirt
-    + 19:29:13   -   Floral pyjama top
-    + 19:29:13   -   Floral print pyjama shorts
-    + 19:29:14   -   Printed pyjama T-shirt
-    + 19:29:14   -   Floral pyjama top
-    + 19:29:14   -   Bralette encaje
-    + 19:29:14   -   Floral pyjama top
-    + 19:29:14   -   Floral pyjama bottoms
-    + 19:29:15   -   Floral pyjama top
-    + 19:29:15   -   Floral pyjama top
-    + 19:29:15   -   Floral pyjama bottoms
-    + 19:29:15   -   Printed pyjama trousers
-    + 19:29:15   -   Floral pyjama bottoms
-    + 19:29:15   -   Floral pyjama top
-    + 19:29:16   -   Dreamers pyjama sweatshirt
-    + 19:29:16   -   Floral pyjama bottoms
-    + 19:29:16   -   Printed pyjama T-shirt
-    + 19:29:16   -   Waffle-texture pyjama shorts
-    + 19:29:16   -   Floral print pyjama shorts
-    + 19:29:16   -   Cropped pyjama T-shirt
-    + 19:29:18   -   Waffle-texture pyjama T-shirt
-    + 19:29:18   -   Waffle-texture pyjama T-shirt
-    + 19:29:19   -   Waffle-texture pyjama shorts
-    + 19:29:19   -   Cropped pyjama T-shirt
-    + 19:29:20   -   Waffle-texture pyjama T-shirt
-    + 19:29:20   -   Waffle-texture pyjama T-shirt
-    + 19:29:21   -   Waffle-texture pyjama T-shirt
-    + 19:29:21   -   Sandalias planas acolchadas
-    + 19:29:21   -   Waffle-texture pyjama shorts
-    + 19:29:21   -   Floral print pyjama shorts
-    + 19:29:21   -   Floral pyjama top
-    + 19:29:22   -   Waffle-texture pyjama T-shirt
-    + 19:29:22   -   Waffle-texture pyjama shorts
-    + 19:29:22   -   Printed pyjama T-shirt
-    + 19:29:22   -   Printed pyjama T-shirt
-    + 19:29:22   -   Floral pyjama top
-    + 19:29:22   -   Floral pyjama top
-    + 19:29:23   -   Ribbed pyjama shorts with buttons
-    + 19:29:23   -   Floral print pyjama shorts
-    + 19:29:23   -   Lace-trimmed pyjama top
-    + 19:29:23   -   Bralette encaje
-    + 19:29:23   -   Strappy pyjama top
-    + 19:29:24   -   Bralette flores
-    + 19:29:24   -   Floral print pyjama shorts
-    + 19:29:24   -   Bralette flores
-    + 19:29:24   -   Floral print pyjama shorts
-    + 19:29:25   -   Bralette encaje
-    + 19:29:25   -   Pyjama shorts with lace trim
-    + 19:29:25   -   Ribbed pyjama shorts with buttons
-    + 19:29:26   -   Sandalias planas cruzadas
-    + 19:29:27   -   Strappy pyjama top
-    + 19:29:27   -   Bralette flores
-    + 19:29:27   -   Bralette flores
-    + 19:29:27   -   Strappy pyjama top
-    + 19:29:27   -   Ribbed pyjama shorts with buttons
-    + 19:29:27   -   Ribbed pyjama T-shirt
-    + 19:29:28   -   Floral briefs
-    + 19:29:28   -   Bralette flores
-    + 19:29:28   -   Floral briefs
-    + 19:29:28   -   Ribbed pyjama shorts with buttons
-    + 19:29:28   -   Short sleeve pyjama T-shirt with lettuce-edge trims
-    + 19:29:28   -   Ribbed pyjama shorts with buttons
-    + 19:29:29   -   Waffle-texture pyjama T-shirt
-    + 19:29:29   -   Daisy briefs
-    + 19:29:30   -   Daisy bralette
-    + 19:29:31   -   Short sleeve pyjama T-shirt with lettuce-edge trims
-    + 19:29:31   -   Camisa larga popelina
-    + 19:29:31   -   Strappy pyjama top
-    + 19:29:31   -   Zuecos ovejeros
-    + 19:29:31   -   Daisy briefs
-    + 19:29:32   -   Striped poplin pyjama shorts
-    + 19:29:32   -   Waffle-texture pyjama shorts
-    + 19:29:32   -   Striped poplin pyjama shorts
-    + 19:29:33   -   Daisy bralette
-    + 19:29:33   -   Gathered poplin pyjama shorts
-    + 19:29:33   -   Lace briefs
-    + 19:29:34   -   Floral pyjama bottoms
-    + 19:29:34   -   Floral pyjama bottoms
-    + 19:29:34   -   Floral pyjama bottoms
-    + 19:29:34   -   Zuecos detalle
-    + 19:29:35   -   Tulle briefs
-    + 19:29:35   -   Tulle bralette
-    + 19:29:35   -   Ribbed pyjama shorts with buttons
-    + 19:29:35   -   Ribbed pyjama shorts with buttons
-    + 19:29:35   -   Ribbed pyjama shorts with buttons
-    + 19:29:35   -   Ribbed pyjama T-shirt
-    + 19:29:36   -   Ribbed pyjama shorts with buttons
-    + 19:29:36   -   Daisy bralette
-    + 19:29:37   -   Daisy bralette
-    + 19:29:37   -   Daisy briefs
-    + 19:29:37   -   Daisy briefs
-    + 19:29:37   -   Daisy bralette
-    + 19:29:37   -   Dreamers pyjama sweatshirt
-    + 19:29:42   -   Lace briefs
-    + 19:29:42   -   Strappy pyjama top
-    + 19:29:43   -   Strappy pyjama top
-    + 19:29:43   -   Daisy briefs
-    + 19:29:43   -   Daisy bralette
-    + 19:29:44   -   Floral briefs
-    + 19:29:44   -   Floral briefs
-19:31   -   97 productos  -  https://www.stradivarius.com/co/mujer/home-%26-living/compra-por-producto/ver-todo/ver-todo-c1020367651.html
-    + 19:31:40   -   Planner bordado
-    + 19:31:42   -   
-    + 19:31:45   -   
-    + 19:31:48   -   2-pack of tea towels
-    + 19:31:51   -   
-    + 19:31:57   -   2-pack of tea towels
-    + 19:32:1   -   Embroidered Mickey Mouse planner
-    + 19:32:2   -   Faux leather mini planner
-    + 19:32:3   -   Table planner
-    + 19:32:3   -   Embroidered floral pencil case
-    + 19:32:5   -   Floral planner
-    + 19:32:5   -   Mini floral print planner
-    + 19:32:7   -   Planner with pen
-    + 19:32:7   -   Floral planner
-    + 19:32:7   -   Pack of stationery
-    + 19:32:8   -   Planner premium
-    + 19:32:8   -   Planner premium
-    + 19:32:8   -   Planner bordado
-    + 19:32:10   -   Landscape rug
-    + 19:32:12   -   Planner with pen
-    + 19:32:12   -   Mini floral print planner
-    + 19:32:13   -   Coloured box
-    + 19:32:13   -   Coloured box
-    + 19:32:13   -   Faux leather mini planner
-    + 19:32:16   -   Minnie Mouse notebook pack
-    + 19:32:16   -   Table planner
-    + 19:32:16   -   Planner bordado
-    + 19:32:28   -   Printed clutch
-    + 19:32:28   -   Ring jewellery box
-    + 19:32:31   -   Estuche acolchado
-    + 19:32:31   -   Jewellery hanger mirror
-    + 19:32:34   -   Smiley ® rug
-    + 19:32:34   -   Embroidered floral pencil case
-    + 19:32:37   -   Quilted case
-    + 19:32:37   -   Printed toiletry bag
-    + 19:32:37   -   Joyero cajones velvet grande
-    + 19:32:37   -   Pack of spiral candles
-    + 19:32:39   -   Cubic candle
-    + 19:32:39   -   Cubic candle
-    + 19:32:39   -   Cubic candle
-    + 19:32:39   -   Pack of spiral candles
-    + 19:32:40   -   Pack of spiral candles
-    + 19:32:43   -   Pack of ombré candles
-    + 19:32:47   -   Pack of floral candles
-    + 19:32:50   -   Coloured mini box
-    + 19:32:50   -   Coloured mini box
-    + 19:32:50   -   Coloured box
-    + 19:32:50   -   Coloured box
-    + 19:32:50   -   Pack of stationery
-    + 19:32:53   -   Moon rug
-    + 19:32:54   -   Pack of spiral candles
-    + 19:32:54   -   Pack of ombré candles
-    + 19:32:57   -   Premium Minnie Mouse planner
-    + 19:33:1   -   Quilted case
-    + 19:33:3   -   Quilted clutch
-    + 19:33:4   -   Wooden base jewellery stand
-    + 19:33:4   -   Pack of floral candles
-    + 19:33:7   -   Minnie mouse weekly planner
-    + 19:33:9   -   Pencil case with “positive” embroidery
-    + 19:33:13   -   Colourful notebook pair
-    + 19:33:13   -   Pack of spiral candles
-    + 19:33:15   -   Portalápices redondo
-    + 19:33:15   -   Joyero terciopelo
-    + 19:33:15   -   Table planner
-    + 19:33:16   -   Coloured mini box
-    + 19:33:18   -   Happy home rug
-    + 19:33:21   -   Dreamer rug
-    + 19:33:21   -   Coloured mini box
-    + 19:33:24   -   Home rug
-    + 19:33:24   -   Cubic candle
-    + 19:33:26   -   Estuche bordado flores
-    + 19:33:28   -   Embroidered Mickey Mouse toiletry bag
-    + 19:33:28   -   Cubic candle
-    + 19:33:29   -   Floral crystal box
-    + 19:33:29   -   Cubic candle
-    + 19:33:29   -   Coloured mini box
-    + 19:33:31   -   Bolígrafo brillos
-    + 19:33:32   -   Coloured mini box
-    + 19:33:37   -   Mini planner efecto cuero
-    + 19:33:38   -   Planner bordado flores
-    + 19:33:39   -   Embroidered floral pencil case
-    + 19:33:42   -   Alfombra bonita
-    + 19:33:44   -   Smiley ® rug
-    + 19:33:47   -   Happy home rug
-    + 19:33:47   -   Floral crystal box
-    + 19:33:50   -   Relleno de cojín
-    + 19:33:50   -   Planner bordado flores
-    + 19:33:51   -   Joyero terciopelo
-    + 19:33:53   -   Joyero minimal mármol
-    + 19:33:53   -   Planner bordado flores
-    + 19:33:53   -   Embroidered floral pencil case
-    + 19:33:53   -   Joyero cajones velvet grande
-    + 19:33:53   -   Bolígrafo brillos
-    + 19:33:55   -   Printed candlestick
-    + 19:33:57   -   
-X 19:33:57   -   list index out of range
-X 19:33:57   -   list index out of range
-19:35   -   38 productos  -  https://www.stradivarius.com/co/mujer/home-%26-living/compra-por-producto/papeler%C3%ADa-c1020367598.html
-    + 19:35:18   -   Planner bordado
-    + 19:35:19   -   Embroidered Mickey Mouse planner
-    + 19:35:19   -   Faux leather mini planner
-    + 19:35:19   -   Table planner
-    + 19:35:20   -   Embroidered floral pencil case
-    + 19:35:20   -   Floral planner
-    + 19:35:20   -   Mini floral print planner
-    + 19:35:21   -   Planner with pen
-    + 19:35:21   -   Floral planner
-    + 19:35:21   -   Pack of stationery
-    + 19:35:22   -   Planner premium
-    + 19:35:22   -   Planner premium
-    + 19:35:22   -   Planner bordado
-    + 19:35:23   -   Planner with pen
-    + 19:35:23   -   Mini floral print planner
-    + 19:35:23   -   Faux leather mini planner
-    + 19:35:24   -   Minnie Mouse notebook pack
-    + 19:35:24   -   Table planner
-    + 19:35:24   -   Planner bordado
-    + 19:35:24   -   Embroidered floral pencil case
-    + 19:35:24   -   Quilted case
-    + 19:35:24   -   Pack of stationery
-    + 19:35:25   -   Premium Minnie Mouse planner
-    + 19:35:25   -   Quilted case
-    + 19:35:25   -   Minnie mouse weekly planner
-    + 19:35:26   -   Pencil case with “positive” embroidery
-    + 19:35:26   -   Colourful notebook pair
-    + 19:35:26   -   Portalápices redondo
-    + 19:35:26   -   Table planner
-    + 19:35:26   -   Bolígrafo brillos
-    + 19:35:27   -   Mini planner efecto cuero
-    + 19:35:27   -   Planner bordado flores
-    + 19:35:27   -   Embroidered floral pencil case
-    + 19:35:27   -   Planner bordado flores
-    + 19:35:27   -   Embroidered floral pencil case
-    + 19:35:28   -   Bolígrafo brillos
-    + 19:35:28   -   
-X 19:35:28   -   list index out of range
-19:37   -   1 productos  -  https://www.stradivarius.com/co/mujer/home-%26-living/compra-por-producto/fragancias-c1020367631.html
-X 19:37:19   -   list index out of range
+··········9 - 23··········
+17:53   -   77 productos  -  https://www.stradivarius.com/co/mujer/ropa/compra-por-producto/blazers-c1695505.html
+    + 17:53:42   -   Double-breasted blazer
+    + 17:53:42   -   Blazer básico punto
+    + 17:53:42   -   Double-breasted blazer
+    + 17:53:43   -   Double-breasted blazer
+    + 17:53:43   -   Double-breasted blazer
+    + 17:53:44   -   Double-breasted blazer
+    + 17:53:44   -   Double-breasted blazer
+    + 17:53:44   -   Double-breasted blazer
+    + 17:53:45   -   Double-breasted blazer
+    + 17:53:45   -   Double-breasted blazer
+    + 17:53:45   -   Double-breasted blazer
+    + 17:53:46   -   Double-breasted blazer
+    + 17:53:46   -   Open double-breasted blazer
+    + 17:53:46   -   Blazer básico punto
+    + 17:53:46   -   Blazer abierto doble botonadura
+    + 17:53:47   -   Double-breasted blazer
+    + 17:53:47   -   Double-breasted blazer
+    + 17:53:47   -   Open double-breasted blazer
+    + 17:53:47   -   Double-breasted blazer
+    + 17:53:47   -   Double-breasted houndstooth blazer
+    + 17:53:48   -   Blazer básico punto
+    + 17:53:48   -   Flowing blazer with drop sleeves
+    + 17:53:48   -   Open double-breasted blazer
+    + 17:53:48   -   Blazer fluido
+    + 17:53:48   -   Flowing blazer with drop sleeves
+    + 17:53:48   -   Open double-breasted blazer
+    + 17:53:49   -   Loose-fitting open blazer
+    + 17:53:49   -   Blazer bolsillo de satín
+    + 17:53:50   -   Blazer with rolled-up sleeves
+    + 17:53:50   -   Double-breasted blazer
+    + 17:53:51   -   Blazer with rolled-up sleeves
+    + 17:53:51   -   Flowing blazer with drop sleeves
+    + 17:53:51   -   Loose-fitting open blazer
+    + 17:53:51   -   Blazer with rolled-up sleeves
+    + 17:53:51   -   Blazer básico punto
+    + 17:53:52   -   Double-breasted blazer
+    + 17:53:52   -   Cropped blazer
+    + 17:53:52   -   Flowing blazer with drop sleeves
+    + 17:53:52   -   Flowing blazer with drop sleeves
+    + 17:53:53   -   Blazer with rolled-up sleeves
+    + 17:53:53   -   Blazer bolsillo de satín
+    + 17:53:53   -   Blazer with rolled-up sleeves
+    + 17:53:54   -   Blazer dress
+    + 17:53:55   -   Double-breasted waistcoat
+    + 17:53:55   -   Blazer dress
+    + 17:53:55   -   Blazer básico punto
+    + 17:53:55   -   Check rustic blazer
+    + 17:53:56   -   Cropped blazer
+    + 17:53:56   -   Blazer abierto doble botonadura
+    + 17:53:56   -   Blazer básico punto
+    + 17:53:56   -   Blazer fluido cuadros
+    + 17:53:56   -   Blazer oversize
+    + 17:53:56   -   Rustic open blazer
+    + 17:53:57   -   Rustic open blazer
+    + 17:53:57   -   Blazer oversize
+    + 17:53:57   -   Blazer oversize
+    + 17:53:57   -   Blazer fluido
+    + 17:53:58   -   Smart waistcoat
+    + 17:53:59   -   Smart waistcoat
+    + 17:53:59   -   Smart waistcoat
+    + 17:54:0   -   Blazer dress
+    + 17:54:0   -   Blazer with rolled-up sleeves
+    + 17:54:1   -   Blazer bolsillo de satín
+    + 17:54:1   -   Blazer oversize
+    + 17:54:1   -   Rustic open blazer
+    + 17:54:1   -   Blazer bolsillo de satín
+    + 17:54:2   -   Smart waistcoat
+    + 17:54:2   -   Blazer dress
+    + 17:54:2   -   Rustic open blazer
+    + 17:54:3   -   Smart waistcoat
+    + 17:54:3   -   Check rustic blazer
+    + 17:54:3   -   Blazer abierto doble botonadura
+    + 17:54:4   -   Smart waistcoat
+    + 17:54:4   -   Smart waistcoat
+    + 17:54:4   -   Blazer abierto doble botonadura
+    + 17:54:4   -   Rustic open blazer
+    + 17:54:4   -   Blazer abierto doble botonadura
+17:55   -   97 productos  -  https://www.stradivarius.com/co/mujer/ropa/compra-por-producto/faldas/ver-todo-c1718525.html
+    + 17:55:33   -   Falda plisada
+    + 17:55:34   -   Checked box pleat skirt
+    + 17:55:34   -   Checked box pleat skirt
+    + 17:55:35   -   Knotted midi skirt
+    + 17:55:35   -   
+    + 17:55:35   -   Falda plisada
+    + 17:55:35   -   Elasticated mini skirt
+    + 17:55:35   -   Jacquard mini skirt
+    + 17:55:35   -   
+    + 17:55:36   -   Falda mini tejida
+    + 17:55:36   -   Jacquard mini skirt
+    + 17:55:36   -   Jacquard mini skirt
+    + 17:55:36   -   Falda mini tejida
+    + 17:55:36   -   Jacquard mini skirt
+    + 17:55:37   -   Falda mini efecto cuero
+    + 17:55:37   -   Mini skort
+    + 17:55:37   -   Jacquard mini skirt
+    + 17:55:37   -   Falda mini tejida
+    + 17:55:38   -   Falda mini efecto cuero
+    + 17:55:38   -   Checked box pleat skirt
+    + 17:55:38   -   Falda mini tejida
+    + 17:55:39   -   Tulle midi skirt
+    + 17:55:39   -   Satin midi skirt
+    + 17:55:39   -   Paisley satin midi skirt
+    + 17:55:39   -   Falda mini efecto cuero
+    + 17:55:40   -   Pleated nylon mini skirt
+    + 17:55:40   -   Paisley satin midi skirt
+    + 17:55:40   -   Checked box pleat skirt
+    + 17:55:40   -   Basic mini skort
+    + 17:55:41   -   Zebra print mini skirt
+    + 17:55:42   -   Silky midi skirt
+    + 17:55:42   -   Basic mini skort
+    + 17:55:42   -   Buttoned midi skirt
+    + 17:55:42   -   Mini skirt with waistband
+    + 17:55:42   -   Falda pantalón fluida estampada
+    + 17:55:42   -   Paisley satin midi skirt
+    + 17:55:43   -   Paisley satin midi skirt
+    + 17:55:43   -   Buttoned midi skirt
+    + 17:55:43   -   Faux leather wrap skort
+    + 17:55:43   -   Pleated mini skirt
+    + 17:55:44   -   Elasticated mini skirt
+    + 17:55:44   -   Mini skort
+    + 17:55:44   -   Pleated nylon mini skirt
+    + 17:55:44   -   Pleated skirt with buckles
+    + 17:55:44   -   Ruffled mini skirt
+    + 17:55:44   -   Tulle midi skirt
+    + 17:55:44   -   
+    + 17:55:45   -   Falda plisada
+    + 17:55:45   -   Jacquard mini skirt
+    + 17:55:45   -   Midi wrap skirt
+    + 17:55:45   -   Midi wrap skirt
+    + 17:55:45   -   Falda mini efecto cuero
+    + 17:55:46   -   Simple skort
+    + 17:55:46   -   Silky midi skirt
+    + 17:55:46   -   Jacquard mini skirt
+    + 17:55:46   -   Basic mini skort
+    + 17:55:46   -   Midi wrap skirt
+    + 17:55:46   -   Satin midi skirt
+    + 17:55:46   -   Tulle midi skirt
+    + 17:55:47   -   Midi wrap skirt
+    + 17:55:47   -   Midi wrap skirt
+    + 17:55:47   -   Midi wrap skirt
+    + 17:55:47   -   Pleated skirt with buckles
+    + 17:55:47   -   Floral mini skirt
+    + 17:55:47   -   Falda plisada
+    + 17:55:47   -   Long floral peasant skirt
+    + 17:55:48   -   Long floral peasant skirt
+    + 17:55:48   -   Midi wrap skirt
+    + 17:55:48   -   Midi wrap skirt
+    + 17:55:48   -   Wrap skort with bows
+    + 17:55:48   -   Knotted midi skirt
+    + 17:55:48   -   Midi wrap skirt
+    + 17:55:49   -   Silky midi skirt
+    + 17:55:49   -   Printed skort
+    + 17:55:49   -   Long floral peasant skirt
+    + 17:55:49   -   Rustic floral midi skirt
+    + 17:55:49   -   Flowing floral skort
+    + 17:55:50   -   Falda midi flores
+    + 17:55:50   -   Denim patchwork skirt
+    + 17:55:50   -   Silky midi skirt
+    + 17:55:50   -   Striped twill mini skirt
+    + 17:55:51   -   Flowing skort
+    + 17:55:51   -   Rustic midi skirt
+    + 17:55:51   -   Falda mini en patchwork
+    + 17:55:51   -   Wrap skort with bows
+    + 17:55:51   -   Rustic floral midi skirt
+    + 17:55:52   -   Falda mini boleros
+    + 17:55:52   -   Rustic midi skirt
+    + 17:55:52   -   Falda pantalón fluida estampada
+    + 17:55:53   -   Vintage-style denim skirt
+    + 17:55:53   -   Denim skort
+    + 17:55:53   -   Falda midi flores
+    + 17:55:53   -   Long floral peasant skirt
+    + 17:55:54   -   Falda midi con cintura asimétrica
+    + 17:55:54   -   Printed skort
+    + 17:55:54   -   Long floral peasant skirt
+    + 17:55:54   -   Falda mini boleros
+17:57   -   264 productos  -  https://www.stradivarius.com/co/mujer/ropa/compra-por-producto/tops-y-bodies/ver-todo-c1020297562.html
+    + 17:57:5   -   Crop top cruzado
+    + 17:57:6   -   Halter top with chain
+    + 17:57:7   -   Satin top with rhinestones
+    + 17:57:7   -   Top with tie
+    + 17:57:8   -   Sculpting sports bra
+    + 17:57:9   -   Cool touch technical sports T-shirt
+    + 17:57:10   -   Strappy sports bra
+    + 17:57:10   -   Sculpting sports bra
+    + 17:57:10   -   Sculpting sports bra
+    + 17:57:11   -   Cool touch tulle sports top
+    + 17:57:12   -   Sculpting sports bra
+    + 17:57:12   -   Rustic strappy top
+    + 17:57:13   -   Seamless top with square neckline
+    + 17:57:13   -   Seamless top with square neckline
+    + 17:57:14   -   Stretch top with ruffles
+    + 17:57:14   -   Seamless top with square neckline
+    + 17:57:15   -   Seamless printed high-neck top
+    + 17:57:15   -   Stretch top with ruffles
+    + 17:57:16   -   Seamless sports bra
+    + 17:57:16   -   Seamless sports bra
+    + 17:57:17   -   Seamless sports bra
+    + 17:57:17   -   Strappy jacquard top
+    + 17:57:18   -   Cut-out knit top
+    + 17:57:18   -   Rustic strappy top
+    + 17:57:18   -   Crop poliamida
+    + 17:57:18   -   Camiseta crop tiras
+    + 17:57:19   -   Strappy jacquard top
+    + 17:57:19   -   Seamless printed high-neck top
+    + 17:57:20   -   Crochet halter neck top
+    + 17:57:20   -   Stretch top with ruffles
+    + 17:57:23   -   Compression sports bra
+    + 17:57:23   -   Satin top with rhinestones
+    + 17:57:24   -   Compression sports bra
+    + 17:57:26   -   Compression sports bra
+    + 17:57:26   -   Crop poliamida
+    + 17:57:28   -   Surplice crop top with diamanté detail
+    + 17:57:28   -   Compression sports bra
+    + 17:57:29   -   Compression sports bra
+    + 17:57:30   -   Compression sports bra
+    + 17:57:31   -   Compression sports bra
+    + 17:57:33   -   High neck seamless top
+    + 17:57:33   -   Top margaritas
+    + 17:57:34   -   Floral strappy top
+    + 17:57:34   -   Lace-trimmed seamless bodysuit
+    + 17:57:34   -   Bralette with side gathering
+    + 17:57:35   -   2-pack of seamless tops
+    + 17:57:35   -   Top seamless espalda fantasía
+    + 17:57:36   -   Seamless racer top
+    + 17:57:38   -   Bralette encaje
+    + 17:57:38   -   Strappy jacquard top
+    + 17:57:38   -   Seamless printed high-neck top
+    + 17:57:38   -   Bralette encaje
+    + 17:57:38   -   Top seamless espalda fantasía
+    + 17:57:39   -   Top seamless espalda fantasía
+    + 17:57:40   -   High neck seamless top
+    + 17:57:40   -   High neck seamless top
+    + 17:57:41   -   Seamless lacey bralette
+    + 17:57:41   -   Polo tejido de punto
+    + 17:57:41   -   Racerback top with diamantés
+    + 17:57:41   -   Camiseta crop tiras
+    + 17:57:42   -   Racerback top with diamantés
+    + 17:57:42   -   Seamless lacey bralette
+    + 17:57:42   -   Rustic vest top
+    + 17:57:42   -   Asymmetric knit top
+    + 17:57:42   -   Bralette with side gathering
+    + 17:57:43   -   Seamless lacey bralette
+    + 17:57:43   -   Top with contrast straps
+    + 17:57:44   -   High neck seamless top
+    + 17:57:44   -   Bralette encaje
+    + 17:57:45   -   Basic asymmetric top
+    + 17:57:45   -   Rustic vest top
+    + 17:57:45   -   Bralette with side gathering
+    + 17:57:45   -   Stretch top with ruffles
+    + 17:57:45   -   Camiseta crop tiras
+    + 17:57:46   -   High neck seamless top
+    + 17:57:46   -   Crop seamless tirantes
+    + 17:57:47   -   Top tejido punto trenzas
+    + 17:57:47   -   High neck seamless top
+    + 17:57:47   -   High neck seamless top
+    + 17:57:47   -   Camiseta crop tiras
+    + 17:57:48   -   Guipure lacey top
+    + 17:57:48   -   Crop seamless tirantes
+    + 17:57:48   -   Body cuello halter
+    + 17:57:48   -   Lace crop top
+    + 17:57:48   -   Crop seamless tirantes
+    + 17:57:49   -   Knit racerback top
+    + 17:57:49   -   Halter bodysuit
+    + 17:57:50   -   Top with tie neck
+    + 17:57:50   -   Lace crop top
+    + 17:57:50   -   Crochet waistcoat
+    + 17:57:50   -   Rustic strappy top
+    + 17:57:51   -   Knit racerback top
+    + 17:57:52   -   Daisy bralette
+    + 17:57:52   -   High neck top with zip
+    + 17:57:52   -   Metallic bodysuit
+    + 17:57:53   -   Seamless top with buttons
+    + 17:57:53   -   Basic asymmetric top
+    + 17:57:53   -   Pack 2 bandeau básico
+    + 17:57:53   -   Body cuello halter
+    + 17:57:53   -   Blond lace bodysuit
+    + 17:57:54   -   Scarf top with tie detail
+    + 17:57:54   -   Seamless top with buttons
+    + 17:57:54   -   Blond lace bodysuit
+    + 17:57:54   -   Crop seamless tirantes
+    + 17:57:54   -   Guipure lacey top
+    + 17:57:55   -   Top margaritas
+    + 17:57:55   -   Rustic striped top
+    + 17:57:55   -   Basic asymmetric top
+    + 17:57:55   -   Rustic striped top
+    + 17:57:56   -   Blond lace bodysuit
+    + 17:57:56   -   Embroidered top with ruffles
+    + 17:57:56   -   Top seamless espalda fantasía
+    + 17:57:56   -   Embroidered top with ruffles
+    + 17:57:56   -   Embroidered top with ruffles
+    + 17:57:56   -   Camiseta asimétrica
+    + 17:57:57   -   Pack 2 bodies cuello halter
+    + 17:57:57   -   Basic asymmetric top
+    + 17:57:57   -   Camiseta crop elástica tiras
+    + 17:57:57   -   Seamless cable-knit top
+    + 17:57:57   -   Crochet halter top
+    + 17:57:58   -   Rustic striped top
+    + 17:57:58   -   Top seamless espalda fantasía
+    + 17:57:58   -   Strappy jacquard top
+    + 17:57:58   -   Halter top with chain
+    + 17:57:59   -   Seamless racer top
+    + 17:57:59   -   Top tejido punto trenzas
+    + 17:57:59   -   Crop poliamida
+    + 17:58:0   -   Off-the-shoulder T-shirt with elastic
+    + 17:58:0   -   Camiseta asimétrica
+    + 17:58:0   -   Crop seamless tirantes
+    + 17:58:0   -   Striped crochet bralette
+    + 17:58:1   -   Crochet halter top
+    + 17:58:1   -   Top tejido punto trenzas
+    + 17:58:1   -   Set of 3 strappy tops
+    + 17:58:1   -   Crop seamless tirantes
+    + 17:58:1   -   Seamless racerback top
+    + 17:58:3   -   Guipure lace top
+    + 17:58:3   -   Seamless racerback top
+    + 17:58:3   -   Crochet halter top
+    + 17:58:4   -   Top pañuelo satín
+    + 17:58:4   -   Striped crochet bralette
+    + 17:58:4   -   Camiseta nadadora
+    + 17:58:5   -   Striped crochet bralette
+    + 17:58:5   -   Crochet top with pocket square
+    + 17:58:5   -   Striped crochet bralette
+    + 17:58:6   -   Top margaritas
+    + 17:58:6   -   Crossover bodysuit
+    + 17:58:6   -   Top pañuelo satín
+    + 17:58:7   -   Bralette crochet
+    + 17:58:7   -   Top botones
+    + 17:58:7   -   Top with a crossover neckline
+    + 17:58:7   -   Top botones
+    + 17:58:7   -   Strappy seamless body
+    + 17:58:7   -   Top botones rayas
+    + 17:58:8   -   Multicoloured bandeau top
+    + 17:58:8   -   Top seamless espalda fantasía
+    + 17:58:8   -   Strappy seamless body
+    + 17:58:8   -   Printed halter top
+    + 17:58:8   -   Rustic floral top
+    + 17:58:9   -   Pack 2 crop top tirantas
+    + 17:58:9   -   Pack 2 crop top tirantas
+    + 17:58:9   -   Rustic buttoned crop top
+    + 17:58:9   -   Seamless V-neck top
+    + 17:58:9   -   Crop poliamida
+    + 17:58:9   -   Camiseta crop tiras
+    + 17:58:10   -   High neck top with zip
+    + 17:58:10   -   Rustic buttoned crop top
+    + 17:58:10   -   Guipure lace top
+    + 17:58:10   -   Rustic top with buttons
+    + 17:58:11   -   Camiseta crop tiras
+    + 17:58:11   -   Lace crop top
+    + 17:58:11   -   Ribbed halter top
+    + 17:58:11   -   Crochet top with knot
+    + 17:58:11   -   Ribbed halter top
+    + 17:58:11   -   Top with tie neck
+    + 17:58:12   -   Top margaritas
+    + 17:58:12   -   Ribbed halter top
+    + 17:58:12   -   Strappy jacquard top
+    + 17:58:12   -   Knit racerback top
+    + 17:58:12   -   Rustic buttoned crop top
+    + 17:58:13   -   Body cuello halter
+    + 17:58:13   -   Camiseta nadadora
+    + 17:58:13   -   Scarf top with tie detail
+    + 17:58:14   -   Top pañuelo satín
+    + 17:58:14   -   Seamless top with buttons
+    + 17:58:14   -   Top tiras asimétrico
+    + 17:58:14   -   Knit racerback top
+    + 17:58:15   -   Top seamless espalda fantasía
+    + 17:58:15   -   Rustic top with buttons
+    + 17:58:15   -   Rustic top with buttons
+    + 17:58:15   -   Rustic buttoned crop top
+    + 17:58:15   -   Crochet halter top
+    + 17:58:15   -   Top tiras asimétrico
+    + 17:58:16   -   Crop poliamida
+    + 17:58:16   -   Crop poliamida
+    + 17:58:16   -   Body cuello halter
+    + 17:58:16   -   Textured crochet top
+    + 17:58:16   -   Camiseta crop elástica tiras
+    + 17:58:16   -   Seamless cable-knit top
+    + 17:58:17   -   Floral strappy top
+    + 17:58:17   -   Rustic top with buttons
+    + 17:58:17   -   Seamless cable-knit top
+    + 17:58:18   -   Top tirantes
+    + 17:58:18   -   Cable-knit crochet top
+    + 17:58:18   -   Camiseta asimétrica
+    + 17:58:19   -   Top pañuelo satín
+    + 17:58:19   -   Floral strappy top
+    + 17:58:19   -   Rustic buttoned crop top
+    + 17:58:19   -   Floral strappy top
+    + 17:58:20   -   Floral strappy top
+    + 17:58:20   -   Body cuello en V poliamida
+    + 17:58:20   -   Asymmetric multicoloured top
+    + 17:58:20   -   Crop poliamida
+    + 17:58:20   -   Body cuello halter
+    + 17:58:21   -   Rustic strappy top
+    + 17:58:21   -   Top with Swiss embroidery
+    + 17:58:21   -   Guipure lace top
+    + 17:58:22   -   Daisy bralette
+    + 17:58:24   -   Pack 2 tops cropped
+    + 17:58:24   -   Top satín
+    + 17:58:24   -   High neck top
+    + 17:58:25   -   Guipure lace top
+    + 17:58:25   -   Body cuello en V poliamida
+    + 17:58:26   -   High neck top
+    + 17:58:26   -   High neck top
+    + 17:58:26   -   Crochet top with pocket square
+    + 17:58:26   -   High neck top
+    + 17:58:26   -   Body cuello en V poliamida
+    + 17:58:26   -   Body cuello en V poliamida
+    + 17:58:26   -   Top satín
+    + 17:58:27   -   Top satín
+    + 17:58:27   -   Top satín
+    + 17:58:27   -   Crochet bralette with border
+    + 17:58:27   -   Crop top cruzado
+    + 17:58:27   -   Bralette tejido
+    + 17:58:27   -   Body cuello en V poliamida
+    + 17:58:28   -   Crop top cruzado
+    + 17:58:28   -   Crop seamless tirantes
+    + 17:58:28   -   Textured crochet top
+    + 17:58:28   -   Top with front diamanté detail
+    + 17:58:28   -   Camiseta crop tiras
+    + 17:58:28   -   Textured crochet top
+    + 17:58:29   -   Textured crochet top
+    + 17:58:29   -   Crochet halter top
+    + 17:58:29   -   Body cuello en V poliamida
+    + 17:58:29   -   Seamless cable-knit top
+    + 17:58:29   -   Bralette tejido
+    + 17:58:29   -   Bralette tejido
+    + 17:58:30   -   Body cuello en V poliamida
+    + 17:58:30   -   Rustic top
+    + 17:58:30   -   Camiseta básica cuello alto
+    + 17:58:30   -   Camiseta crop elástica tiras
+    + 17:58:31   -   Body cuello en V poliamida
+    + 17:58:31   -   Body cuello en V poliamida
+    + 17:58:31   -   Top cuello en V
+    + 17:58:32   -   Soft-touch strappy top
+    + 17:58:32   -   Top with front diamanté detail
+    + 17:58:32   -   Top cuello en V
+    + 17:58:33   -   Daisy bralette
+    + 17:58:33   -   Striped crochet bralette
+    + 17:58:33   -   Top with tie waist
+    + 17:58:34   -   Pack 2 tops cropped
+    + 17:58:34   -   Bralette crochet
+    + 17:58:34   -   Bralette tejido

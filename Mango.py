@@ -21,7 +21,7 @@ xpaths={
     'priceBfr':'.//span[contains(@class,"product-sale") and not(contains(@class,"discount"))]',
     'priceNow':'.//span[contains(@class,"product-sale")]'}
 try:
-    endpoints = ast.literal_eval(open('./Files/.settings','r').read())[brand]['endpoints']
+    endpoints = ast.literal_eval(open('./Files/Settings.json','r').read())[brand]['endpoints']
 except:
     endpoints = []
 
@@ -62,10 +62,10 @@ def scrap_for_links():
                     if 'destacados/nuevo' in category:
                         new = endpoint
     driver.quit()
-    settings = ast.literal_eval(open('./Files/.settings','r').read())
+    settings = ast.literal_eval(open('./Files/Settings.json','r').read())
     settings[brand]['endpoints'] = endpoints
     settings[brand]['endpoint'] = new if new else endpoints[0][1]
-    with open('./Files/.settings','w') as s:
+    with open('./Files/Settings.json','w') as s:
         s.write(str(settings))
 
 

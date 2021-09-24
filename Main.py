@@ -316,11 +316,11 @@ def jsonToBody(json):
     json['colors'] = '__colors__'
     return str(json).replace("'",'"').replace('"sale": True','"sale": 1').replace('"sale": False','"sale": 0').replace('"__allPricesNow__"',str(_backup[0])).replace('__allImages__',str(_backup[1])).replace('__allSizes__',str(_backup[2])).replace('__colors__',str(_backup[3])).replace('á','a').replace('é','e').replace('í','i').replace('ó','o').replace('ú','u').replace('Á','A').replace('É','E').replace('Í','I').replace('Ó','O').replace('Ú','U')
 
-def post(databases = [bDb, mDb, pDb, zDb, mngDb, sDb], crawling=False):
+def post(databases = [mDb, pDb, bDb, zDb, mngDb, sDb], crawling=False):
     if crawling:
-        databases = databases[3:]
+        databases = databases[2:]
     else:
-        databases = databases[:3]
+        databases = databases[:2]
     total_items = 0
     for d in databases:
         total_items += len(d.getAllUrls())
@@ -389,8 +389,8 @@ def check_broken_links(databases = [bDb, mDb, zDb, pDb, sDb], start=0, crawling=
         driver.quit()
     if to_delete:
         print(len(to_delete),'items deleted')
-        open('./Database/Latest.json', 'w').close()
-        open('./Database/Broken.json', 'w').close()
+        latest.clear()
+        broken.clear()
         delete(to_delete)
 
 def sync(brand=''):

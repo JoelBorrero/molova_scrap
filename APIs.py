@@ -14,10 +14,10 @@ import Zara
 from Main import check_broken_links, post, sync
 
 try:
-    settings = ast.literal_eval(open('./Files/.settings','r').read())
+    settings = ast.literal_eval(open('./Files/Settings.json','r').read())
 except FileNotFoundError:
     settings = {'Mango': {'endpoints': [], 'endpoint': ''}, 'Stradivarius': {'endpoints': [], 'endpoint': ''}, 'Zara': {'endpoints': [], 'endpoint': ''}}
-    with open('./Files/.settings','w') as s:
+    with open('./Files/Settings.json','w') as s:
         s.write(str(settings))
 brands = [
     {'name': 'Mango', 'endpoint': settings['Mango']['endpoint'], 'endpoints': settings['Mango']['endpoints'], 'updates': True},
