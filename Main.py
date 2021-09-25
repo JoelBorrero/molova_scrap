@@ -415,7 +415,8 @@ def sync(brand=''):
                     #     item.pop(pop)
                     # if not type(item['allPricesNow']) == list:
                     #     item['allPricesNow'] = [item['allPricesNow']]
-                    db.add(Item(item['brand'], item['name'],'ref',item['description'], item['priceBefore'], item['allPricesNow'], item['discount'], item['allImages'], item['url'], item['allSizes'], item['colors'], item['category'], item['originalCategory'], item['subcategory'], item['originalSubcategory'], item['sale'], item['gender']), sync=True)
+                    item = Item(item['brand'], item['name'],'ref',item['description'], item['priceBefore'], item['allPricesNow'], item['discount'], item['allImages'], item['url'], item['allSizes'], item['colors'], item['category'], item['originalCategory'], item['subcategory'], item['originalSubcategory'], item['sale'], item['gender'])
+                    db.add(item, sync=True)
                     index += 1
                     bar.update()
             else:

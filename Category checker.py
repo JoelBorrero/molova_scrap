@@ -10,11 +10,10 @@ def select_db():
         print(f'{dbs.index(d)}. {d}')
     return Database(dbs[int(input(''))]).db
 
-def from_dict(data):
-    return Item(data['brand'],data['name'],'ref',data['description'],data['priceBefore'],data['allPricesNow'],data['discount'],data['allImages'],data['url'],data['allSizes'],data['colors'],data['category'],data['originalCategory'],data['subcategory'],data['originalSubcategory'],data['sale'],data['gender'])   
-
 def verify(id):
-    item = from_dict(db.get(doc_id=id))
+    item = db.get(doc_id=id)
+    print('Before\nName:', item['name'], '\nCategory:', item['category'], '\nSubcat:', item['subcategory'])
+    item = Item(item['brand'],item['name'],'ref',item['description'],item['priceBefore'],item['allPricesNow'],item['discount'],item['allImages'],item['url'],item['allSizes'],item['colors'],item['category'],item['originalCategory'],item['subcategory'],item['originalSubcategory'],item['sale'],item['gender'])   
     print('\nNow\nName:', item.name, '\nCategory:', item.category, '\nSubcat:', item.subcategory)
     db.update(item.__dict__, Query().url == item.url)
 
