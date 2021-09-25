@@ -246,7 +246,9 @@ def scrap_for_links():
         pass
     main_categories = []
     for c in driver.find_elements_by_xpath(xpaths['categories']):
-        main_categories.append(c.get_attribute('href'))
+        url = c.get_attribute('href')
+        if '/mujer/' in url:
+            main_categories.append(url)
     get_network = 'var performance = window.performance || window.mozPerformance || window.msPerformance || window.webkitPerformance || {}; var network = performance.getEntries() || {}; return network;'
     endpoints.clear()
     news = ''
@@ -325,7 +327,8 @@ class APICrawler:
                     for media in product['xmedia']:
                         color = []
                         for i in media['xmediaItems'][0]['medias']:
-                            color.append(f'https://static.bershka.net/4/photos2/{media["path"]}/{i["idMedia"]}3.jpg?ts={i["timestamp"]}')
+                            if not '_2_6_' in i['idMedia']:
+                                color.append(f'https://static.bershka.net/4/photos2/{media["path"]}/{i["idMedia"]}3.jpg?ts={i["timestamp"]}')
                         optional_images.append(color)
                     image = ''
                     for color in optional_images:
