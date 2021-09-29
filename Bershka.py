@@ -271,7 +271,7 @@ def scrap_for_links():
     settings[brand]['endpoints'] = endpoints
     settings[brand]['endpoint'] = news if news else endpoints[0][1]
     with open('./Files/Settings.json','w') as s:
-        s.write(str(settings))
+        s.write(str(settings).replace("'",'"'))
 
 
 class APICrawler:

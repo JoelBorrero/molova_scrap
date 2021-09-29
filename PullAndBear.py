@@ -1,15 +1,18 @@
+import ast
+import pytz
+import requests
 from time import sleep
-from Database import Database
+from datetime import datetime
 from selenium import webdriver
-from Item import Item
-from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
-from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+from Item import Item
+from Database import Database
 
 brand = 'Pull & Bear'
 db = Database(brand)
+tz = pytz.timezone('America/Bogota')
 xpaths={
     'categories':'.//ul[@class="product-categories"]/li[not(contains(@class,"has-subitems") or contains(@class,"hidden"))]/a|.//ul[@class="product-categories"]/li/ul/li[not(contains(@class,"hidden"))]/a',
     'categoriesSale':'.//ul[@class="product-categories"]/li[contains(@class,"sale")]/ul/li/a',
@@ -31,6 +34,12 @@ xpaths={
     'sizesTags':'.//div[@class="c-product-info--size"]/div/div/div[@class="product-card-size-selector--dropdown-sizes"]/div',
     'subCats':'.//div[starts-with(@class,"carrousel-filters")]/div/div/div/div',
     'subCats2':'.//div[@class="category-badges-list"]/button[not(@value="Ver todo")][span]'}
+try:
+    with open('./Files/Settings.json','r') as settings:
+        endpoints = ast.literal_eval(settings.read())[brand]['endpoints']
+except:
+    endpoints = []
+
 
 class ScrapPullAndBear:
     def __init__(self):
@@ -39,7 +48,7 @@ class ScrapPullAndBear:
         self.driver.set_page_load_timeout(30)
         self.driver.maximize_window()
         self.gender = 'Mujer'
-        self.scrapGender('https://www.pullandbear.com/co/mujer-c1030204557.html')
+        self.scrapGender('https://www.pullandbear.com/co/mujer-n6417')
         self.driver.quit()
         
     def scrapGender(self, url):
@@ -197,6 +206,142 @@ class ScrapPullAndBear:
            print("Item saltado:",e)
         self.driver.close()
         self.driver.switch_to.window(self.driver.window_handles[0])
+
+def scrap_for_links():
+    driver = webdriver.Chrome('./chromedriver')
+    driver.set_page_load_timeout(30)
+    driver.maximize_window()
+    driver.get('https://www.pullandbear.com/co/mujer-n6417')
+    sleep(2)
+    try:
+        driver.find_element_by_xpath('.//button[@class="onetrust-close-btn-handler banner-close-button ot-close-icon"]').click()
+    except:
+        print('Something not dismissed')
+    endpoints.clear()
+    categories = []
+    for i in driver.find_elements_by_xpath(xpaths['categories']):
+        categories.append(i.get_attribute('href'))
+    look_network = 'var performance = window.performance || window.mozPerformance || window.msPerformance || window.webkitPerformance || {}; var network = performance.getEntries() || {}; return network;'
+    new = ''
+    for category in categories:
+        if 'mujer' in category:
+            try:
+                driver.get(category)
+                endpoint = ''
+                timeout = 1
+                while not endpoint and timeout < 5:
+                    sleep(1)
+                    netData = driver.execute_script(look_network)
+                    for i in netData:
+                        if '/product?language' in i['name']:
+                            endpoint = i['name'].replace('showProducts=false', 'showProducts=true')
+                            if not endpoint in str(endpoints):
+                                endpoints.append([category, endpoint])
+                                if 'novedades' in category:
+                                    new = endpoint
+                    if not endpoint:
+                        timeout += 1
+            except Exception as e:
+                print(e)
+    driver.quit()
+    settings = ast.literal_eval(open('./Files/Settings.json','r').read())
+    settings[brand]['endpoints'] = endpoints
+    settings[brand]['endpoint'] = new if new else endpoints[0][1]
+    with open('./Files/Settings.json','w') as s:
+        s.write(str(settings).replace("'",'"'))
+
+
+class APICrawler:
+    def __init__(self, endpoints=endpoints):
+        session = requests.session()
+        headers = {
+            'accept': '*/*',
+            'accept-encoding': 'gzip, deflate, br',
+            'accept-language': 'en-US,en;q=0.9,es-US;q=0.8,es;q=0.7',
+            'content-type': 'application/json',
+            'referer': 'https://www.pullandbear.com/',
+            'sec-ch-ua': '"Google Chrome";v="93", " Not;A Brand";v="99", "Chromium";v="93"',
+            'sec-ch-ua-mobile': '?0',
+            'sec-ch-ua-platform': '"macOS"',
+            'sec-fetch-dest': 'empty',
+            'sec-fetch-mode': 'cors',
+            'sec-fetch-site': 'same-origin',
+            'user-agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/93.0.4577.82 Safari/537.36'}
+        session.headers.update(headers)
+        # image_formats = ('image/png', 'image/jpeg', 'image/jpg')
+        filename = './Files/LogsPULL.txt'
+        with open(filename, 'w') as logs:
+            logs.write(f'··········{datetime.now(tz).month} - {datetime.now(tz).day}··········\n')
+        for endpoint in endpoints:
+            products = session.get(endpoint[1]).json()['products']
+            logs = open(filename, 'a')
+            logs.write(f'{datetime.now(tz).hour}:{datetime.now(tz).minute}   -   {len(products)} productos  -  {endpoint[0]}\n')
+            logs.close()
+            for product in products:
+                logs = open(filename, 'a')
+                try:
+                    name = product['name']
+                    prod_id = product['id']
+                    category = product['relatedCategories'][0]['name']
+                    product = product['bundleProductSummaries'][0]['detail']
+                    description = product['description'] if product['description'] else product['longDescription']
+                    ref = product['displayReference']
+                    subcategory = product['subfamilyInfo']['subFamilyName']
+                    url = f'https://www.bershka.com/co/{name.lower().replace(" ","-")}-c0p{prod_id}.html'
+                    colors, all_images, all_sizes = [], [], []
+                    for color in product['colors']:
+                        colors.append(f'https://static.bershka.net/4/photos2{color["image"]["url"]}_2_4_5.jpg?t={color["image"]["timestamp"]}')
+                        sizes = []
+                        for size in color['sizes']:
+                            stock = '' if size['visibilityValue'] == 'SHOW' else '(AGOTADO)'
+                            sizes.append(size['name'] + stock)
+                        all_sizes.append(sizes)
+                    price_now = [int(product['colors'][0]['sizes'][0]['price']) / 100]
+                    try:
+                        price_before = int(product['colors'][0]['sizes'][0]['oldPrice']) / 100
+                    except TypeError:
+                        price_before = price_now[0]
+
+                    item = Item(brand,name,ref,description,price_before,price_now,0,all_images,url,all_sizes,colors,category,category,subcategory,subcategory,False,'Mujer')
+                    optional_images = []
+                    for media in product['xmedia']:
+                        color = []
+                        for i in media['xmediaItems'][0]['medias']:
+                            if not '_2_6_' in i['idMedia']:
+                                color.append(f'https://static.bershka.net/4/photos2/{media["path"]}/{i["idMedia"]}3.jpg?ts={i["timestamp"]}')
+                        optional_images.append(color)
+                    image = ''
+                    for color in optional_images:
+                        for i in color:
+                            if not image:
+                                r = session.head(i)
+                                if r.headers["content-type"] in image_formats:
+                                    image = i
+                                else:
+                                    color.remove(i)
+                    found = db.contains(url, image,sync=True)
+                    if found:
+                        item.allImages = found['allImages']
+                    else:
+                        for color in optional_images:
+                            images = []
+                            for image in color:
+                                if len(optional_images) == 1 or len(images) < 2:
+                                    r = session.head(image)
+                                    if r.headers["content-type"] in image_formats:
+                                        images.append(image)
+                            all_images.append(images)
+                        item.allImages = all_images
+                    db.add(item)
+                    logs.write(f'    + {datetime.now(tz).hour}:{datetime.now(tz).minute}:{datetime.now(tz).second}   -   {name}\n')
+                except Exception as e:
+                    print(e)
+                    logs.write(f'X {datetime.now(tz).hour}:{datetime.now(tz).minute}:{datetime.now(tz).second}   -   {e}\n')
+                logs.close()
+            headers = session.headers
+            sleep(randint(30, 120))
+            session = requests.session()
+            session.headers.update(headers)
 
 # Main Code
 # ScrapPullAndBear()
