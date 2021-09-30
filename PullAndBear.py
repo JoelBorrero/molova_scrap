@@ -2,6 +2,7 @@ import ast
 import pytz
 import requests
 from time import sleep
+from random import randint
 from datetime import datetime
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
@@ -234,11 +235,11 @@ def scrap_for_links():
                     netData = driver.execute_script(look_network)
                     for i in netData:
                         if '/product?language' in i['name']:
-                            endpoint = i['name'].replace('showProducts=false', 'showProducts=true')
+                            endpoint = i['name']
                             if not endpoint in str(endpoints):
                                 endpoints.append([category, endpoint])
                                 if 'novedades' in category:
-                                    new = endpoint
+                                    new = endpoint.replace('showProducts=false', 'showProducts=true')
                     if not endpoint:
                         timeout += 1
             except Exception as e:
@@ -268,76 +269,90 @@ class APICrawler:
             'sec-fetch-site': 'same-origin',
             'user-agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/93.0.4577.82 Safari/537.36'}
         session.headers.update(headers)
-        # image_formats = ('image/png', 'image/jpeg', 'image/jpg')
+        image_formats = ('image/png', 'image/jpeg', 'image/jpg')
         filename = './Files/LogsPULL.txt'
         with open(filename, 'w') as logs:
             logs.write(f'··········{datetime.now(tz).month} - {datetime.now(tz).day}··········\n')
+        pageSize = 25
         for endpoint in endpoints:
-            products = session.get(endpoint[1]).json()['products']
-            logs = open(filename, 'a')
-            logs.write(f'{datetime.now(tz).hour}:{datetime.now(tz).minute}   -   {len(products)} productos  -  {endpoint[0]}\n')
-            logs.close()
-            for product in products:
-                logs = open(filename, 'a')
-                try:
-                    name = product['name']
-                    prod_id = product['id']
-                    category = product['relatedCategories'][0]['name']
-                    product = product['bundleProductSummaries'][0]['detail']
-                    description = product['description'] if product['description'] else product['longDescription']
-                    ref = product['displayReference']
-                    subcategory = product['subfamilyInfo']['subFamilyName']
-                    url = f'https://www.bershka.com/co/{name.lower().replace(" ","-")}-c0p{prod_id}.html'
-                    colors, all_images, all_sizes = [], [], []
-                    for color in product['colors']:
-                        colors.append(f'https://static.bershka.net/4/photos2{color["image"]["url"]}_2_4_5.jpg?t={color["image"]["timestamp"]}')
-                        sizes = []
-                        for size in color['sizes']:
-                            stock = '' if size['visibilityValue'] == 'SHOW' else '(AGOTADO)'
-                            sizes.append(size['name'] + stock)
-                        all_sizes.append(sizes)
-                    price_now = [int(product['colors'][0]['sizes'][0]['price']) / 100]
-                    try:
-                        price_before = int(product['colors'][0]['sizes'][0]['oldPrice']) / 100
-                    except TypeError:
-                        price_before = price_now[0]
-
-                    item = Item(brand,name,ref,description,price_before,price_now,0,all_images,url,all_sizes,colors,category,category,subcategory,subcategory,False,'Mujer')
-                    optional_images = []
-                    for media in product['xmedia']:
-                        color = []
-                        for i in media['xmediaItems'][0]['medias']:
-                            if not '_2_6_' in i['idMedia']:
-                                color.append(f'https://static.bershka.net/4/photos2/{media["path"]}/{i["idMedia"]}3.jpg?ts={i["timestamp"]}')
-                        optional_images.append(color)
-                    image = ''
-                    for color in optional_images:
-                        for i in color:
-                            if not image:
-                                r = session.head(i)
-                                if r.headers["content-type"] in image_formats:
-                                    image = i
+            category_id = endpoint[1][endpoint[1].index('/category/') + 10 : endpoint[1].rindex('/')]
+            response = session.get(endpoint[1]).json()['productIds']
+            with open(filename, 'a') as logs:
+                logs.write(f'{datetime.now(tz).hour}:{datetime.now(tz).minute}   -   {len(response)} productos  -  {endpoint[0]}\n')
+            for page in range(len(response) // pageSize):
+                ids = [id for id in response[page * pageSize : (page + 1) * pageSize]]
+                page_endpoint = f'https://www.pullandbear.com/itxrest/3/catalog/store/25009465/20309430/productsArray?productIds={str(ids)[1:-1].replace(", ", "%2C")}&languageId=-5&categoryId={category_id}&appId=1'
+                products = session.get(page_endpoint).json()['products']
+                for product in products:
+                    with open(filename, 'a') as logs:
+                        try:
+                            if 'productUrl' in product:
+                                name = product['name']
+                                param = f'&pelement={product["bundleProductSummaries"][0]["productUrlParam"]}' if product['bundleProductSummaries'] and 'productUrlParam' in product['bundleProductSummaries'][0] else ''
+                                url = f'https://www.pullandbear.com/co/{product["productUrl"]}?cS={product["mainColorid"]}{param}'
+                                if product['bundleProductSummaries']:
+                                    product = product['bundleProductSummaries'][0]['detail']
                                 else:
-                                    color.remove(i)
-                    found = db.contains(url, image,sync=True)
-                    if found:
-                        item.allImages = found['allImages']
-                    else:
-                        for color in optional_images:
-                            images = []
-                            for image in color:
-                                if len(optional_images) == 1 or len(images) < 2:
-                                    r = session.head(image)
-                                    if r.headers["content-type"] in image_formats:
-                                        images.append(image)
-                            all_images.append(images)
-                        item.allImages = all_images
-                    db.add(item)
-                    logs.write(f'    + {datetime.now(tz).hour}:{datetime.now(tz).minute}:{datetime.now(tz).second}   -   {name}\n')
-                except Exception as e:
-                    print(e)
-                    logs.write(f'X {datetime.now(tz).hour}:{datetime.now(tz).minute}:{datetime.now(tz).second}   -   {e}\n')
-                logs.close()
+                                    product = product['detail']
+                                description = product['description'] if product['description'] else product['longDescription']
+                                ref = product['displayReference']
+                                category = product['familyInfo']['familyName']
+                                subcategory = product['subfamilyInfo']['subFamilyName']
+                                colors, all_images, all_sizes = [], [], []
+                                for color in product['colors']:
+                                    colors.append(f'https://static.pullandbear.net/2/photos/{color["image"]["url"]}_1_1_8.jpg?t={color["image"]["timestamp"]}&imwidth=90')
+                                    sizes = []
+                                    for size in color['sizes']:
+                                        stock = '' if size['visibilityValue'] == 'SHOW' else '(AGOTADO)'
+                                        sizes.append(size['name'] + stock)
+                                    all_sizes.append(sizes)
+                                if not all([all(['(AGOTADO)' in size for size in sizes]) for sizes in all_sizes]):
+                                    if product['xmedia']:
+                                        price_now = [int(product['colors'][0]['sizes'][0]['price']) / 100]
+                                        try:
+                                            price_before = int(product['colors'][0]['sizes'][0]['oldPrice']) / 100#TODO
+                                        except TypeError:
+                                            price_before = price_now[0]
+                                        # optional_images = []
+                                        for media in product['xmedia']:
+                                            images = []
+                                            for i in media['xmediaItems'][0]['medias']:
+                                                if not '_3_1_' in i['idMedia']:
+                                                    images.append(f'https://static.pullandbear.net/2/photos/{media["path"]}/{i["idMedia"]}8.jpg?ts={i["timestamp"]}')
+                                            all_images.append(images)
+                                        item = Item(brand,name,ref,description,price_before,price_now,0,all_images,url,all_sizes,colors,category,category,subcategory,subcategory,'Mujer')
+                                        db.add(item)
+                                        logs.write(f'    + {datetime.now(tz).hour}:{datetime.now(tz).minute}:{datetime.now(tz).second}   -   {name}\n')
+                                else:
+                                    logs.write(f'X {datetime.now(tz).hour}:{datetime.now(tz).minute}:{datetime.now(tz).second}   -   {name} SIN STOCK {url}\n')
+                                # #Optional images
+                                    # image = ''
+                                    # for color in optional_images:
+                                    #     for i in color:
+                                    #         if not image:
+                                    #             r = session.head(i)
+                                    #             if r.headers["content-type"] in image_formats:
+                                    #                 image = i
+                                    #             else:
+                                    #                 color.remove(i)
+                                    # found = db.contains(url, image, sync=True)
+                                    # if found:
+                                    #     item.allImages = found['allImages']
+                                    # else:
+                                    #     for color in optional_images:
+                                    #         images = []
+                                    #         for image in color:
+                                    #             if len(optional_images) == 1 or len(images) < 2:
+                                    #                 r = session.head(image)
+                                    #                 if r.headers["content-type"] in image_formats:
+                                    #                     images.append(image)
+                                    #                 else:
+                                    #                     print(image+'broken')
+                                    #         all_images.append(images)
+                                    #     item.allImages = all_images
+                        except Exception as e:
+                            print(e)
+                            logs.write(f'X {datetime.now(tz).hour}:{datetime.now(tz).minute}:{datetime.now(tz).second}   -   {e}\n')
             headers = session.headers
             sleep(randint(30, 120))
             session = requests.session()

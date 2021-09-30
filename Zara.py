@@ -194,7 +194,7 @@ class ScrapZara:
                 allImages.append(images)
                 colors.append(colorsBtn[c].get_attribute('innerText').replace('Color: ', '').replace('"', '').capitalize())
                 colorsBtn = self.driver.find_elements_by_xpath('.//ul[@class="product-detail-info-color-selector__colors"]/li/button')
-            db.add(Item(brand,name,ref,description,priceBfr,[priceNow],discount,allImages,url,allSizes,colors,self.category,self.originalCategory,self.subcategory,self.originalSubcategory,self.sale, self.gender))
+            db.add(Item(brand,name,ref,description,priceBfr,[priceNow],discount,allImages,url,allSizes,colors,self.category,self.originalCategory,self.subcategory,self.originalSubcategory, self.gender))
         except Exception as e:
             i = 0
             print('Item saltado\n',url,e)
@@ -260,44 +260,44 @@ class APICrawler:
             logs.write(f'··········{datetime.now(tz).month} - {datetime.now(tz).day}··········\n')
         for endpoint in endpoints:
             products = session.get(endpoint[1]).json()['productGroups'][0]['elements']
-            logs = open(filename, 'a')
-            logs.write(f'{datetime.now(tz).hour}:{datetime.now(tz).minute}   -   {len(products)} productos  -  {endpoint[0]}\n')
-            logs.close()
+            with open(filename, 'a') as logs:
+                logs.write(f'{datetime.now(tz).hour}:{datetime.now(tz).minute}   -   {len(products)} productos  -  {endpoint[0]}\n')
             for product in products:
-                logs = open(filename, 'a')
-                try:
-                    # layout = product['layout'] #1G
-                    product = product['commercialComponents'][0]
-                    name = product['name']
-                    description = product['description']
-                    price_before = product['price']/100
+                with open(filename, 'a') as logs:
                     try:
-                        price_now = product['price_discount']#NOT REAL
-                        discount = product['discount']
-                        sale = True
-                    except KeyError:
-                        price_now = price_before
-                        discount = 0
-                        sale = False
-                    url = f'https://www.zara.com/co/es/{product["seo"]["keyword"]}-p{product["seo"]["seoProductId"]}.html'
-                    category = product['familyName']
-                    subcategory = product['subfamilyName']
-                    product = product['detail']
-                    ref = product['displayReference']
-                    colors, all_images, all_sizes = [], [], []
-                    for color in product['colors']:
-                        colors.append(color['name'])
-                        images, sizes = [], []
-                        for image in color['xmedia']:
-                            images.append(f'https://static.zara.net/photos//{image["path"]}/w/563/{image["name"]}.jpg?ts={image["timestamp"]}')
-                        all_images.append(images)
-                    item = Item(brand,name,ref,description,price_before,[price_now],0,all_images,url,all_sizes,colors,category,category,subcategory,subcategory,sale,'Mujer')
-                    db.add(item)
-                    logs.write(f'    + {datetime.now(tz).hour}:{datetime.now(tz).minute}:{datetime.now(tz).second}   -   {name}\n')
-                except Exception as e:
-                    logs.write(f'X {datetime.now(tz).hour}:{datetime.now(tz).minute}:{datetime.now(tz).second}   -   {e}\n')
-                    print(e)
-                logs.close()
+                        # layout = product['layout'] #1G
+                        product = product['commercialComponents'][0]
+                        name = product['name']
+                        description = product['description']
+                        price_before = product['price']/100
+                        try:
+                            price_now = product['price_discount']  # TODO
+                            discount = product['discount']
+                        except KeyError:
+                            price_now = price_before
+                            discount = 0
+                        url = f'https://www.zara.com/co/es/{product["seo"]["keyword"]}-p{product["seo"]["seoProductId"]}.html'
+                        category = product['familyName']
+                        subcategory = product['subfamilyName']
+                        product = product['detail']
+                        ref = product['displayReference']
+                        colors, all_images, all_sizes = [], [], []
+                        for color in product['colors']:
+                            colors.append(color['name'])
+                            images, sizes = [], []
+                            for image in color['xmedia']:
+                                images.append(f'https://static.zara.net/photos//{image["path"]}/w/563/{image["name"]}.jpg?ts={image["timestamp"]}')
+                            all_images.append(images)
+                        # TODO Verify no-stock
+                        # if not all([all(['(AGOTADO)' in size for size in sizes]) for sizes in all_sizes]):
+                        item = Item(brand,name,ref,description,price_before,[price_now],discount,all_images,url,all_sizes,colors,category,category,subcategory,subcategory,'Mujer')
+                        db.add(item)
+                        logs.write(f'    + {datetime.now(tz).hour}:{datetime.now(tz).minute}:{datetime.now(tz).second}   -   {name}\n')
+                        # else:
+                        #     logs.write(f'X {datetime.now(tz).hour}:{datetime.now(tz).minute}:{datetime.now(tz).second}   -   {name} {url} SIN STOCK\n')
+                    except Exception as e:
+                        logs.write(f'X {datetime.now(tz).hour}:{datetime.now(tz).minute}:{datetime.now(tz).second}   -   {e}\n')
+                        print(e)
             headers = session.headers
             sleep(randint(30, 120))
             session = requests.session()

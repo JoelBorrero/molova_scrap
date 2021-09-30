@@ -220,26 +220,7 @@ class ScrapMercedesCampuzano:
             w = skipName[0][skipName[1].index(max(skipName[1]))]
             if not name.startswith(w):
                 name = " ".join([w, name])
-            db.add(
-                Item(
-                    brand,
-                    name,
-                    ref,
-                    description,
-                    priceBfr,
-                    priceNow,
-                    discount,
-                    allImages,
-                    url,
-                    allSizes,
-                    colors,
-                    self.category,
-                    self.originalCategory,
-                    self.subcategory,
-                    self.originalSubcategory,
-                    self.sale,
-                    self.gender,
-                ))
+            db.add(Item(brand, name, ref, description, priceBfr, priceNow, discount, allImages, url, allSizes, colors, self.category, self.originalCategory, self.subcategory, self.originalSubcategory, self.gender))
         except Exception as e:
             print("Item saltado", url)
             print(e)

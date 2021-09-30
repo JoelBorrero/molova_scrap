@@ -56,7 +56,7 @@ def merge(databases = [bDb, mDb, zDb, pDb, sDb, mngDb]):
                             ref = i['ref']
                         except:
                             ref = ''
-                        db.add(Item(i['brand'], i['name'],ref,i['description'], i['priceBefore'], i['allPricesNow'], i['discount'], i['allImages'], i['url'], i['allSizes'], i['colors'], i['category'], i['originalCategory'], i['subcategory'], i['originalSubcategory'], i['sale'], i['gender']), sync=True)
+                        db.add(Item(i['brand'], i['name'],ref,i['description'], i['priceBefore'], i['allPricesNow'], i['discount'], i['allImages'], i['url'], i['allSizes'], i['colors'], i['category'], i['originalCategory'], i['subcategory'], i['originalSubcategory'], i['gender']), sync=True)
                         bar.update()
                 except Exception as e:
                     print(e)
@@ -67,7 +67,7 @@ def merge(databases = [bDb, mDb, zDb, pDb, sDb, mngDb]):
         f.write(str(total_urls))
     # input('\nPresione enter para salir\n')
 
-def scrap(brands = ['PullAndBear', 'Bershka', 'MercedesCampuzano']):
+def scrap(brands = ['MercedesCampuzano']):
     for brand in brands:
         print('>>>>> ',brand,' <<<<<')
         try:
@@ -270,7 +270,6 @@ def scrap(brands = ['PullAndBear', 'Bershka', 'MercedesCampuzano']):
                     category,
                     category,
                     category,
-                    False,
                     gender,
                     crawling=True,
                 )
@@ -318,9 +317,9 @@ def jsonToBody(json):
 
 def post(databases = [mDb, pDb, bDb, zDb, mngDb, sDb], crawling=False):
     if crawling:
-        databases = databases[2:]
+        databases = databases[1:]
     else:
-        databases = databases[:2]
+        databases = databases[:1]
     total_items = 0
     for d in databases:
         total_items += len(d.getAllUrls())
@@ -415,7 +414,7 @@ def sync(brand=''):
                     #     item.pop(pop)
                     # if not type(item['allPricesNow']) == list:
                     #     item['allPricesNow'] = [item['allPricesNow']]
-                    item = Item(item['brand'], item['name'],'ref',item['description'], item['priceBefore'], item['allPricesNow'], item['discount'], item['allImages'], item['url'], item['allSizes'], item['colors'], item['category'], item['originalCategory'], item['subcategory'], item['originalSubcategory'], item['sale'], item['gender'])
+                    item = Item(item['brand'], item['name'],'ref',item['description'], item['priceBefore'], item['allPricesNow'], item['discount'], item['allImages'], item['url'], item['allSizes'], item['colors'], item['category'], item['originalCategory'], item['subcategory'], item['originalSubcategory'], item['gender'])
                     db.add(item, sync=True)
                     index += 1
                     bar.update()

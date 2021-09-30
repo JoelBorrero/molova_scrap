@@ -76,60 +76,44 @@ class APICrawler:
         with open(filename, 'w') as logs:
             logs.write(f'··········{datetime.now(tz).month} - {datetime.now(tz).day}··········\n')
         for endpoint in endpoints:
-            logs = open(filename, 'a')
-            logs.write(f'{datetime.now(tz).hour}:{datetime.now(tz).minute}   -   {endpoint[0]}\n')
-            pageNum = 1
-            try:
-                while pageNum:
-                    response = requests.get(endpoint[1]+str(pageNum))
-                    if response.status_code == 200:
-                        response = response.json()
-                        if response['lastPage'] or pageNum == 5:
-                            pageNum = 0
-                        else:
-                            pageNum += 1
-                        self.category = response['titleh1']
-                        garments = response['groups'][0]['garments']
-                        logs.write(f'    {datetime.now(tz).hour}:{datetime.now(tz).minute}:{datetime.now(tz).second}   -   {len(garments)} products. (Page {pageNum})\n')
-                        for item in garments:
-                            it = garments[item]
-                            allImages, allSizes, colors = [], [], []
-                            for color in it['colors']:
-                                images = []
-                                sizes = []
-                                for image in color['images']:
-                                    images.append(image['img1Src'])
-                                for size in color['sizes']:
-                                    sizes.append(size['label']+('(Agotado)' if size['stock'] == 0 else ''))
-                                allImages.append(images)
-                                allSizes.append(sizes)
-                                colors.append(color['iconUrl'].replace(' ',''))
-                            allImages.reverse()#I don't know why
-                            db.add(
-                                Item(
-                                    brand,
-                                    it['shortDescription'],
-                                    it['garmentId'],
-                                    it['shortDescription'],
-                                    it['price']['crossedOutPrices'],
-                                    [it['price']['salePrice']],
-                                    it['price']['discountRate'],
-                                    allImages,
-                                    'https://shop.mango.com'+it['colors'][0]['linkAnchor'],
-                                    allSizes,
-                                    colors,
-                                    self.category,
-                                    self.category,
-                                    self.category,
-                                    self.category,
-                                    False,
-                                    'Mujer'))
-                            logs.write(f'      + {datetime.now(tz).hour}:{datetime.now(tz).minute}:{datetime.now(tz).second}   -   {it["shortDescription"]}\n')
-                    sleep(randint(30, 120))
-            except Exception as e:
-                print('Error in Mango', e)
-            logs.close()
-        # db.close()
+            with open(filename, 'a') as logs:
+                logs.write(f'{datetime.now(tz).hour}:{datetime.now(tz).minute}   -   {endpoint[0]}\n')
+                pageNum = 1
+                try:
+                    while pageNum:
+                        response = requests.get(endpoint[1]+str(pageNum))
+                        if response.status_code == 200:
+                            response = response.json()
+                            if response['lastPage'] or pageNum == 5:
+                                pageNum = 0
+                            else:
+                                pageNum += 1
+                            category = response['titleh1']
+                            garments = response['groups'][0]['garments']
+                            logs.write(f'    {datetime.now(tz).hour}:{datetime.now(tz).minute}:{datetime.now(tz).second}   -   {len(garments)} products. (Page {pageNum})\n')
+                            for item in garments:
+                                it = garments[item]
+                                all_images, all_sizes, colors = [], [], []
+                                for color in it['colors']:
+                                    images = []
+                                    sizes = []
+                                    for image in color['images']:
+                                        images.append(image['img1Src'])
+                                    for size in color['sizes']:
+                                        sizes.append(size['label']+('(Agotado)' if size['stock'] == 0 else ''))
+                                    all_images.append(images)
+                                    all_sizes.append(sizes)
+                                    colors.append(color['iconUrl'].replace(' ',''))
+                                if not all([all(['(AGOTADO)' in size for size in sizes]) for sizes in all_sizes]):
+                                    all_images.reverse()#I don't know why
+                                    name = it['shortDescription']
+                                    db.add(Item(brand, name, it['garmentId'], name, it['price']['crossedOutPrices'], [it['price']['salePrice']], it['price']['discountRate'], all_images, 'https://shop.mango.com'+it['colors'][0]['linkAnchor'], all_sizes, colors, category, category, category, category, 'Mujer'))
+                                    logs.write(f'      + {datetime.now(tz).hour}:{datetime.now(tz).minute}:{datetime.now(tz).second}   -   {name}\n')
+                                else:
+                                    logs.write(f'X {datetime.now(tz).hour}:{datetime.now(tz).minute}:{datetime.now(tz).second}   -   {name} SIN STOCK\n')
+                        sleep(randint(30, 120))
+                except Exception as e:
+                    print('Error in Mango', e)
 
 
 # ScrapMango()

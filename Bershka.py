@@ -205,27 +205,7 @@ class ScrapBershka:
                     images.append(i.get_attribute('src')) # .replace('/2021/I/','/2021/V/'))
                 allImages.append(images)
                 colors.append(images[0])
-            db.add(
-                Item(
-                    brand,
-                    name,
-                    ref,
-                    description,
-                    priceBfr,
-                    priceNow,
-                    discount,
-                    allImages,
-                    url,
-                    allSizes,
-                    colors,
-                    self.category,
-                    self.originalCategory,
-                    self.subcategory,
-                    self.originalSubcategory,
-                    self.sale,
-                    self.gender,
-                )
-            )
+            db.add(Item(brand, name, ref, description, priceBfr, priceNow, discount, allImages, url, allSizes, colors, self.category, self.originalCategory, self.subcategory, self.originalSubcategory, self.gender))
         except Exception as e:
             print('Item saltado', url)
             print(e)
@@ -316,44 +296,47 @@ class APICrawler:
                             stock = '' if size['visibilityValue'] == 'SHOW' else '(AGOTADO)'
                             sizes.append(size['name'] + stock)
                         all_sizes.append(sizes)
-                    price_now = [int(product['colors'][0]['sizes'][0]['price']) / 100]
-                    try:
-                        price_before = int(product['colors'][0]['sizes'][0]['oldPrice']) / 100
-                    except TypeError:
-                        price_before = price_now[0]
+                    if not all([all(['(AGOTADO)' in size for size in sizes]) for sizes in all_sizes]):
+                        price_now = [int(product['colors'][0]['sizes'][0]['price']) / 100]
+                        try:
+                            price_before = int(product['colors'][0]['sizes'][0]['oldPrice']) / 100
+                        except TypeError:
+                            price_before = price_now[0]
 
-                    item = Item(brand,name,ref,description,price_before,price_now,0,all_images,url,all_sizes,colors,category,category,subcategory,subcategory,False,'Mujer')
-                    optional_images = []
-                    for media in product['xmedia']:
-                        color = []
-                        for i in media['xmediaItems'][0]['medias']:
-                            if not '_2_6_' in i['idMedia']:
-                                color.append(f'https://static.bershka.net/4/photos2/{media["path"]}/{i["idMedia"]}3.jpg?ts={i["timestamp"]}')
-                        optional_images.append(color)
-                    image = ''
-                    for color in optional_images:
-                        for i in color:
-                            if not image:
-                                r = session.head(i)
-                                if r.headers["content-type"] in image_formats:
-                                    image = i
-                                else:
-                                    color.remove(i)
-                    found = db.contains(url, image,sync=True)
-                    if found:
-                        item.allImages = found['allImages']
-                    else:
+                        item = Item(brand,name,ref,description,price_before,price_now,0,all_images,url,all_sizes,colors,category,category,subcategory,subcategory,'Mujer')
+                        optional_images = []
+                        for media in product['xmedia']:
+                            color = []
+                            for i in media['xmediaItems'][0]['medias']:
+                                if not '_2_6_' in i['idMedia']:
+                                    color.append(f'https://static.bershka.net/4/photos2/{media["path"]}/{i["idMedia"]}3.jpg?ts={i["timestamp"]}')
+                            optional_images.append(color)
+                        image = ''
                         for color in optional_images:
-                            images = []
-                            for image in color:
-                                if len(optional_images) == 1 or len(images) < 2:
-                                    r = session.head(image)
+                            for i in color:
+                                if not image:
+                                    r = session.head(i)
                                     if r.headers["content-type"] in image_formats:
-                                        images.append(image)
-                            all_images.append(images)
-                        item.allImages = all_images
-                    db.add(item)
-                    logs.write(f'    + {datetime.now(tz).hour}:{datetime.now(tz).minute}:{datetime.now(tz).second}   -   {name}\n')
+                                        image = i
+                                    else:
+                                        color.remove(i)
+                        found = db.contains(url, image,sync=True)
+                        if found:
+                            item.allImages = found['allImages']
+                        else:
+                            for color in optional_images:
+                                images = []
+                                for image in color:
+                                    if len(optional_images) == 1 or len(images) < 2:
+                                        r = session.head(image)
+                                        if r.headers["content-type"] in image_formats:
+                                            images.append(image)
+                                all_images.append(images)
+                            item.allImages = all_images
+                        db.add(item)
+                        logs.write(f'    + {datetime.now(tz).hour}:{datetime.now(tz).minute}:{datetime.now(tz).second}   -   {name}\n')
+                    else:
+                        logs.write(f'X {datetime.now(tz).hour}:{datetime.now(tz).minute}:{datetime.now(tz).second}   -   {name} SIN STOCK\n')
                 except Exception as e:
                     print(e)
                     logs.write(f'X {datetime.now(tz).hour}:{datetime.now(tz).minute}:{datetime.now(tz).second}   -   {e}\n')

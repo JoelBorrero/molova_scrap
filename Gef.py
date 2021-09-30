@@ -140,7 +140,7 @@ class ScrapGef:
                 name = " ".join([w,name])
             if name:
                 self.sale = False
-                self.db.add(Item(brand,name,description,allPricesBfr,allPricesNow,' ',allImages,url,allSizes,colors,self.category,self.category, self.subcategory,self.subcategory,self.sale,self.gender))
+                self.db.add(Item(brand,name,description,allPricesBfr,allPricesNow,' ',allImages,url,allSizes,colors,self.category,self.category, self.subcategory,self.subcategory,self.gender))
             else:
                 print("Hubo un error")
         except Exception as e:

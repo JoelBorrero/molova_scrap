@@ -13,7 +13,7 @@ def select_db():
 def verify(id):
     item = db.get(doc_id=id)
     print('Before\nName:', item['name'], '\nCategory:', item['category'], '\nSubcat:', item['subcategory'])
-    item = Item(item['brand'],item['name'],'ref',item['description'],item['priceBefore'],item['allPricesNow'],item['discount'],item['allImages'],item['url'],item['allSizes'],item['colors'],item['category'],item['originalCategory'],item['subcategory'],item['originalSubcategory'],item['sale'],item['gender'])   
+    item = Item(item['brand'],item['name'],'ref',item['description'],item['priceBefore'],item['allPricesNow'],item['discount'],item['allImages'],item['url'],item['allSizes'],item['colors'],item['category'],item['originalCategory'],item['subcategory'],item['originalSubcategory'],item['gender'])   
     print('\nNow\nName:', item.name, '\nCategory:', item.category, '\nSubcat:', item.subcategory)
     db.update(item.__dict__, Query().url == item.url)
 

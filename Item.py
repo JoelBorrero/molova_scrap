@@ -3,7 +3,7 @@ import ast
 import json
 
 class Item:
-    def __init__(self,brand,name,ref,description,priceBefore,allPricesNow,discount,allImages,url,allSizes,colors,category,originalCategory,subcategory,originalSubcategory,sale,gender,crawling=False):
+    def __init__(self,brand,name,ref,description,priceBefore,allPricesNow,discount,allImages,url,allSizes,colors,category,originalCategory,subcategory,originalSubcategory,gender,crawling=False):
         self.brand = brand
         if not name:
             name = ' '
@@ -381,4 +381,4 @@ def toInt(s):
         return s
 
 def from_dict(data):
-    return Item(data['brand'],data['name'],data['description'],data['priceBefore'],data['allPricesNow'],data['discount'],data['allImages'],data['url'],data['allSizes'],data['colors'],data['category'],data['originalCategory'],data['subcategory'],data['originalSubcategory'],data['sale'],data['gender'])   
+    return Item(data['brand'],data['name'],data['description'],data['priceBefore'],data['allPricesNow'],data['discount'],data['allImages'],data['url'],data['allSizes'],data['colors'],data['category'],data['originalCategory'],data['subcategory'],data['originalSubcategory'],data['gender'])   

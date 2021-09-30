@@ -155,6 +155,5 @@ class ItemsSpider(scrapy.Spider):
             response.xpath(xpaths[brand]['category']).get(),
             response.xpath(xpaths[brand]['subCat']).get(),
             response.xpath(xpaths[brand]['subCat']).get(),
-            False,
             gender,
             crawling=True)'''
