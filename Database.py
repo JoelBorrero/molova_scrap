@@ -44,7 +44,10 @@ class Database:
             it = self.contains(item["url"], str(item["allImages"]), sync)
             if all([all(['(AGOTADO)' in size for size in sizes]) for sizes in item['allSizes']]):
                 self.delete(item['url'])
-                return self.broken.insert({'url': item['url']})
+                try:
+                    return self.broken.insert({'url': item['url']})
+                except:
+                    return
             if it:  # Update it
                 if all([all(['(AGOTADO)' in size for size in sizes]) for sizes in it['allSizes']]):
                     self.delete(it['url'])

@@ -53,7 +53,7 @@ class Catcher:
         for i,j in enumerate(self.df):
             self.df[j].to_excel(self.writer,j, index=False)
         self.writer.save()
-        # sync()
+        sync()
         self.check()
 
     def update_headers(self):
