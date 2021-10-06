@@ -158,7 +158,7 @@ class ScrapZara:
                 sizes = []
                 for t in self.driver.find_elements_by_xpath(xpaths['sizesTags']):
                     if 'disabled' in t.get_attribute('class'):
-                        sizes.append('{}(Agotado)'.format(t.find_element_by_xpath('./div/div/span').get_attribute('innerText')))
+                        sizes.append('{}(AGOTADO)'.format(t.find_element_by_xpath('./div/div/span').get_attribute('innerText')))
                     else:
                         sizes.append(t.find_element_by_xpath('./div/div/span').get_attribute('innerText'))
                 allSizes.append(sizes)
@@ -178,7 +178,7 @@ class ScrapZara:
                     sleep(0.1)
                 for t in self.driver.find_elements_by_xpath('.//ul[contains(@id,"product-size-selector-product-detail-info")]/li'):
                     if 'disabled' in t.get_attribute('class'):
-                        sizes.append('{}(Agotado)'.format(t.find_element_by_xpath('./div/div/span').get_attribute('innerText')))
+                        sizes.append('{}(AGOTADO)'.format(t.find_element_by_xpath('./div/div/span').get_attribute('innerText')))
                     else:
                         sizes.append(t.find_element_by_xpath('./div/div/span').get_attribute('innerText'))
                 allSizes.append(sizes)

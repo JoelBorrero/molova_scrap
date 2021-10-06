@@ -166,7 +166,7 @@ class ScrapBershka:
                             sizes.append(f'{s.get_attribute("innerText")}(Próximamente)')
                         except:
                             if "is-disabled" in s.get_attribute("class"):
-                                sizes.append(f'{s.get_attribute("innerText")}(Agotado)')
+                                sizes.append(f'{s.get_attribute("innerText")}(AGOTADO)')
                             else:
                                 sizes.append(s.get_attribute('innerText'))
                     if not sizes:
@@ -191,7 +191,7 @@ class ScrapBershka:
                     except:
                         if 'is-disabled' in s.get_attribute('class'):
                             sizes.append(
-                                f'{s.get_attribute("innerText")}(Agotado)'
+                                f'{s.get_attribute("innerText")}(AGOTADO)'
                             )
                         else:
                             sizes.append(s.get_attribute('innerText'))
@@ -296,47 +296,47 @@ class APICrawler:
                             stock = '' if size['visibilityValue'] == 'SHOW' else '(AGOTADO)'
                             sizes.append(size['name'] + stock)
                         all_sizes.append(sizes)
-                    if not all([all(['(AGOTADO)' in size for size in sizes]) for sizes in all_sizes]):
-                        price_now = [int(product['colors'][0]['sizes'][0]['price']) / 100]
-                        try:
-                            price_before = int(product['colors'][0]['sizes'][0]['oldPrice']) / 100
-                        except TypeError:
-                            price_before = price_now[0]
+                    # if not all([all(['(AGOTADO)' in size for size in sizes]) for sizes in all_sizes]):
+                    price_now = [int(product['colors'][0]['sizes'][0]['price']) / 100]
+                    try:
+                        price_before = int(product['colors'][0]['sizes'][0]['oldPrice']) / 100
+                    except TypeError:
+                        price_before = price_now[0]
 
-                        item = Item(brand,name,ref,description,price_before,price_now,0,all_images,url,all_sizes,colors,category,category,subcategory,subcategory,'Mujer')
-                        optional_images = []
-                        for media in product['xmedia']:
-                            color = []
-                            for i in media['xmediaItems'][0]['medias']:
-                                if not '_2_6_' in i['idMedia']:
-                                    color.append(f'https://static.bershka.net/4/photos2/{media["path"]}/{i["idMedia"]}3.jpg?ts={i["timestamp"]}')
-                            optional_images.append(color)
-                        image = ''
-                        for color in optional_images:
-                            for i in color:
-                                if not image:
-                                    r = session.head(i)
-                                    if r.headers["content-type"] in image_formats:
-                                        image = i
-                                    else:
-                                        color.remove(i)
-                        found = db.contains(url, image,sync=True)
-                        if found:
-                            item.allImages = found['allImages']
-                        else:
-                            for color in optional_images:
-                                images = []
-                                for image in color:
-                                    if len(optional_images) == 1 or len(images) < 2:
-                                        r = session.head(image)
-                                        if r.headers["content-type"] in image_formats:
-                                            images.append(image)
-                                all_images.append(images)
-                            item.allImages = all_images
-                        db.add(item)
-                        logs.write(f'    + {datetime.now(tz).hour}:{datetime.now(tz).minute}:{datetime.now(tz).second}   -   {name}\n')
+                    item = Item(brand,name,ref,description,price_before,price_now,0,all_images,url,all_sizes,colors,category,category,subcategory,subcategory,'Mujer')
+                    optional_images = []
+                    for media in product['xmedia']:
+                        color = []
+                        for i in media['xmediaItems'][0]['medias']:
+                            if not '_2_6_' in i['idMedia']:
+                                color.append(f'https://static.bershka.net/4/photos2/{media["path"]}/{i["idMedia"]}3.jpg?ts={i["timestamp"]}')
+                        optional_images.append(color)
+                    image = ''
+                    for color in optional_images:
+                        for i in color:
+                            if not image:
+                                r = session.head(i)
+                                if r.headers["content-type"] in image_formats:
+                                    image = i
+                                else:
+                                    color.remove(i)
+                    found = db.contains(url, image,sync=True)
+                    if found:
+                        item.allImages = found['allImages']
                     else:
-                        logs.write(f'X {datetime.now(tz).hour}:{datetime.now(tz).minute}:{datetime.now(tz).second}   -   {name} SIN STOCK\n')
+                        for color in optional_images:
+                            images = []
+                            for image in color:
+                                if len(optional_images) == 1 or len(images) < 2:
+                                    r = session.head(image)
+                                    if r.headers["content-type"] in image_formats:
+                                        images.append(image)
+                            all_images.append(images)
+                        item.allImages = all_images
+                    db.add(item)
+                    logs.write(f'    + {datetime.now(tz).hour}:{datetime.now(tz).minute}:{datetime.now(tz).second}   -   {name}\n')
+                    # else:
+                    #     logs.write(f'X {datetime.now(tz).hour}:{datetime.now(tz).minute}:{datetime.now(tz).second}   -   {name} SIN STOCK\n')
                 except Exception as e:
                     print(e)
                     logs.write(f'X {datetime.now(tz).hour}:{datetime.now(tz).minute}:{datetime.now(tz).second}   -   {e}\n')

@@ -1,5 +1,9 @@
 chromedriver
 Private.py
 Database/
-Files/Logs*
+Files/LogsBERSHKA.txt
+Files/LogsMNG.txt
+Files/LogsPULL.txt
+Files/LogsSTR.txt
+Files/LogsZARA.txt
 Files/Catcher.xlsx

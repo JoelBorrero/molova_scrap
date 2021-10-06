@@ -1275,6 +1275,7 @@
 				["tenis", "tennis", "deportivas", "deportivos"],
 				["oxford", "clásico", "clasico", "zuecos"],
 				[
+					"alpargata",
 					"sandalia",
 					"sandalias",
 					"trespuntada",
@@ -1392,9 +1393,11 @@
 				["sport", "sporty"]
 			],
 			[
-				["tenis", "tennis", "deportivas", "bamba", "zapatilla", "zapatillas"],
+				["bamba", "deportivas", "deportivo", "tenis", "tennis", "zapatilla", "zapatillas"],
 				["oxford", "clásico", "clasico", "zuecos"],
 				[
+					"alpargata",
+					"cuña",
 					"sandalia",
 					"sandalias",
 					"trespuntada",
@@ -1403,8 +1406,8 @@
 					"spadrillas"
 				],
 				["baletas", "bailarina"],
-				["tacones", "tacón"],
-				["bota", "botas", "botin", "botínes"]
+				["tacon", "tacones", "tacón"],
+				["bota", "botas", "botin", "botín", "botínes"]
 			],
 			[
 				[

@@ -339,41 +339,41 @@ class APICrawler:
                                 stock = '(AGOTADO)'
                             sizes.append(f'{size["name"]} {stock}')
                         all_sizes.append(sizes)
-                    if not all([all(['(AGOTADO)' in size for size in sizes]) for sizes in all_sizes]):
-                        allImages = []
-                        item = Item(brand,name,ref,description,price_bfr,[price_now],0,allImages,url,all_sizes,colors,category,category,subcategory,subcategory,'Mujer')
-                        optional_images = []
-                        for media in product['xmedia']:
-                            color = []
-                            for i in media['xmediaItems'][0]['medias']:
-                                color.append(f'https://static.e-stradivarius.net/5/photos3{media["path"]}/{i["idMedia"]}2.jpg?t={i["timestamp"]}')
-                            optional_images.append(color)
-                        image = ''
-                        for color in optional_images:
-                            for i in color:
-                                if not image:
-                                    r = session.head(i)
-                                    if r.headers["content-type"] in image_formats:
-                                        image = i
-                                    else:
-                                        color.remove(i)
-                        found = db.contains(url, image,sync=True)
-                        if found:
-                            item.allImages = found['allImages']
-                        else:
-                            for color in optional_images:
-                                images = []
-                                for image in color:
-                                    if len(optional_images) == 1 or len(images) < 2:
-                                        r = session.head(image)
-                                        if r.headers["content-type"] in image_formats:
-                                            images.append(image)
-                                allImages.append(images)
-                            item.allImages = allImages
-                        db.add(item)
-                        logs.write(f'    + {datetime.now(tz).hour}:{datetime.now(tz).minute}:{datetime.now(tz).second}   -   {name}\n')
+                    # if not all([all(['(AGOTADO)' in size for size in sizes]) for sizes in all_sizes]):
+                    allImages = []
+                    item = Item(brand,name,ref,description,price_bfr,[price_now],0,allImages,url,all_sizes,colors,category,category,subcategory,subcategory,'Mujer')
+                    optional_images = []
+                    for media in product['xmedia']:
+                        color = []
+                        for i in media['xmediaItems'][0]['medias']:
+                            color.append(f'https://static.e-stradivarius.net/5/photos3{media["path"]}/{i["idMedia"]}2.jpg?t={i["timestamp"]}')
+                        optional_images.append(color)
+                    image = ''
+                    for color in optional_images:
+                        for i in color:
+                            if not image:
+                                r = session.head(i)
+                                if r.headers["content-type"] in image_formats:
+                                    image = i
+                                else:
+                                    color.remove(i)
+                    found = db.contains(url, image,sync=True)
+                    if found:
+                        item.allImages = found['allImages']
                     else:
-                        logs.write(f'X {datetime.now(tz).hour}:{datetime.now(tz).minute}:{datetime.now(tz).second}   -   {name} SIN STOCK\n')
+                        for color in optional_images:
+                            images = []
+                            for image in color:
+                                if len(optional_images) == 1 or len(images) < 2:
+                                    r = session.head(image)
+                                    if r.headers["content-type"] in image_formats:
+                                        images.append(image)
+                            allImages.append(images)
+                        item.allImages = allImages
+                    db.add(item)
+                    logs.write(f'    + {datetime.now(tz).hour}:{datetime.now(tz).minute}:{datetime.now(tz).second}   -   {name}\n')
+                    # else:
+                    #     logs.write(f'X {datetime.now(tz).hour}:{datetime.now(tz).minute}:{datetime.now(tz).second}   -   {name} SIN STOCK\n')
                 except Exception as e:
                     logs.write(f'X {datetime.now(tz).hour}:{datetime.now(tz).minute}:{datetime.now(tz).second}   -   {e}\n')
                     print(e)

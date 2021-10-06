@@ -185,7 +185,7 @@ class ScrapPullAndBear:
                     sizesTags = self.driver.find_elements_by_xpath(xpaths['sizesTags'])
                     for s in sizesTags:
                         if 'disabled' in s.get_attribute('class'):
-                            sizes.append('{}(Agotado)'.format(s.get_attribute('innerText')))
+                            sizes.append('{}(AGOTADO)'.format(s.get_attribute('innerText')))
                         else:
                             sizes.append(s.get_attribute('innerText'))
                     if not sizesTags:
@@ -306,50 +306,24 @@ class APICrawler:
                                         stock = '' if size['visibilityValue'] == 'SHOW' else '(AGOTADO)'
                                         sizes.append(size['name'] + stock)
                                     all_sizes.append(sizes)
-                                if not all([all(['(AGOTADO)' in size for size in sizes]) for sizes in all_sizes]):
-                                    if product['xmedia']:
-                                        price_now = [int(product['colors'][0]['sizes'][0]['price']) / 100]
-                                        try:
-                                            price_before = int(product['colors'][0]['sizes'][0]['oldPrice']) / 100#TODO
-                                        except TypeError:
-                                            price_before = price_now[0]
-                                        # optional_images = []
-                                        for media in product['xmedia']:
-                                            images = []
-                                            for i in media['xmediaItems'][0]['medias']:
-                                                if not '_3_1_' in i['idMedia']:
-                                                    images.append(f'https://static.pullandbear.net/2/photos/{media["path"]}/{i["idMedia"]}8.jpg?ts={i["timestamp"]}')
-                                            all_images.append(images)
-                                        item = Item(brand,name,ref,description,price_before,price_now,0,all_images,url,all_sizes,colors,category,category,subcategory,subcategory,'Mujer')
-                                        db.add(item)
-                                        logs.write(f'    + {datetime.now(tz).hour}:{datetime.now(tz).minute}:{datetime.now(tz).second}   -   {name}\n')
-                                else:
-                                    logs.write(f'X {datetime.now(tz).hour}:{datetime.now(tz).minute}:{datetime.now(tz).second}   -   {name} SIN STOCK {url}\n')
-                                # #Optional images
-                                    # image = ''
-                                    # for color in optional_images:
-                                    #     for i in color:
-                                    #         if not image:
-                                    #             r = session.head(i)
-                                    #             if r.headers["content-type"] in image_formats:
-                                    #                 image = i
-                                    #             else:
-                                    #                 color.remove(i)
-                                    # found = db.contains(url, image, sync=True)
-                                    # if found:
-                                    #     item.allImages = found['allImages']
-                                    # else:
-                                    #     for color in optional_images:
-                                    #         images = []
-                                    #         for image in color:
-                                    #             if len(optional_images) == 1 or len(images) < 2:
-                                    #                 r = session.head(image)
-                                    #                 if r.headers["content-type"] in image_formats:
-                                    #                     images.append(image)
-                                    #                 else:
-                                    #                     print(image+'broken')
-                                    #         all_images.append(images)
-                                    #     item.allImages = all_images
+                                # if not all([all(['(AGOTADO)' in size for size in sizes]) for sizes in all_sizes]):
+                                if product['xmedia']:
+                                    price_now = [int(product['colors'][0]['sizes'][0]['price']) / 100]
+                                    try:
+                                        price_before = int(product['colors'][0]['sizes'][0]['oldPrice']) / 100#TODO
+                                    except TypeError:
+                                        price_before = price_now[0]
+                                    for media in product['xmedia']:
+                                        images = []
+                                        for i in media['xmediaItems'][0]['medias']:
+                                            if not '_3_1_' in i['idMedia']:
+                                                images.append(f'https://static.pullandbear.net/2/photos/{media["path"]}/{i["idMedia"]}8.jpg?ts={i["timestamp"]}')
+                                        all_images.append(images)
+                                    item = Item(brand,name,ref,description,price_before,price_now,0,all_images,url,all_sizes,colors,category,category,subcategory,subcategory,'Mujer')
+                                    db.add(item)
+                                    logs.write(f'    + {datetime.now(tz).hour}:{datetime.now(tz).minute}:{datetime.now(tz).second}   -   {name}\n')
+                                # else:
+                                    # logs.write(f'X {datetime.now(tz).hour}:{datetime.now(tz).minute}:{datetime.now(tz).second}   -   {name} SIN STOCK {url}\n')
                         except Exception as e:
                             print(e)
                             logs.write(f'X {datetime.now(tz).hour}:{datetime.now(tz).minute}:{datetime.now(tz).second}   -   {e}\n')

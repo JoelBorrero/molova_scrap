@@ -1,3 +1,4 @@
+import ast
 from tinydb import TinyDB, Query, where
 from Item import toInt
 
@@ -11,8 +12,14 @@ class Database:
         self.q = Query()
 
     def add(self, item, debug=False, sync=False):
-        if not type(item) is dict:
+        try:
+            item['allImages']
+        except:
+
+        # if type(item) is not dict:
             item = item.__dict__
+        for key in ['allImages', 'allSizes', 'colors']:
+            item[key] = ast.literal_eval(str(item[key]))
         img = item['allImages'][0][0]
         if item['allImages'][0]:
             def update():
@@ -35,20 +42,21 @@ class Database:
                             doc[field] = item[field]
                 return transform
             it = self.contains(item["url"], str(item["allImages"]), sync)
-            # TODO broken
+            if all([all(['(AGOTADO)' in size for size in sizes]) for sizes in item['allSizes']]):
+                self.delete(item['url'])
+                return self.broken.insert({'url': item['url']})
             if it:  # Update it
+                if all([all(['(AGOTADO)' in size for size in sizes]) for sizes in it['allSizes']]):
+                    self.delete(it['url'])
+                    return self.broken.insert({'url': it['url']})
                 if item['url'] != it['url']:
                     try:
                         self.broken.insert({'url': it['url']})
                     except:
                         pass
-                if debug:
-                    print('DB:Updating', it.doc_id)
                 self.db.update(update(), doc_ids=[it.doc_id])
                 return int(it.doc_id)
             else:  # Create it
-                if debug:
-                    print('DB:Adding',item["url"])
                 item['url'] = normalyze_url(item['url'])
                 return int(self.db.insert(item))
 
@@ -130,6 +138,8 @@ class Database:
     
 def normalyze_url(url):
     try:
+        if 'pullandbear' in url:
+            return url[:url.index('?cS=')]
         return url[:url.index(".html")+5]
-    except:
+    except ValueError:
         return url

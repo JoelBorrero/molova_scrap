@@ -113,7 +113,7 @@ class ScrapGef:
                 sizesTags = self.driver.find_elements_by_xpath('.//div[@class="color_swatch_list"]/ul[@aria-label="TALLA"]/li/a')
                 for s in sizesTags:
                     if "disabled_enable" in s.find_element_by_xpath("./div").get_attribute("class"):
-                        sizes.append("{}(Agotado)".format(s.find_element_by_xpath("./span").get_attribute("innerText")))
+                        sizes.append("{}(AGOTADO)".format(s.find_element_by_xpath("./span").get_attribute("innerText")))
                     else:
                         sizes.append(s.find_element_by_xpath("./span").get_attribute("innerText"))
                 if len(sizesTags) == 0:

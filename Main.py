@@ -89,7 +89,7 @@ def scrap(brands = ['MercedesCampuzano']):
                 for color in json['colors']:
                     data = {'name': color['name'],'sizes' : [],'imgs' : []}
                     for s in color['sizes']:
-                        a = '' if s['availability'] == 'in_stock' else '(Agotado)'
+                        a = '' if s['availability'] == 'in_stock' else '(AGOTADO)'
                         data['sizes'].append(f'{s["name"]}{a}')
                     for img in color['mainImgs']:
                         data['imgs'].append(
@@ -244,7 +244,7 @@ def scrap(brands = ['MercedesCampuzano']):
                 response.xpath(xpaths[brand]['stock']).getall()]
                 for i in range(len(temp[0])):
                     if xpaths[brand]['hasStock'] in temp[1][i]:
-                        sizes.append('{}(Agotado)'.format(temp[0][i]))
+                        sizes.append('{}(AGOTADO)'.format(temp[0][i]))
                     else:
                         sizes.append(temp[0][i])
                 imgs = response.xpath(xpaths[brand]['imgs']).getall()

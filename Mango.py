@@ -100,17 +100,17 @@ class APICrawler:
                                     for image in color['images']:
                                         images.append(image['img1Src'])
                                     for size in color['sizes']:
-                                        sizes.append(size['label']+('(Agotado)' if size['stock'] == 0 else ''))
+                                        sizes.append(size['label']+('(AGOTADO)' if size['stock'] == 0 else ''))
                                     all_images.append(images)
                                     all_sizes.append(sizes)
                                     colors.append(color['iconUrl'].replace(' ',''))
-                                if not all([all(['(AGOTADO)' in size for size in sizes]) for sizes in all_sizes]):
-                                    all_images.reverse()#I don't know why
-                                    name = it['shortDescription']
-                                    db.add(Item(brand, name, it['garmentId'], name, it['price']['crossedOutPrices'], [it['price']['salePrice']], it['price']['discountRate'], all_images, 'https://shop.mango.com'+it['colors'][0]['linkAnchor'], all_sizes, colors, category, category, category, category, 'Mujer'))
-                                    logs.write(f'      + {datetime.now(tz).hour}:{datetime.now(tz).minute}:{datetime.now(tz).second}   -   {name}\n')
-                                else:
-                                    logs.write(f'X {datetime.now(tz).hour}:{datetime.now(tz).minute}:{datetime.now(tz).second}   -   {name} SIN STOCK\n')
+                                # if not all([all(['(AGOTADO)' in size for size in sizes]) for sizes in all_sizes]):
+                                all_images.reverse()#I don't know why
+                                name = it['shortDescription']
+                                db.add(Item(brand, name, it['garmentId'], name, it['price']['crossedOutPrices'], [it['price']['salePrice']], it['price']['discountRate'], all_images, 'https://shop.mango.com'+it['colors'][0]['linkAnchor'], all_sizes, colors, category, category, category, category, 'Mujer'))
+                                logs.write(f'      + {datetime.now(tz).hour}:{datetime.now(tz).minute}:{datetime.now(tz).second}   -   {name}\n')
+                                # else:
+                                #     logs.write(f'X {datetime.now(tz).hour}:{datetime.now(tz).minute}:{datetime.now(tz).second}   -   {name} SIN STOCK\n')
                         sleep(randint(30, 120))
                 except Exception as e:
                     print('Error in Mango', e)

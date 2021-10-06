@@ -132,7 +132,7 @@ class ItemsSpider(scrapy.Spider):
         sizes = []
         for i in range(len(temp[0])):
             if xpaths[brand]['hasStock'] in temp[1][i]:
-                sizes.append('{}(Agotado)'.format(temp[0][i]))
+                sizes.append('{}(AGOTADO)'.format(temp[0][i]))
             else:
                 sizes.append(temp[0][i])
         temp.clear()
