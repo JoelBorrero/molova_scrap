@@ -15,13 +15,10 @@ class Database:
         try:
             item['allImages']
         except:
-
-        # if type(item) is not dict:
             item = item.__dict__
         for key in ['allImages', 'allSizes', 'colors']:
             item[key] = ast.literal_eval(str(item[key]))
-        img = item['allImages'][0][0]
-        if item['allImages'][0]:
+        if item['allImages'] and item['allImages'][0]:
             def update():
                 categories = [
                     "Camisas y Camisetas",
@@ -42,7 +39,7 @@ class Database:
                             doc[field] = item[field]
                 return transform
             it = self.contains(item["url"], str(item["allImages"]), sync)
-            if all([all(['(AGOTADO)' in size for size in sizes]) for sizes in item['allSizes']]):
+            if item['allSizes'] and all([all(['(AGOTADO)' in size for size in sizes]) for sizes in item['allSizes']]):
                 self.delete(item['url'])
                 try:
                     return self.broken.insert({'url': item['url']})

@@ -684,6 +684,7 @@
 			],
 			["sudaderas", "joggers", "chándal", "sport", "legging", "leggings"],
 			[
+				"cosmetiquera",
 				"zapatos",
 				"baletas",
 				"botas",
@@ -699,19 +700,19 @@
 				"shoes",
 				"zapatillas"
 			],
-			["bolsos", "bandoleras", "carteras", "mochilas", "riñoneras"],
+			["bolso", "bolsos", "bandoleras", "carteras", "mochila", "mochilas", "monedero", "riñonera", "riñoneras", "tarjetero"],
 			[
 				"accesorios",
-				"gafas",
 				"bisutería",
+				"bufandas",
+				"calcetines",
 				"cinturones",
 				"correas",
-				"gorros",
-				"fundas",
-				"bufandas",
-				"medias",
 				"decoración",
-				"calcetines",
+				"fundas",
+				"gafas",
+				"gorros",
+				"medias",
 				"socks"
 			]
 		],
@@ -750,7 +751,7 @@
 				"shoes",
 				"zapatillas"
 			],
-			["bolsos", "bandoleras", "carteras", "mochilas", "riñoneras"],
+			["bolso", "bolsos", "bandoleras", "carteras", "cosmetiquera", "mochilas", "riñoneras", "tarjetero"],
 			[
 				"accesorios",
 				"bisuteria",
@@ -801,7 +802,7 @@
 				"shoes",
 				"zapatillas"
 			],
-			["bolsos", "bandoleras", "carteras", "mochilas", "riñoneras"],
+			["bolsos", "bandoleras", "billetera", "carteras", "cosmetiquera", "monedero", "mochilas", "riñoneras"],
 			[
 				"accesorios",
 				"bisuteria",
@@ -906,7 +907,7 @@
 				"shoes",
 				"zapatillas"
 			],
-			["bags", "bolsos", "bandoleras", "carteras", "mochilas", "riñoneras"],
+			["bag", "bags", "bolsos", "bandoleras", "carteras", "mochilas", "riñoneras"],
 			[
 				"accesorios",
 				"belts",
@@ -959,7 +960,7 @@
 				"shoes",
 				"zapatillas"
 			],
-			["bolsos", "bandoleras", "carteras", "mochilas", "riñoneras"],
+			["bolso", "bolsos", "bandoleras", "carteras", "mochilas", "riñoneras"],
 			[
 				"accesorios",
 				"bisuteria",
@@ -1068,30 +1069,95 @@
 			],
 			[
 				[
-					"bolso",
 					"bandolera",
+					"bolso",
 					"cartera",
-					"mochila",
-					"riñonera",
-					"shopper",
+					"clutch",
+					"riñonera"
+				],
+				[
 					"maletin",
 					"maletín",
+					"mochila",
 					"morral"
+				],
+				[
+					"shopper",
+					"tote"
+				],
+				[
+					"billetera",
+					"cosmetiquera",
+					"estuche",
+					"monedero",
+					"tarjetero"
 				]
 			],
 			[
 				[
-					"correa",
-					"gorro",
-					"bufanda",
+					"cadena",
 					"cadenas",
-					"collares",
+					"collar",
+					"collares"
+					],
+				[
+					"brazalete",
+					"pulsera",
+					"pulseras"
+					],
+				[
 					"aretes",
-					"anillos",
+					"pendiente",
+					"pendientes"
+				],
+				[
+					"anillo",
+					"anillos"
+					],
+				[
+					"bandana",
+					"beanie",
+					"boina",
+					"coleta",
+					"coletero",
+					"coleteros",
+					"diadema",
+					"gorra",
+					"gorro",
+					"pañoleta",
+					"pañuelo",
+					"pasadores",
+					"pinza",
+					"pinzas",
+					"sombrero"
+					],
+				[
+					"gafas"
+					],
+				[
+					"bufanda"
+					],
+				[
+					"bañador",
+					"bikini",
+					"braguita",
+					"bralette",
+					"interiores"
+					],
+				[
 					"medias",
+					"tobillera",
 					"tobilleras",
 					"calcetines",
 					"socks"
+				],
+				[
+					"cinturon",
+					"cinturones",
+					"correa",
+					"corset",
+					"fajin",
+					"fajín"
 				]
 			],
 			[[]]
@@ -1178,30 +1244,96 @@
 			],
 			[
 				[
-					"bolso",
 					"bandolera",
+					"bolso",
+					"capazo",
 					"cartera",
-					"mochila",
-					"riñonera",
-					"shopper",
+					"clutch",
+					"riñonera"
+				],
+				[
 					"maletin",
 					"maletín",
+					"mochila",
 					"morral"
+				],
+				[
+					"shopper",
+					"tote"
+				],
+				[
+					"billetera",
+					"cosmetiquera",
+					"estuche",
+					"monedero",
+					"tarjetero"
 				]
 			],
 			[
 				[
-					"correa",
-					"gorro",
-					"bufanda",
-					"cadenas",
-					"collares",
+					"cadena",
+					"colgante",
+					"collar",
+					"collares"
+					],
+				[
+					"brazalete",
+					"pulsera",
+					"pulseras"
+					],
+				[
 					"aretes",
-					"anillos",
+					"pendiente",
+					"pendientes"
+				],
+				[
+					"anillo",
+					"anillos"
+					],
+				[
+					"bandana",
+					"beanie",
+					"boina",
+					"coleta",
+					"coletero",
+					"coleteros",
+					"diadema",
+					"gorra",
+					"gorro",
+					"pañoleta",
+					"pañuelo",
+					"pasadores",
+					"pinza",
+					"pinzas",
+					"sombrero"
+					],
+				[
+					"gafas"
+					],
+				[
+					"bufanda"
+					],
+				[
+					"bañador",
+					"bikini",
+					"braguita",
+					"bralette",
+					"interiores"
+					],
+				[
 					"medias",
+					"tobillera",
 					"tobilleras",
 					"calcetines",
 					"socks"
+				],
+				[
+					"cinturon",
+					"cinturones",
+					"correa",
+					"corset",
+					"fajin",
+					"fajín"
 				]
 			],
 			[[]]
@@ -1290,31 +1422,96 @@
 			],
 			[
 				[
-					"bolso",
 					"bandolera",
+					"bolso",
 					"cartera",
-					"mochila",
-					"riñonera",
-					"shopper",
+					"clutch",
+					"riñonera"
+				],
+				[
 					"maletin",
 					"maletín",
+					"mochila",
 					"morral"
+				],
+				[
+					"shopper",
+					"tote"
+				],
+				[
+					"billetera",
+					"cosmetiquera",
+					"estuche",
+					"cosmetiqueras",
+					"monedero",
+					"tarjetero"
 				]
 			],
 			[
 				[
-					"correa",
-					"gorro",
-					"bufanda",
-					"cadenas",
-					"collares",
+					"cadena",
+					"collar",
+					"collares"
+					],
+				[
+					"brazalete",
+					"pulsera",
+					"pulseras"
+					],
+				[
 					"aretes",
-					"anillos",
+					"pendiente",
+					"pendientes"
+				],
+				[
+					"anillo",
+					"anillos"
+					],
+				[
+					"bamba",
+					"bandana",
+					"beanie",
+					"boina",
+					"coleta",
+					"coletero",
+					"coleteros",
+					"diadema",
+					"gorra",
+					"gorro",
+					"pañoleta",
+					"pañuelo",
+					"pasadores",
+					"pinza",
+					"pinzas",
+					"sombrero"
+					],
+				[
+					"gafas"
+					],
+				[
+					"bufanda"
+					],
+				[
+					"bañador",
+					"bikini",
+					"braguita",
+					"bralette",
+					"interiores"
+					],
+				[
 					"medias",
+					"tobillera",
 					"tobilleras",
 					"calcetines",
-					"socks",
-					"bamba"
+					"socks"
+				],
+				[
+					"cinturon",
+					"cinturones",
+					"correa",
+					"corset",
+					"fajin",
+					"fajín"
 				]
 			],
 			[[]]
@@ -1411,31 +1608,100 @@
 			],
 			[
 				[
-					"bolso",
 					"bandolera",
+					"bolso",
 					"cartera",
-					"mochila",
-					"riñonera",
-					"shopper",
+					"clutch",
+					"riñonera"
+				],
+				[
 					"maletin",
 					"maletín",
+					"mochila",
 					"morral"
+				],
+				[
+					"shopper",
+					"tote"
+				],
+				[
+					"billetera",
+					"cosmetiquera",
+					"estuche",
+					"monedero",
+					"neceser",
+					"portamovil",
+					"tarjetero"
 				]
 			],
 			[
 				[
-					"correa",
-					"gorro",
-					"bufanda",
-					"cadenas",
-					"collares",
+					"cadena",
+					"collar",
+					"collares"
+					],
+				[
+					"brazalete",
+					"pulsera",
+					"pulseras"
+					],
+				[
 					"aretes",
-					"anillos",
-					"tobilleras",
+					"aros",
+					"pendiente",
+					"pendientes"
+				],
+				[
+					"anillo",
+					"anillos"
+					],
+				[
+					"bandana",
+					"beanie",
+					"boina",
+					"cinta",
+					"cintas",
+					"coleta",
+					"coletero",
+					"coleteros",
+					"diadema",
+					"gorra",
+					"gorro",
+					"moños",
+					"pañoleta",
+					"pañuelo",
+					"pasadores",
+					"pinza",
+					"pinzas",
+					"sombrero"
+					],
+				[
+					"gafas"
+					],
+				[
+					"bufanda"
+					],
+				[
+					"bañador",
+					"bikini",
+					"braguita",
+					"bralette",
+					"interiores"
+					],
+				[
 					"medias",
-					"calcetines",
+					"tobillera",
+					"tobilleras",
 					"calcetines",
 					"socks"
+				],
+				[
+					"cinturon",
+					"cinturones",
+					"correa",
+					"corset",
+					"fajin",
+					"fajín"
 				]
 			],
 			[[]]
@@ -1533,34 +1799,119 @@
 			],
 			[
 				[
-					"bag",
-					"bolso",
 					"bandolera",
+					"bag",
+					"backpack",
+					"bolso",
 					"cartera",
-					"mochila",
-					"riñonera",
-					"shopper",
+					"clutch",
+					"libres",
+					"riñonera"
+				],
+				[
 					"maletin",
 					"maletín",
+					"mochila",
 					"morral"
+				],
+				[
+					"shopper",
+					"tote"
+				],
+				[
+					"billetera",
+					"cosmetiquera",
+					"estuche",
+					"monedero",
+					"tarjetero"
 				]
 			],
 			[
 				[
-					"correa",
-					"gorro",
-					"bufanda",
 					"cadena",
 					"cadenas",
+					"chains",
+					"chokers",
 					"collar",
+					"collares",
+					"necklaces"
+					],
+				[
+					"brazalete",
+					"bracelets",
+					"pulsera",
+					"pulseras"
+					],
+				[
 					"aretes",
+					"earrings",
+					"pendiente",
+					"pendientes"
+				],
+				[
 					"anillo",
 					"anillos",
+					"rings"
+					],
+				[
+					"bamba",
+					"bambas",
+					"bandana",
+					"bandanas",
+					"bandannas",
+					"beanie",
+					"boina",
+					"clip",
+					"clips",
+					"coleta",
+					"coletero",
+					"coleteros",
+					"diadema",
+					"diademas",
+					"gorra",
+					"gorro",
+					"grips",
+					"hairclip",
+					"hat",
+					"moñas",
+					"neckerchief",
+					"pañoleta",
+					"pañuelo",
+					"pasadores",
+					"pinza",
+					"pinzas",
+					"scarf",
+					"scrunchies",
+					"sombrero"
+					],
+				[
+					"gafas"
+					],
+				[
+					"bufanda"
+					],
+				[
+					"bañador",
+					"bikini",
+					"braguita",
+					"bralette",
+					"interiores"
+					],
+				[
 					"medias",
+					"tobillera",
 					"tobilleras",
 					"calcetines",
-					"socks",
-					"bamba"
+					"socks"
+				],
+				[
+					"belt",
+					"cinturon",
+					"cinturones",
+					"correa",
+					"corset",
+					"fajin",
+					"fajín"
 				]
 			],
 			[[]]
@@ -1640,30 +1991,106 @@
 			],
 			[
 				[
-					"bolso",
 					"bandolera",
+					"bolsa",
+					"bolso",
 					"cartera",
-					"mochila",
+					"cesta",
+					"clutch",
+					"city",
 					"riñonera",
-					"shopper",
+					"saca"
+				],
+				[
 					"maletin",
 					"maletín",
+					"mochila",
 					"morral"
+				],
+				[
+					"shopper",
+					"tote"
+				],
+				[
+					"billetera",
+					"bowling",
+					"caja",
+					"cosmetiquera",
+					"estuche",
+					"monedero",
+					"porta",
+					"tarjetero"
 				]
 			],
 			[
 				[
-					"correa",
-					"gorro",
-					"bufanda",
+					"cadena",
 					"cadenas",
-					"collares",
+					"choker",
+					"collar",
+					"collares"
+					],
+				[
+					"brazalete",
+					"pulsera",
+					"pulseras"
+					],
+				[
 					"aretes",
-					"anillos",
+					"pendiente",
+					"pendientes",
+					"piercings"
+				],
+				[
+					"anillo",
+					"anillos"
+					],
+				[
+					"bandana",
+					"beanie",
+					"boina",
+					"coleta",
+					"coletero",
+					"coleteros",
+					"diadema",
+					"gorra",
+					"gorro",
+					"pañoleta",
+					"pañuelo",
+					"pasadores",
+					"pinza",
+					"pinzas",
+					"sombrero"
+					],
+				[
+					"gafa",
+					"gafas"
+					],
+				[
+					"bufanda"
+					],
+				[
+					"bañador",
+					"bikini",
+					"braguita",
+					"bralette",
+					"interiores"
+					],
+				[
+					"media",
 					"medias",
+					"tobillera",
 					"tobilleras",
 					"calcetines",
 					"socks"
+				],
+				[
+					"cinturon",
+					"cinturones",
+					"correa",
+					"corset",
+					"fajin",
+					"fajín"
 				]
 			],
 			[[]]
@@ -1678,6 +2105,7 @@
 		[],
 		["socks", "calcetines", "medias"],
 		[],
-		[]
+		[],
+		["tarjetero"]
 	]
 }

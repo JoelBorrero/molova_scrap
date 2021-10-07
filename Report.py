@@ -8,7 +8,7 @@ general = [0,0,0,0,0,0,0,0,0,0]
 category_names = ["Camisas y Camisetas", "Pantalones y Jeans", "Vestidos y Enterizos", "Faldas y Shorts", "Abrigos y Blazers", "Ropa deportiva", "Zapatos", "Bolsos", "Accesorios", "Otros"]
 df = pd.DataFrame({'Categoría':category_names})
 df.to_excel(writer,'Report', index=False)
-for i, brand in [enumerate('Bershka', 'Mango', 'Mercedes Campuzano', 'Pull & Bear', 'Stradivarius', 'Zara')]:
+for i, brand in enumerate(['Bershka', 'Mango', 'Mercedes Campuzano', 'Pull & Bear', 'Stradivarius', 'Zara']):
     db = Database(brand)
     categories = [0,0,0,0,0,0,0,0,0,0]
     for item in db.getAllItems():

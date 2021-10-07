@@ -42,13 +42,13 @@ class Item:
             category = ' '
         self.category = category
         if not originalCategory:
-            originalCategory = category
+            originalCategory = 'category'
         self.originalCategory = originalCategory
         if not subcategory:
             subcategory = category
         self.subcategory = subcategory
         if not originalSubcategory:
-            originalSubcategory = category
+            originalSubcategory = 'subcategory'
         self.originalSubcategory = originalSubcategory
         self.sale = any(p < toInt(priceBefore) for p in self.allPricesNow)
         self.gender = gender
@@ -202,8 +202,12 @@ class Item:
                         if any(s in name for s in categories_list[0]):
                             index = 0
                     elif index == 6:
+                        # If any sock in shoes
                         if any(s in name for s in ['sock', 'socks', 'calcetines']):
                             index = 9
+                    elif index == 8:
+                        if any(s in name for s in categories_list[7]):
+                            index = 7
                     self.category = categories[index]
         if not self.category:
             for i, c in enumerate(subcategories_list):
@@ -217,7 +221,7 @@ class Item:
     def get_subcategory(self, index, subcategories_list):
         sub = self.originalSubcategory.lower().split(' ')
         name = self.name.lower().split(' ')
-        subs = subcategories_list[index] if index < 7 else ''
+        subs = subcategories_list[index] if index < 9 else ''
         if index == 0:
             if any(s in sub for s in subs[0]) and not any(s in sub for s in subs[1]+subs[2]+subs[3]):
                 return 'Camisas'
@@ -307,6 +311,64 @@ class Item:
                 return 'Tacones'
             elif any(s in name for s in subs[2]):
                 return 'Sandalias'
+        elif index == 7:
+            if any(s in sub for s in subs[0]) and not any(s in sub for s in subs[1] + subs[2] + subs[3]):
+                return 'Bolsos'
+            elif any(s in sub for s in subs[1]) and not any(s in sub for s in subs[2] + subs[3]):
+                return 'Morrales'
+            elif any(s in sub for s in subs[2]) and not any(s in sub for s in subs[3]):
+                return 'Totes'
+            elif any(s in sub for s in subs[3]):
+                return 'Monederos'
+            elif any(s in name for s in subs[0]):
+                return 'Bolsos'
+            elif any(s in name for s in subs[1]):
+                return 'Morrales'
+            elif any(s in name for s in subs[2]):
+                return 'Totes'
+            elif any(s in name for s in subs[3]):
+                return 'Monederos'
+        elif index == 8:
+            if any(s in sub for s in subs[0]) and not any(s in sub for s in subs[1] + subs[2] + subs[3] + subs[4] + subs[5] + subs[6] + subs[7] + subs[8] + subs[9]):
+                return 'Collares'
+            elif any(s in sub for s in subs[1]) and not any(s in sub for s in subs[2] + subs[3] + subs[4] + subs[5] + subs[6] + subs[7] + subs[8] + subs[9]):
+                return 'Pulseras'
+            elif any(s in sub for s in subs[2]) and not any(s in sub for s in subs[3] + subs[4] + subs[5] + subs[6] + subs[7] + subs[8] + subs[9]):
+                return 'Aretes'
+            elif any(s in sub for s in subs[3]) and not any(s in sub for s in subs[4] + subs[5] + subs[6] + subs[7] + subs[8] + subs[9]):
+                return 'Anillos'
+            elif any(s in sub for s in subs[4]) and not any(s in sub for s in subs[5] + subs[6] + subs[7] + subs[8] + subs[9]):
+                return 'Cabeza'
+            elif any(s in sub for s in subs[5]) and not any(s in sub for s in subs[6] + subs[7] + subs[8] + subs[9]):
+                return 'Gafas'
+            elif any(s in sub for s in subs[6]) and not any(s in sub for s in subs[7] + subs[8] + subs[9]):
+                return 'Cuello'
+            elif any(s in sub for s in subs[7]) and not any(s in sub for s in subs[8] + subs[9]):
+                return 'Interiores'
+            elif any(s in sub for s in subs[8]) and not any(s in sub for s in subs[9]):
+                return 'Medias'
+            elif any(s in sub for s in subs[9]):
+                return 'Cinturones'
+            elif any(s in name for s in subs[0]):
+                return 'Collares'
+            elif any(s in name for s in subs[1]):
+                return 'Pulseras'
+            elif any(s in name for s in subs[2]):
+                return 'Aretes'
+            elif any(s in name for s in subs[3]):
+                return 'Anillos'
+            elif any(s in name for s in subs[4]):
+                return 'Cabeza'
+            elif any(s in name for s in subs[5]):
+                return 'Gafas'
+            elif any(s in name for s in subs[6]):
+                return 'Cuello'
+            elif any(s in name for s in subs[7]):
+                return 'Interiores'
+            elif any(s in name for s in subs[8]):
+                return 'Medias'
+            elif any(s in name for s in subs[9]):
+                return 'Cinturones'
         return self.category
   
 
