@@ -15,7 +15,7 @@ from Database import Database
 brand = 'Stradivarius'
 db = Database(brand)
 tz = pytz.timezone('America/Bogota')
-xpaths = {
+XPATHS = {
     'categories': './/div[@class="categories-menu "]/div[contains(@class,"items-menu")]/div/a[not(@href="javascript:void(0)")]|.//div[@class="categories-menu "]/div[contains(@class,"items-menu")]/div[./a[@href="javascript:void(0)"]]/following-sibling::div[position()=1]//a',
     'categoriesSale': './/ul[@class="product-categories"]/li/ul/li/a[span[contains(@style,"#f")]]',
     'colorsBtn':'.//div[@class="set-colors-product parent-center-child"]//img[@src]',
@@ -58,8 +58,8 @@ class ScrapStradivarius:
         #     sleep(2)
         # except:
         #     print('No menu open')
-        # main_categories = self.driver.find_elements_by_xpath(xpaths['main_categories'])
-        main_categories = self.driver.find_elements_by_xpath(xpaths['categories'])
+        # main_categories = self.driver.find_elements_by_xpath(XPATHS['main_categories'])
+        main_categories = self.driver.find_elements_by_xpath(XPATHS['categories'])
         categories = [[],[]]
         # for i in range(len(main_categories)):
         #     i=main_categories[i]
@@ -68,7 +68,7 @@ class ScrapStradivarius:
         #         try:
         #             i.click()
         #             sleep(3)
-        #             for c in self.driver.find_elements_by_xpath(xpaths['categories']):
+        #             for c in self.driver.find_elements_by_xpath(XPATHS['categories']):
         #                 if not c.get_attribute('href') in categories[1]:
         #                     categories[0].append(c.get_attribute('innerText'))
         #                     categories[1].append(c.get_attribute('href'))
@@ -77,7 +77,7 @@ class ScrapStradivarius:
         #     else:
         #         categories[0].append(i.text)
         #         categories[1].append(i.find_element_by_xpath('./a').get_attribute('href'))
-        #     main_categories = self.driver.find_elements_by_xpath(xpaths['main_categories'])
+        #     main_categories = self.driver.find_elements_by_xpath(XPATHS['main_categories'])
         for c in main_categories:
             if not 'javascript:void' in c.get_attribute('href'):
                 categories[0].append(c.get_attribute('innerText'))
@@ -95,13 +95,13 @@ class ScrapStradivarius:
     def scrapCategory(self, url):
         self.driver.get(url)
         sleep(1)
-        subCats = [self.driver.find_elements_by_xpath(xpaths['subCats']),[]]
+        subCats = [self.driver.find_elements_by_xpath(XPATHS['subCats']),[]]
         if not subCats:
             sleep(1)
-            subCats = [self.driver.find_elements_by_xpath(xpaths['subCats']),[]]
+            subCats = [self.driver.find_elements_by_xpath(XPATHS['subCats']),[]]
         if not subCats:
             sleep(5)
-            subCats = [self.driver.find_elements_by_xpath(xpaths['subCats']),[]]
+            subCats = [self.driver.find_elements_by_xpath(XPATHS['subCats']),[]]
         for i in range(len(subCats[0])):
             subCats[1].append(subCats[0][i].find_element_by_xpath('./div[@class="name"]').text)
             subCats[0][i]=subCats[0][i].get_attribute('href')
@@ -117,7 +117,7 @@ class ScrapStradivarius:
         self.driver.get(url)
         sleep(5)
         loading = True
-        elems = self.driver.find_elements_by_xpath(xpaths['elems'])
+        elems = self.driver.find_elements_by_xpath(XPATHS['elems'])
         while loading:
             try:
                 self.driver.execute_script('window.scrollTo(0, document.body.scrollHeight);')
@@ -126,20 +126,20 @@ class ScrapStradivarius:
                 sleep(1)
                 self.driver.find_element_by_xpath('.//body').send_keys(Keys.PAGE_UP)
                 sleep(2)
-                loading = len(elems) < len(self.driver.find_elements_by_xpath(xpaths['elems']))
-                elems = self.driver.find_elements_by_xpath(xpaths['elems'])
+                loading = len(elems) < len(self.driver.find_elements_by_xpath(XPATHS['elems']))
+                elems = self.driver.find_elements_by_xpath(XPATHS['elems'])
             except:
                 loading = False
         for elem in elems:
             try:
                 self.driver.execute_script('arguments[0].scrollIntoView();', elem)
-                href = elem.find_element_by_xpath(xpaths['href']).get_attribute('href')
+                href = elem.find_element_by_xpath(XPATHS['href']).get_attribute('href')
                 try:
                     img = elem.find_element_by_xpath('.//img').get_attribute('src')
                 except:
                     img = ''
                 if db.contains(href, img):
-                    db.update_product(elem, href, xpaths)
+                    db.update_product(elem, href, XPATHS)
                 else:
                     self.scrapProduct(href)
             except:
@@ -150,25 +150,25 @@ class ScrapStradivarius:
         self.driver.switch_to.window(self.driver.window_handles[1])
         try:
             sleep(3)
-            name = self.driver.find_elements_by_xpath(xpaths['name'])
+            name = self.driver.find_elements_by_xpath(XPATHS['name'])
             if not name:
                 sleep(3)
-                name = self.driver.find_elements_by_xpath(xpaths['name'])
-            ref = self.driver.find_element_by_xpath(xpaths['ref']).text
+                name = self.driver.find_elements_by_xpath(XPATHS['name'])
+            ref = self.driver.find_element_by_xpath(XPATHS['ref']).text
             try:
-                description = self.driver.find_element_by_xpath(xpaths['description']).text.capitalize()
+                description = self.driver.find_element_by_xpath(XPATHS['description']).text.capitalize()
             except:
                 description = ' '
-            priceNow = self.driver.find_element_by_xpath(xpaths['priceNow']).text
+            priceNow = self.driver.find_element_by_xpath(XPATHS['priceNow']).text
             try:
-                priceBfr = self.driver.find_element_by_xpath(xpaths['priceBfr']).text
+                priceBfr = self.driver.find_element_by_xpath(XPATHS['priceBfr']).text
             except:
                 priceBfr = priceNow
             try:
-                discount = self.driver.find_element_by_xpath(xpaths['discount']).text
+                discount = self.driver.find_element_by_xpath(XPATHS['discount']).text
             except:
                 discount = ' '
-            colorsBtn = self.driver.find_elements_by_xpath(xpaths['colorsBtn'])
+            colorsBtn = self.driver.find_elements_by_xpath(XPATHS['colorsBtn'])
             colors = []
             all_sizes = []
             allImages = []
@@ -176,23 +176,23 @@ class ScrapStradivarius:
                 c.click()
                 colors.append(c.get_attribute("src"))
                 sizes = []
-                sizesTags = self.driver.find_elements_by_xpath(xpaths['sizesTags'])
+                sizesTags = self.driver.find_elements_by_xpath(XPATHS['sizesTags'])
                 for s in sizesTags:
                     sizes.append(s.text)
                 if len(sizesTags) == 0:
                     sizes = ["Única"]
                 all_sizes.append(sizes)
                 images = []
-                for i in self.driver.find_elements_by_xpath(xpaths['imgs']):
+                for i in self.driver.find_elements_by_xpath(XPATHS['imgs']):
                     images.append(i.get_attribute("src"))
                 allImages.append(images)
             if not allImages:
                 images = []
-                for i in self.driver.find_elements_by_xpath(xpaths['imgs']):
+                for i in self.driver.find_elements_by_xpath(XPATHS['imgs']):
                     images.append(i.get_attribute("src"))
                 allImages.append(images)
                 sizes = []
-                sizesTags = self.driver.find_elements_by_xpath(xpaths['sizesTags'])
+                sizesTags = self.driver.find_elements_by_xpath(XPATHS['sizesTags'])
                 for s in sizesTags:
                     sizes.append(s.text)
                 if len(sizesTags) == 0:
@@ -223,7 +223,7 @@ def scrap_for_links():
     except:
         print('No dismiss cookies')
     main_categories = []
-    for c in driver.find_elements_by_xpath(xpaths['categories']):
+    for c in driver.find_elements_by_xpath(XPATHS['categories']):
         main_categories.append(c.get_attribute('href'))
     get_network = 'var performance = window.performance || window.mozPerformance || window.msPerformance || window.webkitPerformance || {}; var network = performance.getEntries() || {}; return network;'
     endpoints.clear()

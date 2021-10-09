@@ -13,7 +13,7 @@ from Database import Database
 brand = 'Mango'
 db = Database(brand)
 tz = pytz.timezone('America/Bogota')
-xpaths={
+XPATHS={
     'categories':'.//div[@class="section-detail-container section-detail-hidden "]/div/ul[@class="section-detail"]/li[not(contains(@class,"desktop-label-hidden") or contains(@class," label-hidden"))]/a',
     'discount':'.//span[@class="product-discount"]',
     'imgs':'.//div[@id="renderedImages"]//img',
@@ -46,7 +46,7 @@ def scrap_for_links():
         print('Something not dismissed')
     endpoints.clear()
     categories = []
-    for i in driver.find_elements_by_xpath(xpaths['categories']):
+    for i in driver.find_elements_by_xpath(XPATHS['categories']):
         categories.append(i.get_attribute('href'))
     look_network = 'var performance = window.performance || window.mozPerformance || window.msPerformance || window.webkitPerformance || {}; var network = performance.getEntries() || {}; return network;'
     new = ''

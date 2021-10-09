@@ -3,7 +3,7 @@ sys.path.append("C:/Users/JoelBook/Documents/Molova")
 from Item import Item, toInt
 
 file = 'C:/Users/JoelBook/Documents/Molova/Items/Crawled.txt'
-xpaths={
+XPATHS={
     'Bershka':{
         'category'      : '',
         'color'         : './/ul[@class="swiper-wrapper"]/li/a/div/img/@scr',
@@ -128,32 +128,32 @@ class ItemsSpider(scrapy.Spider):
             print('ERROR                    NEVER PRINTS BODY>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>',e)
 
         '''
-        temp = [response.xpath(xpaths[brand]['sizes']).getall(),response.xpath(xpaths[brand]['stock']).getall()]
+        temp = [response.xpath(XPATHS[brand]['sizes']).getall(),response.xpath(XPATHS[brand]['stock']).getall()]
         sizes = []
         for i in range(len(temp[0])):
-            if xpaths[brand]['hasStock'] in temp[1][i]:
+            if XPATHS[brand]['hasStock'] in temp[1][i]:
                 sizes.append('{}(AGOTADO)'.format(temp[0][i]))
             else:
                 sizes.append(temp[0][i])
         temp.clear()
-        priceNow = toInt(response.xpath(xpaths[brand]['priceNow']).getall())
-        priceBefore = toInt(response.xpath(xpaths[brand]['priceBefore']).getall())
+        priceNow = toInt(response.xpath(XPATHS[brand]['priceNow']).getall())
+        priceBefore = toInt(response.xpath(XPATHS[brand]['priceBefore']).getall())
         if priceBefore == '$ 0':
-            priceBefore = toInt(response.xpath(xpaths[brand]['priceBefore2']).getall())
+            priceBefore = toInt(response.xpath(XPATHS[brand]['priceBefore2']).getall())
             if priceBefore == '$ 0':
                 priceBefore = priceNow
-        Item(brand,response.xpath(xpaths[brand]['name']).get(),
-            response.xpath(xpaths[brand]['description']).get(),
+        Item(brand,response.xpath(XPATHS[brand]['name']).get(),
+            response.xpath(XPATHS[brand]['description']).get(),
             priceBefore,
             priceNow,
-            ''.join(response.xpath(xpaths[brand]['discount']).getall()).replace('\xa0',''),
-            response.xpath(xpaths[brand]['imgs']).getall(),
+            ''.join(response.xpath(XPATHS[brand]['discount']).getall()).replace('\xa0',''),
+            response.xpath(XPATHS[brand]['imgs']).getall(),
             response.url,
             sizes,
-            response.xpath(xpaths[brand]['color']).get(),
-            response.xpath(xpaths[brand]['category']).get(),
-            response.xpath(xpaths[brand]['category']).get(),
-            response.xpath(xpaths[brand]['subCat']).get(),
-            response.xpath(xpaths[brand]['subCat']).get(),
+            response.xpath(XPATHS[brand]['color']).get(),
+            response.xpath(XPATHS[brand]['category']).get(),
+            response.xpath(XPATHS[brand]['category']).get(),
+            response.xpath(XPATHS[brand]['subCat']).get(),
+            response.xpath(XPATHS[brand]['subCat']).get(),
             gender,
             crawling=True)'''

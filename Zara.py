@@ -14,7 +14,7 @@ from Database import Database
 brand = 'Zara'
 db = Database(brand)
 tz = pytz.timezone('America/Bogota')
-xpaths = {
+XPATHS = {
     'categories': './/ul[@class="layout-categories__container"]/li[position()=2]/ul/li/ul/li/a',
     'color':'.//p[contains(@class,"product-detail-selected-color")]',
     'colorsBtn': './/ul[contains(@class,"-color-selector__colors")]/li/button',
@@ -59,7 +59,7 @@ class ScrapZara:
         except:
             pass
         cats=[[],[]]
-        for cat in self.driver.find_elements_by_xpath(xpaths['categories']):
+        for cat in self.driver.find_elements_by_xpath(XPATHS['categories']):
             c = cat.get_attribute('innerText').capitalize()
             cats[0].append(c)
             cats[1].append(cat.get_attribute('href'))
@@ -78,17 +78,17 @@ class ScrapZara:
     def scrap_category(self, url):
         self.driver.get(url)
         try:
-            self.subcategory = self.driver.find_element_by_xpath(xpaths['subcategory']).text.capitalize()
+            self.subcategory = self.driver.find_element_by_xpath(XPATHS['subcategory']).text.capitalize()
         except:
             self.subcategory = self.category
-        subcats = self.driver.find_elements_by_xpath(xpaths['subCats'])
+        subcats = self.driver.find_elements_by_xpath(XPATHS['subCats'])
         if subcats:
             for s in range(len(subcats)):
                 if subcats[s].text.lower() != 'ver todo':
                     try:
                         subcats[s].click()
                         sleep(5)
-                        self.subcategory = self.driver.find_element_by_xpath(xpaths['subcategory']).text.capitalize()
+                        self.subcategory = self.driver.find_element_by_xpath(XPATHS['subcategory']).text.capitalize()
                         self.scrap_subcategory()
                     except:
                         # try:
@@ -96,35 +96,35 @@ class ScrapZara:
                         sleep(1)
                         subcats[s].click()
                         sleep(5)
-                        self.subcategory = self.driver.find_element_by_xpath(xpaths['subcategory']).text.capitalize()
+                        self.subcategory = self.driver.find_element_by_xpath(XPATHS['subcategory']).text.capitalize()
                         self.scrap_subcategory()
                         # except:
                         #     print('Never click')
-                subcats = self.driver.find_elements_by_xpath(xpaths['subCats'])
+                subcats = self.driver.find_elements_by_xpath(XPATHS['subCats'])
         else:
             self.scrap_subcategory()
             
     def scrap_subcategory(self):
         self.originalSubcategory = self.subcategory
-        elems = self.driver.find_elements_by_xpath(xpaths['elems'])
+        elems = self.driver.find_elements_by_xpath(XPATHS['elems'])
         self.driver.execute_script('window.scrollTo(0, document.body.scrollHeight);')
         sleep(3)
         loading = True
         while loading:
             self.driver.execute_script('window.scrollTo(0, document.body.scrollHeight);')
             sleep(3)
-            loading = len(elems) < len(self.driver.find_elements_by_xpath(xpaths['elems']))
-            elems = self.driver.find_elements_by_xpath(xpaths['elems'])
+            loading = len(elems) < len(self.driver.find_elements_by_xpath(XPATHS['elems']))
+            elems = self.driver.find_elements_by_xpath(XPATHS['elems'])
         while elems:
             elem = elems.pop()
             self.driver.execute_script('arguments[0].scrollIntoView();', elem)
-            url = elem.find_element_by_xpath(xpaths['href']).get_attribute('href')
+            url = elem.find_element_by_xpath(XPATHS['href']).get_attribute('href')
             try:
-                image = elem.find_element_by_xpath(xpaths['fast_image']).get_attribute('src')
+                image = elem.find_element_by_xpath(XPATHS['fast_image']).get_attribute('src')
             except:
                 image = ''
             if db.contains(url, image):
-                db.update_product(elem, url, xpaths)
+                db.update_product(elem, url, XPATHS)
             else:
                 self.scrap_product(url)
 
@@ -134,40 +134,40 @@ class ScrapZara:
         self.driver.execute_script('window.open("{}", "new window")'.format(url))
         self.driver.switch_to.window(self.driver.window_handles[1])
         try:
-            name = self.driver.find_element_by_xpath(xpaths['name']).text.capitalize()
-            ref = self.driver.find_element_by_xpath(xpaths['ref']).text
+            name = self.driver.find_element_by_xpath(XPATHS['name']).text.capitalize()
+            ref = self.driver.find_element_by_xpath(XPATHS['ref']).text
             ref = ref[ref.index(' | ')+3:]
             try:
-                description = self.driver.find_element_by_xpath(xpaths['description']).text.capitalize()
+                description = self.driver.find_element_by_xpath(XPATHS['description']).text.capitalize()
             except:
                 description = ''
-            priceNow = self.driver.find_element_by_xpath(xpaths['priceNow']).text
+            priceNow = self.driver.find_element_by_xpath(XPATHS['priceNow']).text
             try:
-                priceBfr = self.driver.find_element_by_xpath(xpaths['priceBfr']).text
-                discount = self.driver.find_element_by_xpath(xpaths['discount']).get_attribute('innerText')
+                priceBfr = self.driver.find_element_by_xpath(XPATHS['priceBfr']).text
+                discount = self.driver.find_element_by_xpath(XPATHS['discount']).get_attribute('innerText')
             except:
                 priceBfr = priceNow
                 discount = 0
-            colorsBtn = self.driver.find_elements_by_xpath(xpaths['colorsBtn'])
+            colorsBtn = self.driver.find_elements_by_xpath(XPATHS['colorsBtn'])
             colors = []
             allSizes = []
             allImages = []
             if len(colorsBtn) == 0:
-                color = self.driver.find_element_by_xpath(xpaths['color'])
+                color = self.driver.find_element_by_xpath(XPATHS['color'])
                 colors.append(color.text.replace('Color: ', '').replace('"', '').capitalize())
                 sizes = []
-                for t in self.driver.find_elements_by_xpath(xpaths['sizesTags']):
+                for t in self.driver.find_elements_by_xpath(XPATHS['sizesTags']):
                     if 'disabled' in t.get_attribute('class'):
                         sizes.append('{}(AGOTADO)'.format(t.find_element_by_xpath('./div/div/span').get_attribute('innerText')))
                     else:
                         sizes.append(t.find_element_by_xpath('./div/div/span').get_attribute('innerText'))
                 allSizes.append(sizes)
                 images = []
-                thumbnails = self.driver.find_elements_by_xpath(xpaths['thumbnails'])
+                thumbnails = self.driver.find_elements_by_xpath(XPATHS['thumbnails'])
                 for i in range(len(thumbnails)):
                     mouse.move_to_element(thumbnails[i]).perform()
                     thumbnails[i].click()
-                for i in self.driver.find_elements_by_xpath(xpaths['imgs']):
+                for i in self.driver.find_elements_by_xpath(XPATHS['imgs']):
                     if not 'transparent-background' in i.get_attribute('src'):
                         images.append(i.get_attribute('src'))
                 allImages.append(images)
@@ -183,11 +183,11 @@ class ScrapZara:
                         sizes.append(t.find_element_by_xpath('./div/div/span').get_attribute('innerText'))
                 allSizes.append(sizes)
                 images = []
-                thumbnails = self.driver.find_elements_by_xpath(xpaths['thumbnails'])
+                thumbnails = self.driver.find_elements_by_xpath(XPATHS['thumbnails'])
                 for i in range(len(thumbnails)):
                     mouse.move_to_element(thumbnails[i]).perform()
                     thumbnails[i].click()
-                for i in self.driver.find_elements_by_xpath(xpaths['imgs']):
+                for i in self.driver.find_elements_by_xpath(XPATHS['imgs']):
                     if not 'transparent-background' in i.get_attribute('src'):
                         images.append(i.get_attribute('src'))
                         print(i.get_attribute('src'))
@@ -214,7 +214,7 @@ def scrap_for_links():
     except:
         pass
     main_categories = []
-    for c in driver.find_elements_by_xpath(xpaths['categories']):
+    for c in driver.find_elements_by_xpath(XPATHS['categories']):
         main_categories.append(c.get_attribute('href'))
     get_network = 'var performance = window.performance || window.mozPerformance || window.msPerformance || window.webkitPerformance || {}; var network = performance.getEntries() || {}; return network;'
     endpoints.clear()

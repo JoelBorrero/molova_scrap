@@ -144,22 +144,22 @@ def check_broken_links(databases = [bDb, mDb, zDb, pDb, sDb], start=0, crawling=
                 driver.get(url)
             try:
                 brand = Bershka if 'bershka.com' in url else Mango if 'mango.com' in url else MercedesCampuzano if 'mercedescampuzano.com' in url else PullAndBear if 'pullandbear.com' in url  else Stradivarius if  'stradivarius.com' in url else Zara
-                if not driver.find_elements_by_xpath(brand.xpaths['name']):
+                if not driver.find_elements_by_xpath(brand.XPATHS['name']):
                     sleep(2)
-                if not driver.find_elements_by_xpath(brand.xpaths['name']):
-                    if not driver.find_elements_by_xpath(brand.xpaths['imgs']):
+                if not driver.find_elements_by_xpath(brand.XPATHS['name']):
+                    if not driver.find_elements_by_xpath(brand.XPATHS['imgs']):
                         broken.db.insert({'url':url})
                         brand.db.delete(url)
                 else:
                     try:
                         try:
-                            priceBfr = driver.find_element_by_xpath(brand.xpaths['priceBfr']).text
+                            priceBfr = driver.find_element_by_xpath(brand.XPATHS['priceBfr']).text
                         except:
                             sleep(1)
-                            priceBfr = driver.find_element_by_xpath(brand.xpaths['priceBfr']).text
+                            priceBfr = driver.find_element_by_xpath(brand.XPATHS['priceBfr']).text
                         try:
-                            priceNow = driver.find_element_by_xpath(brand.xpaths['priceNow']).text
-                            discount = 0 # driver.find_element_by_xpath(brand.xpaths['discount']).text
+                            priceNow = driver.find_element_by_xpath(brand.XPATHS['priceNow']).text
+                            discount = 0 # driver.find_element_by_xpath(brand.XPATHS['discount']).text
                         except:
                             priceNow = priceBfr
                             discount = 0
@@ -218,10 +218,10 @@ def clear_remote_db():
                 url = item['id_producto']
                 driver.get(url)
                 brand = Bershka if 'bershka.com' in url else Mango if 'mango.com' in url else MercedesCampuzano if 'mercedescampuzano.com' in url else PullAndBear if 'pullandbear.com' in url  else Stradivarius if  'stradivarius.com' in url else Zara
-                if not driver.find_elements_by_xpath(brand.xpaths['name']):
+                if not driver.find_elements_by_xpath(brand.XPATHS['name']):
                     sleep(1)
-                if not driver.find_elements_by_xpath(brand.xpaths['name']):
-                    if not driver.find_elements_by_xpath(brand.xpaths['imgs']):
+                if not driver.find_elements_by_xpath(brand.XPATHS['name']):
+                    if not driver.find_elements_by_xpath(brand.XPATHS['imgs']):
                         broken.db.insert({'url':url})
                         print(url,'borrado')
                         brand.db.delete(url)

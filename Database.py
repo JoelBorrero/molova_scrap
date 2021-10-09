@@ -60,19 +60,19 @@ class Database:
                 item['url'] = normalyze_url(item['url'])
                 return int(self.db.insert(item))
 
-    def update_product(self, elem, url, xpaths={}):
+    def update_product(self, elem, url, XPATHS={}):
         '''Update the item if its exists in database
             `elem`: Web element
             `url`: Url
-            `xpaths`: Dictionary with xpaths locators'''
+            `XPATHS`: Dictionary with XPATHS locators'''
         url = normalyze_url(url)
         if elem.__class__ is list:
             discount, priceBfr, priceNow = elem
         else:
-            priceNow = elem.find_element_by_xpath(xpaths['fast_priceNow']).text
+            priceNow = elem.find_element_by_xpath(XPATHS['fast_priceNow']).text
             try:
-                priceBfr = elem.find_element_by_xpath(xpaths['fast_priceBfr']).text
-                discount = elem.find_element_by_xpath(xpaths['fast_discount']).text
+                priceBfr = elem.find_element_by_xpath(XPATHS['fast_priceBfr']).text
+                discount = elem.find_element_by_xpath(XPATHS['fast_discount']).text
             except:
                 priceBfr = priceNow
                 discount = 0

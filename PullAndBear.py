@@ -14,7 +14,7 @@ from Database import Database
 brand = 'Pull & Bear'
 db = Database(brand)
 tz = pytz.timezone('America/Bogota')
-xpaths={
+XPATHS={
     'categories':'.//ul[@class="product-categories"]/li[not(contains(@class,"has-subitems") or contains(@class,"hidden"))]/a|.//ul[@class="product-categories"]/li/ul/li[not(contains(@class,"hidden"))]/a',
     'categoriesSale':'.//ul[@class="product-categories"]/li[contains(@class,"sale")]/ul/li/a',
     'colorsBtn':'.//div[@class="c-product-info--header"]/div[contains(@class,"product-card-color-selector")]/div/div/div/img',
@@ -55,10 +55,10 @@ class ScrapPullAndBear:
     def scrapGender(self, url):
         self.sale = False
         self.driver.get(url)
-        categories = [self.driver.find_elements_by_xpath(xpaths['categories']),[]]
+        categories = [self.driver.find_elements_by_xpath(XPATHS['categories']),[]]
         if not categories[0]:
             sleep(5)
-            categories = [self.driver.find_elements_by_xpath(xpaths['categories']),[]]
+            categories = [self.driver.find_elements_by_xpath(XPATHS['categories']),[]]
         for c in categories[0]:
             cat = c.get_attribute('innerText').replace('\n', '')
             while '  ' in cat:
@@ -72,13 +72,13 @@ class ScrapPullAndBear:
 
     def scrapCategory(self, url):
         self.driver.get(url)
-        subCats = self.driver.find_elements_by_xpath(xpaths['subCats'])
+        subCats = self.driver.find_elements_by_xpath(XPATHS['subCats'])
         type = 1
         if not subCats:
             sleep(5)
-            subCats = self.driver.find_elements_by_xpath(xpaths['subCats'])
+            subCats = self.driver.find_elements_by_xpath(XPATHS['subCats'])
             if not subCats:
-                subCats = self.driver.find_elements_by_xpath(xpaths['subCats2'])
+                subCats = self.driver.find_elements_by_xpath(XPATHS['subCats2'])
                 if subCats:
                     print(url,'type2')
                     type = 2#Text buttons
@@ -95,7 +95,7 @@ class ScrapPullAndBear:
         if subCats and type == 1:
             for i in range(len(subCats)):
                 if not 'Ver Todo' in subCats[i].get_attribute('innerText'):
-                    subCats = self.driver.find_elements_by_xpath(xpaths['subCats'])
+                    subCats = self.driver.find_elements_by_xpath(XPATHS['subCats'])
                     self.subcategory = subCats[i].find_element_by_xpath('.//p').text
                     if not self.subcategory:
                         self.subcategory = (subCats[i].find_element_by_xpath('.//p').get_attribute('innerText'))
@@ -130,26 +130,26 @@ class ScrapPullAndBear:
             self.driver.get(url)
             sleep(5)
         loading = True
-        elems = self.driver.find_elements_by_xpath(xpaths['elems'])
+        elems = self.driver.find_elements_by_xpath(XPATHS['elems'])
         while loading:
             self.driver.execute_script('window.scrollTo(0, document.body.scrollHeight);')
             self.driver.find_element_by_xpath('.//body').send_keys(Keys.PAGE_UP)
             self.driver.find_element_by_xpath('.//body').send_keys(Keys.PAGE_UP)
             sleep(5)
-            loading = len(elems) < len(self.driver.find_elements_by_xpath(xpaths['elems']))
-            elems = self.driver.find_elements_by_xpath(xpaths['elems'])
+            loading = len(elems) < len(self.driver.find_elements_by_xpath(XPATHS['elems']))
+            elems = self.driver.find_elements_by_xpath(XPATHS['elems'])
         for elem in elems:
             self.driver.execute_script('arguments[0].scrollIntoView();', elem)
-            url = elem.find_element_by_xpath(xpaths['href']).get_attribute('href')
+            url = elem.find_element_by_xpath(XPATHS['href']).get_attribute('href')
             try:
-                image = elem.find_element_by_xpath(xpaths['fast_image']).get_attribute('src')
+                image = elem.find_element_by_xpath(XPATHS['fast_image']).get_attribute('src')
             except:
                 image = ''
             if db.contains(url, image):
-                db.update_product(elem, url, xpaths)
+                db.update_product(elem, url, XPATHS)
             else:
                 try:
-                    discount = elem.find_element_by_xpath(xpaths['fast_discount']).text
+                    discount = elem.find_element_by_xpath(XPATHS['fast_discount']).text
                 except:
                     discount = 0
                 self.scrapProduct(url, discount)
@@ -159,21 +159,21 @@ class ScrapPullAndBear:
         self.driver.switch_to.window(self.driver.window_handles[1])
         try:
             try:
-                name = self.driver.find_element_by_xpath(xpaths['name']).text
+                name = self.driver.find_element_by_xpath(XPATHS['name']).text
             except:
                 sleep(3)
-                name = self.driver.find_element_by_xpath(xpaths['name']).text
-            ref = self.driver.find_element_by_xpath(xpaths['ref']).text
-            description = self.driver.find_element_by_xpath(xpaths['description']).text
+                name = self.driver.find_element_by_xpath(XPATHS['name']).text
+            ref = self.driver.find_element_by_xpath(XPATHS['ref']).text
+            description = self.driver.find_element_by_xpath(XPATHS['description']).text
             try:
-                priceNow = self.driver.find_element_by_xpath(xpaths['priceNow']).text
+                priceNow = self.driver.find_element_by_xpath(XPATHS['priceNow']).text
             except:
-                priceNow = self.driver.find_element_by_xpath(xpaths['priceNow2']).text
+                priceNow = self.driver.find_element_by_xpath(XPATHS['priceNow2']).text
             try:
-                priceBfr = self.driver.find_element_by_xpath(xpaths['priceBfr']).text
+                priceBfr = self.driver.find_element_by_xpath(XPATHS['priceBfr']).text
             except:
                 priceBfr = priceNow
-            colorsBtn = self.driver.find_elements_by_xpath(xpaths['colorsBtn'])
+            colorsBtn = self.driver.find_elements_by_xpath(XPATHS['colorsBtn'])
             colors = []
             allSizes = []
             allImages = []
@@ -182,7 +182,7 @@ class ScrapPullAndBear:
                     c.click()
                     colors.append(c.get_attribute('src'))
                     sizes = []
-                    sizesTags = self.driver.find_elements_by_xpath(xpaths['sizesTags'])
+                    sizesTags = self.driver.find_elements_by_xpath(XPATHS['sizesTags'])
                     for s in sizesTags:
                         if 'disabled' in s.get_attribute('class'):
                             sizes.append('{}(AGOTADO)'.format(s.get_attribute('innerText')))
@@ -192,11 +192,11 @@ class ScrapPullAndBear:
                         sizes = ['Única']
                     allSizes.append(sizes)
                     images = []
-                    imgs = self.driver.find_elements_by_xpath(xpaths['imgs'])
+                    imgs = self.driver.find_elements_by_xpath(XPATHS['imgs'])
                     for i in range(len(imgs)):
                         while not imgs[i].get_attribute('src'):
                             self.driver.execute_script('arguments[0].scrollIntoView();', imgs[i])
-                            imgs = self.driver.find_elements_by_xpath(xpaths['imgs'])
+                            imgs = self.driver.find_elements_by_xpath(XPATHS['imgs'])
                             sleep(1)
                         images.append(imgs[i].get_attribute('src'))
                     allImages.append(images)
@@ -220,7 +220,7 @@ def scrap_for_links():
         print('Something not dismissed')
     endpoints.clear()
     categories = []
-    for i in driver.find_elements_by_xpath(xpaths['categories']):
+    for i in driver.find_elements_by_xpath(XPATHS['categories']):
         categories.append(i.get_attribute('href'))
     look_network = 'var performance = window.performance || window.mozPerformance || window.msPerformance || window.webkitPerformance || {}; var network = performance.getEntries() || {}; return network;'
     new = ''
