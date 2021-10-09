@@ -12,6 +12,7 @@ import Mango
 import Stradivarius
 import Zara
 import PullAndBear
+import MercedesCampuzano
 from Main import check_broken_links, post, sync
 
 try:
@@ -21,6 +22,7 @@ except FileNotFoundError:
     with open('./Files/Settings.json','w') as s:
         s.write(str(settings))
 brands = [
+    {'name': 'MercedesCampuzano', 'endpoint': settings['MercedesCampuzano']['endpoint'], 'endpoints': settings['MercedesCampuzano']['endpoints'], 'updates': True},
     {'name': 'PullAndBear', 'endpoint': settings['Pull & Bear']['endpoint'], 'endpoints': settings['Pull & Bear']['endpoints'], 'updates': True},
     {'name': 'Mango', 'endpoint': settings['Mango']['endpoint'], 'endpoints': settings['Mango']['endpoints'], 'updates': True},
     {'name': 'Zara', 'endpoint': settings['Zara']['endpoint'], 'endpoints': settings['Zara']['endpoints'], 'updates': True},
@@ -78,12 +80,12 @@ class Catcher:
         self.writer.save()
 
     def check(self):
-        count = 5
-        for brand in brands:
+        count = 3
+        for brand in brands[1:]: #  Mercedes Campuzano doesn't
             open(f'./Files/.changes_{brand["name"]}','w').close()
         while True:
             self.update_headers()
-            for brand in brands:
+            for brand in brands[1:]:
                 res = self.session.get(brand['endpoint']).json()
                 new_data = res['groups'][0]['garments'] if brand['name'] == 'Mango' else res['productGroups'][0]['elements'] if brand['name'] == 'Zara' else res['products']
                 # try:
@@ -126,13 +128,13 @@ class Catcher:
                 with open(f'./Files/.changes_{brand["name"]}', 'w') as f:
                     f.write(str(new_data))
             count += 1
-            if count == 6:
+            if count == 4:
                 for brand in brands:
                     if brand['updates']:
                         print(f'Crawling {brand["name"]}')
                         exec(f'{brand["name"]}.APICrawler(brand["endpoints"])')
                 check_broken_links(crawling=True)
-                post(crawling=True)
+                post()
                 count = 0
             sleep(randint(3000, 4000))
 
