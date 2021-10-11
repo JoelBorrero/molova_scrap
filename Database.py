@@ -1,14 +1,15 @@
 import ast
 from tinydb import TinyDB, Query, where
 from Item import toInt
+from JoelDB import JoelDB
 
 class Database:
     '''Creates a TinyDB database'''
     def __init__(self, name):
-        TinyDB.default_table_name = "Items"
-        self.db = TinyDB(f"./Database/{name}.json")
-        self.latest = TinyDB("./Database/Latest.json")
-        self.broken = TinyDB("./Database/Broken.json")
+        TinyDB.default_table_name = 'Items'
+        self.db = TinyDB(f'./Database/{name}.json')
+        self.latest = TinyDB('./Database/Latest.json')
+        self.broken = JoelDB('Broken')
         self.q = Query()
 
     def add(self, item, debug=False, sync=False):
@@ -21,39 +22,33 @@ class Database:
         if item['allImages'] and item['allImages'][0]:
             def update():
                 categories = [
-                    "Camisas y Camisetas",
-                    "Pantalones y Jeans",
-                    "Vestidos y Enterizos",
-                    "Faldas y Shorts",
-                    "Abrigos y Blazers",
-                    "Ropa deportiva",
-                    "Zapatos",
-                    "Bolsos",
-                    "Accesorios",]
+                    'Camisas y Camisetas',
+                    'Pantalones y Jeans',
+                    'Vestidos y Enterizos',
+                    'Faldas y Shorts',
+                    'Abrigos y Blazers',
+                    'Ropa deportiva',
+                    'Zapatos',
+                    'Bolsos',
+                    'Accesorios',]
                 def transform(doc):
-                    for field in ["name", "description", "priceBefore", "allPricesNow", "discount", "allSizes", "sale", "colors", "url", "allImages", "category", "subcategory", "allSizes"]:
+                    for field in ['name', 'description', 'priceBefore', 'allPricesNow', 'discount', 'allSizes', 'sale', 'colors', 'url', 'allImages', 'category', 'subcategory', 'allSizes']:
                         if not doc[field] == item[field]:
                             doc[field] = item[field]
-                    for field in ["category", "originalCategory"]:
+                    for field in ['category', 'originalCategory']:
                         if not doc[field] in categories and item[field] in categories:
                             doc[field] = item[field]
                 return transform
-            it = self.contains(item["url"], str(item["allImages"]), sync)
+            it = self.contains(item['url'], str(item['allImages']), sync)
             if item['allSizes'] and all([all(['(AGOTADO)' in size for size in sizes]) for sizes in item['allSizes']]):
                 self.delete(item['url'])
-                try:
-                    return self.broken.insert({'url': item['url']})
-                except:
-                    return
+                self.broken.add(item['url'])
             if it:  # Update it
                 if all([all(['(AGOTADO)' in size for size in sizes]) for sizes in it['allSizes']]):
                     self.delete(it['url'])
-                    return self.broken.insert({'url': it['url']})
+                    return self.broken.add(it['url'])
                 if item['url'] != it['url']:
-                    try:
-                        self.broken.insert({'url': it['url']})
-                    except:
-                        pass
+                    self.broken.add(it['url'])
                 self.db.update(update(), doc_ids=[it.doc_id])
                 return int(it.doc_id)
             else:  # Create it
@@ -84,7 +79,7 @@ class Database:
         if discount < 1 or discount >= 60:
             discount = (1 - priceNow / priceBfr) * 100 if priceBfr else 0
         if priceBfr > 0 and priceNow > 0:
-            self.db.update({"priceBefore":priceBfr, "allPricesNow":[priceNow], 'discount':discount, 'sale':sale}, self.q.url == url)
+            self.db.update({'priceBefore':priceBfr, 'allPricesNow':[priceNow], 'discount':discount, 'sale':sale}, self.q.url == url)
 
     def contains_url(self, url):
         return True if self.db.get(self.q.url == url) else False
@@ -100,16 +95,23 @@ class Database:
             if '.jpg?t' in image:
                 image = image[:image.index('.jpg?t') + 4]
             return image in str(val)
+        print(url)
         url = normalyze_url(url)
+        print(url)
         it = self.db.get(self.q.url == url)
+        print(it)
         if not it and allImages: # Search by imgs
+            print('allimgs')
             it = self.db.get(self.q.allImages.test(has_image,allImages))
         if not sync:
             if it:
+                print('it')
                 if not self.latest.get(self.q.url == it['url']):
                     self.latest.insert({'url':it['url']})
             else:
+                print('else')
                 self.latest.insert({'url':url})
+        print(it)
         return it
 
     def delete(self, url):
@@ -140,6 +142,6 @@ def normalyze_url(url):
     try:
         if 'pullandbear' in url:
             return url[:url.index('?cS=')]
-        return url[:url.index(".html")+5]
+        return url[:url.index('.html')+5]
     except ValueError:
         return url

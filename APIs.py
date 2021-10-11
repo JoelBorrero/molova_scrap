@@ -22,7 +22,7 @@ except FileNotFoundError:
     with open('./Files/Settings.json','w') as s:
         s.write(str(settings))
 brands = [
-    {'name': 'MercedesCampuzano', 'endpoint': settings['MercedesCampuzano']['endpoint'], 'endpoints': settings['MercedesCampuzano']['endpoints'], 'updates': True},
+    {'name': 'MercedesCampuzano', 'endpoint': settings['Mercedes Campuzano']['endpoint'], 'endpoints': settings['Mercedes Campuzano']['endpoints'], 'updates': True},
     {'name': 'PullAndBear', 'endpoint': settings['Pull & Bear']['endpoint'], 'endpoints': settings['Pull & Bear']['endpoints'], 'updates': True},
     {'name': 'Mango', 'endpoint': settings['Mango']['endpoint'], 'endpoints': settings['Mango']['endpoints'], 'updates': True},
     {'name': 'Zara', 'endpoint': settings['Zara']['endpoint'], 'endpoints': settings['Zara']['endpoints'], 'updates': True},
@@ -55,7 +55,7 @@ class Catcher:
         for i,j in enumerate(self.df):
             self.df[j].to_excel(self.writer,j, index=False)
         self.writer.save()
-        sync()
+#        sync()
         self.check()
 
     def update_headers(self):

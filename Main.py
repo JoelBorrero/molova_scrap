@@ -11,6 +11,7 @@ from time import sleep
 from selenium import webdriver
 # from scrapy.crawler import CrawlerProcess
 import Bershka, Mango, MercedesCampuzano, PullAndBear, Stradivarius, Zara
+from JoelDB import JoelDB
 
 from Item import Item, toInt
 from Database import Database
@@ -23,7 +24,7 @@ mngDb = Database('Mango')
 pDb = Database('Pull & Bear')
 sDb = Database('Stradivarius')
 zDb = Database('Zara')
-broken = Database('Broken')
+broken = JoelDB('Broken')
 latest = Database('Latest')
 
 def merge(databases = [bDb, mDb, zDb, pDb, sDb, mngDb]):
