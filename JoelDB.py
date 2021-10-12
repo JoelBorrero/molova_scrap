@@ -16,7 +16,7 @@ class JoelDB:
 
     def add(self, data):
         if data in self.db['Items']:
-            return 'already exist'
+            return f'Item already exist ({self.name})'
         self.db['Items'].append(data)
         self.save()
     

@@ -30,7 +30,7 @@ class Database:
                     'Ropa deportiva',
                     'Zapatos',
                     'Bolsos',
-                    'Accesorios',]
+                    'Accesorios']
                 def transform(doc):
                     for field in ['name', 'description', 'priceBefore', 'allPricesNow', 'discount', 'allSizes', 'sale', 'colors', 'url', 'allImages', 'category', 'subcategory', 'allSizes']:
                         if not doc[field] == item[field]:
@@ -42,7 +42,7 @@ class Database:
             it = self.contains(item['url'], str(item['allImages']), sync)
             if item['allSizes'] and all([all(['(AGOTADO)' in size for size in sizes]) for sizes in item['allSizes']]):
                 self.delete(item['url'])
-                self.broken.add(item['url'])
+                return self.broken.add(item['url'])
             if it:  # Update it
                 if all([all(['(AGOTADO)' in size for size in sizes]) for sizes in it['allSizes']]):
                     self.delete(it['url'])
@@ -52,7 +52,7 @@ class Database:
                 self.db.update(update(), doc_ids=[it.doc_id])
                 return int(it.doc_id)
             else:  # Create it
-                item['url'] = normalyze_url(item['url'])
+                # item['url'] = normalize_url(item['url'])
                 return int(self.db.insert(item))
 
     def update_product(self, elem, url, XPATHS={}):
@@ -60,7 +60,7 @@ class Database:
             `elem`: Web element
             `url`: Url
             `XPATHS`: Dictionary with XPATHS locators'''
-        url = normalyze_url(url)
+        url = normalize_url(url)
         if elem.__class__ is list:
             discount, priceBfr, priceNow = elem
         else:
@@ -95,23 +95,23 @@ class Database:
             if '.jpg?t' in image:
                 image = image[:image.index('.jpg?t') + 4]
             return image in str(val)
-        print(url)
-        url = normalyze_url(url)
-        print(url)
+        def normalized_url(val, url):
+            print('Val:', val)
+            print('Url:',url)
+            return normalize_url(val) == url
+
+        url = normalize_url(url)
         it = self.db.get(self.q.url == url)
-        print(it)
+        if not it:
+            it = self.db.get(self.q.url.test(normalized_url,url))
         if not it and allImages: # Search by imgs
-            print('allimgs')
             it = self.db.get(self.q.allImages.test(has_image,allImages))
         if not sync:
             if it:
-                print('it')
                 if not self.latest.get(self.q.url == it['url']):
                     self.latest.insert({'url':it['url']})
             else:
-                print('else')
                 self.latest.insert({'url':url})
-        print(it)
         return it
 
     def delete(self, url):
@@ -137,8 +137,8 @@ class Database:
 
     def close(self):
         self.db.close()
-    
-def normalyze_url(url):
+
+def normalize_url(url):
     try:
         if 'pullandbear' in url:
             return url[:url.index('?cS=')]
