@@ -1,7 +1,7 @@
 import ast
 import requests
 from time import sleep
-from random import uniform
+from random import randint
 from datetime import datetime
 import pytz
 from urllib.parse import quote
@@ -247,7 +247,7 @@ def scrap_for_links():
 
 
 class APICrawler:
-    def __init__(self, endpoints=endpoints):
+    def __init__(self, endpoints=endpoints, speed=1):
         session = requests.session()
         headers = {
             'accept': '*/*',
@@ -379,7 +379,7 @@ class APICrawler:
                     print(e)
                 logs.close()
             headers = session.headers
-            sleep(uniform(30, 120))
+            sleep(randint(30, 120) / speed)
             session = requests.session()
             session.headers.update(headers)
 

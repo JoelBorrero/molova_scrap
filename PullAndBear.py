@@ -253,7 +253,7 @@ def scrap_for_links():
 
 
 class APICrawler:
-    def __init__(self, endpoints=endpoints):
+    def __init__(self, endpoints=endpoints, speed=1):
         session = requests.session()
         headers = {
             'accept': '*/*',
@@ -269,7 +269,6 @@ class APICrawler:
             'sec-fetch-site': 'same-origin',
             'user-agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/93.0.4577.82 Safari/537.36'}
         session.headers.update(headers)
-        image_formats = ('image/png', 'image/jpeg', 'image/jpg')
         filename = './Files/LogsPULL.txt'
         with open(filename, 'w') as logs:
             logs.write(f'··········{datetime.now(tz).month} - {datetime.now(tz).day}··········\n')
@@ -328,7 +327,7 @@ class APICrawler:
                             print(e)
                             logs.write(f'X {datetime.now(tz).hour}:{datetime.now(tz).minute}:{datetime.now(tz).second}   -   {e}\n')
             headers = session.headers
-            sleep(randint(30, 120))
+            sleep(randint(30, 120) / speed)
             session = requests.session()
             session.headers.update(headers)
 

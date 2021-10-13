@@ -96,8 +96,6 @@ class Database:
                 image = image[:image.index('.jpg?t') + 4]
             return image in str(val)
         def normalized_url(val, url):
-            print('Val:', val)
-            print('Url:',url)
             return normalize_url(val) == url
 
         url = normalize_url(url)

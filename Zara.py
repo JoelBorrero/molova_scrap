@@ -239,7 +239,7 @@ def scrap_for_links():
 
 
 class APICrawler:
-    def __init__(self, endpoints=endpoints):
+    def __init__(self, endpoints=endpoints, speed=20):
         session = requests.session()
         headers = {
             'accept': '*/*',
@@ -299,6 +299,6 @@ class APICrawler:
                         logs.write(f'X {datetime.now(tz).hour}:{datetime.now(tz).minute}:{datetime.now(tz).second}   -   {e}\n')
                         print(e)
             headers = session.headers
-            sleep(randint(30, 120))
+            sleep(randint(30, 120) / speed)
             session = requests.session()
             session.headers.update(headers)

@@ -245,7 +245,7 @@ class ScrapMercedesCampuzano:
 
 def scrap_for_links():
     opts = webdriver.ChromeOptions()
-    # opts.headless = True
+    opts.headless = True
     opts.add_argument('--window-size=1920,1080')
     opts.add_argument('--start-maximized')
     driver = webdriver.Chrome(ChromeDriverManager().install(), options=opts)
@@ -281,7 +281,6 @@ def scrap_for_links():
                             new = endpoint
             if not endpoint:
                 sleep(1)
-        input('...')
     driver.quit()
     settings = ast.literal_eval(open('./Files/Settings.json','r').read())
     settings[BRAND]['endpoints'] = endpoints

@@ -70,7 +70,7 @@ def scrap_for_links():
 
 
 class APICrawler:
-    def __init__(self, endpoints=endpoints):
+    def __init__(self, endpoints=endpoints, speed=1):
         tz = pytz.timezone('America/Bogota')
         filename = './Files/LogsMNG.txt'
         with open(filename, 'w') as logs:
@@ -111,7 +111,7 @@ class APICrawler:
                                 logs.write(f'      + {datetime.now(tz).hour}:{datetime.now(tz).minute}:{datetime.now(tz).second}   -   {name}\n')
                                 # else:
                                 #     logs.write(f'X {datetime.now(tz).hour}:{datetime.now(tz).minute}:{datetime.now(tz).second}   -   {name} SIN STOCK\n')
-                        sleep(randint(30, 120))
+                        sleep(randint(30, 120) / speed)
                 except Exception as e:
                     print('Error in Mango', e)
 
