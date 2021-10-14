@@ -1,4 +1,5 @@
 #TODO ocultar si no hay disponibilidad, enviar categorias no linkeadas
+#  TODO " endpoints: crear y eliminar"
 
 import os
 import ast
@@ -68,6 +69,7 @@ def merge(databases = [bDb, mDb, zDb, pDb, sDb, mngDb]):
         f.write(str(total_urls))
     # input('\nPresione enter para salir\n')
 
+
 def scrap(brands = ['MercedesCampuzano']):
     for brand in brands:
         print('>>>>> ',brand,' <<<<<')
@@ -76,6 +78,7 @@ def scrap(brands = ['MercedesCampuzano']):
         except Exception as e:
            print('Error scrapping', brand, e)
 
+
 def postItem(data):
     '''Create or update the element with the same url'''
     temp = jsonToBody(data)#.replace(''allPricesNow'',''allPriceNow'').replace(''allSizes'',''allSize'').replace(''subcategory'',''subCategory'').replace(''originalSubcategory'',''originalSubCategory'')
@@ -83,6 +86,7 @@ def postItem(data):
         return requests.post('https://2ksanrpxtd.execute-api.us-east-1.amazonaws.com/dev/molova/find', temp.encode('utf-8'))
     except Exception as e:
         print('Exception:',e)
+
 
 def jsonToBody(json):
     try:
@@ -100,6 +104,7 @@ def jsonToBody(json):
     json['colors'] = '__colors__'
     return str(json).replace("'",'"').replace('"sale": True','"sale": 1').replace('"sale": False','"sale": 0').replace('"__allPricesNow__"',str(_backup[0])).replace('__allImages__',str(_backup[1])).replace('__allSizes__',str(_backup[2])).replace('__colors__',str(_backup[3])).replace('á','a').replace('é','e').replace('í','i').replace('ó','o').replace('ú','u').replace('Á','A').replace('É','E').replace('Í','I').replace('Ó','O').replace('Ú','U')
 
+
 def post(databases = [mDb, pDb, bDb, zDb, mngDb, sDb]):
     total_items = 0
     for d in databases:
@@ -109,6 +114,7 @@ def post(databases = [mDb, pDb, bDb, zDb, mngDb, sDb]):
         for i in d.getAllItems():
             postItem(i)
             bar.update()
+
 
 def check_broken_links(databases = [bDb, mDb, zDb, pDb, sDb], start=0, crawling=False):
     '''Check each url that was not present in the last scrap'''
@@ -173,6 +179,7 @@ def check_broken_links(databases = [bDb, mDb, zDb, pDb, sDb], start=0, crawling=
         broken.clear()
         delete(to_delete)
 
+
 def sync(brand=''):
     if brand in ['Bershka', 'Mango', 'Mercedes Campuzano', 'Pull & Bear', 'Stradivarius', 'Zara']:
         brand = f'marcas/{brand}'
@@ -202,6 +209,7 @@ def sync(brand=''):
             else:
                 print('ERROR:'+endpoint)
 
+
 def clear_remote_db():
     driver = webdriver.Chrome("./chromedriver")
     driver.maximize_window()
@@ -225,9 +233,11 @@ def clear_remote_db():
                         to_delete.append(url)
             delete(to_delete)
 
+
 def scrap_for_links():
     for brand in [Bershka, Mango, Stradivarius, Zara]:
         brand.scrap_for_links()
+
 
 def get_database(brand):
     brand = brand.lower()

@@ -52,15 +52,22 @@ def scrap_for_links():
     new = ''
     for category in categories:
         driver.get(category)
-        netData = driver.execute_script(look_network)
-        for i in netData:
-            if '/services/productlist/products/CO/she/' in i['name']:
-                endpoint = i['name']
-                endpoint = endpoint[:endpoint.index('&pageNum=')]
-                if not endpoint in str(endpoints):
-                    endpoints.append([category, endpoint])
-                    if 'destacados/nuevo' in category:
-                        new = endpoint
+        count = 0
+        endpoint = ''
+        while not endpoint and count < 10:
+            netData = driver.execute_script(look_network)
+            for i in netData:
+                if '/services/productlist/products/CO/she/' in i['name']:
+                    endpoint = i['name']
+                    endpoint = endpoint[:endpoint.index('&pageNum=')]
+                    print(endpoint)
+                    if not endpoint in str(endpoints):
+                        endpoints.append([category, endpoint])
+                        if 'destacados/nuevo' in category:
+                            new = endpoint
+            count += 1
+            if not endpoint:
+                sleep(.5)
     driver.quit()
     settings = ast.literal_eval(open('./Files/Settings.json','r').read())
     settings[brand]['endpoints'] = endpoints
